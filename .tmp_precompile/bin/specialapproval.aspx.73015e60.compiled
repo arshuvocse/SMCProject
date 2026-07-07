@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/SpecialApproval.aspx" hash="928e13213" filehash="5b24a9cedf154112" flags="110000" assembly="App_Web_specialapproval.aspx.73015e60" type="ASP.healthcare_ui_specialapproval_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/SpecialApproval.aspx" />
+        <filedep name="/HealthCare_UI/SpecialApproval.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

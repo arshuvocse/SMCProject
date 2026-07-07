@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/HRDeadlineExtendedView.aspx" hash="928e13213" filehash="15bc10a21e3f8e58" flags="110000" assembly="App_Web_hrdeadlineextendedview.aspx.b734c8db" type="ASP.appraisal_hrdeadlineextendedview_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/HRDeadlineExtendedView.aspx" />
+        <filedep name="/Appraisal/HRDeadlineExtendedView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/AppraisalSelfFunctionalApproval.aspx" hash="928e13213" filehash="40d482b489c58d9" flags="110000" assembly="App_Web_appraisalselffunctionalapproval.aspx.b734c8db" type="ASP.appraisal_appraisalselffunctionalapproval_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/AppraisalSelfFunctionalApproval.aspx" />
+        <filedep name="/Appraisal/AppraisalSelfFunctionalApproval.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

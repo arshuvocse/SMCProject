@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/ExitManagement_UI/EmployeeJobLeftEntryView.aspx" hash="928e13213" filehash="702d387aa3b085c3" flags="110000" assembly="App_Web_employeejobleftentryview.aspx.9b34101b" type="ASP.exitmanagement_ui_employeejobleftentryview_aspx">
+    <filedeps>
+        <filedep name="/ExitManagement_UI/EmployeeJobLeftEntryView.aspx" />
+        <filedep name="/ExitManagement_UI/EmployeeJobLeftEntryView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

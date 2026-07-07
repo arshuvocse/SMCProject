@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/OKRBSCAppraisalDashboardSelf.aspx" hash="928e13213" filehash="8ce8d1bf57ff183e" flags="110000" assembly="App_Web_okrbscappraisaldashboardself.aspx.b734c8db" type="ASP.appraisal_okrbscappraisaldashboardself_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/OKRBSCAppraisalDashboardSelf.aspx" />
+        <filedep name="/Appraisal/OKRBSCAppraisalDashboardSelf.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

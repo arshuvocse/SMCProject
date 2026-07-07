@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Appraisal/WebService.asmx" hash="48caa2a6" filehash="c60b305c111" flags="130000" assembly="App_Code" type="WebService">
+    <filedeps>
+        <filedep name="/Appraisal/WebService.asmx" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/OtherTalentsEntry.aspx" hash="928e13213" filehash="e66cbf189db9d766" flags="110000" assembly="App_Web_othertalentsentry.aspx.ac93fe35" type="ASP.mastersetup_ui_othertalentsentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/OtherTalentsEntry.aspx" />
+        <filedep name="/MasterSetup_UI/OtherTalentsEntry.aspx.cs" />
+    </filedeps>
+</preserve>

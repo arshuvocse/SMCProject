@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpSeparationITMayInfo.rpt" hash="48caa2a6" filehash="ffffe80d1f442e81" flags="110000" assembly="App_Web_crpseparationitmayinfo.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpSeparationITMayInfo.rpt" />
+    </filedeps>
+</preserve>

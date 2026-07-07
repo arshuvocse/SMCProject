@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/JdDesigList.aspx" hash="928e13213" filehash="a0f1b2e37ab8a71a" flags="110000" assembly="App_Web_jddesiglist.aspx.b734c8db" type="ASP.appraisal_jddesiglist_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/JdDesigList.aspx" />
+        <filedep name="/Appraisal/JdDesigList.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

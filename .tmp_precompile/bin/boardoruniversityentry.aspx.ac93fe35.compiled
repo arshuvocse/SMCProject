@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/BoardOrUniversityEntry.aspx" hash="928e13213" filehash="4855f91addf8ee40" flags="110000" assembly="App_Web_boardoruniversityentry.aspx.ac93fe35" type="ASP.mastersetup_ui_boardoruniversityentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/BoardOrUniversityEntry.aspx" />
+        <filedep name="/MasterSetup_UI/BoardOrUniversityEntry.aspx.cs" />
+    </filedeps>
+</preserve>

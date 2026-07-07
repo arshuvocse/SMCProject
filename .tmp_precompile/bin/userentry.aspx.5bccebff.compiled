@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/UserEntry.aspx" hash="928e13213" filehash="544b4ebcec3e4fad" flags="110000" assembly="App_Web_userentry.aspx.5bccebff" type="ASP.usersetup_userentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/UserEntry.aspx" />
+        <filedep name="/UserSetup/UserEntry.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/HandlerDoc.ashx" hash="48caa2a6" filehash="ffffdb8e81f47708" flags="110000" assembly="App_Web_handlerdoc.ashx.cdcab7d2" type="HandlerDoc">
+    <filedeps>
+        <filedep name="/HandlerDoc.ashx" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/HRDeclarationView.aspx" hash="928e13213" filehash="3177d6d1cf803794" flags="110000" assembly="App_Web_hrdeclarationview.aspx.73015e60" type="ASP.healthcare_ui_hrdeclarationview_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/HRDeclarationView.aspx" />
+        <filedep name="/HealthCare_UI/HRDeclarationView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

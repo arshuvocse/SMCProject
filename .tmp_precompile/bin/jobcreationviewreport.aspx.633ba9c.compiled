@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_Pages/JobCreationViewReport.aspx" hash="928e13213" filehash="5f6c8df2ecd0f212" flags="110000" assembly="App_Web_jobcreationviewreport.aspx.633ba9c" type="ASP.report_pages_jobcreationviewreport_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Report_Pages/JobCreationViewReport.aspx" />
+        <filedep name="/Report_Pages/JobCreationViewReport.aspx.cs" />
+    </filedeps>
+</preserve>

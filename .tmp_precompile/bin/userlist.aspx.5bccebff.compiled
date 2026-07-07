@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/UserList.aspx" hash="928e13213" filehash="3a617cc1e65643a2" flags="110000" assembly="App_Web_userlist.aspx.5bccebff" type="ASP.usersetup_userlist_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/UserList.aspx" />
+        <filedep name="/UserSetup/UserList.aspx.cs" />
+    </filedeps>
+</preserve>

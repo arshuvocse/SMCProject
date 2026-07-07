@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/SalaryMatrixViewer.aspx" hash="928e13213" filehash="8ac752b6a607f06c" flags="110000" assembly="App_Web_salarymatrixviewer.aspx.8e127b5f" type="ASP.report_ui_salarymatrixviewer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/SalaryMatrixViewer.aspx" />
+        <filedep name="/Report_UI/SalaryMatrixViewer.aspx.cs" />
+    </filedeps>
+</preserve>

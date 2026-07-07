@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/AppraisalRecommendationReport.aspx" hash="928e13213" filehash="ab5b43fc89be4be4" flags="110000" assembly="App_Web_appraisalrecommendationreport.aspx.b734c8db" type="ASP.appraisal_appraisalrecommendationreport_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/AppraisalRecommendationReport.aspx" />
+        <filedep name="/Appraisal/AppraisalRecommendationReport.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

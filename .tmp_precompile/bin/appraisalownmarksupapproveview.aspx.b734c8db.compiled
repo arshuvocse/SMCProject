@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/AppraisalOwnMarkSupApproveView.aspx" hash="928e13213" filehash="fc6607ef31b07a38" flags="110000" assembly="App_Web_appraisalownmarksupapproveview.aspx.b734c8db" type="ASP.appraisal_appraisalownmarksupapproveview_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/AppraisalOwnMarkSupApproveView.aspx" />
+        <filedep name="/Appraisal/AppraisalOwnMarkSupApproveView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Training/TrainingRecordSendMAil.aspx" hash="928e13213" filehash="2c8c3eaaef3c831f" flags="110000" assembly="App_Web_trainingrecordsendmail.aspx.c7875b37" type="ASP.training_trainingrecordsendmail_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Training/TrainingRecordSendMAil.aspx" />
+        <filedep name="/Training/TrainingRecordSendMAil.aspx.cs" />
+    </filedeps>
+</preserve>

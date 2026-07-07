@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/TraningInstitiueView.aspx" hash="928e13213" filehash="3c94e0c93b9cd425" flags="110000" assembly="App_Web_traninginstitiueview.aspx.ac93fe35" type="ASP.mastersetup_ui_traninginstitiueview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/TraningInstitiueView.aspx" />
+        <filedep name="/MasterSetup_UI/TraningInstitiueView.aspx.cs" />
+    </filedeps>
+</preserve>

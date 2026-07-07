@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/OKRDeadlineSetup.aspx" hash="928e13213" filehash="7b6a5adfc0462dd8" flags="110000" assembly="App_Web_okrdeadlinesetup.aspx.b734c8db" type="ASP.appraisal_okrdeadlinesetup_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/OKRDeadlineSetup.aspx" />
+        <filedep name="/Appraisal/OKRDeadlineSetup.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

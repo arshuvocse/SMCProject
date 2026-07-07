@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/EmployeeTypeView.aspx" hash="928e13213" filehash="8de839ba6cc0e2e4" flags="110000" assembly="App_Web_employeetypeview.aspx.ac93fe35" type="ASP.mastersetup_ui_employeetypeview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/EmployeeTypeView.aspx" />
+        <filedep name="/MasterSetup_UI/EmployeeTypeView.aspx.cs" />
+    </filedeps>
+</preserve>

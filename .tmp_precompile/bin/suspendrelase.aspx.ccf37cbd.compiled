@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/SuspendAndDiciplinary_UI/SuspendRelase.aspx" hash="928e13213" filehash="e37c41536334897c" flags="110000" assembly="App_Web_suspendrelase.aspx.ccf37cbd" type="ASP.suspendanddiciplinary_ui_suspendrelase_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/SuspendAndDiciplinary_UI/SuspendRelase.aspx" />
+        <filedep name="/SuspendAndDiciplinary_UI/SuspendRelase.aspx.cs" />
+    </filedeps>
+</preserve>

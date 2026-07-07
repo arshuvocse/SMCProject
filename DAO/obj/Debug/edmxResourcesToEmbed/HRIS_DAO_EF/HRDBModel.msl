@@ -1,0 +1,1169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HRIS_SMCModelStoreContainer" CdmEntityContainer="HRIS_SMCEntities">
+    <EntitySetMapping Name="tblCompanyInfoes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblCompanyInfo">
+        <MappingFragment StoreEntitySet="tblCompanyInfo">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Hotline" ColumnName="Hotline" />
+          <ScalarProperty Name="EmailAdress" ColumnName="EmailAdress" />
+          <ScalarProperty Name="Pabx" ColumnName="Pabx" />
+          <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDepartments">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblDepartment">
+        <MappingFragment StoreEntitySet="tblDepartment">
+          <ScalarProperty Name="Root" ColumnName="Root" />
+          <ScalarProperty Name="Invisible" ColumnName="Invisible" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DivisionWId" ColumnName="DivisionWId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDesignationSteps">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblDesignationStep">
+        <MappingFragment StoreEntitySet="tblDesignationStep">
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DesignationStepName" ColumnName="DesignationStepName" />
+          <ScalarProperty Name="DesignationStepId" ColumnName="DesignationStepId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDesignationTypes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblDesignationType">
+        <MappingFragment StoreEntitySet="tblDesignationType">
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DesigTypeName" ColumnName="DesigTypeName" />
+          <ScalarProperty Name="DesignationTypeId" ColumnName="DesignationTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDivisions">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblDivision">
+        <MappingFragment StoreEntitySet="tblDivision">
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDivisionWings">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblDivisionWing">
+        <MappingFragment StoreEntitySet="tblDivisionWing">
+          <ScalarProperty Name="IsActiveHK" ColumnName="IsActiveHK" />
+          <ScalarProperty Name="Root" ColumnName="Root" />
+          <ScalarProperty Name="Invisible" ColumnName="Invisible" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="DivisionWingName" ColumnName="DivisionWingName" />
+          <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+          <ScalarProperty Name="DivisionWId" ColumnName="DivisionWId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCompanyUnits">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblCompanyUnit">
+        <MappingFragment StoreEntitySet="tblCompanyUnit">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+          <ScalarProperty Name="DeleteBy" ColumnName="DeleteBy" />
+          <ScalarProperty Name="CompanyInfoId" ColumnName="CompanyInfoId" />
+          <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="UnitAddress" ColumnName="UnitAddress" />
+          <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+          <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+          <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuTypeSetups">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuTypeSetup">
+        <MappingFragment StoreEntitySet="tblMenuTypeSetup">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="MenuTypeName" ColumnName="MenuTypeName" />
+          <ScalarProperty Name="MenuTypeId" ColumnName="MenuTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuApprovalGroupSetups">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuApprovalGroupSetup">
+        <MappingFragment StoreEntitySet="tblMenuApprovalGroupSetup">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="MenuApprovalGroupName" ColumnName="MenuApprovalGroupName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="MenuApprovalGroupSetupId" ColumnName="MenuApprovalGroupSetupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuApprovalGroupSetupDetails">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuApprovalGroupSetupDetail">
+        <MappingFragment StoreEntitySet="tblMenuApprovalGroupSetupDetail">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MainMenuId" ColumnName="MainMenuId" />
+          <ScalarProperty Name="MenuApprovalGroupSetupId" ColumnName="MenuApprovalGroupSetupId" />
+          <ScalarProperty Name="MenuApprovalGroupSetupDetailId" ColumnName="MenuApprovalGroupSetupDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuGroupPermissions">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuGroupPermission">
+        <MappingFragment StoreEntitySet="tblMenuGroupPermission">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="MenuGroupPermissionId" ColumnName="MenuGroupPermissionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuGroupPermissionDtls">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuGroupPermissionDtl">
+        <MappingFragment StoreEntitySet="tblMenuGroupPermissionDtl">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MenuGroupSetupId" ColumnName="MenuGroupSetupId" />
+          <ScalarProperty Name="MenuGroupPermissionId" ColumnName="MenuGroupPermissionId" />
+          <ScalarProperty Name="MenuGroupPermissionDtlId" ColumnName="MenuGroupPermissionDtlId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuApprovalGroupPermissions">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuApprovalGroupPermission">
+        <MappingFragment StoreEntitySet="tblMenuApprovalGroupPermission">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="MenuApprovalGroupPermissionId" ColumnName="MenuApprovalGroupPermissionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuApprovalGroupPermissionDtls">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuApprovalGroupPermissionDtl">
+        <MappingFragment StoreEntitySet="tblMenuApprovalGroupPermissionDtl">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MenuApprovalGroupSetupId" ColumnName="MenuApprovalGroupSetupId" />
+          <ScalarProperty Name="MenuApprovalGroupPermissionId" ColumnName="MenuApprovalGroupPermissionId" />
+          <ScalarProperty Name="MenuApprovalGroupPermissionDtlId" ColumnName="MenuApprovalGroupPermissionDtlId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpCategories">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpCategory">
+        <MappingFragment StoreEntitySet="tblEmpCategory">
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EmpCategoryName" ColumnName="EmpCategoryName" />
+          <ScalarProperty Name="EmpCategoryId" ColumnName="EmpCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterAchievements">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMasterAchievement">
+        <MappingFragment StoreEntitySet="tblMasterAchievements">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AchievementsName" ColumnName="AchievementsName" />
+          <ScalarProperty Name="MasterAchievementsId" ColumnName="MasterAchievementsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterExtraCurriculams">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMasterExtraCurriculam">
+        <MappingFragment StoreEntitySet="tblMasterExtraCurriculam">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ExtraCurriculamName" ColumnName="ExtraCurriculamName" />
+          <ScalarProperty Name="MasterExtraCurriculamId" ColumnName="MasterExtraCurriculamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterHobbies">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMasterHobby">
+        <MappingFragment StoreEntitySet="tblMasterHobby">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="HobbyName" ColumnName="HobbyName" />
+          <ScalarProperty Name="MasterHobbyId" ColumnName="MasterHobbyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMasterOtherTalents">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMasterOtherTalent">
+        <MappingFragment StoreEntitySet="tblMasterOtherTalents">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="OtherTalentsName" ColumnName="OtherTalentsName" />
+          <ScalarProperty Name="MasterOtherTalentsId" ColumnName="MasterOtherTalentsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAttachmentTypes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblAttachmentType">
+        <MappingFragment StoreEntitySet="tblAttachmentType">
+          <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+          <ScalarProperty Name="AttachmentTypeId" ColumnName="AttachmentTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpAttachments">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpAttachment">
+        <MappingFragment StoreEntitySet="tblEmpAttachments">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AttObject" ColumnName="AttObject" />
+          <ScalarProperty Name="AttachmentTypeId" ColumnName="AttachmentTypeId" />
+          <ScalarProperty Name="EmpAttachmentsId" ColumnName="EmpAttachmentsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpAchievements">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpAchievement">
+        <MappingFragment StoreEntitySet="tblEmpAchievements">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MasterAchievementsId" ColumnName="MasterAchievementsId" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+          <ScalarProperty Name="EmpAchievementsId" ColumnName="EmpAchievementsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpExtraCurriculams">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpExtraCurriculam">
+        <MappingFragment StoreEntitySet="tblEmpExtraCurriculam">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MasterExtraCurriculamId" ColumnName="MasterExtraCurriculamId" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+          <ScalarProperty Name="EmpExtraCurriculamId" ColumnName="EmpExtraCurriculamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpHobbies">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpHobby">
+        <MappingFragment StoreEntitySet="tblEmpHobby">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MasterHobbyId" ColumnName="MasterHobbyId" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+          <ScalarProperty Name="EmpHobbyId" ColumnName="EmpHobbyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpOtherTalents">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpOtherTalent">
+        <MappingFragment StoreEntitySet="tblEmpOtherTalents">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MasterOtherTalentsId" ColumnName="MasterOtherTalentsId" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+          <ScalarProperty Name="EmpOtherTalentsId" ColumnName="EmpOtherTalentsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserDepartmentPermissions">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblUserDepartmentPermission">
+        <MappingFragment StoreEntitySet="tblUserDepartmentPermission">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserDepartmentPermissionId" ColumnName="UserDepartmentPermissionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMainMenus">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMainMenu">
+        <MappingFragment StoreEntitySet="tblMainMenu">
+          <ScalarProperty Name="IsSupervisor" ColumnName="IsSupervisor" />
+          <ScalarProperty Name="IsInMainMenu" ColumnName="IsInMainMenu" />
+          <ScalarProperty Name="Own" ColumnName="Own" />
+          <ScalarProperty Name="Everyone" ColumnName="Everyone" />
+          <ScalarProperty Name="Delete" ColumnName="Delete" />
+          <ScalarProperty Name="Edit" ColumnName="Edit" />
+          <ScalarProperty Name="View" ColumnName="View" />
+          <ScalarProperty Name="Add" ColumnName="Add" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="MenuTypeId" ColumnName="MenuTypeId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="IsApprovalPage" ColumnName="IsApprovalPage" />
+          <ScalarProperty Name="ParantId" ColumnName="ParantId" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="SL" ColumnName="SL" />
+          <ScalarProperty Name="MainMenuId" ColumnName="MainMenuId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuGroupSetupDetails">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuGroupSetupDetail">
+        <MappingFragment StoreEntitySet="tblMenuGroupSetupDetail">
+          <ScalarProperty Name="Delete" ColumnName="Delete" />
+          <ScalarProperty Name="Edit" ColumnName="Edit" />
+          <ScalarProperty Name="View" ColumnName="View" />
+          <ScalarProperty Name="Add" ColumnName="Add" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MainMenuId" ColumnName="MainMenuId" />
+          <ScalarProperty Name="MenuGroupSetupId" ColumnName="MenuGroupSetupId" />
+          <ScalarProperty Name="MenuGroupSetupDetailId" ColumnName="MenuGroupSetupDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblApprovalStepInfoes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblApprovalStepInfo">
+        <MappingFragment StoreEntitySet="tblApprovalStepInfo">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="ApprovalStepName" ColumnName="ApprovalStepName" />
+          <ScalarProperty Name="ApprovalStepInfoId" ColumnName="ApprovalStepInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblApprovalStepSetups">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblApprovalStepSetup">
+        <MappingFragment StoreEntitySet="tblApprovalStepSetup">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MainMenuId" ColumnName="MainMenuId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="ApprovalStepSetupId" ColumnName="ApprovalStepSetupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblApprovalStepSetupStepDtls">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblApprovalStepSetupStepDtl">
+        <MappingFragment StoreEntitySet="tblApprovalStepSetupStepDtl">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApprovalStepInfoId" ColumnName="ApprovalStepInfoId" />
+          <ScalarProperty Name="ApprovalStepSetupId" ColumnName="ApprovalStepSetupId" />
+          <ScalarProperty Name="ApprovalStepSetupStepDtlId" ColumnName="ApprovalStepSetupStepDtlId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="IsmainDasboard" ColumnName="IsmainDasboard" />
+          <ScalarProperty Name="JobLocationID" ColumnName="JobLocationID" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="UserDataPermissionId" ColumnName="UserDataPermissionId" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+          <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
+          <ScalarProperty Name="ActiveDate" ColumnName="ActiveDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserCategoryId" ColumnName="UserCategoryId" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserCategories">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblUserCategory">
+        <MappingFragment StoreEntitySet="tblUserCategory">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="UserCategoryId" ColumnName="UserCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserCompanyMapings">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblUserCompanyMaping">
+        <MappingFragment StoreEntitySet="tblUserCompanyMaping">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserCompanyMapingId" ColumnName="UserCompanyMapingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserTypes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblUserType">
+        <MappingFragment StoreEntitySet="tblUserType">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblQuarterInfoes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblQuarterInfo">
+        <MappingFragment StoreEntitySet="tblQuarterInfo">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="QuarterName" ColumnName="QuarterName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="QuarterId" ColumnName="QuarterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblQuarterMonthInfoes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblQuarterMonthInfo">
+        <MappingFragment StoreEntitySet="tblQuarterMonthInfo">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+          <ScalarProperty Name="QuarterId" ColumnName="QuarterId" />
+          <ScalarProperty Name="QuarterMonthId" ColumnName="QuarterMonthId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDesignations">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblDesignation">
+        <MappingFragment StoreEntitySet="tblDesignation">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="SalaryGradeId" ColumnName="SalaryGradeId" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewActivities">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewActivity">
+        <MappingFragment StoreEntitySet="tblInterviewActivity">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="InterviewActivity" ColumnName="InterviewActivity" />
+          <ScalarProperty Name="InterviewActivityId" ColumnName="InterviewActivityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewBoardEmpDetails">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewBoardEmpDetail">
+        <MappingFragment StoreEntitySet="tblInterviewBoardEmpDetails">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+          <ScalarProperty Name="EmpBoardDetailsId" ColumnName="EmpBoardDetailsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewCandidateGradings">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewCandidateGrading">
+        <MappingFragment StoreEntitySet="tblInterviewCandidateGrading">
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="IsRecommended" ColumnName="IsRecommended" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+          <ScalarProperty Name="TimeSence" ColumnName="TimeSence" />
+          <ScalarProperty Name="Others" ColumnName="Others" />
+          <ScalarProperty Name="GeneralKnowledge" ColumnName="GeneralKnowledge" />
+          <ScalarProperty Name="IQ" ColumnName="IQ" />
+          <ScalarProperty Name="TechnicalSkill" ColumnName="TechnicalSkill" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Attitude" ColumnName="Attitude" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="InterviewCandidateGradingId" ColumnName="InterviewCandidateGradingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewCandidateTotalMarks">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewCandidateTotalMark">
+        <MappingFragment StoreEntitySet="tblInterviewCandidateTotalMarks">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="OtherMarksOutOf" ColumnName="OtherMarksOutOf" />
+          <ScalarProperty Name="OtherMarks" ColumnName="OtherMarks" />
+          <ScalarProperty Name="VivaMarksOutOf" ColumnName="VivaMarksOutOf" />
+          <ScalarProperty Name="VivaMarks" ColumnName="VivaMarks" />
+          <ScalarProperty Name="WrittenMarksOutOf" ColumnName="WrittenMarksOutOf" />
+          <ScalarProperty Name="WrittenMarks" ColumnName="WrittenMarks" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="InterviewPhase" ColumnName="InterviewPhase" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="InterviewCandidateTotalMarksId" ColumnName="InterviewCandidateTotalMarksId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewGradings">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewGrading">
+        <MappingFragment StoreEntitySet="tblInterviewGrading">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="StartingMarks" ColumnName="StartingMarks" />
+          <ScalarProperty Name="LetterGrade" ColumnName="LetterGrade" />
+          <ScalarProperty Name="InterviewGradingId" ColumnName="InterviewGradingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_EmpInfo">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.vw_EmpInfo">
+        <MappingFragment StoreEntitySet="vw_EmpInfo">
+          <ScalarProperty Name="OfficialMobile" ColumnName="OfficialMobile" />
+          <ScalarProperty Name="OfficialEmail" ColumnName="OfficialEmail" />
+          <ScalarProperty Name="EmpCategoryName" ColumnName="EmpCategoryName" />
+          <ScalarProperty Name="DivisionWingName" ColumnName="DivisionWingName" />
+          <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="EmployeeStatus" ColumnName="EmployeeStatus" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="AddressPermanent" ColumnName="AddressPermanent" />
+          <ScalarProperty Name="AddressPresent" ColumnName="AddressPresent" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="EmpMasterCode" ColumnName="EmpMasterCode" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpContractProjects">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpContractProject">
+        <MappingFragment StoreEntitySet="tblEmpContractProject">
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="EmpContractProjectId" ColumnName="EmpContractProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpExperiences">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpExperience">
+        <MappingFragment StoreEntitySet="tblEmpExperience">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ExpRemarks" ColumnName="ExpRemarks" />
+          <ScalarProperty Name="ExpTelNo" ColumnName="ExpTelNo" />
+          <ScalarProperty Name="ExpJobDescription" ColumnName="ExpJobDescription" />
+          <ScalarProperty Name="ExpDesignation" ColumnName="ExpDesignation" />
+          <ScalarProperty Name="ExpLastJob" ColumnName="ExpLastJob" />
+          <ScalarProperty Name="ExpToDate" ColumnName="ExpToDate" />
+          <ScalarProperty Name="ExpFromDate" ColumnName="ExpFromDate" />
+          <ScalarProperty Name="ExpLeavingSalary" ColumnName="ExpLeavingSalary" />
+          <ScalarProperty Name="ExpJobType" ColumnName="ExpJobType" />
+          <ScalarProperty Name="ExpNatureofBusiness" ColumnName="ExpNatureofBusiness" />
+          <ScalarProperty Name="ExpAddress" ColumnName="ExpAddress" />
+          <ScalarProperty Name="ExpContactPerson" ColumnName="ExpContactPerson" />
+          <ScalarProperty Name="ExpCompany" ColumnName="ExpCompany" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+          <ScalarProperty Name="EmpExperienceId" ColumnName="EmpExperienceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpChildrens">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpChildren">
+        <MappingFragment StoreEntitySet="tblEmpChildren">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ChildrenMaritalStatus" ColumnName="ChildrenMaritalStatus" />
+          <ScalarProperty Name="ChildrenDOB" ColumnName="ChildrenDOB" />
+          <ScalarProperty Name="ChildrenOccupation" ColumnName="ChildrenOccupation" />
+          <ScalarProperty Name="ChildrenGender" ColumnName="ChildrenGender" />
+          <ScalarProperty Name="ChildrenName" ColumnName="ChildrenName" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+          <ScalarProperty Name="EmpChildrenId" ColumnName="EmpChildrenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpTrainings">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpTraining">
+        <MappingFragment StoreEntitySet="tblEmpTraining">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TrRemarks" ColumnName="TrRemarks" />
+          <ScalarProperty Name="TrainingDays" ColumnName="TrainingDays" />
+          <ScalarProperty Name="TrToDate" ColumnName="TrToDate" />
+          <ScalarProperty Name="TrFromDate" ColumnName="TrFromDate" />
+          <ScalarProperty Name="TrainingAchievment" ColumnName="TrainingAchievment" />
+          <ScalarProperty Name="TrainingCountry" ColumnName="TrainingCountry" />
+          <ScalarProperty Name="TrainingPlace" ColumnName="TrainingPlace" />
+          <ScalarProperty Name="TrainingInstitution" ColumnName="TrainingInstitution" />
+          <ScalarProperty Name="TrainingDescription" ColumnName="TrainingDescription" />
+          <ScalarProperty Name="TrainingType" ColumnName="TrainingType" />
+          <ScalarProperty Name="TrainingName" ColumnName="TrainingName" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+          <ScalarProperty Name="EmpTrainingId" ColumnName="EmpTrainingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblJobCreations">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblJobCreation">
+        <MappingFragment StoreEntitySet="tblJobCreation">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+          <ScalarProperty Name="DeleteBy" ColumnName="DeleteBy" />
+          <ScalarProperty Name="ActionStatus" ColumnName="ActionStatus" />
+          <ScalarProperty Name="ReqCodeId" ColumnName="ReqCodeId" />
+          <ScalarProperty Name="IsSalary" ColumnName="IsSalary" />
+          <ScalarProperty Name="InternalNote" ColumnName="InternalNote" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="VerifiedDate" ColumnName="VerifiedDate" />
+          <ScalarProperty Name="VerifiedBy" ColumnName="VerifiedBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="Updateby" ColumnName="Updateby" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="Progress" ColumnName="Progress" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="ProbableIRecruitmentDate" ColumnName="ProbableIRecruitmentDate" />
+          <ScalarProperty Name="ProbableInterviewDate" ColumnName="ProbableInterviewDate" />
+          <ScalarProperty Name="CirculationsdeadlineDate" ColumnName="CirculationsdeadlineDate" />
+          <ScalarProperty Name="CirculationStartDate" ColumnName="CirculationStartDate" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="OtherDS" ColumnName="OtherDS" />
+          <ScalarProperty Name="TVDS" ColumnName="TVDS" />
+          <ScalarProperty Name="NewspaperDS" ColumnName="NewspaperDS" />
+          <ScalarProperty Name="CompensationandOtherBenefits" ColumnName="CompensationandOtherBenefits" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="AdditionalRequirements" ColumnName="AdditionalRequirements" />
+          <ScalarProperty Name="ExperienceRequirements" ColumnName="ExperienceRequirements" />
+          <ScalarProperty Name="CasualEmp" ColumnName="CasualEmp" />
+          <ScalarProperty Name="TraineeEmp" ColumnName="TraineeEmp" />
+          <ScalarProperty Name="ContractualEmp" ColumnName="ContractualEmp" />
+          <ScalarProperty Name="PermanenteEmp" ColumnName="PermanenteEmp" />
+          <ScalarProperty Name="JobResponsibilities" ColumnName="JobResponsibilities" />
+          <ScalarProperty Name="JobContext" ColumnName="JobContext" />
+          <ScalarProperty Name="Vacancy" ColumnName="Vacancy" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewCandidateInfoes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewCandidateInfo">
+        <MappingFragment StoreEntitySet="tblInterviewCandidateInfo">
+          <ScalarProperty Name="Cv_FileName" ColumnName="Cv_FileName" />
+          <ScalarProperty Name="Cv_File" ColumnName="Cv_File" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="InternalNote" ColumnName="InternalNote" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="VerifiedDate" ColumnName="VerifiedDate" />
+          <ScalarProperty Name="VerifiedBy" ColumnName="VerifiedBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="Updateby" ColumnName="Updateby" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="ExpectedSalary" ColumnName="ExpectedSalary" />
+          <ScalarProperty Name="CurrentSalary" ColumnName="CurrentSalary" />
+          <ScalarProperty Name="PhotoUploadID" ColumnName="PhotoUploadID" />
+          <ScalarProperty Name="CvUploadID" ColumnName="CvUploadID" />
+          <ScalarProperty Name="LastResultOutOf" ColumnName="LastResultOutOf" />
+          <ScalarProperty Name="LastResultCGPA" ColumnName="LastResultCGPA" />
+          <ScalarProperty Name="LastResultDivision" ColumnName="LastResultDivision" />
+          <ScalarProperty Name="LastResultType" ColumnName="LastResultType" />
+          <ScalarProperty Name="LastPassingYear" ColumnName="LastPassingYear" />
+          <ScalarProperty Name="LastMajor" ColumnName="LastMajor" />
+          <ScalarProperty Name="LastExam" ColumnName="LastExam" />
+          <ScalarProperty Name="LastPosition" ColumnName="LastPosition" />
+          <ScalarProperty Name="LastOrganization" ColumnName="LastOrganization" />
+          <ScalarProperty Name="TotalYearsOfExp" ColumnName="TotalYearsOfExp" />
+          <ScalarProperty Name="EmailAdress" ColumnName="EmailAdress" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewBoardSetupDetails">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewBoardSetupDetail">
+        <MappingFragment StoreEntitySet="tblInterviewBoardSetupDetails">
+          <ScalarProperty Name="OtherRemarks" ColumnName="OtherRemarks" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="Viva" ColumnName="Viva" />
+          <ScalarProperty Name="Written" ColumnName="Written" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+          <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+          <ScalarProperty Name="BoardDetailsId" ColumnName="BoardDetailsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewCandidateInvitations">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewCandidateInvitation">
+        <MappingFragment StoreEntitySet="tblInterviewCandidateInvitation">
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="InterviewPhase" ColumnName="InterviewPhase" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="PhoneInvitationSent" ColumnName="PhoneInvitationSent" />
+          <ScalarProperty Name="SMSInvitationSent" ColumnName="SMSInvitationSent" />
+          <ScalarProperty Name="EmailInvitationSent" ColumnName="EmailInvitationSent" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="CandidateInvitationId" ColumnName="CandidateInvitationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewCandidateAttandances">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewCandidateAttandance">
+        <MappingFragment StoreEntitySet="tblInterviewCandidateAttandance">
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="InterviewPhase" ColumnName="InterviewPhase" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
+          <ScalarProperty Name="ReportingTime" ColumnName="ReportingTime" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="InterviewCandidateAttandanceId" ColumnName="InterviewCandidateAttandanceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewBoardSetupMasters">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewBoardSetupMaster">
+        <MappingFragment StoreEntitySet="tblInterviewBoardSetupMaster">
+          <ScalarProperty Name="AttFileName" ColumnName="AttFileName" />
+          <ScalarProperty Name="HasAttachment" ColumnName="HasAttachment" />
+          <ScalarProperty Name="EmailBody" ColumnName="EmailBody" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="InterviewToTime" ColumnName="InterviewToTime" />
+          <ScalarProperty Name="InterviewFromTime" ColumnName="InterviewFromTime" />
+          <ScalarProperty Name="InterviewDate" ColumnName="InterviewDate" />
+          <ScalarProperty Name="Vanue" ColumnName="Vanue" />
+          <ScalarProperty Name="InterviewPhase" ColumnName="InterviewPhase" />
+          <ScalarProperty Name="JobTitleId" ColumnName="JobTitleId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="SetupMasterId" ColumnName="SetupMasterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMPBudgetDetails">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMPBudgetDetail">
+        <MappingFragment StoreEntitySet="tblMPBudgetDetails">
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="EmployeeTypeId" ColumnName="EmployeeTypeId" />
+          <ScalarProperty Name="FilterType" ColumnName="FilterType" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DtlRemarks" ColumnName="DtlRemarks" />
+          <ScalarProperty Name="SalaryStepId" ColumnName="SalaryStepId" />
+          <ScalarProperty Name="SalaryGradeId" ColumnName="SalaryGradeId" />
+          <ScalarProperty Name="QuarterId" ColumnName="QuarterId" />
+          <ScalarProperty Name="ReqTotalSalary" ColumnName="ReqTotalSalary" />
+          <ScalarProperty Name="ReqApproxSalary" ColumnName="ReqApproxSalary" />
+          <ScalarProperty Name="EmployeeRequisition" ColumnName="EmployeeRequisition" />
+          <ScalarProperty Name="EmpCategoryId" ColumnName="EmpCategoryId" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="MPBudgetMasterId" ColumnName="MPBudgetMasterId" />
+          <ScalarProperty Name="MPBudgetDetailsId" ColumnName="MPBudgetDetailsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMenuGroupSetups">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMenuGroupSetup">
+        <MappingFragment StoreEntitySet="tblMenuGroupSetup">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="MenuTypeId" ColumnName="MenuTypeId" />
+          <ScalarProperty Name="MenuGroupDescription" ColumnName="MenuGroupDescription" />
+          <ScalarProperty Name="MenuGroupName" ColumnName="MenuGroupName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="MenuGroupSetupId" ColumnName="MenuGroupSetupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpEducations">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpEducation">
+        <MappingFragment StoreEntitySet="tblEmpEducation">
+          <ScalarProperty Name="EmpEducationId" ColumnName="EmpEducationId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsProfessionalEdu" ColumnName="IsProfessionalEdu" />
+          <ScalarProperty Name="EduIsLastLevel" ColumnName="EduIsLastLevel" />
+          <ScalarProperty Name="FieldOfSpecializationId" ColumnName="FieldOfSpecializationId" />
+          <ScalarProperty Name="CgpaOrTotalMarks" ColumnName="CgpaOrTotalMarks" />
+          <ScalarProperty Name="PassingYear" ColumnName="PassingYear" />
+          <ScalarProperty Name="EducationalInstituteId" ColumnName="EducationalInstituteId" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="BoardUniversityId" ColumnName="BoardUniversityId" />
+          <ScalarProperty Name="SubjectGroupId" ColumnName="SubjectGroupId" />
+          <ScalarProperty Name="EducationNameId" ColumnName="EducationNameId" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpReferences">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpReference">
+        <MappingFragment StoreEntitySet="tblEmpReference">
+          <ScalarProperty Name="EmpReferenceId" ColumnName="EmpReferenceId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RefMobile" ColumnName="RefMobile" />
+          <ScalarProperty Name="RefAddress" ColumnName="RefAddress" />
+          <ScalarProperty Name="RefOccupation" ColumnName="RefOccupation" />
+          <ScalarProperty Name="ReferenceName" ColumnName="ReferenceName" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpNominees">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpNominee">
+        <MappingFragment StoreEntitySet="tblEmpNominee">
+          <ScalarProperty Name="NomNomineImg" ColumnName="NomNomineImg" />
+          <ScalarProperty Name="EmpNomineeId" ColumnName="EmpNomineeId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="NomineeTelephone" ColumnName="NomineeTelephone" />
+          <ScalarProperty Name="NomineeAddress" ColumnName="NomineeAddress" />
+          <ScalarProperty Name="NomineeRelation" ColumnName="NomineeRelation" />
+          <ScalarProperty Name="NomineeDOB" ColumnName="NomineeDOB" />
+          <ScalarProperty Name="NominationPercentage" ColumnName="NominationPercentage" />
+          <ScalarProperty Name="DateOfNomination" ColumnName="DateOfNomination" />
+          <ScalarProperty Name="NomineeOccupation" ColumnName="NomineeOccupation" />
+          <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
+          <ScalarProperty Name="NominationPurpose" ColumnName="NominationPurpose" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblInterviewMarksDetails">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblInterviewMarksDetail">
+        <MappingFragment StoreEntitySet="tblInterviewMarksDetails">
+          <ScalarProperty Name="WrittenOutOf" ColumnName="WrittenOutOf" />
+          <ScalarProperty Name="OtherOutOf" ColumnName="OtherOutOf" />
+          <ScalarProperty Name="VivaOutOf" ColumnName="VivaOutOf" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="Tag" ColumnName="Tag" />
+          <ScalarProperty Name="OtherMarks" ColumnName="OtherMarks" />
+          <ScalarProperty Name="WrittenMarks" ColumnName="WrittenMarks" />
+          <ScalarProperty Name="VivaMarks" ColumnName="VivaMarks" />
+          <ScalarProperty Name="VivaId" ColumnName="VivaId" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="BoardDetailsId" ColumnName="BoardDetailsId" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="InterviewMarksDetailsId" ColumnName="InterviewMarksDetailsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmployeeTypes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmployeeType">
+        <MappingFragment StoreEntitySet="tblEmployeeType">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EmpType" ColumnName="EmpType" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="EmpTypeId" ColumnName="EmpTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMPBudgetMasters">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblMPBudgetMaster">
+        <MappingFragment StoreEntitySet="tblMPBudgetMaster">
+          <ScalarProperty Name="isManuallyUpdate" ColumnName="isManuallyUpdate" />
+          <ScalarProperty Name="ActionStatus2" ColumnName="ActionStatus2" />
+          <ScalarProperty Name="ActionStatus" ColumnName="ActionStatus" />
+          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+          <ScalarProperty Name="DeleteBy" ColumnName="DeleteBy" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+          <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="FinancialYearId" ColumnName="FinancialYearId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="BudgetCode" ColumnName="BudgetCode" />
+          <ScalarProperty Name="MPBudgetMasterId" ColumnName="MPBudgetMasterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpGeneralInfoes">
+      <EntityTypeMapping TypeName="HRIS_SMCModel.tblEmpGeneralInfo">
+        <MappingFragment StoreEntitySet="tblEmpGeneralInfo">
+          <ScalarProperty Name="RecruitmentTypeReplacement" ColumnName="RecruitmentTypeReplacement" />
+          <ScalarProperty Name="RecruitmentTypeNew" ColumnName="RecruitmentTypeNew" />
+          <ScalarProperty Name="MotherDOB" ColumnName="MotherDOB" />
+          <ScalarProperty Name="FatherDOB" ColumnName="FatherDOB" />
+          <ScalarProperty Name="IsSpTransfer" ColumnName="IsSpTransfer" />
+          <ScalarProperty Name="LeaveApprovalId" ColumnName="LeaveApprovalId" />
+          <ScalarProperty Name="leaveRecommenderId" ColumnName="leaveRecommenderId" />
+          <ScalarProperty Name="IsCompanyDirector" ColumnName="IsCompanyDirector" />
+          <ScalarProperty Name="IsSMCFundedProjects" ColumnName="IsSMCFundedProjects" />
+          <ScalarProperty Name="NewIDChangePolicy_OldID" ColumnName="NewIDChangePolicy_OldID" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="ContractStartDate" ColumnName="ContractStartDate" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Floor" ColumnName="Floor" />
+          <ScalarProperty Name="ContractPeriod" ColumnName="ContractPeriod" />
+          <ScalarProperty Name="NomineeImage" ColumnName="NomineeImage" />
+          <ScalarProperty Name="IsProgramContractual" ColumnName="IsProgramContractual" />
+          <ScalarProperty Name="NationalIdNo" ColumnName="NationalIdNo" />
+          <ScalarProperty Name="SMCOldCode" ColumnName="SMCOldCode" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="EmpSign" ColumnName="EmpSign" />
+          <ScalarProperty Name="EmpImage" ColumnName="EmpImage" />
+          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+          <ScalarProperty Name="DeleteBy" ColumnName="DeleteBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+          <ScalarProperty Name="InactiveReason" ColumnName="InactiveReason" />
+          <ScalarProperty Name="EmployeeStatus" ColumnName="EmployeeStatus" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="Updateby" ColumnName="Updateby" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryBy" ColumnName="EntryBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="MedicalInformation" ColumnName="MedicalInformation" />
+          <ScalarProperty Name="ActionStatus" ColumnName="ActionStatus" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="NAge" ColumnName="NAge" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="ConformationStatus" ColumnName="ConformationStatus" />
+          <ScalarProperty Name="DateOfConfirmation" ColumnName="DateOfConfirmation" />
+          <ScalarProperty Name="DateOfMarriage" ColumnName="DateOfMarriage" />
+          <ScalarProperty Name="SpouseOccupation" ColumnName="SpouseOccupation" />
+          <ScalarProperty Name="SpouseMaxEducation" ColumnName="SpouseMaxEducation" />
+          <ScalarProperty Name="SpouseDateOfBirth" ColumnName="SpouseDateOfBirth" />
+          <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+          <ScalarProperty Name="EmergencyContactNumber" ColumnName="EmergencyContactNumber" />
+          <ScalarProperty Name="EmergencyContactAddress" ColumnName="EmergencyContactAddress" />
+          <ScalarProperty Name="EmergencyContactPerson" ColumnName="EmergencyContactPerson" />
+          <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+          <ScalarProperty Name="OfficialMobile" ColumnName="OfficialMobile" />
+          <ScalarProperty Name="PersonalMobile" ColumnName="PersonalMobile" />
+          <ScalarProperty Name="OfficialEmail" ColumnName="OfficialEmail" />
+          <ScalarProperty Name="PersonalEmail" ColumnName="PersonalEmail" />
+          <ScalarProperty Name="ParmanentTelNo" ColumnName="ParmanentTelNo" />
+          <ScalarProperty Name="PermanentThana" ColumnName="PermanentThana" />
+          <ScalarProperty Name="PermanentDistrict" ColumnName="PermanentDistrict" />
+          <ScalarProperty Name="ParmanentDivision" ColumnName="ParmanentDivision" />
+          <ScalarProperty Name="AddressPermanent" ColumnName="AddressPermanent" />
+          <ScalarProperty Name="PresentTelNo" ColumnName="PresentTelNo" />
+          <ScalarProperty Name="PresentThana" ColumnName="PresentThana" />
+          <ScalarProperty Name="PresentDistrict" ColumnName="PresentDistrict" />
+          <ScalarProperty Name="PresentDivision" ColumnName="PresentDivision" />
+          <ScalarProperty Name="AddressPresent" ColumnName="AddressPresent" />
+          <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+          <ScalarProperty Name="DateOfConformation" ColumnName="DateOfConformation" />
+          <ScalarProperty Name="DateOfRetirement" ColumnName="DateOfRetirement" />
+          <ScalarProperty Name="ExpectedServiceLength" ColumnName="ExpectedServiceLength" />
+          <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+          <ScalarProperty Name="NationalityID" ColumnName="NationalityID" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="ExtContractDate" ColumnName="ExtContractDate" />
+          <ScalarProperty Name="ContractEndDate" ColumnName="ContractEndDate" />
+          <ScalarProperty Name="ExtProbationPeriodDate" ColumnName="ExtProbationPeriodDate" />
+          <ScalarProperty Name="ProbationEndDate" ColumnName="ProbationEndDate" />
+          <ScalarProperty Name="IsProbationary" ColumnName="IsProbationary" />
+          <ScalarProperty Name="SalaryFromProject" ColumnName="SalaryFromProject" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="EmpTypeId" ColumnName="EmpTypeId" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="DateOfJoin" ColumnName="DateOfJoin" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="MotherOccupation" ColumnName="MotherOccupation" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="FatherOccupation" ColumnName="FatherOccupation" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="TinNo" ColumnName="TinNo" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="JobLocationId" ColumnName="JobLocationId" />
+          <ScalarProperty Name="SalaryLoationId" ColumnName="SalaryLoationId" />
+          <ScalarProperty Name="DesignationTypeId" ColumnName="DesignationTypeId" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="SalaryStepId" ColumnName="SalaryStepId" />
+          <ScalarProperty Name="SalaryGradeId" ColumnName="SalaryGradeId" />
+          <ScalarProperty Name="EmpCategoryId" ColumnName="EmpCategoryId" />
+          <ScalarProperty Name="SubSectionId" ColumnName="SubSectionId" />
+          <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="DivisionWId" ColumnName="DivisionWId" />
+          <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="EmpMasterCode" ColumnName="EmpMasterCode" />
+          <ScalarProperty Name="ReportingEmpId" ColumnName="ReportingEmpId" />
+          <ScalarProperty Name="EmpInfoId" ColumnName="EmpInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

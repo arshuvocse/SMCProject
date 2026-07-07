@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/DocumentMemo.aspx" hash="928e13213" filehash="c7c889e885365900" flags="110000" assembly="App_Web_documentmemo.aspx.1f05457f" type="ASP.meetingminors_documentmemo_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/DocumentMemo.aspx" />
+        <filedep name="/MeetingMinors/DocumentMemo.aspx.cs" />
+    </filedeps>
+</preserve>

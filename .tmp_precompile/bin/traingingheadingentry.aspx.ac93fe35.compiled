@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/TraingingHeadingEntry.aspx" hash="928e13213" filehash="c82d6792cc499952" flags="110000" assembly="App_Web_traingingheadingentry.aspx.ac93fe35" type="ASP.mastersetup_ui_traingingheadingentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/TraingingHeadingEntry.aspx" />
+        <filedep name="/MasterSetup_UI/TraingingHeadingEntry.aspx.cs" />
+    </filedeps>
+</preserve>

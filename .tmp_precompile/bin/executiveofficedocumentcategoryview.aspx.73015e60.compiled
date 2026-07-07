@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/ExecutiveOfficeDocumentCategoryView.aspx" hash="928e13213" filehash="a1c2dcbe755e52f2" flags="110000" assembly="App_Web_executiveofficedocumentcategoryview.aspx.73015e60" type="ASP.healthcare_ui_executiveofficedocumentcategoryview_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/ExecutiveOfficeDocumentCategoryView.aspx" />
+        <filedep name="/HealthCare_UI/ExecutiveOfficeDocumentCategoryView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

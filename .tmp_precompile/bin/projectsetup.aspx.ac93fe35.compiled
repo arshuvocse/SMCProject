@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/ProjectSetup.aspx" hash="928e13213" filehash="118e5ce5501574dc" flags="110000" assembly="App_Web_projectsetup.aspx.ac93fe35" type="ASP.mastersetup_ui_projectsetup_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/ProjectSetup.aspx" />
+        <filedep name="/MasterSetup_UI/ProjectSetup.aspx.cs" />
+    </filedeps>
+</preserve>

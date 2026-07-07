@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/DashBoard_UI/DashBoard.aspx" hash="928e13213" filehash="ee3a956da7eeb250" flags="110000" assembly="App_Web_dashboard.aspx.60bf5940" type="ASP.dashboard_ui_dashboard_aspx">
+    <filedeps>
+        <filedep name="/DashBoard_UI/DashBoard.aspx" />
+        <filedep name="/DashBoard_UI/DashBoard.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

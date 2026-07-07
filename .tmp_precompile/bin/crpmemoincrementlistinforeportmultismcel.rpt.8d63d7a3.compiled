@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpMemoIncrementListInfoReportMultiSMCEL.rpt" hash="48caa2a6" filehash="ffffe0ffa837c4c2" flags="110000" assembly="App_Web_crpmemoincrementlistinforeportmultismcel.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpMemoIncrementListInfoReportMultiSMCEL.rpt" />
+    </filedeps>
+</preserve>

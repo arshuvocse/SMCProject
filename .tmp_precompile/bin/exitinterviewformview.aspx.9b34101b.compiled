@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/ExitManagement_UI/ExitInterviewFormView.aspx" hash="928e13213" filehash="8252215f2119ffaa" flags="110000" assembly="App_Web_exitinterviewformview.aspx.9b34101b" type="ASP.exitmanagement_ui_exitinterviewformview_aspx">
+    <filedeps>
+        <filedep name="/ExitManagement_UI/ExitInterviewFormView.aspx" />
+        <filedep name="/ExitManagement_UI/ExitInterviewFormView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

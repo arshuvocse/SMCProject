@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Inverview/InterviewBoardSetupSendMAil.aspx" hash="928e13213" filehash="e7159702b739c84b" flags="110000" assembly="App_Web_interviewboardsetupsendmail.aspx.1128ecb0" type="ASP.inverview_interviewboardsetupsendmail_aspx">
+    <filedeps>
+        <filedep name="/Inverview/InterviewBoardSetupSendMAil.aspx" />
+        <filedep name="/Inverview/InterviewBoardSetupSendMAil.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Benefit_UI/FacilityEntry.aspx" hash="928e13213" filehash="e4f5ba8daa9e5f4e" flags="110000" assembly="App_Web_facilityentry.aspx.c704fd94" type="ASP.benefit_ui_facilityentry_aspx">
+    <filedeps>
+        <filedep name="/Benefit_UI/FacilityEntry.aspx" />
+        <filedep name="/Benefit_UI/FacilityEntry.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

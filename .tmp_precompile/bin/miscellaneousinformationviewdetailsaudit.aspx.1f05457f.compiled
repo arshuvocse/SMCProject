@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/MiscellaneousInformationViewDetailsAudit.aspx" hash="928e13213" filehash="6298543da8b55963" flags="110000" assembly="App_Web_miscellaneousinformationviewdetailsaudit.aspx.1f05457f" type="ASP.meetingminors_miscellaneousinformationviewdetailsaudit_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/MiscellaneousInformationViewDetailsAudit.aspx" />
+        <filedep name="/MeetingMinors/MiscellaneousInformationViewDetailsAudit.aspx.cs" />
+    </filedeps>
+</preserve>

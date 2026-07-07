@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpClearenceFormReport.rpt" hash="48caa2a6" filehash="f0f545fc0e2" flags="110000" assembly="App_Web_crpclearenceformreport.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpClearenceFormReport.rpt" />
+    </filedeps>
+</preserve>

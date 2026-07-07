@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/BSCKPIInformationReportViewer.aspx" hash="928e13213" filehash="b3aae3a02754f8e6" flags="110000" assembly="App_Web_bsckpiinformationreportviewer.aspx.8e127b5f" type="ASP.report_ui_bsckpiinformationreportviewer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/BSCKPIInformationReportViewer.aspx" />
+        <filedep name="/Report_UI/BSCKPIInformationReportViewer.aspx.cs" />
+    </filedeps>
+</preserve>

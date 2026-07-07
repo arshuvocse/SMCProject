@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/MPBudgetListReportViwer.aspx" hash="928e13213" filehash="7978036a7c4c0931" flags="110000" assembly="App_Web_mpbudgetlistreportviwer.aspx.8e127b5f" type="ASP.report_ui_mpbudgetlistreportviwer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/MPBudgetListReportViwer.aspx" />
+        <filedep name="/Report_UI/MPBudgetListReportViwer.aspx.cs" />
+    </filedeps>
+</preserve>

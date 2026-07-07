@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Increment_UI/ICSignaturePerson.aspx" hash="928e13213" filehash="9c38ec8941f60b7c" flags="110000" assembly="App_Web_icsignatureperson.aspx.72a1dc72" type="ASP.increment_ui_icsignatureperson_aspx">
+    <filedeps>
+        <filedep name="/Increment_UI/ICSignaturePerson.aspx" />
+        <filedep name="/Increment_UI/ICSignaturePerson.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

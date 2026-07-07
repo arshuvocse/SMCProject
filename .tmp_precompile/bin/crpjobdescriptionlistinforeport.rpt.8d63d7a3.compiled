@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpJobDescriptionListInfoReport.rpt" hash="48caa2a6" filehash="ffffc5299b22b846" flags="110000" assembly="App_Web_crpjobdescriptionlistinforeport.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpJobDescriptionListInfoReport.rpt" />
+    </filedeps>
+</preserve>

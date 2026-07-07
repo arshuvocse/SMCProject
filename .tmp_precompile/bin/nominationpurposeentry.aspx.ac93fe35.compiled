@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/NominationPurposeEntry.aspx" hash="928e13213" filehash="edaafb063b467b39" flags="110000" assembly="App_Web_nominationpurposeentry.aspx.ac93fe35" type="ASP.mastersetup_ui_nominationpurposeentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/NominationPurposeEntry.aspx" />
+        <filedep name="/MasterSetup_UI/NominationPurposeEntry.aspx.cs" />
+    </filedeps>
+</preserve>

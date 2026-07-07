@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Lunch_Allowance_UI/YearlyHolidayEntry.aspx" hash="928e13213" filehash="567d10074cd1d329" flags="110000" assembly="App_Web_yearlyholidayentry.aspx.c83acfdb" type="ASP.lunch_allowance_ui_yearlyholidayentry_aspx">
+    <filedeps>
+        <filedep name="/Lunch_Allowance_UI/YearlyHolidayEntry.aspx" />
+        <filedep name="/Lunch_Allowance_UI/YearlyHolidayEntry.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

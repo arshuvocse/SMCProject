@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/RecruitmentManagement_UI/HRONJobRequisitionForm.aspx" hash="928e13213" filehash="72bb5ef1e718e91a" flags="110000" assembly="App_Web_hronjobrequisitionform.aspx.79a9ee9f" type="ASP.recruitmentmanagement_ui_hronjobrequisitionform_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/RecruitmentManagement_UI/HRONJobRequisitionForm.aspx" />
+        <filedep name="/RecruitmentManagement_UI/HRONJobRequisitionForm.aspx.cs" />
+    </filedeps>
+</preserve>

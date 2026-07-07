@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/BirthDayMailGenerate/BirthDayMailGenerateForEmployee.aspx" hash="928e13213" filehash="500e3c466528f83" flags="110000" assembly="App_Web_birthdaymailgenerateforemployee.aspx.7fe75309" type="ASP.birthdaymailgenerate_birthdaymailgenerateforemployee_aspx">
+    <filedeps>
+        <filedep name="/BirthDayMailGenerate/BirthDayMailGenerateForEmployee.aspx" />
+        <filedep name="/BirthDayMailGenerate/BirthDayMailGenerateForEmployee.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

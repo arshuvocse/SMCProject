@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/MeetingEntry.aspx" hash="928e13213" filehash="d51558f034f60629" flags="110000" assembly="App_Web_meetingentry.aspx.1f05457f" type="ASP.meetingminors_meetingentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/MeetingEntry.aspx" />
+        <filedep name="/MeetingMinors/MeetingEntry.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Skill_Will_Assessment/SkillWill_AssessmentListView.aspx" hash="928e13213" filehash="7a5b4bb202ac7f8b" flags="110000" assembly="App_Web_skillwill_assessmentlistview.aspx.d26514b1" type="ASP.skill_will_assessment_skillwill_assessmentlistview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Skill_Will_Assessment/SkillWill_AssessmentListView.aspx" />
+        <filedep name="/Skill_Will_Assessment/SkillWill_AssessmentListView.aspx.cs" />
+    </filedeps>
+</preserve>

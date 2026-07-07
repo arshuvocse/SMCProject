@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/PlaceInformationView.aspx" hash="928e13213" filehash="338897535345b10b" flags="110000" assembly="App_Web_placeinformationview.aspx.ac93fe35" type="ASP.mastersetup_ui_placeinformationview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/PlaceInformationView.aspx" />
+        <filedep name="/MasterSetup_UI/PlaceInformationView.aspx.cs" />
+    </filedeps>
+</preserve>

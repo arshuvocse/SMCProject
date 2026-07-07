@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/HealthCareList.aspx" hash="928e13213" filehash="74825ed4368dc5c2" flags="110000" assembly="App_Web_healthcarelist.aspx.73015e60" type="ASP.healthcare_ui_healthcarelist_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/HealthCareList.aspx" />
+        <filedep name="/HealthCare_UI/HealthCareList.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

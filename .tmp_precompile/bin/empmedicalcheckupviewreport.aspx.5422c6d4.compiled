@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Medica_Ul/EmpMedicalCheckUpViewReport.aspx" hash="928e13213" filehash="d68f2c6442d97adb" flags="110000" assembly="App_Web_empmedicalcheckupviewreport.aspx.5422c6d4" type="ASP.medica_ul_empmedicalcheckupviewreport_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Medica_Ul/EmpMedicalCheckUpViewReport.aspx" />
+        <filedep name="/Medica_Ul/EmpMedicalCheckUpViewReport.aspx.cs" />
+    </filedeps>
+</preserve>

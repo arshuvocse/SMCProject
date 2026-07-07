@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/KPIInformationView.aspx" hash="928e13213" filehash="7516f4b5462deb43" flags="110000" assembly="App_Web_kpiinformationview.aspx.b734c8db" type="ASP.appraisal_kpiinformationview_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/KPIInformationView.aspx" />
+        <filedep name="/Appraisal/KPIInformationView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

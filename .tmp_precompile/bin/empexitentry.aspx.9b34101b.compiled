@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/ExitManagement_UI/EmpExitEntry.aspx" hash="928e13213" filehash="adbf62fcbad697e" flags="110000" assembly="App_Web_empexitentry.aspx.9b34101b" type="ASP.exitmanagement_ui_empexitentry_aspx">
+    <filedeps>
+        <filedep name="/ExitManagement_UI/EmpExitEntry.aspx" />
+        <filedep name="/ExitManagement_UI/EmpExitEntry.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

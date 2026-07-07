@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/SuspendAndDiciplinary_UI/DiciplinaryAction.aspx" hash="928e13213" filehash="4b135c1f28b487cd" flags="110000" assembly="App_Web_diciplinaryaction.aspx.ccf37cbd" type="ASP.suspendanddiciplinary_ui_diciplinaryaction_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/SuspendAndDiciplinary_UI/DiciplinaryAction.aspx" />
+        <filedep name="/SuspendAndDiciplinary_UI/DiciplinaryAction.aspx.cs" />
+    </filedeps>
+</preserve>

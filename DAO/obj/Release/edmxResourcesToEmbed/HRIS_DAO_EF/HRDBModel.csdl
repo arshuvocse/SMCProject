@@ -1,0 +1,1170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HRIS_SMCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HRIS_SMCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCompanyInfoes" EntityType="HRIS_SMCModel.tblCompanyInfo" />
+    <EntitySet Name="tblDepartments" EntityType="HRIS_SMCModel.tblDepartment" />
+    <EntitySet Name="tblDesignationSteps" EntityType="HRIS_SMCModel.tblDesignationStep" />
+    <EntitySet Name="tblDesignationTypes" EntityType="HRIS_SMCModel.tblDesignationType" />
+    <EntitySet Name="tblDivisions" EntityType="HRIS_SMCModel.tblDivision" />
+    <EntitySet Name="tblDivisionWings" EntityType="HRIS_SMCModel.tblDivisionWing" />
+    <EntitySet Name="tblCompanyUnits" EntityType="HRIS_SMCModel.tblCompanyUnit" />
+    <EntitySet Name="tblMenuTypeSetups" EntityType="HRIS_SMCModel.tblMenuTypeSetup" />
+    <EntitySet Name="tblMenuApprovalGroupSetups" EntityType="HRIS_SMCModel.tblMenuApprovalGroupSetup" />
+    <EntitySet Name="tblMenuApprovalGroupSetupDetails" EntityType="HRIS_SMCModel.tblMenuApprovalGroupSetupDetail" />
+    <EntitySet Name="tblMenuGroupPermissions" EntityType="HRIS_SMCModel.tblMenuGroupPermission" />
+    <EntitySet Name="tblMenuGroupPermissionDtls" EntityType="HRIS_SMCModel.tblMenuGroupPermissionDtl" />
+    <EntitySet Name="tblMenuApprovalGroupPermissions" EntityType="HRIS_SMCModel.tblMenuApprovalGroupPermission" />
+    <EntitySet Name="tblMenuApprovalGroupPermissionDtls" EntityType="HRIS_SMCModel.tblMenuApprovalGroupPermissionDtl" />
+    <EntitySet Name="tblEmpCategories" EntityType="HRIS_SMCModel.tblEmpCategory" />
+    <EntitySet Name="tblMasterAchievements" EntityType="HRIS_SMCModel.tblMasterAchievement" />
+    <EntitySet Name="tblMasterExtraCurriculams" EntityType="HRIS_SMCModel.tblMasterExtraCurriculam" />
+    <EntitySet Name="tblMasterHobbies" EntityType="HRIS_SMCModel.tblMasterHobby" />
+    <EntitySet Name="tblMasterOtherTalents" EntityType="HRIS_SMCModel.tblMasterOtherTalent" />
+    <EntitySet Name="tblAttachmentTypes" EntityType="HRIS_SMCModel.tblAttachmentType" />
+    <EntitySet Name="tblEmpAttachments" EntityType="HRIS_SMCModel.tblEmpAttachment" />
+    <EntitySet Name="tblEmpAchievements" EntityType="HRIS_SMCModel.tblEmpAchievement" />
+    <EntitySet Name="tblEmpExtraCurriculams" EntityType="HRIS_SMCModel.tblEmpExtraCurriculam" />
+    <EntitySet Name="tblEmpHobbies" EntityType="HRIS_SMCModel.tblEmpHobby" />
+    <EntitySet Name="tblEmpOtherTalents" EntityType="HRIS_SMCModel.tblEmpOtherTalent" />
+    <EntitySet Name="tblUserDepartmentPermissions" EntityType="HRIS_SMCModel.tblUserDepartmentPermission" />
+    <EntitySet Name="tblMainMenus" EntityType="HRIS_SMCModel.tblMainMenu" />
+    <EntitySet Name="tblMenuGroupSetupDetails" EntityType="HRIS_SMCModel.tblMenuGroupSetupDetail" />
+    <EntitySet Name="tblApprovalStepInfoes" EntityType="HRIS_SMCModel.tblApprovalStepInfo" />
+    <EntitySet Name="tblApprovalStepSetups" EntityType="HRIS_SMCModel.tblApprovalStepSetup" />
+    <EntitySet Name="tblApprovalStepSetupStepDtls" EntityType="HRIS_SMCModel.tblApprovalStepSetupStepDtl" />
+    <EntitySet Name="tblUsers" EntityType="HRIS_SMCModel.tblUser" />
+    <EntitySet Name="tblUserCategories" EntityType="HRIS_SMCModel.tblUserCategory" />
+    <EntitySet Name="tblUserCompanyMapings" EntityType="HRIS_SMCModel.tblUserCompanyMaping" />
+    <EntitySet Name="tblUserTypes" EntityType="HRIS_SMCModel.tblUserType" />
+    <EntitySet Name="tblQuarterInfoes" EntityType="HRIS_SMCModel.tblQuarterInfo" />
+    <EntitySet Name="tblQuarterMonthInfoes" EntityType="HRIS_SMCModel.tblQuarterMonthInfo" />
+    <EntitySet Name="tblDesignations" EntityType="HRIS_SMCModel.tblDesignation" />
+    <EntitySet Name="tblInterviewActivities" EntityType="HRIS_SMCModel.tblInterviewActivity" />
+    <EntitySet Name="tblInterviewBoardEmpDetails" EntityType="HRIS_SMCModel.tblInterviewBoardEmpDetail" />
+    <EntitySet Name="tblInterviewCandidateGradings" EntityType="HRIS_SMCModel.tblInterviewCandidateGrading" />
+    <EntitySet Name="tblInterviewCandidateTotalMarks" EntityType="HRIS_SMCModel.tblInterviewCandidateTotalMark" />
+    <EntitySet Name="tblInterviewGradings" EntityType="HRIS_SMCModel.tblInterviewGrading" />
+    <EntitySet Name="vw_EmpInfo" EntityType="HRIS_SMCModel.vw_EmpInfo" />
+    <EntitySet Name="tblEmpContractProjects" EntityType="HRIS_SMCModel.tblEmpContractProject" />
+    <EntitySet Name="tblEmpExperiences" EntityType="HRIS_SMCModel.tblEmpExperience" />
+    <EntitySet Name="tblEmpChildrens" EntityType="HRIS_SMCModel.tblEmpChildren" />
+    <EntitySet Name="tblEmpTrainings" EntityType="HRIS_SMCModel.tblEmpTraining" />
+    <EntitySet Name="tblJobCreations" EntityType="HRIS_SMCModel.tblJobCreation" />
+    <EntitySet Name="tblInterviewCandidateInfoes" EntityType="HRIS_SMCModel.tblInterviewCandidateInfo" />
+    <EntitySet Name="tblInterviewBoardSetupDetails" EntityType="HRIS_SMCModel.tblInterviewBoardSetupDetail" />
+    <EntitySet Name="tblInterviewCandidateInvitations" EntityType="HRIS_SMCModel.tblInterviewCandidateInvitation" />
+    <EntitySet Name="tblInterviewCandidateAttandances" EntityType="HRIS_SMCModel.tblInterviewCandidateAttandance" />
+    <EntitySet Name="tblInterviewBoardSetupMasters" EntityType="HRIS_SMCModel.tblInterviewBoardSetupMaster" />
+    <EntitySet Name="tblMPBudgetDetails" EntityType="HRIS_SMCModel.tblMPBudgetDetail" />
+    <EntitySet Name="tblMenuGroupSetups" EntityType="HRIS_SMCModel.tblMenuGroupSetup" />
+    <EntitySet Name="tblEmpEducations" EntityType="HRIS_SMCModel.tblEmpEducation" />
+    <EntitySet Name="tblEmpReferences" EntityType="HRIS_SMCModel.tblEmpReference" />
+    <EntitySet Name="tblEmpNominees" EntityType="HRIS_SMCModel.tblEmpNominee" />
+    <EntitySet Name="tblInterviewMarksDetails" EntityType="HRIS_SMCModel.tblInterviewMarksDetail" />
+    <EntitySet Name="tblEmployeeTypes" EntityType="HRIS_SMCModel.tblEmployeeType" />
+    <EntitySet Name="tblMPBudgetMasters" EntityType="HRIS_SMCModel.tblMPBudgetMaster" />
+    <EntitySet Name="tblEmpGeneralInfoes" EntityType="HRIS_SMCModel.tblEmpGeneralInfo" />
+  </EntityContainer>
+  <EntityType Name="tblCompanyInfo">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FaxNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Pabx" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAdress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Hotline" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DivisionWId" Type="Int32" />
+    <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="Invisible" Type="Boolean" />
+    <Property Name="Root" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblDesignationStep">
+    <Key>
+      <PropertyRef Name="DesignationStepId" />
+    </Key>
+    <Property Name="DesignationStepId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DesignationStepName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblDesignationType">
+    <Key>
+      <PropertyRef Name="DesignationTypeId" />
+    </Key>
+    <Property Name="DesignationTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DesigTypeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblDivision">
+    <Key>
+      <PropertyRef Name="DivisionId" />
+    </Key>
+    <Property Name="DivisionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="DivisionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblDivisionWing">
+    <Key>
+      <PropertyRef Name="DivisionWId" />
+    </Key>
+    <Property Name="DivisionWId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DivisionId" Type="Int32" Nullable="false" />
+    <Property Name="DivisionWingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="Invisible" Type="Boolean" />
+    <Property Name="Root" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActiveHK" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblCompanyUnit">
+    <Key>
+      <PropertyRef Name="UnitId" />
+      <PropertyRef Name="CompanyInfoId" />
+    </Key>
+    <Property Name="UnitId" Type="Int32" Nullable="false" />
+    <Property Name="UnitCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UnitName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UnitAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FaxNo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyInfoId" Type="Int32" Nullable="false" />
+    <Property Name="DeleteBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblMenuTypeSetup">
+    <Key>
+      <PropertyRef Name="MenuTypeId" />
+    </Key>
+    <Property Name="MenuTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblMenuApprovalGroupSetup">
+    <Key>
+      <PropertyRef Name="MenuApprovalGroupSetupId" />
+    </Key>
+    <Property Name="MenuApprovalGroupSetupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="MenuApprovalGroupName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblMenuApprovalGroupSetupDetail">
+    <Key>
+      <PropertyRef Name="MenuApprovalGroupSetupDetailId" />
+    </Key>
+    <Property Name="MenuApprovalGroupSetupDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuApprovalGroupSetupId" Type="Int32" Nullable="false" />
+    <Property Name="MainMenuId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblMenuGroupPermission">
+    <Key>
+      <PropertyRef Name="MenuGroupPermissionId" />
+    </Key>
+    <Property Name="MenuGroupPermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblMenuGroupPermissionDtl">
+    <Key>
+      <PropertyRef Name="MenuGroupPermissionDtlId" />
+    </Key>
+    <Property Name="MenuGroupPermissionDtlId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuGroupPermissionId" Type="Int32" Nullable="false" />
+    <Property Name="MenuGroupSetupId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblMenuApprovalGroupPermission">
+    <Key>
+      <PropertyRef Name="MenuApprovalGroupPermissionId" />
+    </Key>
+    <Property Name="MenuApprovalGroupPermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblMenuApprovalGroupPermissionDtl">
+    <Key>
+      <PropertyRef Name="MenuApprovalGroupPermissionDtlId" />
+    </Key>
+    <Property Name="MenuApprovalGroupPermissionDtlId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuApprovalGroupPermissionId" Type="Int32" Nullable="false" />
+    <Property Name="MenuApprovalGroupSetupId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpCategory">
+    <Key>
+      <PropertyRef Name="EmpCategoryId" />
+    </Key>
+    <Property Name="EmpCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpCategoryName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblMasterAchievement">
+    <Key>
+      <PropertyRef Name="MasterAchievementsId" />
+    </Key>
+    <Property Name="MasterAchievementsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AchievementsName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblMasterExtraCurriculam">
+    <Key>
+      <PropertyRef Name="MasterExtraCurriculamId" />
+    </Key>
+    <Property Name="MasterExtraCurriculamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExtraCurriculamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblMasterHobby">
+    <Key>
+      <PropertyRef Name="MasterHobbyId" />
+    </Key>
+    <Property Name="MasterHobbyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HobbyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblMasterOtherTalent">
+    <Key>
+      <PropertyRef Name="MasterOtherTalentsId" />
+    </Key>
+    <Property Name="MasterOtherTalentsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OtherTalentsName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblAttachmentType">
+    <Key>
+      <PropertyRef Name="AttachmentTypeId" />
+    </Key>
+    <Property Name="AttachmentTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttachmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblEmpAttachment">
+    <Key>
+      <PropertyRef Name="EmpAttachmentsId" />
+    </Key>
+    <Property Name="EmpAttachmentsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttachmentTypeId" Type="Int32" Nullable="false" />
+    <Property Name="AttObject" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpAchievement">
+    <Key>
+      <PropertyRef Name="EmpAchievementsId" />
+    </Key>
+    <Property Name="EmpAchievementsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="MasterAchievementsId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpExtraCurriculam">
+    <Key>
+      <PropertyRef Name="EmpExtraCurriculamId" />
+    </Key>
+    <Property Name="EmpExtraCurriculamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="MasterExtraCurriculamId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpHobby">
+    <Key>
+      <PropertyRef Name="EmpHobbyId" />
+    </Key>
+    <Property Name="EmpHobbyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="MasterHobbyId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpOtherTalent">
+    <Key>
+      <PropertyRef Name="EmpOtherTalentsId" />
+    </Key>
+    <Property Name="EmpOtherTalentsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="MasterOtherTalentsId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblUserDepartmentPermission">
+    <Key>
+      <PropertyRef Name="UserDepartmentPermissionId" />
+    </Key>
+    <Property Name="UserDepartmentPermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblMainMenu">
+    <Key>
+      <PropertyRef Name="MainMenuId" />
+    </Key>
+    <Property Name="MainMenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SL" Type="Int32" />
+    <Property Name="MenuName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ParantId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsApprovalPage" Type="Boolean" />
+    <Property Name="ModuleId" Type="Int32" />
+    <Property Name="MenuTypeId" Type="Int32" />
+    <Property Name="icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Add" Type="Boolean" />
+    <Property Name="View" Type="Boolean" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="Delete" Type="Boolean" />
+    <Property Name="Everyone" Type="Boolean" />
+    <Property Name="Own" Type="Boolean" />
+    <Property Name="IsInMainMenu" Type="Boolean" />
+    <Property Name="IsSupervisor" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblMenuGroupSetupDetail">
+    <Key>
+      <PropertyRef Name="MenuGroupSetupDetailId" />
+    </Key>
+    <Property Name="MenuGroupSetupDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuGroupSetupId" Type="Int32" Nullable="false" />
+    <Property Name="MainMenuId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Add" Type="Boolean" />
+    <Property Name="View" Type="Boolean" />
+    <Property Name="Edit" Type="Boolean" />
+    <Property Name="Delete" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblApprovalStepInfo">
+    <Key>
+      <PropertyRef Name="ApprovalStepInfoId" />
+    </Key>
+    <Property Name="ApprovalStepInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApprovalStepName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblApprovalStepSetup">
+    <Key>
+      <PropertyRef Name="ApprovalStepSetupId" />
+    </Key>
+    <Property Name="ApprovalStepSetupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="MainMenuId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblApprovalStepSetupStepDtl">
+    <Key>
+      <PropertyRef Name="ApprovalStepSetupStepDtlId" />
+    </Key>
+    <Property Name="ApprovalStepSetupStepDtlId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApprovalStepSetupId" Type="Int32" Nullable="false" />
+    <Property Name="ApprovalStepInfoId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeId" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UserCategoryId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="ActiveDate" Type="DateTime" Precision="3" />
+    <Property Name="InActiveDate" Type="DateTime" Precision="3" />
+    <Property Name="EmpInfoId" Type="Int32" />
+    <Property Name="UserDataPermissionId" Type="Int32" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="JobLocationID" Type="Int32" />
+    <Property Name="IsmainDasboard" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblUserCategory">
+    <Key>
+      <PropertyRef Name="UserCategoryId" />
+    </Key>
+    <Property Name="UserCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblUserCompanyMaping">
+    <Key>
+      <PropertyRef Name="UserCompanyMapingId" />
+    </Key>
+    <Property Name="UserCompanyMapingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblUserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblQuarterInfo">
+    <Key>
+      <PropertyRef Name="QuarterId" />
+    </Key>
+    <Property Name="QuarterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="QuarterName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblQuarterMonthInfo">
+    <Key>
+      <PropertyRef Name="QuarterMonthId" />
+    </Key>
+    <Property Name="QuarterMonthId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuarterId" Type="Int32" Nullable="false" />
+    <Property Name="MonthName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblDesignation">
+    <Key>
+      <PropertyRef Name="DesignationId" />
+    </Key>
+    <Property Name="DesignationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalaryGradeId" Type="Int32" />
+    <Property Name="Designation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblInterviewActivity">
+    <Key>
+      <PropertyRef Name="InterviewActivityId" />
+    </Key>
+    <Property Name="InterviewActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InterviewActivity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblInterviewBoardEmpDetail">
+    <Key>
+      <PropertyRef Name="EmpBoardDetailsId" />
+    </Key>
+    <Property Name="EmpBoardDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MasterId" Type="Int32" />
+    <Property Name="EmployeeId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateGrading">
+    <Key>
+      <PropertyRef Name="InterviewCandidateGradingId" />
+    </Key>
+    <Property Name="InterviewCandidateGradingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobID" Type="Int32" Nullable="false" />
+    <Property Name="CandidateID" Type="Int32" />
+    <Property Name="Attitude" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Language" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TechnicalSkill" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IQ" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="GeneralKnowledge" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Others" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TimeSence" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Grade" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IsRecommended" Type="Boolean" />
+    <Property Name="IsApproved" Type="Boolean" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateTotalMark">
+    <Key>
+      <PropertyRef Name="InterviewCandidateTotalMarksId" />
+    </Key>
+    <Property Name="InterviewCandidateTotalMarksId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CandidateID" Type="Int32" />
+    <Property Name="InterviewPhase" Type="Int32" />
+    <Property Name="JobID" Type="Int32" />
+    <Property Name="WrittenMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WrittenMarksOutOf" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="VivaMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="VivaMarksOutOf" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtherMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtherMarksOutOf" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblInterviewGrading">
+    <Key>
+      <PropertyRef Name="InterviewGradingId" />
+    </Key>
+    <Property Name="InterviewGradingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LetterGrade" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="StartingMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="vw_EmpInfo">
+    <Key>
+      <PropertyRef Name="EmpInfoId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="EmpMasterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MotherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressPresent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressPermanent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DivisionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DivisionWingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmpCategoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="OfficialEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OfficialMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblEmpContractProject">
+    <Key>
+      <PropertyRef Name="EmpContractProjectId" />
+    </Key>
+    <Property Name="EmpContractProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblEmpExperience">
+    <Key>
+      <PropertyRef Name="EmpExperienceId" />
+    </Key>
+    <Property Name="EmpExperienceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="ExpCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpContactPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpNatureofBusiness" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpJobType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpLeavingSalary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ExpFromDate" Type="DateTime" Precision="3" />
+    <Property Name="ExpToDate" Type="DateTime" Precision="3" />
+    <Property Name="ExpLastJob" Type="Boolean" />
+    <Property Name="ExpDesignation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpJobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpTelNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpChildren">
+    <Key>
+      <PropertyRef Name="EmpChildrenId" />
+    </Key>
+    <Property Name="EmpChildrenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="ChildrenName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ChildrenGender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ChildrenOccupation" Type="Int32" />
+    <Property Name="ChildrenDOB" Type="DateTime" Precision="3" />
+    <Property Name="ChildrenMaritalStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpTraining">
+    <Key>
+      <PropertyRef Name="EmpTrainingId" />
+    </Key>
+    <Property Name="EmpTrainingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="TrainingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TrainingType" Type="Int32" />
+    <Property Name="TrainingDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TrainingInstitution" Type="Int32" />
+    <Property Name="TrainingPlace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TrainingCountry" Type="Int32" />
+    <Property Name="TrainingAchievment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TrFromDate" Type="DateTime" Precision="0" />
+    <Property Name="TrToDate" Type="DateTime" Precision="0" />
+    <Property Name="TrainingDays" Type="Int32" />
+    <Property Name="TrRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblJobCreation">
+    <Key>
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="JobID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="SectionID" Type="Int32" />
+    <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Vacancy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JobContext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JobResponsibilities" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PermanenteEmp" Type="Boolean" />
+    <Property Name="ContractualEmp" Type="Boolean" />
+    <Property Name="TraineeEmp" Type="Boolean" />
+    <Property Name="CasualEmp" Type="Boolean" />
+    <Property Name="ExperienceRequirements" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AdditionalRequirements" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Salary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CompensationandOtherBenefits" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NewspaperDS" Type="Boolean" />
+    <Property Name="TVDS" Type="Boolean" />
+    <Property Name="OtherDS" Type="Boolean" />
+    <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CirculationStartDate" Type="DateTime" Precision="3" />
+    <Property Name="CirculationsdeadlineDate" Type="DateTime" Precision="3" />
+    <Property Name="ProbableInterviewDate" Type="DateTime" Precision="3" />
+    <Property Name="ProbableIRecruitmentDate" Type="DateTime" Precision="3" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Progress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="Updateby" Type="Int32" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="VerifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VerifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="InternalNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsSalary" Type="Boolean" />
+    <Property Name="ReqCodeId" Type="Int32" />
+    <Property Name="ActionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteBy" Type="Int32" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDelete" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateInfo">
+    <Key>
+      <PropertyRef Name="CandidateID" />
+    </Key>
+    <Property Name="CandidateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="JobID" Type="Int32" Nullable="false" />
+    <Property Name="CandidateName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAdress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalYearsOfExp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastOrganization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastExam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastMajor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastPassingYear" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastResultType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastResultDivision" Type="Int32" />
+    <Property Name="LastResultCGPA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastResultOutOf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CvUploadID" Type="Int32" />
+    <Property Name="PhotoUploadID" Type="Int32" />
+    <Property Name="CurrentSalary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpectedSalary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="Updateby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="VerifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VerifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ApproveBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="InternalNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="Age" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Cv_File" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Cv_FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblInterviewBoardSetupDetail">
+    <Key>
+      <PropertyRef Name="BoardDetailsId" />
+    </Key>
+    <Property Name="BoardDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MasterId" Type="Int32" />
+    <Property Name="MemberType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmployeeId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Written" Type="Boolean" />
+    <Property Name="Viva" Type="Boolean" />
+    <Property Name="Other" Type="Boolean" />
+    <Property Name="OtherRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateInvitation">
+    <Key>
+      <PropertyRef Name="CandidateInvitationId" />
+    </Key>
+    <Property Name="CandidateInvitationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CandidateID" Type="Int32" Nullable="false" />
+    <Property Name="EmailInvitationSent" Type="Int32" Nullable="false" />
+    <Property Name="SMSInvitationSent" Type="Int32" Nullable="false" />
+    <Property Name="PhoneInvitationSent" Type="Int32" Nullable="false" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="InterviewPhase" Type="Int32" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateAttandance">
+    <Key>
+      <PropertyRef Name="InterviewCandidateAttandanceId" />
+    </Key>
+    <Property Name="InterviewCandidateAttandanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobID" Type="Int32" Nullable="false" />
+    <Property Name="CandidateID" Type="Int32" Nullable="false" />
+    <Property Name="ReportingTime" Type="Time" Precision="7" />
+    <Property Name="InterviewDate" Type="DateTime" Precision="3" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="InterviewPhase" Type="Int32" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblInterviewBoardSetupMaster">
+    <Key>
+      <PropertyRef Name="SetupMasterId" />
+    </Key>
+    <Property Name="SetupMasterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="JobTitleId" Type="Int32" />
+    <Property Name="InterviewPhase" Type="Int32" />
+    <Property Name="Vanue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InterviewDate" Type="DateTime" Precision="3" />
+    <Property Name="InterviewFromTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InterviewToTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EmailBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HasAttachment" Type="Boolean" />
+    <Property Name="AttFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblMPBudgetDetail">
+    <Key>
+      <PropertyRef Name="MPBudgetDetailsId" />
+    </Key>
+    <Property Name="MPBudgetDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MPBudgetMasterId" Type="Int32" />
+    <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DesignationId" Type="Int32" />
+    <Property Name="EmpCategoryId" Type="Int32" />
+    <Property Name="EmployeeRequisition" Type="Int32" />
+    <Property Name="ReqApproxSalary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ReqTotalSalary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="QuarterId" Type="Int32" />
+    <Property Name="SalaryGradeId" Type="Int32" />
+    <Property Name="SalaryStepId" Type="Int32" />
+    <Property Name="DtlRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="FilterType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeTypeId" Type="Int32" />
+    <Property Name="ProjectId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblMenuGroupSetup">
+    <Key>
+      <PropertyRef Name="MenuGroupSetupId" />
+    </Key>
+    <Property Name="MenuGroupSetupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="MenuGroupName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MenuGroupDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="MenuTypeId" Type="Int32" />
+    <Property Name="EntryBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpEducation">
+    <Key>
+      <PropertyRef Name="EmpEducationId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" />
+    <Property Name="EducationNameId" Type="Int32" />
+    <Property Name="SubjectGroupId" Type="Int32" />
+    <Property Name="BoardUniversityId" Type="Int32" />
+    <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EducationalInstituteId" Type="Int32" />
+    <Property Name="PassingYear" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CgpaOrTotalMarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FieldOfSpecializationId" Type="Int32" />
+    <Property Name="EduIsLastLevel" Type="Boolean" />
+    <Property Name="IsProfessionalEdu" Type="Boolean" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EmpEducationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="tblEmpReference">
+    <Key>
+      <PropertyRef Name="EmpReferenceId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="Int64" />
+    <Property Name="ReferenceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RefOccupation" Type="Int32" />
+    <Property Name="RefAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RefMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EmpReferenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="tblEmpNominee">
+    <Key>
+      <PropertyRef Name="EmpNomineeId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="Int64" />
+    <Property Name="NominationPurpose" Type="Int32" />
+    <Property Name="NomineeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NomineeOccupation" Type="Int32" />
+    <Property Name="DateOfNomination" Type="DateTime" Precision="0" />
+    <Property Name="NominationPercentage" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NomineeDOB" Type="DateTime" Precision="0" />
+    <Property Name="NomineeRelation" Type="Int32" />
+    <Property Name="NomineeAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NomineeTelephone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EmpNomineeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomNomineImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblInterviewMarksDetail">
+    <Key>
+      <PropertyRef Name="InterviewMarksDetailsId" />
+    </Key>
+    <Property Name="InterviewMarksDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int32" />
+    <Property Name="BoardDetailsId" Type="Int32" Nullable="false" />
+    <Property Name="CandidateID" Type="Int32" Nullable="false" />
+    <Property Name="VivaId" Type="Int32" />
+    <Property Name="VivaMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WrittenMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtherMarks" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="Int32" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="VivaOutOf" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtherOutOf" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WrittenOutOf" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblEmployeeType">
+    <Key>
+      <PropertyRef Name="EmpTypeId" />
+    </Key>
+    <Property Name="EmpTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyID" Type="Int32" />
+    <Property Name="EmpType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="EntryBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblMPBudgetMaster">
+    <Key>
+      <PropertyRef Name="MPBudgetMasterId" />
+    </Key>
+    <Property Name="MPBudgetMasterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BudgetCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="FinancialYearId" Type="Int32" />
+    <Property Name="EntryBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="ApprovalStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApproveDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <Property Name="DeleteBy" Type="Int32" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="ActionStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActionStatus2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isManuallyUpdate" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblEmpGeneralInfo">
+    <Key>
+      <PropertyRef Name="EmpInfoId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReportingEmpId" Type="Int32" />
+    <Property Name="EmpMasterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="DivisionId" Type="Int32" />
+    <Property Name="DivisionWId" Type="Int32" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="SectionId" Type="Int32" />
+    <Property Name="SubSectionId" Type="Int32" />
+    <Property Name="EmpCategoryId" Type="Int32" />
+    <Property Name="SalaryGradeId" Type="Int32" />
+    <Property Name="SalaryStepId" Type="Int32" />
+    <Property Name="DesignationId" Type="Int32" />
+    <Property Name="DesignationTypeId" Type="Int32" />
+    <Property Name="SalaryLoationId" Type="Int32" />
+    <Property Name="JobLocationId" Type="Int32" />
+    <Property Name="EmpName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BloodGroup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TinNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FatherOccupation" Type="Int32" />
+    <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MotherOccupation" Type="Int32" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="DateOfJoin" Type="DateTime" Precision="3" />
+    <Property Name="Religion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaritalStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmpTypeId" Type="Int32" />
+    <Property Name="ProjectID" Type="Int32" />
+    <Property Name="SalaryFromProject" Type="Int32" />
+    <Property Name="IsProbationary" Type="Boolean" />
+    <Property Name="ProbationEndDate" Type="DateTime" Precision="3" />
+    <Property Name="ExtProbationPeriodDate" Type="DateTime" Precision="3" />
+    <Property Name="ContractEndDate" Type="DateTime" Precision="0" />
+    <Property Name="ExtContractDate" Type="DateTime" Precision="3" />
+    <Property Name="Nationality" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NationalityID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PassportNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpectedServiceLength" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfRetirement" Type="DateTime" Precision="0" />
+    <Property Name="DateOfConformation" Type="DateTime" Precision="0" />
+    <Property Name="PlaceOfBirth" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressPresent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PresentDivision" Type="Int32" />
+    <Property Name="PresentDistrict" Type="Int32" />
+    <Property Name="PresentThana" Type="Int32" />
+    <Property Name="PresentTelNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressPermanent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ParmanentDivision" Type="Int32" />
+    <Property Name="PermanentDistrict" Type="Int32" />
+    <Property Name="PermanentThana" Type="Int32" />
+    <Property Name="ParmanentTelNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PersonalEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OfficialEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PersonalMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OfficialMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FaxNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmergencyContactPerson" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EmergencyContactAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="EmergencyContactNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="SpouseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpouseDateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="SpouseMaxEducation" Type="Int32" />
+    <Property Name="SpouseOccupation" Type="Int32" />
+    <Property Name="DateOfMarriage" Type="DateTime" Precision="0" />
+    <Property Name="DateOfConfirmation" Type="DateTime" Precision="0" />
+    <Property Name="ConformationStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NAge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="ActionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MedicalInformation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="JobID" Type="Int32" />
+    <Property Name="CandidateID" Type="Int32" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="Updateby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="EmployeeStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InactiveReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="DeleteBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+    <Property Name="EmpImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EmpSign" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PayType" Type="Int32" />
+    <Property Name="SMCOldCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NationalIdNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsProgramContractual" Type="Boolean" />
+    <Property Name="NomineeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContractPeriod" Type="Int32" />
+    <Property Name="Floor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceID" Type="Int32" />
+    <Property Name="ContractStartDate" Type="DateTime" Precision="0" />
+    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NewIDChangePolicy_OldID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSMCFundedProjects" Type="Boolean" />
+    <Property Name="IsCompanyDirector" Type="Boolean" />
+    <Property Name="leaveRecommenderId" Type="Int32" />
+    <Property Name="LeaveApprovalId" Type="Int32" />
+    <Property Name="IsSpTransfer" Type="Boolean" />
+    <Property Name="FatherDOB" Type="DateTime" Precision="3" />
+    <Property Name="MotherDOB" Type="DateTime" Precision="3" />
+    <Property Name="RecruitmentTypeNew" Type="Boolean" />
+    <Property Name="RecruitmentTypeReplacement" Type="Boolean" />
+  </EntityType>
+</Schema>

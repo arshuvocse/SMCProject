@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/VacancyCirculationViewer.aspx" hash="928e13213" filehash="76fd79c63d2b017d" flags="110000" assembly="App_Web_vacancycirculationviewer.aspx.ac93fe35" type="ASP.mastersetup_ui_vacancycirculationviewer_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/VacancyCirculationViewer.aspx" />
+        <filedep name="/MasterSetup_UI/VacancyCirculationViewer.aspx.cs" />
+    </filedeps>
+</preserve>

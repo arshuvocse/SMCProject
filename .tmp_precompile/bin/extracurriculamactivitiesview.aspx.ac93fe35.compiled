@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/ExtraCurriculamActivitiesView.aspx" hash="928e13213" filehash="888b92f5c500a6e3" flags="110000" assembly="App_Web_extracurriculamactivitiesview.aspx.ac93fe35" type="ASP.mastersetup_ui_extracurriculamactivitiesview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/ExtraCurriculamActivitiesView.aspx" />
+        <filedep name="/MasterSetup_UI/ExtraCurriculamActivitiesView.aspx.cs" />
+    </filedeps>
+</preserve>

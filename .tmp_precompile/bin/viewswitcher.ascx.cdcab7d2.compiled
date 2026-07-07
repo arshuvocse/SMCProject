@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/ViewSwitcher.ascx" hash="928e13213" filehash="d625a25c880cd2eb" flags="110000" assembly="App_Web_viewswitcher.ascx.cdcab7d2" type="ASP.viewswitcher_ascx">
+    <filedeps>
+        <filedep name="/ViewSwitcher.ascx" />
+        <filedep name="/ViewSwitcher.ascx.cs" />
+    </filedeps>
+</preserve>

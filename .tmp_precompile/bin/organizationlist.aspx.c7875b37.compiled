@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Training/OrganizationList.aspx" hash="928e13213" filehash="1cd3677e8bb5bccd" flags="110000" assembly="App_Web_organizationlist.aspx.c7875b37" type="ASP.training_organizationlist_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Training/OrganizationList.aspx" />
+        <filedep name="/Training/OrganizationList.aspx.cs" />
+    </filedeps>
+</preserve>

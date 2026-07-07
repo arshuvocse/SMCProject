@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/EmployeeCategoryInformation.aspx" hash="928e13213" filehash="42ecb0f32f9a7812" flags="110000" assembly="App_Web_employeecategoryinformation.aspx.ac93fe35" type="ASP.mastersetup_ui_employeecategoryinformation_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/EmployeeCategoryInformation.aspx" />
+        <filedep name="/MasterSetup_UI/EmployeeCategoryInformation.aspx.cs" />
+    </filedeps>
+</preserve>

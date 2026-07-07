@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/ApppraisalApprove.aspx" hash="928e13213" filehash="ba5aa43910a22d25" flags="110000" assembly="App_Web_apppraisalapprove.aspx.b734c8db" type="ASP.appraisal_apppraisalapprove_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/ApppraisalApprove.aspx" />
+        <filedep name="/Appraisal/ApppraisalApprove.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

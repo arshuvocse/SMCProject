@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/ChartTest/Chartttttttttt.aspx" hash="928e13213" filehash="13bbc8cfe40dbd6f" flags="110000" assembly="App_Web_chartttttttttt.aspx.5acb0b0a" type="ASP.charttest_chartttttttttt_aspx">
+    <filedeps>
+        <filedep name="/ChartTest/Chartttttttttt.aspx" />
+        <filedep name="/ChartTest/Chartttttttttt.aspx.cs" />
+    </filedeps>
+</preserve>

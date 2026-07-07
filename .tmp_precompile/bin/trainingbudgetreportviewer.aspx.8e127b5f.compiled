@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/TrainingBudgetReportViewer.aspx" hash="928e13213" filehash="b9b9eaeb28bdf7fb" flags="110000" assembly="App_Web_trainingbudgetreportviewer.aspx.8e127b5f" type="ASP.report_ui_trainingbudgetreportviewer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/TrainingBudgetReportViewer.aspx" />
+        <filedep name="/Report_UI/TrainingBudgetReportViewer.aspx.cs" />
+    </filedeps>
+</preserve>

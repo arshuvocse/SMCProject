@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/NomineeImageUploadHandler.ashx" hash="48caa2a6" filehash="2b02719db9ca" flags="110000" assembly="App_Web_nomineeimageuploadhandler.ashx.cdcab7d2" type="SignatureUploadHandler">
+    <filedeps>
+        <filedep name="/NomineeImageUploadHandler.ashx" />
+    </filedeps>
+</preserve>

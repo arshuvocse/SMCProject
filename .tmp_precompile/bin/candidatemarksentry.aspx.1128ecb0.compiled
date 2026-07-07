@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Inverview/CandidateMarksEntry.aspx" hash="928e13213" filehash="ff6ff609017e5a85" flags="110000" assembly="App_Web_candidatemarksentry.aspx.1128ecb0" type="ASP.inverview_candidatemarksentry_aspx">
+    <filedeps>
+        <filedep name="/Inverview/CandidateMarksEntry.aspx" />
+        <filedep name="/Inverview/CandidateMarksEntry.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

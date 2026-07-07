@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Lunch_Allowance_UI/LunchAllownaceCancelApproval.aspx" hash="928e13213" filehash="7cd85f9fe3bc6e1a" flags="110000" assembly="App_Web_lunchallownacecancelapproval.aspx.c83acfdb" type="ASP.lunch_allowance_ui_lunchallownacecancelapproval_aspx">
+    <filedeps>
+        <filedep name="/Lunch_Allowance_UI/LunchAllownaceCancelApproval.aspx" />
+        <filedep name="/Lunch_Allowance_UI/LunchAllownaceCancelApproval.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

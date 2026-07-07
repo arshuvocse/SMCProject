@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/RecruitmentApp_UI/RecruitmentApproval.aspx" hash="928e13213" filehash="bdd8264038c0f4ed" flags="110000" assembly="App_Web_recruitmentapproval.aspx.78b0c72c" type="ASP.recruitmentapp_ui_recruitmentapproval_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/RecruitmentApp_UI/RecruitmentApproval.aspx" />
+        <filedep name="/RecruitmentApp_UI/RecruitmentApproval.aspx.cs" />
+        <filedep name="/Report_Pages/IVSearchControlReport.ascx" />
+        <filedep name="/Report_Pages/IVSearchControlReport.ascx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/EmployeeAuditTrailNew.aspx" hash="928e13213" filehash="ba5768e9df812dc6" flags="110000" assembly="App_Web_employeeaudittrailnew.aspx.1f05457f" type="ASP.meetingminors_employeeaudittrailnew_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/EmployeeAuditTrailNew.aspx" />
+        <filedep name="/MeetingMinors/EmployeeAuditTrailNew.aspx.cs" />
+    </filedeps>
+</preserve>

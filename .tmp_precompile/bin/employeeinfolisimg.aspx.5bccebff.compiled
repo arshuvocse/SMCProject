@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/EmployeeInfoLisImg.aspx" hash="928e13213" filehash="d47993d7c341ad73" flags="110000" assembly="App_Web_employeeinfolisimg.aspx.5bccebff" type="ASP.usersetup_employeeinfolisimg_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/EmployeeInfoLisImg.aspx" />
+        <filedep name="/UserSetup/EmployeeInfoLisImg.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/SalaryStepInformationView.aspx" hash="928e13213" filehash="255aa2888b11ab22" flags="110000" assembly="App_Web_salarystepinformationview.aspx.ac93fe35" type="ASP.mastersetup_ui_salarystepinformationview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/SalaryStepInformationView.aspx" />
+        <filedep name="/MasterSetup_UI/SalaryStepInformationView.aspx.cs" />
+    </filedeps>
+</preserve>

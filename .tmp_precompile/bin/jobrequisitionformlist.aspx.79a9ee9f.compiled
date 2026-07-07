@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/RecruitmentManagement_UI/JobRequisitionFormList.aspx" hash="928e13213" filehash="cce5156bace2ff46" flags="110000" assembly="App_Web_jobrequisitionformlist.aspx.79a9ee9f" type="ASP.recruitmentmanagement_ui_jobrequisitionformlist_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/RecruitmentManagement_UI/JobRequisitionFormList.aspx" />
+        <filedep name="/RecruitmentManagement_UI/JobRequisitionFormList.aspx.cs" />
+    </filedeps>
+</preserve>

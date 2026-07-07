@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpTrainingBudgetReport.rpt" hash="48caa2a6" filehash="ffffe7f0d8edd062" flags="110000" assembly="App_Web_crptrainingbudgetreport.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpTrainingBudgetReport.rpt" />
+    </filedeps>
+</preserve>

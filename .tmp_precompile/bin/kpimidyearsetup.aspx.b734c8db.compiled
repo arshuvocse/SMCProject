@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/KPIMidYearSetup.aspx" hash="928e13213" filehash="dd3f36cb75ecf59d" flags="110000" assembly="App_Web_kpimidyearsetup.aspx.b734c8db" type="ASP.appraisal_kpimidyearsetup_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/KPIMidYearSetup.aspx" />
+        <filedep name="/Appraisal/KPIMidYearSetup.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

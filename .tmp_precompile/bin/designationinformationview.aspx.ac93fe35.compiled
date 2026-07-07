@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/DesignationInformationView.aspx" hash="928e13213" filehash="44632bc6389dbd7b" flags="110000" assembly="App_Web_designationinformationview.aspx.ac93fe35" type="ASP.mastersetup_ui_designationinformationview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/DesignationInformationView.aspx" />
+        <filedep name="/MasterSetup_UI/DesignationInformationView.aspx.cs" />
+    </filedeps>
+</preserve>

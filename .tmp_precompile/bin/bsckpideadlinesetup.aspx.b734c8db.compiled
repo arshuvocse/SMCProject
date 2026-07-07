@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/BSCKpiDeadlineSetup.aspx" hash="928e13213" filehash="c2df107efbcfd140" flags="110000" assembly="App_Web_bsckpideadlinesetup.aspx.b734c8db" type="ASP.appraisal_bsckpideadlinesetup_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/BSCKpiDeadlineSetup.aspx" />
+        <filedep name="/Appraisal/BSCKpiDeadlineSetup.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

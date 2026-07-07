@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/BSCOKRDetailsView.aspx" hash="928e13213" filehash="c363aed2f24a0ad9" flags="110000" assembly="App_Web_bscokrdetailsview.aspx.b734c8db" type="ASP.appraisal_bscokrdetailsview_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/BSCOKRDetailsView.aspx" />
+        <filedep name="/Appraisal/BSCOKRDetailsView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

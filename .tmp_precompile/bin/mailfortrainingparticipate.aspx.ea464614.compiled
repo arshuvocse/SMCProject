@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/GenerateMail/MailForTrainingParticipate.aspx" hash="928e13213" filehash="65c1aa5c5c9282ad" flags="110000" assembly="App_Web_mailfortrainingparticipate.aspx.ea464614" type="ASP.generatemail_mailfortrainingparticipate_aspx">
+    <filedeps>
+        <filedep name="/GenerateMail/MailForTrainingParticipate.aspx" />
+        <filedep name="/GenerateMail/MailForTrainingParticipate.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

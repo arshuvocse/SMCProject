@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Transfer_UI/EmployeePromotionApprovalList.aspx" hash="928e13213" filehash="14b8f852a584874f" flags="110000" assembly="App_Web_employeepromotionapprovallist.aspx.81e6cfc1" type="ASP.transfer_ui_employeepromotionapprovallist_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Transfer_UI/EmployeePromotionApprovalList.aspx" />
+        <filedep name="/Transfer_UI/EmployeePromotionApprovalList.aspx.cs" />
+    </filedeps>
+</preserve>

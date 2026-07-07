@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Training/BudgetWiseAllocation.aspx" hash="928e13213" filehash="3f23006ef0cc66e1" flags="110000" assembly="App_Web_budgetwiseallocation.aspx.c7875b37" type="ASP.training_budgetwiseallocation_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Training/BudgetWiseAllocation.aspx" />
+        <filedep name="/Training/BudgetWiseAllocation.aspx.cs" />
+    </filedeps>
+</preserve>

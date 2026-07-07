@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Inverview/IVSearchControl.ascx" hash="928e13213" filehash="568c31d4440834e0" flags="110000" assembly="App_Web_ivsearchcontrol.ascx.1128ecb0" type="ASP.inverview_ivsearchcontrol_ascx">
+    <filedeps>
+        <filedep name="/Inverview/IVSearchControl.ascx" />
+        <filedep name="/Inverview/IVSearchControl.ascx.cs" />
+    </filedeps>
+</preserve>

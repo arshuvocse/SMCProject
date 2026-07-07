@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Lunch_Allowance_UI/LunchAllownaceCancelSelfList.aspx" hash="928e13213" filehash="532b12017013ec48" flags="110000" assembly="App_Web_lunchallownacecancelselflist.aspx.c83acfdb" type="ASP.lunch_allowance_ui_lunchallownacecancelselflist_aspx">
+    <filedeps>
+        <filedep name="/Lunch_Allowance_UI/LunchAllownaceCancelSelfList.aspx" />
+        <filedep name="/Lunch_Allowance_UI/LunchAllownaceCancelSelfList.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

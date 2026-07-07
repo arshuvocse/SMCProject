@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/RoutingPathSetupView.aspx" hash="928e13213" filehash="bf92a9a2c1bea472" flags="110000" assembly="App_Web_routingpathsetupview.aspx.1f05457f" type="ASP.meetingminors_routingpathsetupview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/RoutingPathSetupView.aspx" />
+        <filedep name="/MeetingMinors/RoutingPathSetupView.aspx.cs" />
+    </filedeps>
+</preserve>

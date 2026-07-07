@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MPBudget/MPBudgetEntry.aspx" hash="928e13213" filehash="ad3a4790601d8e5d" flags="110000" assembly="App_Web_mpbudgetentry.aspx.5500c0d0" type="ASP.mpbudget_mpbudgetentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MPBudget/MPBudgetEntry.aspx" />
+        <filedep name="/MPBudget/MPBudgetEntry.aspx.cs" />
+    </filedeps>
+</preserve>

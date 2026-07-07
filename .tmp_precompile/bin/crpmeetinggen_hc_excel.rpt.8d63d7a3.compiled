@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpMeetingGen_HC_Excel.rpt" hash="48caa2a6" filehash="ffffd23f9ba340b5" flags="110000" assembly="App_Web_crpmeetinggen_hc_excel.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpMeetingGen_HC_Excel.rpt" />
+    </filedeps>
+</preserve>

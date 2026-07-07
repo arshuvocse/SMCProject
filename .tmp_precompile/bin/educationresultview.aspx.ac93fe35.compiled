@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/EducationResultView.aspx" hash="928e13213" filehash="1cd1bbefc1a61357" flags="110000" assembly="App_Web_educationresultview.aspx.ac93fe35" type="ASP.mastersetup_ui_educationresultview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/EducationResultView.aspx" />
+        <filedep name="/MasterSetup_UI/EducationResultView.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/MBSCKPIApproval.aspx" hash="928e13213" filehash="7562939552e45ec0" flags="110000" assembly="App_Web_mbsckpiapproval.aspx.b734c8db" type="ASP.appraisal_mbsckpiapproval_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/MBSCKPIApproval.aspx" />
+        <filedep name="/Appraisal/MBSCKPIApproval.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

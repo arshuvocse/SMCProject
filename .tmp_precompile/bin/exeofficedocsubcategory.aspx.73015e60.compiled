@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/ExeOfficeDocSubCategory.aspx" hash="928e13213" filehash="7d7ae2d359c937e6" flags="110000" assembly="App_Web_exeofficedocsubcategory.aspx.73015e60" type="ASP.healthcare_ui_exeofficedocsubcategory_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/ExeOfficeDocSubCategory.aspx" />
+        <filedep name="/HealthCare_UI/ExeOfficeDocSubCategory.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

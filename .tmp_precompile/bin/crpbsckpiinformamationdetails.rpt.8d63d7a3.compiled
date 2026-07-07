@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpBSCKPIInformamationDetails.rpt" hash="48caa2a6" filehash="910c2792437" flags="110000" assembly="App_Web_crpbsckpiinformamationdetails.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpBSCKPIInformamationDetails.rpt" />
+    </filedeps>
+</preserve>

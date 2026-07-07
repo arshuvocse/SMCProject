@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MenuSetup/MenuDataPermissionEntry.aspx" hash="928e13213" filehash="a18b28a046a574ea" flags="110000" assembly="App_Web_menudatapermissionentry.aspx.d8b19aa9" type="ASP.menusetup_menudatapermissionentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MenuSetup/MenuDataPermissionEntry.aspx" />
+        <filedep name="/MenuSetup/MenuDataPermissionEntry.aspx.cs" />
+    </filedeps>
+</preserve>

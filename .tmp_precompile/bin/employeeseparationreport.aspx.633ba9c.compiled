@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_Pages/EmployeeSeparationReport.aspx" hash="928e13213" filehash="d3dba63650c07109" flags="110000" assembly="App_Web_employeeseparationreport.aspx.633ba9c" type="ASP.report_pages_employeeseparationreport_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Report_Pages/EmployeeSeparationReport.aspx" />
+        <filedep name="/Report_Pages/EmployeeSeparationReport.aspx.cs" />
+    </filedeps>
+</preserve>

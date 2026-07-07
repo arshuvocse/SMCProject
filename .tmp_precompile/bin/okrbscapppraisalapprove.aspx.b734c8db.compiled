@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/OKRBSCApppraisalApprove.aspx" hash="928e13213" filehash="8d0d31067147307e" flags="110000" assembly="App_Web_okrbscapppraisalapprove.aspx.b734c8db" type="ASP.appraisal_okrbscapppraisalapprove_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/OKRBSCApppraisalApprove.aspx" />
+        <filedep name="/Appraisal/OKRBSCApppraisalApprove.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

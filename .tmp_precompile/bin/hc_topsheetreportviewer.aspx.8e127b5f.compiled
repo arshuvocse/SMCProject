@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/HC_TopSheetReportViewer.aspx" hash="928e13213" filehash="c9a8ebbb6d4c0ecc" flags="110000" assembly="App_Web_hc_topsheetreportviewer.aspx.8e127b5f" type="ASP.report_ui_hc_topsheetreportviewer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/HC_TopSheetReportViewer.aspx" />
+        <filedep name="/Report_UI/HC_TopSheetReportViewer.aspx.cs" />
+    </filedeps>
+</preserve>

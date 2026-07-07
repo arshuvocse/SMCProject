@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MenuSetup/ApprovalStepSetup.aspx" hash="928e13213" filehash="7de5a761b11608a4" flags="110000" assembly="App_Web_approvalstepsetup.aspx.d8b19aa9" type="ASP.menusetup_approvalstepsetup_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MenuSetup/ApprovalStepSetup.aspx" />
+        <filedep name="/MenuSetup/ApprovalStepSetup.aspx.cs" />
+    </filedeps>
+</preserve>

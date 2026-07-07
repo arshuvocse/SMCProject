@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/ApprovedDocumentList.aspx" hash="928e13213" filehash="284b8def6ebad82e" flags="110000" assembly="App_Web_approveddocumentlist.aspx.1f05457f" type="ASP.meetingminors_approveddocumentlist_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/ApprovedDocumentList.aspx" />
+        <filedep name="/MeetingMinors/ApprovedDocumentList.aspx.cs" />
+    </filedeps>
+</preserve>

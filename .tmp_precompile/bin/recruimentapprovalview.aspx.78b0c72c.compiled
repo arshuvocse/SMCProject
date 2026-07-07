@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/RecruitmentApp_UI/RecruimentApprovalView.aspx" hash="928e13213" filehash="ce785f0340059f03" flags="110000" assembly="App_Web_recruimentapprovalview.aspx.78b0c72c" type="ASP.recruitmentapp_ui_recruimentapprovalview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/RecruitmentApp_UI/RecruimentApprovalView.aspx" />
+        <filedep name="/RecruitmentApp_UI/RecruimentApprovalView.aspx.cs" />
+    </filedeps>
+</preserve>

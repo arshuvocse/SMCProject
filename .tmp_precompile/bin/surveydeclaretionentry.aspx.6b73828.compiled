@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Survey/SurveyDeclaretionEntry.aspx" hash="928e13213" filehash="25674780b95c7ebd" flags="110000" assembly="App_Web_surveydeclaretionentry.aspx.6b73828" type="ASP.survey_surveydeclaretionentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Survey/SurveyDeclaretionEntry.aspx" />
+        <filedep name="/Survey/SurveyDeclaretionEntry.aspx.cs" />
+    </filedeps>
+</preserve>

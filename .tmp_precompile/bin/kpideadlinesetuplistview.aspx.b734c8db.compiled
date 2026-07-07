@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/KpiDeadlineSetupListView.aspx" hash="928e13213" filehash="695fbac089066f63" flags="110000" assembly="App_Web_kpideadlinesetuplistview.aspx.b734c8db" type="ASP.appraisal_kpideadlinesetuplistview_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/KpiDeadlineSetupListView.aspx" />
+        <filedep name="/Appraisal/KpiDeadlineSetupListView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

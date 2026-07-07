@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/HandlerDocCV.ashx" hash="48caa2a6" filehash="ffffe212db14f620" flags="110000" assembly="App_Web_handlerdoccv.ashx.cdcab7d2" type="HandlerDocCV">
+    <filedeps>
+        <filedep name="/HandlerDocCV.ashx" />
+    </filedeps>
+</preserve>

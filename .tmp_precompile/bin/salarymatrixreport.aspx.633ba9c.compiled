@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_Pages/SalaryMatrixReport.aspx" hash="928e13213" filehash="7ffda50aabbf6cf5" flags="110000" assembly="App_Web_salarymatrixreport.aspx.633ba9c" type="ASP.report_pages_salarymatrixreport_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Report_Pages/SalaryMatrixReport.aspx" />
+        <filedep name="/Report_Pages/SalaryMatrixReport.aspx.cs" />
+    </filedeps>
+</preserve>

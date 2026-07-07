@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Training/TrainingBudget2ListApprovalView.aspx" hash="928e13213" filehash="2dbcd9b41c16fd7c" flags="110000" assembly="App_Web_trainingbudget2listapprovalview.aspx.c7875b37" type="ASP.training_trainingbudget2listapprovalview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Training/TrainingBudget2ListApprovalView.aspx" />
+        <filedep name="/Training/TrainingBudget2ListApprovalView.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/BoardMeetingAuditTrailViwer.aspx" hash="928e13213" filehash="39b14354e37ce166" flags="110000" assembly="App_Web_boardmeetingaudittrailviwer.aspx.8e127b5f" type="ASP.report_ui_boardmeetingaudittrailviwer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/BoardMeetingAuditTrailViwer.aspx" />
+        <filedep name="/Report_UI/BoardMeetingAuditTrailViwer.aspx.cs" />
+    </filedeps>
+</preserve>

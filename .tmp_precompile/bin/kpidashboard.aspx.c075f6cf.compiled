@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserProfile/KPIDashboard.aspx" hash="928e13213" filehash="59ba2eb8f07c6afe" flags="110000" assembly="App_Web_kpidashboard.aspx.c075f6cf" type="ASP.userprofile_kpidashboard_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserProfile/KPIDashboard.aspx" />
+        <filedep name="/UserProfile/KPIDashboard.aspx.cs" />
+    </filedeps>
+</preserve>

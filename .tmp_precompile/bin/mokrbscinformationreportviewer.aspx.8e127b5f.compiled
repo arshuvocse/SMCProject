@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/MOKRBSCInformationReportViewer.aspx" hash="928e13213" filehash="10096923fcb41ec2" flags="110000" assembly="App_Web_mokrbscinformationreportviewer.aspx.8e127b5f" type="ASP.report_ui_mokrbscinformationreportviewer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/MOKRBSCInformationReportViewer.aspx" />
+        <filedep name="/Report_UI/MOKRBSCInformationReportViewer.aspx.cs" />
+    </filedeps>
+</preserve>

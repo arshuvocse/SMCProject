@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/OKRKpiSetupList.aspx" hash="928e13213" filehash="5adcbc7cf42de307" flags="110000" assembly="App_Web_okrkpisetuplist.aspx.b734c8db" type="ASP.appraisal_okrkpisetuplist_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/OKRKpiSetupList.aspx" />
+        <filedep name="/Appraisal/OKRKpiSetupList.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

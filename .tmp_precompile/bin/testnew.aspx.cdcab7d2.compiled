@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/TestNew.aspx" hash="928e13213" filehash="e230a1a2ba452a64" flags="110000" assembly="App_Web_testnew.aspx.cdcab7d2" type="ASP.testnew_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/TestNew.aspx" />
+        <filedep name="/TestNew.aspx.cs" />
+    </filedeps>
+</preserve>

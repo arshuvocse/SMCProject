@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/AppraisalSelfFunctional.aspx" hash="928e13213" filehash="e3c4f9ae07eab0e" flags="110000" assembly="App_Web_appraisalselffunctional.aspx.b734c8db" type="ASP.appraisal_appraisalselffunctional_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/AppraisalSelfFunctional.aspx" />
+        <filedep name="/Appraisal/AppraisalSelfFunctional.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

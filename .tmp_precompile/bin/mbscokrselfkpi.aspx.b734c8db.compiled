@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/MBSCOKRSelfKPI.aspx" hash="928e13213" filehash="add477a26e9f93ad" flags="110000" assembly="App_Web_mbscokrselfkpi.aspx.b734c8db" type="ASP.appraisal_mbscokrselfkpi_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/MBSCOKRSelfKPI.aspx" />
+        <filedep name="/Appraisal/MBSCOKRSelfKPI.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

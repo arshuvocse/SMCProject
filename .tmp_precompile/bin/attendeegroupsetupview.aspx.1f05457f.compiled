@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/AttendeeGroupSetupView.aspx" hash="928e13213" filehash="4712bd40c709ece2" flags="110000" assembly="App_Web_attendeegroupsetupview.aspx.1f05457f" type="ASP.meetingminors_attendeegroupsetupview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/AttendeeGroupSetupView.aspx" />
+        <filedep name="/MeetingMinors/AttendeeGroupSetupView.aspx.cs" />
+    </filedeps>
+</preserve>

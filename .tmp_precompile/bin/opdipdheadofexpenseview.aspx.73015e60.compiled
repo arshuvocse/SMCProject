@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/OPDIPDHeadOfExpenseView.aspx" hash="928e13213" filehash="18ae9bc125640dc6" flags="110000" assembly="App_Web_opdipdheadofexpenseview.aspx.73015e60" type="ASP.healthcare_ui_opdipdheadofexpenseview_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/OPDIPDHeadOfExpenseView.aspx" />
+        <filedep name="/HealthCare_UI/OPDIPDHeadOfExpenseView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

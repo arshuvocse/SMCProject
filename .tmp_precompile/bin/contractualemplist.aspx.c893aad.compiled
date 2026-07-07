@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/ContractualEmployeeManagement_UI/ContractualEmpList.aspx" hash="928e13213" filehash="5f5d5c4fec3f6552" flags="110000" assembly="App_Web_contractualemplist.aspx.c893aad" type="ASP.contractualemployeemanagement_ui_contractualemplist_aspx">
+    <filedeps>
+        <filedep name="/ContractualEmployeeManagement_UI/ContractualEmpList.aspx" />
+        <filedep name="/ContractualEmployeeManagement_UI/ContractualEmpList.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

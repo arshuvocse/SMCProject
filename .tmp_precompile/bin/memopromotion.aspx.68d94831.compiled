@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/AllPrintLetter/MemoPromotion.aspx" hash="928e13213" filehash="6218ea872c3b5434" flags="110000" assembly="App_Web_memopromotion.aspx.68d94831" type="ASP.allprintletter_memopromotion_aspx">
+    <filedeps>
+        <filedep name="/AllPrintLetter/MemoPromotion.aspx" />
+        <filedep name="/AllPrintLetter/MemoPromotion.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

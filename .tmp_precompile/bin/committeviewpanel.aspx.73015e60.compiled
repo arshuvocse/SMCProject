@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/CommitteViewPanel.aspx" hash="928e13213" filehash="39762a7ddc5d98bd" flags="110000" assembly="App_Web_committeviewpanel.aspx.73015e60" type="ASP.healthcare_ui_committeviewpanel_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/CommitteViewPanel.aspx" />
+        <filedep name="/HealthCare_UI/CommitteViewPanel.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/EmpOthers.aspx" hash="928e13213" filehash="7c7d633e51340c68" flags="110000" assembly="App_Web_empothers.aspx.5bccebff" type="ASP.usersetup_empothers_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/EmpOthers.aspx" />
+        <filedep name="/UserSetup/EmpOthers.aspx.cs" />
+    </filedeps>
+</preserve>

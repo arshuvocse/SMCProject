@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Training/EvaluationFormList.aspx" hash="928e13213" filehash="78b5ff47b2ea5821" flags="110000" assembly="App_Web_evaluationformlist.aspx.c7875b37" type="ASP.training_evaluationformlist_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Training/EvaluationFormList.aspx" />
+        <filedep name="/Training/EvaluationFormList.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/RecruitmentManagement_UI/JobRequisitionFormAproval.aspx" hash="928e13213" filehash="dea322029ca8e30e" flags="110000" assembly="App_Web_jobrequisitionformaproval.aspx.79a9ee9f" type="ASP.recruitmentmanagement_ui_jobrequisitionformaproval_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/RecruitmentManagement_UI/JobRequisitionFormAproval.aspx" />
+        <filedep name="/RecruitmentManagement_UI/JobRequisitionFormAproval.aspx.cs" />
+    </filedeps>
+</preserve>

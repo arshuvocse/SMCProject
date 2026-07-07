@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_Pages/InterviewCandidateInfoListReport.aspx" hash="928e13213" filehash="f741348ebde8fb51" flags="110000" assembly="App_Web_interviewcandidateinfolistreport.aspx.633ba9c" type="ASP.report_pages_interviewcandidateinfolistreport_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Report_Pages/InterviewCandidateInfoListReport.aspx" />
+        <filedep name="/Report_Pages/InterviewCandidateInfoListReport.aspx.cs" />
+        <filedep name="/Report_Pages/IVSearchControlReport.ascx" />
+        <filedep name="/Report_Pages/IVSearchControlReport.ascx.cs" />
+    </filedeps>
+</preserve>

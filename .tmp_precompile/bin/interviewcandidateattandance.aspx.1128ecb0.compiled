@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Inverview/InterviewCandidateAttandance.aspx" hash="928e13213" filehash="374569b0b459b632" flags="110000" assembly="App_Web_interviewcandidateattandance.aspx.1128ecb0" type="ASP.inverview_interviewcandidateattandance_aspx">
+    <filedeps>
+        <filedep name="/Inverview/InterviewCandidateAttandance.aspx" />
+        <filedep name="/Inverview/InterviewCandidateAttandance.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Report_Pages/IVSearchControlReport.ascx" />
+        <filedep name="/Report_Pages/IVSearchControlReport.ascx.cs" />
+    </filedeps>
+</preserve>

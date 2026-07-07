@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Lunch_Allowance_UI/FoodRateEntry.aspx" hash="928e13213" filehash="a9e2e32c02373242" flags="110000" assembly="App_Web_foodrateentry.aspx.c83acfdb" type="ASP.lunch_allowance_ui_foodrateentry_aspx">
+    <filedeps>
+        <filedep name="/Lunch_Allowance_UI/FoodRateEntry.aspx" />
+        <filedep name="/Lunch_Allowance_UI/FoodRateEntry.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

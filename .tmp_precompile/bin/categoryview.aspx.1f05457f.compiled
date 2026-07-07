@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/CategoryView.aspx" hash="928e13213" filehash="96a491b81b94c03c" flags="110000" assembly="App_Web_categoryview.aspx.1f05457f" type="ASP.meetingminors_categoryview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/CategoryView.aspx" />
+        <filedep name="/MeetingMinors/CategoryView.aspx.cs" />
+    </filedeps>
+</preserve>

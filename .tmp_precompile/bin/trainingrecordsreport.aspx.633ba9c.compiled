@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_Pages/TrainingRecordsReport.aspx" hash="928e13213" filehash="8a2077505a32f253" flags="110000" assembly="App_Web_trainingrecordsreport.aspx.633ba9c" type="ASP.report_pages_trainingrecordsreport_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/Report_Pages/TrainingRecordsReport.aspx" />
+        <filedep name="/Report_Pages/TrainingRecordsReport.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/SignatureUploadHandler.ashx" hash="48caa2a6" filehash="403f4ea81e68" flags="110000" assembly="App_Web_signatureuploadhandler.ashx.cdcab7d2" type="SignatureUploadHandler">
+    <filedeps>
+        <filedep name="/SignatureUploadHandler.ashx" />
+    </filedeps>
+</preserve>

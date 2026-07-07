@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Increment_UI/IncrementEntry2.aspx" hash="928e13213" filehash="b6ddf9d243f04f74" flags="110000" assembly="App_Web_incremententry2.aspx.72a1dc72" type="ASP.increment_ui_incremententry2_aspx">
+    <filedeps>
+        <filedep name="/Increment_UI/IncrementEntry2.aspx" />
+        <filedep name="/Increment_UI/IncrementEntry2.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

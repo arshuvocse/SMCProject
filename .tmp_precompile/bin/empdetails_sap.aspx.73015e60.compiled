@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/EmpDetails_Sap.aspx" hash="928e13213" filehash="50c36f7e412cb018" flags="110000" assembly="App_Web_empdetails_sap.aspx.73015e60" type="ASP.healthcare_ui_empdetails_sap_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/EmpDetails_Sap.aspx" />
+        <filedep name="/HealthCare_UI/EmpDetails_Sap.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

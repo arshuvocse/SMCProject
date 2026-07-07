@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpEmployeeBeenCard.rpt" hash="48caa2a6" filehash="4172e37c7405" flags="110000" assembly="App_Web_crpemployeebeencard.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpEmployeeBeenCard.rpt" />
+    </filedeps>
+</preserve>

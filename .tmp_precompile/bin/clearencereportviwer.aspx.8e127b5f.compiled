@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/ClearenceReportViwer.aspx" hash="928e13213" filehash="c6558230789c1ec7" flags="110000" assembly="App_Web_clearencereportviwer.aspx.8e127b5f" type="ASP.report_ui_clearencereportviwer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/ClearenceReportViwer.aspx" />
+        <filedep name="/Report_UI/ClearenceReportViwer.aspx.cs" />
+    </filedeps>
+</preserve>

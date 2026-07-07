@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/DepartedInfo.aspx" hash="928e13213" filehash="8f1a63f3962ed53d" flags="110000" assembly="App_Web_departedinfo.aspx.5bccebff" type="ASP.usersetup_departedinfo_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/DepartedInfo.aspx" />
+        <filedep name="/UserSetup/DepartedInfo.aspx.cs" />
+    </filedeps>
+</preserve>

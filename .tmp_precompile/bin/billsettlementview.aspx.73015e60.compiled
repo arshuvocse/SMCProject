@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/BillSettlementView.aspx" hash="928e13213" filehash="d6479b9cf104778d" flags="110000" assembly="App_Web_billsettlementview.aspx.73015e60" type="ASP.healthcare_ui_billsettlementview_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/BillSettlementView.aspx" />
+        <filedep name="/HealthCare_UI/BillSettlementView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

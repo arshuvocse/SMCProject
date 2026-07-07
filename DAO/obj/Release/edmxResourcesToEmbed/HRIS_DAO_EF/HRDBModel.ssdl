@@ -1,0 +1,1215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HRIS_SMCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblApprovalStepInfo">
+    <Key>
+      <PropertyRef Name="ApprovalStepInfoId" />
+    </Key>
+    <Property Name="ApprovalStepInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApprovalStepName" Type="varchar" MaxLength="50" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblApprovalStepSetup">
+    <Key>
+      <PropertyRef Name="ApprovalStepSetupId" />
+    </Key>
+    <Property Name="ApprovalStepSetupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="MainMenuId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblApprovalStepSetupStepDtl">
+    <Key>
+      <PropertyRef Name="ApprovalStepSetupStepDtlId" />
+    </Key>
+    <Property Name="ApprovalStepSetupStepDtlId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApprovalStepSetupId" Type="int" Nullable="false" />
+    <Property Name="ApprovalStepInfoId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblAttachmentType">
+    <Key>
+      <PropertyRef Name="AttachmentTypeId" />
+    </Key>
+    <Property Name="AttachmentTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AttachmentName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblCompanyInfo">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="7" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="500" />
+    <Property Name="FaxNumber" Type="nvarchar" MaxLength="500" />
+    <Property Name="Pabx" Type="nvarchar" MaxLength="500" />
+    <Property Name="EmailAdress" Type="nvarchar" MaxLength="500" />
+    <Property Name="Hotline" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="EntryDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS_SMC_DB_Lunch.dbo.tblCompanyUnit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblCompanyUnit">
+    <Key>
+      <PropertyRef Name="UnitId" />
+      <PropertyRef Name="CompanyInfoId" />
+    </Key>
+    <Property Name="UnitId" Type="int" Nullable="false" />
+    <Property Name="UnitCode" Type="nvarchar(max)" />
+    <Property Name="UnitName" Type="nvarchar(max)" />
+    <Property Name="UnitAddress" Type="nvarchar(max)" />
+    <Property Name="PhoneNo" Type="nvarchar(max)" />
+    <Property Name="MobileNo" Type="nvarchar(max)" />
+    <Property Name="FaxNo" Type="nvarchar" MaxLength="25" />
+    <Property Name="CompanyInfoId" Type="int" Nullable="false" />
+    <Property Name="DeleteBy" Type="nvarchar(max)" />
+    <Property Name="DeleteDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="DivisionWId" Type="int" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="Invisible" Type="bit" />
+    <Property Name="Root" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblDesignation">
+    <Key>
+      <PropertyRef Name="DesignationId" />
+    </Key>
+    <Property Name="DesignationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalaryGradeId" Type="int" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="CompanyId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblDesignationStep">
+    <Key>
+      <PropertyRef Name="DesignationStepId" />
+    </Key>
+    <Property Name="DesignationStepId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DesignationStepName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nchar" MaxLength="10" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="EntryDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDesignationType">
+    <Key>
+      <PropertyRef Name="DesignationTypeId" />
+    </Key>
+    <Property Name="DesignationTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DesigTypeName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDivision">
+    <Key>
+      <PropertyRef Name="DivisionId" />
+    </Key>
+    <Property Name="DivisionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="DivisionName" Type="nvarchar(max)" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDivisionWing">
+    <Key>
+      <PropertyRef Name="DivisionWId" />
+    </Key>
+    <Property Name="DivisionId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="DivisionWingName" Type="nvarchar(max)" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="Invisible" Type="bit" />
+    <Property Name="Root" Type="nvarchar" MaxLength="50" />
+    <Property Name="DivisionWId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsActiveHK" Type="int" />
+  </EntityType>
+  <EntityType Name="tblEmpAchievements">
+    <Key>
+      <PropertyRef Name="EmpAchievementsId" />
+    </Key>
+    <Property Name="EmpAchievementsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="MasterAchievementsId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblEmpAttachments">
+    <Key>
+      <PropertyRef Name="EmpAttachmentsId" />
+    </Key>
+    <Property Name="EmpAttachmentsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AttachmentTypeId" Type="int" Nullable="false" />
+    <Property Name="AttObject" Type="varbinary(max)" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblEmpCategory">
+    <Key>
+      <PropertyRef Name="EmpCategoryId" />
+    </Key>
+    <Property Name="EmpCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpCategoryName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApproveDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblEmpChildren">
+    <Key>
+      <PropertyRef Name="EmpChildrenId" />
+    </Key>
+    <Property Name="EmpChildrenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="ChildrenName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ChildrenGender" Type="nvarchar" MaxLength="20" />
+    <Property Name="ChildrenOccupation" Type="int" />
+    <Property Name="ChildrenDOB" Type="datetime" />
+    <Property Name="ChildrenMaritalStatus" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblEmpContractProject">
+    <Key>
+      <PropertyRef Name="EmpContractProjectId" />
+    </Key>
+    <Property Name="EmpContractProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblEmpEducation">
+    <Key>
+      <PropertyRef Name="EmpEducationId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="EducationNameId" Type="int" />
+    <Property Name="SubjectGroupId" Type="int" />
+    <Property Name="BoardUniversityId" Type="int" />
+    <Property Name="Result" Type="nvarchar" MaxLength="50" />
+    <Property Name="EducationalInstituteId" Type="int" />
+    <Property Name="PassingYear" Type="nvarchar" MaxLength="20" />
+    <Property Name="CgpaOrTotalMarks" Type="nvarchar" MaxLength="50" />
+    <Property Name="FieldOfSpecializationId" Type="int" />
+    <Property Name="EduIsLastLevel" Type="bit" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EmpEducationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsProfessionalEdu" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblEmpExperience">
+    <Key>
+      <PropertyRef Name="EmpExperienceId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="ExpContactPerson" Type="nvarchar(max)" />
+    <Property Name="ExpCompany" Type="nvarchar(max)" />
+    <Property Name="ExpAddress" Type="nvarchar(max)" />
+    <Property Name="ExpTelNo" Type="nvarchar(max)" />
+    <Property Name="ExpNatureofBusiness" Type="nvarchar(max)" />
+    <Property Name="ExpDesignation" Type="nvarchar(max)" />
+    <Property Name="ExpJobDescription" Type="nvarchar(max)" />
+    <Property Name="ExpFromDate" Type="datetime" />
+    <Property Name="ExpToDate" Type="datetime" />
+    <Property Name="ExpJobType" Type="nvarchar(max)" />
+    <Property Name="ExpLastJob" Type="bit" />
+    <Property Name="ExpRemarks" Type="nvarchar(max)" />
+    <Property Name="ExpLeavingSalary" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EmpExperienceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblEmpExtraCurriculam">
+    <Key>
+      <PropertyRef Name="EmpExtraCurriculamId" />
+    </Key>
+    <Property Name="EmpExtraCurriculamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="MasterExtraCurriculamId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblEmpGeneralInfo">
+    <Key>
+      <PropertyRef Name="EmpInfoId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="EmpMasterCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmpName" Type="nvarchar(max)" />
+    <Property Name="EmpInfoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReportingEmpId" Type="int" />
+    <Property Name="DivisionId" Type="int" />
+    <Property Name="DivisionWId" Type="int" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="SectionId" Type="int" />
+    <Property Name="SubSectionId" Type="int" />
+    <Property Name="EmpCategoryId" Type="int" />
+    <Property Name="SalaryGradeId" Type="int" />
+    <Property Name="SalaryStepId" Type="int" />
+    <Property Name="DesignationId" Type="int" />
+    <Property Name="DesignationTypeId" Type="int" />
+    <Property Name="SalaryLoationId" Type="int" />
+    <Property Name="JobLocationId" Type="int" />
+    <Property Name="ShortName" Type="nvarchar(max)" />
+    <Property Name="Gender" Type="nvarchar(max)" />
+    <Property Name="BloodGroup" Type="nvarchar(max)" />
+    <Property Name="TinNo" Type="nvarchar(max)" />
+    <Property Name="FatherName" Type="nvarchar(max)" />
+    <Property Name="FatherOccupation" Type="int" />
+    <Property Name="MotherName" Type="nvarchar(max)" />
+    <Property Name="MotherOccupation" Type="int" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="DateOfJoin" Type="datetime" />
+    <Property Name="Religion" Type="nvarchar(max)" />
+    <Property Name="MaritalStatus" Type="nvarchar(max)" />
+    <Property Name="EmpTypeId" Type="int" />
+    <Property Name="ProjectID" Type="int" />
+    <Property Name="SalaryFromProject" Type="int" />
+    <Property Name="IsProbationary" Type="bit" />
+    <Property Name="ProbationEndDate" Type="datetime" />
+    <Property Name="ExtProbationPeriodDate" Type="datetime" />
+    <Property Name="ContractEndDate" Type="date" />
+    <Property Name="ExtContractDate" Type="datetime" />
+    <Property Name="Nationality" Type="nvarchar(max)" />
+    <Property Name="NationalityID" Type="nvarchar(max)" />
+    <Property Name="PassportNo" Type="nvarchar(max)" />
+    <Property Name="ExpectedServiceLength" Type="varchar" MaxLength="50" />
+    <Property Name="DateOfRetirement" Type="date" />
+    <Property Name="DateOfConformation" Type="date" />
+    <Property Name="PlaceOfBirth" Type="nvarchar(max)" />
+    <Property Name="AddressPresent" Type="nvarchar(max)" />
+    <Property Name="PresentDivision" Type="int" />
+    <Property Name="PresentDistrict" Type="int" />
+    <Property Name="PresentThana" Type="int" />
+    <Property Name="PresentTelNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressPermanent" Type="nvarchar(max)" />
+    <Property Name="ParmanentDivision" Type="int" />
+    <Property Name="PermanentDistrict" Type="int" />
+    <Property Name="PermanentThana" Type="int" />
+    <Property Name="ParmanentTelNo" Type="nvarchar(max)" />
+    <Property Name="PersonalEmail" Type="nvarchar(max)" />
+    <Property Name="OfficialEmail" Type="nvarchar(max)" />
+    <Property Name="PersonalMobile" Type="nvarchar(max)" />
+    <Property Name="OfficialMobile" Type="nvarchar(max)" />
+    <Property Name="FaxNo" Type="nvarchar(max)" />
+    <Property Name="EmergencyContactPerson" Type="nvarchar" MaxLength="500" />
+    <Property Name="EmergencyContactAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="EmergencyContactNumber" Type="nvarchar" MaxLength="500" />
+    <Property Name="SpouseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpouseDateOfBirth" Type="date" />
+    <Property Name="SpouseMaxEducation" Type="int" />
+    <Property Name="SpouseOccupation" Type="int" />
+    <Property Name="DateOfMarriage" Type="date" />
+    <Property Name="DateOfConfirmation" Type="date" />
+    <Property Name="ConformationStatus" Type="varchar" MaxLength="50" />
+    <Property Name="Age" Type="nvarchar" MaxLength="50" />
+    <Property Name="NAge" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="ActionStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="MedicalInformation" Type="nvarchar" MaxLength="50" />
+    <Property Name="JobID" Type="int" />
+    <Property Name="CandidateID" Type="int" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="EntryBy" Type="nvarchar(max)" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="Updateby" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="EmployeeStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="InactiveReason" Type="nvarchar(max)" />
+    <Property Name="ApprovalDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="DeleteBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="DeleteDate" Type="datetime" />
+    <Property Name="EmpImage" Type="varchar" MaxLength="100" />
+    <Property Name="EmpSign" Type="varchar" MaxLength="100" />
+    <Property Name="PayType" Type="int" />
+    <Property Name="SMCOldCode" Type="varchar" MaxLength="100" />
+    <Property Name="NationalIdNo" Type="nvarchar(max)" />
+    <Property Name="IsProgramContractual" Type="bit" />
+    <Property Name="NomineeImage" Type="nvarchar(max)" />
+    <Property Name="ContractPeriod" Type="int" />
+    <Property Name="Floor" Type="nvarchar(max)" />
+    <Property Name="ReferenceID" Type="int" />
+    <Property Name="ContractStartDate" Type="date" />
+    <Property Name="ImagePath" Type="nvarchar(max)" />
+    <Property Name="NewIDChangePolicy_OldID" Type="nvarchar(max)" />
+    <Property Name="IsSMCFundedProjects" Type="bit" />
+    <Property Name="IsCompanyDirector" Type="bit" />
+    <Property Name="leaveRecommenderId" Type="int" />
+    <Property Name="LeaveApprovalId" Type="int" />
+    <Property Name="IsSpTransfer" Type="bit" />
+    <Property Name="FatherDOB" Type="datetime" />
+    <Property Name="MotherDOB" Type="datetime" />
+    <Property Name="RecruitmentTypeNew" Type="bit" />
+    <Property Name="RecruitmentTypeReplacement" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblEmpHobby">
+    <Key>
+      <PropertyRef Name="EmpHobbyId" />
+    </Key>
+    <Property Name="EmpHobbyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="MasterHobbyId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblEmployeeType">
+    <Key>
+      <PropertyRef Name="EmpTypeId" />
+    </Key>
+    <Property Name="EmpTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyID" Type="int" />
+    <Property Name="EmpType" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="500" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblEmpNominee">
+    <Key>
+      <PropertyRef Name="EmpNomineeId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="bigint" />
+    <Property Name="NominationPurpose" Type="int" />
+    <Property Name="NomineeName" Type="nvarchar(max)" />
+    <Property Name="NomineeOccupation" Type="int" />
+    <Property Name="DateOfNomination" Type="date" />
+    <Property Name="NominationPercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="NomineeDOB" Type="date" />
+    <Property Name="NomineeRelation" Type="int" />
+    <Property Name="NomineeAddress" Type="nvarchar(max)" />
+    <Property Name="NomineeTelephone" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EmpNomineeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomNomineImg" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblEmpOtherTalents">
+    <Key>
+      <PropertyRef Name="EmpOtherTalentsId" />
+    </Key>
+    <Property Name="EmpOtherTalentsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="MasterOtherTalentsId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblEmpReference">
+    <Key>
+      <PropertyRef Name="EmpReferenceId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="bigint" />
+    <Property Name="ReferenceName" Type="nvarchar(max)" />
+    <Property Name="RefOccupation" Type="int" />
+    <Property Name="RefAddress" Type="nvarchar(max)" />
+    <Property Name="RefMobile" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EmpReferenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblEmpTraining">
+    <Key>
+      <PropertyRef Name="EmpTrainingId" />
+    </Key>
+    <Property Name="EmpTrainingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="TrainingName" Type="nvarchar(max)" />
+    <Property Name="TrainingType" Type="int" />
+    <Property Name="TrainingDescription" Type="nvarchar(max)" />
+    <Property Name="TrainingInstitution" Type="int" />
+    <Property Name="TrainingPlace" Type="nvarchar(max)" />
+    <Property Name="TrainingCountry" Type="int" />
+    <Property Name="TrainingAchievment" Type="nvarchar(max)" />
+    <Property Name="TrFromDate" Type="date" />
+    <Property Name="TrToDate" Type="date" />
+    <Property Name="TrainingDays" Type="int" />
+    <Property Name="TrRemarks" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblInterviewActivity">
+    <Key>
+      <PropertyRef Name="InterviewActivityId" />
+    </Key>
+    <Property Name="InterviewActivityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InterviewActivity" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblInterviewBoardEmpDetails">
+    <Key>
+      <PropertyRef Name="EmpBoardDetailsId" />
+    </Key>
+    <Property Name="EmpBoardDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MasterId" Type="int" />
+    <Property Name="EmployeeId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblInterviewBoardSetupDetails">
+    <Key>
+      <PropertyRef Name="BoardDetailsId" />
+    </Key>
+    <Property Name="BoardDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MasterId" Type="int" />
+    <Property Name="MemberType" Type="varchar" MaxLength="50" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+    <Property Name="Company" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Written" Type="bit" />
+    <Property Name="Viva" Type="bit" />
+    <Property Name="Other" Type="bit" />
+    <Property Name="OtherRemarks" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblInterviewBoardSetupMaster">
+    <Key>
+      <PropertyRef Name="SetupMasterId" />
+    </Key>
+    <Property Name="SetupMasterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="JobTitleId" Type="int" />
+    <Property Name="InterviewPhase" Type="int" />
+    <Property Name="Vanue" Type="nvarchar" MaxLength="50" />
+    <Property Name="InterviewDate" Type="datetime" />
+    <Property Name="InterviewFromTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="InterviewToTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+    <Property Name="EmailBody" Type="nvarchar(max)" />
+    <Property Name="HasAttachment" Type="bit" />
+    <Property Name="AttFileName" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateAttandance">
+    <Key>
+      <PropertyRef Name="InterviewCandidateAttandanceId" />
+    </Key>
+    <Property Name="InterviewCandidateAttandanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+    <Property Name="CandidateID" Type="int" Nullable="false" />
+    <Property Name="ReportingTime" Type="time" Precision="7" />
+    <Property Name="InterviewDate" Type="datetime" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="InterviewPhase" Type="int" />
+    <Property Name="Remarks" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateGrading">
+    <Key>
+      <PropertyRef Name="InterviewCandidateGradingId" />
+    </Key>
+    <Property Name="InterviewCandidateGradingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+    <Property Name="CandidateID" Type="int" />
+    <Property Name="Attitude" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Language" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TechnicalSkill" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IQ" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="GeneralKnowledge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Others" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TimeSence" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalMarks" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="10" />
+    <Property Name="IsRecommended" Type="bit" />
+    <Property Name="IsApproved" Type="bit" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateInfo">
+    <Key>
+      <PropertyRef Name="CandidateID" />
+    </Key>
+    <Property Name="CandidateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+    <Property Name="CandidateName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNo" Type="nvarchar(max)" />
+    <Property Name="EmailAdress" Type="nvarchar(max)" />
+    <Property Name="TotalYearsOfExp" Type="nvarchar(max)" />
+    <Property Name="LastOrganization" Type="nvarchar(max)" />
+    <Property Name="LastPosition" Type="nvarchar(max)" />
+    <Property Name="LastExam" Type="nvarchar(max)" />
+    <Property Name="LastMajor" Type="nvarchar(max)" />
+    <Property Name="LastPassingYear" Type="nvarchar(max)" />
+    <Property Name="LastResultType" Type="nvarchar(max)" />
+    <Property Name="LastResultDivision" Type="int" />
+    <Property Name="LastResultCGPA" Type="nvarchar(max)" />
+    <Property Name="LastResultOutOf" Type="nvarchar(max)" />
+    <Property Name="CvUploadID" Type="int" />
+    <Property Name="PhotoUploadID" Type="int" />
+    <Property Name="CurrentSalary" Type="nvarchar(max)" />
+    <Property Name="ExpectedSalary" Type="nvarchar(max)" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="ApprovalStatus" Type="nvarchar(max)" />
+    <Property Name="EntryBy" Type="nvarchar(max)" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="Updateby" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="VerifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="VerifiedDate" Type="datetime" />
+    <Property Name="ApproveBy" Type="nvarchar(max)" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="InternalNote" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Age" Type="nvarchar(max)" />
+    <Property Name="Cv_File" Type="nvarchar(max)" />
+    <Property Name="Cv_FileName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateInvitation">
+    <Key>
+      <PropertyRef Name="CandidateInvitationId" />
+    </Key>
+    <Property Name="CandidateInvitationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CandidateID" Type="int" Nullable="false" />
+    <Property Name="EmailInvitationSent" Type="int" Nullable="false" />
+    <Property Name="SMSInvitationSent" Type="int" Nullable="false" />
+    <Property Name="PhoneInvitationSent" Type="int" Nullable="false" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="InterviewPhase" Type="int" />
+    <Property Name="Remarks" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblInterviewCandidateTotalMarks">
+    <Key>
+      <PropertyRef Name="InterviewCandidateTotalMarksId" />
+    </Key>
+    <Property Name="InterviewCandidateTotalMarksId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CandidateID" Type="int" />
+    <Property Name="InterviewPhase" Type="int" />
+    <Property Name="JobID" Type="int" />
+    <Property Name="WrittenMarks" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WrittenMarksOutOf" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="VivaMarks" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="VivaMarksOutOf" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OtherMarks" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OtherMarksOutOf" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblInterviewGrading">
+    <Key>
+      <PropertyRef Name="InterviewGradingId" />
+    </Key>
+    <Property Name="InterviewGradingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LetterGrade" Type="nvarchar" MaxLength="10" />
+    <Property Name="StartingMarks" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblInterviewMarksDetails">
+    <Key>
+      <PropertyRef Name="InterviewMarksDetailsId" />
+    </Key>
+    <Property Name="InterviewMarksDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobId" Type="int" />
+    <Property Name="BoardDetailsId" Type="int" Nullable="false" />
+    <Property Name="CandidateID" Type="int" Nullable="false" />
+    <Property Name="VivaId" Type="int" />
+    <Property Name="VivaMarks" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WrittenMarks" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OtherMarks" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tag" Type="nvarchar(max)" />
+    <Property Name="EntryBy" Type="int" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="VivaOutOf" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OtherOutOf" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WrittenOutOf" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblJobCreation">
+    <Key>
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="JobID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobCode" Type="nvarchar(max)" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="DepartmentID" Type="int" />
+    <Property Name="SectionID" Type="int" />
+    <Property Name="Position" Type="nvarchar(max)" />
+    <Property Name="Vacancy" Type="nvarchar(max)" />
+    <Property Name="JobContext" Type="nvarchar(max)" />
+    <Property Name="JobResponsibilities" Type="nvarchar(max)" />
+    <Property Name="PermanenteEmp" Type="bit" />
+    <Property Name="ContractualEmp" Type="bit" />
+    <Property Name="TraineeEmp" Type="bit" />
+    <Property Name="CasualEmp" Type="bit" />
+    <Property Name="ExperienceRequirements" Type="nvarchar(max)" />
+    <Property Name="AdditionalRequirements" Type="nvarchar(max)" />
+    <Property Name="Salary" Type="nvarchar" MaxLength="500" />
+    <Property Name="CompensationandOtherBenefits" Type="nvarchar(max)" />
+    <Property Name="NewspaperDS" Type="bit" />
+    <Property Name="TVDS" Type="bit" />
+    <Property Name="OtherDS" Type="bit" />
+    <Property Name="Other" Type="nvarchar(max)" />
+    <Property Name="CirculationStartDate" Type="datetime" />
+    <Property Name="CirculationsdeadlineDate" Type="datetime" />
+    <Property Name="ProbableInterviewDate" Type="datetime" />
+    <Property Name="ProbableIRecruitmentDate" Type="datetime" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Progress" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryBy" Type="int" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="Updateby" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="VerifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="VerifiedDate" Type="datetime" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="InternalNote" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsSalary" Type="bit" />
+    <Property Name="ReqCodeId" Type="int" />
+    <Property Name="ActionStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="DeleteBy" Type="int" />
+    <Property Name="DeleteDate" Type="datetime" />
+    <Property Name="IsDelete" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMainMenu">
+    <Key>
+      <PropertyRef Name="MainMenuId" />
+    </Key>
+    <Property Name="SL" Type="int" />
+    <Property Name="MenuName" Type="nvarchar(max)" />
+    <Property Name="URL" Type="nvarchar(max)" />
+    <Property Name="ParantId" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsApprovalPage" Type="bit" />
+    <Property Name="ModuleId" Type="int" />
+    <Property Name="MenuTypeId" Type="int" />
+    <Property Name="icon" Type="nvarchar" MaxLength="50" />
+    <Property Name="Add" Type="bit" />
+    <Property Name="View" Type="bit" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="Delete" Type="bit" />
+    <Property Name="Everyone" Type="bit" />
+    <Property Name="Own" Type="bit" />
+    <Property Name="IsInMainMenu" Type="bit" />
+    <Property Name="IsSupervisor" Type="bit" />
+    <Property Name="MainMenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblMasterAchievements">
+    <Key>
+      <PropertyRef Name="MasterAchievementsId" />
+    </Key>
+    <Property Name="MasterAchievementsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AchievementsName" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="int" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblMasterExtraCurriculam">
+    <Key>
+      <PropertyRef Name="MasterExtraCurriculamId" />
+    </Key>
+    <Property Name="MasterExtraCurriculamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExtraCurriculamName" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="int" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblMasterHobby">
+    <Key>
+      <PropertyRef Name="MasterHobbyId" />
+    </Key>
+    <Property Name="MasterHobbyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HobbyName" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="int" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblMasterOtherTalents">
+    <Key>
+      <PropertyRef Name="MasterOtherTalentsId" />
+    </Key>
+    <Property Name="MasterOtherTalentsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OtherTalentsName" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="int" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblMenuApprovalGroupPermission">
+    <Key>
+      <PropertyRef Name="MenuApprovalGroupPermissionId" />
+    </Key>
+    <Property Name="MenuApprovalGroupPermissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMenuApprovalGroupPermissionDtl">
+    <Key>
+      <PropertyRef Name="MenuApprovalGroupPermissionDtlId" />
+    </Key>
+    <Property Name="MenuApprovalGroupPermissionDtlId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuApprovalGroupPermissionId" Type="int" Nullable="false" />
+    <Property Name="MenuApprovalGroupSetupId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMenuApprovalGroupSetup">
+    <Key>
+      <PropertyRef Name="MenuApprovalGroupSetupId" />
+    </Key>
+    <Property Name="MenuApprovalGroupSetupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="MenuApprovalGroupName" Type="varchar" MaxLength="200" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMenuApprovalGroupSetupDetail">
+    <Key>
+      <PropertyRef Name="MenuApprovalGroupSetupDetailId" />
+    </Key>
+    <Property Name="MenuApprovalGroupSetupDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuApprovalGroupSetupId" Type="int" Nullable="false" />
+    <Property Name="MainMenuId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMenuGroupPermission">
+    <Key>
+      <PropertyRef Name="MenuGroupPermissionId" />
+    </Key>
+    <Property Name="MenuGroupPermissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMenuGroupPermissionDtl">
+    <Key>
+      <PropertyRef Name="MenuGroupPermissionDtlId" />
+    </Key>
+    <Property Name="MenuGroupPermissionDtlId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuGroupPermissionId" Type="int" Nullable="false" />
+    <Property Name="MenuGroupSetupId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMenuGroupSetup">
+    <Key>
+      <PropertyRef Name="MenuGroupSetupId" />
+    </Key>
+    <Property Name="MenuGroupSetupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="MenuGroupName" Type="varchar" MaxLength="200" />
+    <Property Name="MenuGroupDescription" Type="varchar" MaxLength="500" />
+    <Property Name="MenuTypeId" Type="int" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMenuGroupSetupDetail">
+    <Key>
+      <PropertyRef Name="MenuGroupSetupDetailId" />
+    </Key>
+    <Property Name="MenuGroupSetupDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuGroupSetupId" Type="int" Nullable="false" />
+    <Property Name="MainMenuId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Add" Type="bit" />
+    <Property Name="View" Type="bit" />
+    <Property Name="Edit" Type="bit" />
+    <Property Name="Delete" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMenuTypeSetup">
+    <Key>
+      <PropertyRef Name="MenuTypeId" />
+    </Key>
+    <Property Name="MenuTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuTypeName" Type="varchar" MaxLength="100" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMPBudgetDetails">
+    <Key>
+      <PropertyRef Name="MPBudgetDetailsId" />
+    </Key>
+    <Property Name="MPBudgetDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MPBudgetMasterId" Type="int" />
+    <Property Name="Designation" Type="nvarchar(max)" />
+    <Property Name="DesignationId" Type="int" />
+    <Property Name="EmpCategoryId" Type="int" />
+    <Property Name="EmployeeRequisition" Type="int" />
+    <Property Name="ReqApproxSalary" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ReqTotalSalary" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="QuarterId" Type="int" />
+    <Property Name="SalaryGradeId" Type="int" />
+    <Property Name="SalaryStepId" Type="int" />
+    <Property Name="DtlRemarks" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="FilterType" Type="nvarchar(max)" />
+    <Property Name="EmployeeTypeId" Type="int" />
+    <Property Name="ProjectId" Type="int" />
+  </EntityType>
+  <EntityType Name="tblMPBudgetMaster">
+    <Key>
+      <PropertyRef Name="MPBudgetMasterId" />
+    </Key>
+    <Property Name="MPBudgetMasterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BudgetCode" Type="nvarchar(max)" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="FinancialYearId" Type="int" />
+    <Property Name="EntryBy" Type="nvarchar(max)" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar(max)" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApprovalStatus" Type="nvarchar(max)" />
+    <Property Name="ApproveBy" Type="nvarchar(max)" />
+    <Property Name="ApproveDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDelete" Type="bit" />
+    <Property Name="DeleteBy" Type="int" />
+    <Property Name="DeleteDate" Type="datetime" />
+    <Property Name="ActionStatus" Type="nvarchar(max)" />
+    <Property Name="ActionStatus2" Type="nvarchar(max)" />
+    <Property Name="isManuallyUpdate" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblQuarterInfo">
+    <Key>
+      <PropertyRef Name="QuarterId" />
+    </Key>
+    <Property Name="QuarterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="QuarterName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblQuarterMonthInfo">
+    <Key>
+      <PropertyRef Name="QuarterMonthId" />
+    </Key>
+    <Property Name="QuarterMonthId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuarterId" Type="int" Nullable="false" />
+    <Property Name="MonthName" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserName" Type="nvarchar" MaxLength="200" />
+    <Property Name="Password" Type="nvarchar" MaxLength="200" />
+    <Property Name="UserTypeId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="200" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+    <Property Name="UserCategoryId" Type="int" />
+    <Property Name="ActiveDate" Type="datetime" />
+    <Property Name="InActiveDate" Type="datetime" />
+    <Property Name="EmpInfoId" Type="int" />
+    <Property Name="UserDataPermissionId" Type="int" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="JobLocationID" Type="int" />
+    <Property Name="IsmainDasboard" Type="bit" />
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUserCategory">
+    <Key>
+      <PropertyRef Name="UserCategoryId" />
+    </Key>
+    <Property Name="UserCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblUserCompanyMaping">
+    <Key>
+      <PropertyRef Name="UserCompanyMapingId" />
+    </Key>
+    <Property Name="UserCompanyMapingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblUserDepartmentPermission">
+    <Key>
+      <PropertyRef Name="UserDepartmentPermissionId" />
+    </Key>
+    <Property Name="UserDepartmentPermissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="EntryBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblUserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS_SMC_DB_Lunch.dbo.vw_EmpInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_EmpInfo">
+    <Key>
+      <PropertyRef Name="EmpInfoId" />
+    </Key>
+    <Property Name="EmpInfoId" Type="bigint" Nullable="false" />
+    <Property Name="EmpMasterCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmpName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MotherName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Religion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="BloodGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressPresent" Type="nvarchar(max)" />
+    <Property Name="AddressPermanent" Type="nvarchar(max)" />
+    <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmployeeStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="PayType" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="500" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="500" />
+    <Property Name="DivisionName" Type="nvarchar(max)" />
+    <Property Name="DivisionWingName" Type="nvarchar(max)" />
+    <Property Name="EmpCategoryName" Type="nvarchar" MaxLength="500" />
+    <Property Name="OfficialEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="OfficialMobile" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="HRIS_SMCModelStoreContainer">
+    <EntitySet Name="tblApprovalStepInfo" EntityType="Self.tblApprovalStepInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblApprovalStepSetup" EntityType="Self.tblApprovalStepSetup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblApprovalStepSetupStepDtl" EntityType="Self.tblApprovalStepSetupStepDtl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAttachmentType" EntityType="Self.tblAttachmentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCompanyInfo" EntityType="Self.tblCompanyInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDesignation" EntityType="Self.tblDesignation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDesignationStep" EntityType="Self.tblDesignationStep" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDesignationType" EntityType="Self.tblDesignationType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDivision" EntityType="Self.tblDivision" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDivisionWing" EntityType="Self.tblDivisionWing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpAchievements" EntityType="Self.tblEmpAchievements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpAttachments" EntityType="Self.tblEmpAttachments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpCategory" EntityType="Self.tblEmpCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpChildren" EntityType="Self.tblEmpChildren" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpContractProject" EntityType="Self.tblEmpContractProject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpEducation" EntityType="Self.tblEmpEducation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpExperience" EntityType="Self.tblEmpExperience" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpExtraCurriculam" EntityType="Self.tblEmpExtraCurriculam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpGeneralInfo" EntityType="Self.tblEmpGeneralInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpHobby" EntityType="Self.tblEmpHobby" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmployeeType" EntityType="Self.tblEmployeeType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpNominee" EntityType="Self.tblEmpNominee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpOtherTalents" EntityType="Self.tblEmpOtherTalents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpReference" EntityType="Self.tblEmpReference" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpTraining" EntityType="Self.tblEmpTraining" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewActivity" EntityType="Self.tblInterviewActivity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewBoardEmpDetails" EntityType="Self.tblInterviewBoardEmpDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewBoardSetupDetails" EntityType="Self.tblInterviewBoardSetupDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewBoardSetupMaster" EntityType="Self.tblInterviewBoardSetupMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewCandidateAttandance" EntityType="Self.tblInterviewCandidateAttandance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewCandidateGrading" EntityType="Self.tblInterviewCandidateGrading" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewCandidateInfo" EntityType="Self.tblInterviewCandidateInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewCandidateInvitation" EntityType="Self.tblInterviewCandidateInvitation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewCandidateTotalMarks" EntityType="Self.tblInterviewCandidateTotalMarks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewGrading" EntityType="Self.tblInterviewGrading" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblInterviewMarksDetails" EntityType="Self.tblInterviewMarksDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblJobCreation" EntityType="Self.tblJobCreation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMainMenu" EntityType="Self.tblMainMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMasterAchievements" EntityType="Self.tblMasterAchievements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMasterExtraCurriculam" EntityType="Self.tblMasterExtraCurriculam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMasterHobby" EntityType="Self.tblMasterHobby" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMasterOtherTalents" EntityType="Self.tblMasterOtherTalents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuApprovalGroupPermission" EntityType="Self.tblMenuApprovalGroupPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuApprovalGroupPermissionDtl" EntityType="Self.tblMenuApprovalGroupPermissionDtl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuApprovalGroupSetup" EntityType="Self.tblMenuApprovalGroupSetup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuApprovalGroupSetupDetail" EntityType="Self.tblMenuApprovalGroupSetupDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuGroupPermission" EntityType="Self.tblMenuGroupPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuGroupPermissionDtl" EntityType="Self.tblMenuGroupPermissionDtl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuGroupSetup" EntityType="Self.tblMenuGroupSetup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuGroupSetupDetail" EntityType="Self.tblMenuGroupSetupDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenuTypeSetup" EntityType="Self.tblMenuTypeSetup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMPBudgetDetails" EntityType="Self.tblMPBudgetDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMPBudgetMaster" EntityType="Self.tblMPBudgetMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblQuarterInfo" EntityType="Self.tblQuarterInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblQuarterMonthInfo" EntityType="Self.tblQuarterMonthInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserCategory" EntityType="Self.tblUserCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserCompanyMaping" EntityType="Self.tblUserCompanyMaping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserDepartmentPermission" EntityType="Self.tblUserDepartmentPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserType" EntityType="Self.tblUserType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCompanyUnit" EntityType="Self.tblCompanyUnit" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblCompanyUnit].[UnitId] AS [UnitId], 
+    [tblCompanyUnit].[UnitCode] AS [UnitCode], 
+    [tblCompanyUnit].[UnitName] AS [UnitName], 
+    [tblCompanyUnit].[UnitAddress] AS [UnitAddress], 
+    [tblCompanyUnit].[PhoneNo] AS [PhoneNo], 
+    [tblCompanyUnit].[MobileNo] AS [MobileNo], 
+    [tblCompanyUnit].[FaxNo] AS [FaxNo], 
+    [tblCompanyUnit].[CompanyInfoId] AS [CompanyInfoId], 
+    [tblCompanyUnit].[DeleteBy] AS [DeleteBy], 
+    [tblCompanyUnit].[DeleteDate] AS [DeleteDate], 
+    [tblCompanyUnit].[IsActive] AS [IsActive]
+    FROM [dbo].[tblCompanyUnit] AS [tblCompanyUnit]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_EmpInfo" EntityType="Self.vw_EmpInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_EmpInfo].[EmpInfoId] AS [EmpInfoId], 
+    [vw_EmpInfo].[EmpMasterCode] AS [EmpMasterCode], 
+    [vw_EmpInfo].[EmpName] AS [EmpName], 
+    [vw_EmpInfo].[ShortName] AS [ShortName], 
+    [vw_EmpInfo].[FatherName] AS [FatherName], 
+    [vw_EmpInfo].[MotherName] AS [MotherName], 
+    [vw_EmpInfo].[Religion] AS [Religion], 
+    [vw_EmpInfo].[Nationality] AS [Nationality], 
+    [vw_EmpInfo].[DateOfBirth] AS [DateOfBirth], 
+    [vw_EmpInfo].[BloodGroup] AS [BloodGroup], 
+    [vw_EmpInfo].[Gender] AS [Gender], 
+    [vw_EmpInfo].[AddressPresent] AS [AddressPresent], 
+    [vw_EmpInfo].[AddressPermanent] AS [AddressPermanent], 
+    [vw_EmpInfo].[MaritalStatus] AS [MaritalStatus], 
+    [vw_EmpInfo].[EmployeeStatus] AS [EmployeeStatus], 
+    [vw_EmpInfo].[PayType] AS [PayType], 
+    [vw_EmpInfo].[CompanyName] AS [CompanyName], 
+    [vw_EmpInfo].[DepartmentName] AS [DepartmentName], 
+    [vw_EmpInfo].[Designation] AS [Designation], 
+    [vw_EmpInfo].[DivisionName] AS [DivisionName], 
+    [vw_EmpInfo].[DivisionWingName] AS [DivisionWingName], 
+    [vw_EmpInfo].[EmpCategoryName] AS [EmpCategoryName], 
+    [vw_EmpInfo].[OfficialEmail] AS [OfficialEmail], 
+    [vw_EmpInfo].[OfficialMobile] AS [OfficialMobile]
+    FROM [dbo].[vw_EmpInfo] AS [vw_EmpInfo]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/JobDescriptionReportViwer.aspx" hash="928e13213" filehash="36eb4dc7995236b9" flags="110000" assembly="App_Web_jobdescriptionreportviwer.aspx.8e127b5f" type="ASP.report_ui_jobdescriptionreportviwer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/JobDescriptionReportViwer.aspx" />
+        <filedep name="/Report_UI/JobDescriptionReportViwer.aspx.cs" />
+    </filedeps>
+</preserve>

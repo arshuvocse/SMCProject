@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/CommiteeSetup.aspx" hash="928e13213" filehash="2f080503ca509c3c" flags="110000" assembly="App_Web_commiteesetup.aspx.73015e60" type="ASP.healthcare_ui_commiteesetup_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/CommiteeSetup.aspx" />
+        <filedep name="/HealthCare_UI/CommiteeSetup.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

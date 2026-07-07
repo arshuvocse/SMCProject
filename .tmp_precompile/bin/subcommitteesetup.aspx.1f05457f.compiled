@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/SubcommitteeSetup.aspx" hash="928e13213" filehash="8a6aa3b330b6060a" flags="110000" assembly="App_Web_subcommitteesetup.aspx.1f05457f" type="ASP.meetingminors_subcommitteesetup_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/SubcommitteeSetup.aspx" />
+        <filedep name="/MeetingMinors/SubcommitteeSetup.aspx.cs" />
+    </filedeps>
+</preserve>

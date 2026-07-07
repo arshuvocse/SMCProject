@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/SuspendAndDiciplinary_UI/SuspendReleaseList.aspx" hash="928e13213" filehash="ed0f2ed5cb7869de" flags="110000" assembly="App_Web_suspendreleaselist.aspx.ccf37cbd" type="ASP.suspendanddiciplinary_ui_suspendreleaselist_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/SuspendAndDiciplinary_UI/SuspendReleaseList.aspx" />
+        <filedep name="/SuspendAndDiciplinary_UI/SuspendReleaseList.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MeetingMinors/MiscellaneousInformationApprove.aspx" hash="928e13213" filehash="26fff22b78a0e695" flags="110000" assembly="App_Web_miscellaneousinformationapprove.aspx.1f05457f" type="ASP.meetingminors_miscellaneousinformationapprove_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MeetingMinors/MiscellaneousInformationApprove.aspx" />
+        <filedep name="/MeetingMinors/MiscellaneousInformationApprove.aspx.cs" />
+    </filedeps>
+</preserve>

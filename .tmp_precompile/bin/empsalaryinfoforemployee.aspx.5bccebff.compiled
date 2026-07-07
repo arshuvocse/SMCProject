@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/EmpSalaryInfoForEmployee.aspx" hash="928e13213" filehash="fde6c98951c9b228" flags="110000" assembly="App_Web_empsalaryinfoforemployee.aspx.5bccebff" type="ASP.usersetup_empsalaryinfoforemployee_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/EmpSalaryInfoForEmployee.aspx" />
+        <filedep name="/UserSetup/EmpSalaryInfoForEmployee.aspx.cs" />
+    </filedeps>
+</preserve>

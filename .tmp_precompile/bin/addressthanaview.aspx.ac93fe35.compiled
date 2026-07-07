@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/AddressThanaView.aspx" hash="928e13213" filehash="93bf652f17db35d3" flags="110000" assembly="App_Web_addressthanaview.aspx.ac93fe35" type="ASP.mastersetup_ui_addressthanaview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/AddressThanaView.aspx" />
+        <filedep name="/MasterSetup_UI/AddressThanaView.aspx.cs" />
+    </filedeps>
+</preserve>

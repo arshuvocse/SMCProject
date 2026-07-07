@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/VivaSetupInfoView.aspx" hash="928e13213" filehash="65ae01c7ffe50a1c" flags="110000" assembly="App_Web_vivasetupinfoview.aspx.ac93fe35" type="ASP.mastersetup_ui_vivasetupinfoview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/VivaSetupInfoView.aspx" />
+        <filedep name="/MasterSetup_UI/VivaSetupInfoView.aspx.cs" />
+    </filedeps>
+</preserve>

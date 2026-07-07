@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/AppraisalPartB.aspx" hash="928e13213" filehash="b963be9552ab1df3" flags="110000" assembly="App_Web_appraisalpartb.aspx.b734c8db" type="ASP.appraisal_appraisalpartb_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/AppraisalPartB.aspx" />
+        <filedep name="/Appraisal/AppraisalPartB.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

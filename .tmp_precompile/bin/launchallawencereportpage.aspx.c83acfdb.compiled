@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Lunch_Allowance_UI/launchAllawenceReportPage.aspx" hash="928e13213" filehash="68587cc94f4b3122" flags="110000" assembly="App_Web_launchallawencereportpage.aspx.c83acfdb" type="ASP.lunch_allowance_ui_launchallawencereportpage_aspx">
+    <filedeps>
+        <filedep name="/Lunch_Allowance_UI/launchAllawenceReportPage.aspx" />
+        <filedep name="/Lunch_Allowance_UI/launchAllawenceReportPage.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

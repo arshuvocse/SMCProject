@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Increment_UI/IncrementApprovalView.aspx" hash="928e13213" filehash="5f78930a92452917" flags="110000" assembly="App_Web_incrementapprovalview.aspx.72a1dc72" type="ASP.increment_ui_incrementapprovalview_aspx">
+    <filedeps>
+        <filedep name="/Increment_UI/IncrementApprovalView.aspx" />
+        <filedep name="/Increment_UI/IncrementApprovalView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

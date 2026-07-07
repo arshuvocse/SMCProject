@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/JobLocationView.aspx" hash="928e13213" filehash="c4484120a22fcfc4" flags="110000" assembly="App_Web_joblocationview.aspx.ac93fe35" type="ASP.mastersetup_ui_joblocationview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/JobLocationView.aspx" />
+        <filedep name="/MasterSetup_UI/JobLocationView.aspx.cs" />
+    </filedeps>
+</preserve>

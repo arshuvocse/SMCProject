@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/DivisionWiseEmpTransfer.aspx" hash="928e13213" filehash="bfc596894170ddd7" flags="110000" assembly="App_Web_divisionwiseemptransfer.aspx.5bccebff" type="ASP.usersetup_divisionwiseemptransfer_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/DivisionWiseEmpTransfer.aspx" />
+        <filedep name="/UserSetup/DivisionWiseEmpTransfer.aspx.cs" />
+    </filedeps>
+</preserve>

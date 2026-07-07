@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/EmpReference.aspx" hash="928e13213" filehash="65473c2abc7203fd" flags="110000" assembly="App_Web_empreference.aspx.5bccebff" type="ASP.usersetup_empreference_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/EmpReference.aspx" />
+        <filedep name="/UserSetup/EmpReference.aspx.cs" />
+    </filedeps>
+</preserve>

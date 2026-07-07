@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/JobRequisitionFormViewReportPreview.aspx" hash="928e13213" filehash="4c8f191e1b6b10d6" flags="110000" assembly="App_Web_jobrequisitionformviewreportpreview.aspx.8e127b5f" type="ASP.report_ui_jobrequisitionformviewreportpreview_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/JobRequisitionFormViewReportPreview.aspx" />
+        <filedep name="/Report_UI/JobRequisitionFormViewReportPreview.aspx.cs" />
+    </filedeps>
+</preserve>

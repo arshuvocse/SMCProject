@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/UserSetup/EmpExperience.aspx" hash="928e13213" filehash="3fb53276b9971b32" flags="110000" assembly="App_Web_empexperience.aspx.5bccebff" type="ASP.usersetup_empexperience_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/UserSetup/EmpExperience.aspx" />
+        <filedep name="/UserSetup/EmpExperience.aspx.cs" />
+    </filedeps>
+</preserve>

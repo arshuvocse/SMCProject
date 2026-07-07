@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/ExitManagementReportViwer.aspx" hash="928e13213" filehash="45429849d7f2126f" flags="110000" assembly="App_Web_exitmanagementreportviwer.aspx.8e127b5f" type="ASP.report_ui_exitmanagementreportviwer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/ExitManagementReportViwer.aspx" />
+        <filedep name="/Report_UI/ExitManagementReportViwer.aspx.cs" />
+    </filedeps>
+</preserve>

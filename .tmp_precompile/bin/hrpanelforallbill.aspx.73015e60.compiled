@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/HealthCare_UI/HRPanelForAllBill.aspx" hash="928e13213" filehash="57178ba5bcd56f1c" flags="110000" assembly="App_Web_hrpanelforallbill.aspx.73015e60" type="ASP.healthcare_ui_hrpanelforallbill_aspx">
+    <filedeps>
+        <filedep name="/HealthCare_UI/HRPanelForAllBill.aspx" />
+        <filedep name="/HealthCare_UI/HRPanelForAllBill.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/crpSeparationAuditTrail.rpt" hash="48caa2a6" filehash="ffffc13df38ad8c3" flags="110000" assembly="App_Web_crpseparationaudittrail.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/crpSeparationAuditTrail.rpt" />
+    </filedeps>
+</preserve>

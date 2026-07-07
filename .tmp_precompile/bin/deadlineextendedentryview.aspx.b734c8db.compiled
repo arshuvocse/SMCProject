@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/DeadlineExtendedEntryView.aspx" hash="928e13213" filehash="4621f869aae5b6bc" flags="110000" assembly="App_Web_deadlineextendedentryview.aspx.b734c8db" type="ASP.appraisal_deadlineextendedentryview_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/DeadlineExtendedEntryView.aspx" />
+        <filedep name="/Appraisal/DeadlineExtendedEntryView.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

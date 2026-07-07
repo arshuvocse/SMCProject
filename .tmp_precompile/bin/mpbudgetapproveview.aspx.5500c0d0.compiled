@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MPBudget/MPBudgetApproveView.aspx" hash="928e13213" filehash="df29871bbf68e635" flags="110000" assembly="App_Web_mpbudgetapproveview.aspx.5500c0d0" type="ASP.mpbudget_mpbudgetapproveview_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MPBudget/MPBudgetApproveView.aspx" />
+        <filedep name="/MPBudget/MPBudgetApproveView.aspx.cs" />
+    </filedeps>
+</preserve>

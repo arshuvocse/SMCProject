@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MenuSetup/SupervisorApprovalEntry.aspx" hash="928e13213" filehash="3d9c63fdb50e025e" flags="110000" assembly="App_Web_supervisorapprovalentry.aspx.d8b19aa9" type="ASP.menusetup_supervisorapprovalentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MenuSetup/SupervisorApprovalEntry.aspx" />
+        <filedep name="/MenuSetup/SupervisorApprovalEntry.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/EmployeeAuditTrailViewer.aspx" hash="928e13213" filehash="9fbf1728958fbadb" flags="110000" assembly="App_Web_employeeaudittrailviewer.aspx.8e127b5f" type="ASP.report_ui_employeeaudittrailviewer_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/EmployeeAuditTrailViewer.aspx" />
+        <filedep name="/Report_UI/EmployeeAuditTrailViewer.aspx.cs" />
+    </filedeps>
+</preserve>

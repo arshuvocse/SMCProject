@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/ChartTest/ChartNew.aspx" hash="928e13213" filehash="2ac7ce5bc7b7d37" flags="110000" assembly="App_Web_chartnew.aspx.5acb0b0a" type="ASP.charttest_chartnew_aspx">
+    <filedeps>
+        <filedep name="/ChartTest/ChartNew.aspx" />
+        <filedep name="/ChartTest/ChartNew.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

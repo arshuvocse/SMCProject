@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/JobDescription.aspx" hash="928e13213" filehash="8023a3a8b907e541" flags="110000" assembly="App_Web_jobdescription.aspx.b734c8db" type="ASP.appraisal_jobdescription_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/JobDescription.aspx" />
+        <filedep name="/Appraisal/JobDescription.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Appraisal/KPIMIDApppraisalApprove.aspx" hash="928e13213" filehash="69330f018ab86b40" flags="110000" assembly="App_Web_kpimidapppraisalapprove.aspx.b734c8db" type="ASP.appraisal_kpimidapppraisalapprove_aspx">
+    <filedeps>
+        <filedep name="/Appraisal/KPIMIDApppraisalApprove.aspx" />
+        <filedep name="/Appraisal/KPIMIDApppraisalApprove.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

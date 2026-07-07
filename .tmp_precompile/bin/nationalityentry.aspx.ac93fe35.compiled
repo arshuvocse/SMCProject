@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/MasterSetup_UI/NationalityEntry.aspx" hash="928e13213" filehash="82cce889c4ad138c" flags="110000" assembly="App_Web_nationalityentry.aspx.ac93fe35" type="ASP.mastersetup_ui_nationalityentry_aspx">
+    <filedeps>
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+        <filedep name="/MasterSetup_UI/NationalityEntry.aspx" />
+        <filedep name="/MasterSetup_UI/NationalityEntry.aspx.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Increment_UI/MemoPrintIncrementPreviousSalary.aspx" hash="928e13213" filehash="93765f727d3d2711" flags="110000" assembly="App_Web_memoprintincrementprevioussalary.aspx.72a1dc72" type="ASP.increment_ui_memoprintincrementprevioussalary_aspx">
+    <filedeps>
+        <filedep name="/Increment_UI/MemoPrintIncrementPreviousSalary.aspx" />
+        <filedep name="/Increment_UI/MemoPrintIncrementPreviousSalary.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

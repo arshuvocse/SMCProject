@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="1" virtualPath="/Reports/CrystalReports/NewCclearform.rpt" hash="48caa2a6" filehash="ffffcc09abdf9692" flags="110000" assembly="App_Web_newcclearform.rpt.8d63d7a3">
+    <filedeps>
+        <filedep name="/Reports/CrystalReports/NewCclearform.rpt" />
+    </filedeps>
+</preserve>

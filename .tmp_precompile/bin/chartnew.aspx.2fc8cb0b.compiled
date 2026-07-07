@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/crystalreportviewers13/ChartNew.aspx" hash="928e13213" filehash="528ade41018353e7" flags="110000" assembly="App_Web_chartnew.aspx.2fc8cb0b" type="ASP.crystalreportviewers13_chartnew_aspx">
+    <filedeps>
+        <filedep name="/crystalreportviewers13/ChartNew.aspx" />
+        <filedep name="/crystalreportviewers13/ChartNew.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/Report_UI/EmployeeProfileReportViwerKPI.aspx" hash="928e13213" filehash="febca82518bf444a" flags="110000" assembly="App_Web_employeeprofilereportviwerkpi.aspx.8e127b5f" type="ASP.report_ui_employeeprofilereportviwerkpi_aspx">
+    <filedeps>
+        <filedep name="/Report_UI/EmployeeProfileReportViwerKPI.aspx" />
+        <filedep name="/Report_UI/EmployeeProfileReportViwerKPI.aspx.cs" />
+    </filedeps>
+</preserve>

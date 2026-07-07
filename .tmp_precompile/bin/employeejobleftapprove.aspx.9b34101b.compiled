@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/ExitManagement_UI/EmployeeJobLeftApprove.aspx" hash="928e13213" filehash="90c78d92d2fa3f69" flags="110000" assembly="App_Web_employeejobleftapprove.aspx.9b34101b" type="ASP.exitmanagement_ui_employeejobleftapprove_aspx">
+    <filedeps>
+        <filedep name="/ExitManagement_UI/EmployeeJobLeftApprove.aspx" />
+        <filedep name="/ExitManagement_UI/EmployeeJobLeftApprove.aspx.cs" />
+        <filedep name="/MasterPages/MainMasterPage.master" />
+        <filedep name="/MasterPages/MainMasterPage.master.cs" />
+    </filedeps>
+</preserve>
