@@ -686,38 +686,42 @@ public partial class DashBoard_UI_DashBoard : System.Web.UI.Page
                     else
                     {
                         int totalCount = 0; // To track how many dt2 have rows
-                        DataTable dt44 =
-                            _appDashboard.GetAppraisalDashboardOwn333DashOnlyKPIappraisal(Convert.ToInt32(Session["EmpInfoId"])
-                                , "   and isnull(aax.ActionStatus,'')='Approved'  and     isnull(tblAppraisalMasterAppLog.ActionStatus,'')<>'Approved'");
 
-
-
-
-                        if (dt44.Rows.Count > 0)
+                        DataTable dataTable = _appDashboard.GetActiveDeadlineFinancialYear(Convert.ToInt32(Session["EmpInfoId"]));
+                        string fYwe = "";
+                        int fYearId = 0;
+                        if (dataTable.Rows.Count > 0)
                         {
+                            fYwe = dataTable.Rows[0]["FinancialYearDesc"].ToString().Trim();
+                            if (dataTable.Rows[0]["FinancialYearId"] != DBNull.Value && dataTable.Rows[0]["FinancialYearId"].ToString() != "")
+                            {
+                                fYearId = Convert.ToInt32(dataTable.Rows[0]["FinancialYearId"]);
+                            }
+                        }
 
+                        DataTable dt44 = _appDashboard.GetAppraisalDashboardOwn333fin(
+                                Convert.ToInt32(Session["EmpInfoId"]),
+                                fYearId,
+                                "",
+                                fYwe);
 
+                        string empInfoId = Session["EmpInfoId"].ToString();
+                        DataTable dt2 = _appDashboard.GetAppraisalByPermission2nnnnnnnn(fYwe, empInfoId);
 
-
+                        if (dt2.Rows.Count > 0)
+                        {
                             foreach (DataRow row in dt44.Rows)
                             {
-                                string financialYearId = row["FinancialYearId"].ToString();
-                                string empInfoId = Session["EmpInfoId"].ToString();
+                                DataTable dt3 = _appDashboard.GetAppraisalByPermission3(row["AppraisalMasterId"].ToString());
 
-                                DataTable dt2 = _appDashboard.GetAppraisalByPermissionDashboard(financialYearId, empInfoId);
-
-                                if (dt2.Rows.Count > 0)
+                                if (dt3.Rows.Count == 0)
                                 {
-                                    totalCount++; // Count only if dt2 has data
+                                    totalCount++; // Not yet submitted for approval, and still within permission window
                                 }
                             }
+                        }
 
-                            lblAppPendingforSetup.Text = totalCount > 0 ? totalCount.ToString() : "0";
-                        }
-                        else
-                        {
-                            lblAppPendingforSetup.Text = "0";
-                        }
+                        lblAppPendingforSetup.Text = totalCount > 0 ? totalCount.ToString() : "0";
                     }
                 }
                 catch (Exception)
@@ -931,8 +935,7 @@ BSCOKRAppraislDashboardDAL _appDashboardOKR = new BSCOKRAppraislDashboardDAL();
 
                     if (totalCount == 0)
                     {
-                        string COMID = Session["CompanyId"].ToString();
-                        DataTable dataTable = _aFincDal.CheckStartEndDateExistOrNotDAL(DateTime.Now, DateTime.Now, COMID);
+                        DataTable dataTable = _appDashboardOKR.GetActiveDeadlineFinancialYear(Convert.ToInt32(Session["EmpInfoId"]));
                         string fYwe = "";
                         int fYearId = 0;
                         if (dataTable.Rows.Count > 0)
@@ -947,18 +950,22 @@ BSCOKRAppraislDashboardDAL _appDashboardOKR = new BSCOKRAppraislDashboardDAL();
                         DataTable dt44 = _appDashboardOKR.GetAppraisalDashboardOwn333fin(
                                 Convert.ToInt32(Session["EmpInfoId"]),
                                 fYearId,
-                                "   and isnull(aax.ActionStatus,'')='Approved' ",
+                                "",
                                 fYwe);
 
-                        foreach (DataRow row in dt44.Rows)
+                        string empInfoId = Session["EmpInfoId"].ToString();
+                        DataTable dt2 = _appDashboardOKR.GetAppraisalByPermission2nnnnnnn(fYwe, empInfoId);
+
+                        if (dt2.Rows.Count > 0)
                         {
-                            string empInfoId = Session["EmpInfoId"].ToString();
-
-                            DataTable dt2 = _appDashboardOKR.GetAppraisalByPermission2nnnnnnn(fYwe, empInfoId);
-
-                            if (dt2.Rows.Count > 0)
+                            foreach (DataRow row in dt44.Rows)
                             {
-                                totalCount++; // Count only if dt2 has data
+                                DataTable dt3 = _appDashboardOKR.GetAppraisalByPermission3(row["AppraisalMasterId"].ToString());
+
+                                if (dt3.Rows.Count == 0)
+                                {
+                                    totalCount++; // Not yet submitted for approval, and still within permission window
+                                }
                             }
                         }
                     }

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sqlcmd -S \"NASA-PC\\\\MSSQLSERVER2019\" -U sa -P sa1234 -d HRIS_SMC_DB -i \"C:\\\\Users\\\\NASA\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--CSTL-Projects-SMC-HRIS-HRIS-Web-SMCProject\\\\0f6d5108-511e-4c60-a8c5-1116868461ca\\\\scratchpad\\\\test_query3.sql\" -W)"
+    ]
+  }
+}

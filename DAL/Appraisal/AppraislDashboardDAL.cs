@@ -941,6 +941,27 @@ LEFT JOIN tblFinancialYear fin ON fin.FinancialYearId = dM.FinancialYearId
 
 
         }
+        public DataTable GetActiveDeadlineFinancialYear(int EmpID)
+        {
+            try
+            {
+                string query = @" SELECT TOP 1 ff.FinancialYearId, ff.FinancialYearDesc
+FROM tblAppraisalDeadlineMaster dlmas
+INNER JOIN tblAppraisalDeadLineDetails dldtl ON dldtl.AppraisalDeadLineMasterId = dlmas.AppraisalDeadLineMasterId
+INNER JOIN tblFinancialYear ff ON ff.FinancialYearId = dlmas.FinancialYearId
+WHERE dldtl.EmpinfoId=" + EmpID + @" and convert(date,isnull(dldtl.ExtensionDate, dldtl.DeadLine)) >= convert(date,getdate())
+ORDER BY ff.FinancialYearDesc desc";
+
+                return _aCommonInternalDal.DataContainerDataTable(query, DataBase.HRDB);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
         public DataTable GetAppraisalByPermissionDashboard(string FInYear,string EmpID)
         {
             try

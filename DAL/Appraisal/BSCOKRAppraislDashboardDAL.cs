@@ -703,10 +703,32 @@ FROM tblBSCAppraisalSelfMaster aax
         {
             try
             {
-                string query = @" SELECT dd.EmpinfoId   FROM dbo.tblBSCAppraisalDeadlineMaster dM 
- INNER JOIN dbo.tblBSCAppraisalDeadLineDetails dd ON dm.BSCAppraisalDeadLineMasterId = dd.BSCAppraisalDeadLineMasterId 
-LEFT JOIN tblFinancialYear fin ON fin.FinancialYearId = dM.FinancialYearId  
+                string query = @" SELECT dd.EmpinfoId   FROM dbo.tblBSCAppraisalDeadlineMaster dM
+ INNER JOIN dbo.tblBSCAppraisalDeadLineDetails dd ON dm.BSCAppraisalDeadLineMasterId = dd.BSCAppraisalDeadLineMasterId
+LEFT JOIN tblFinancialYear fin ON fin.FinancialYearId = dM.FinancialYearId
  WHERE dd.EmpinfoId=" + EmpID + " and     fin.FinancialYearDesc='" + FInYear + "'";
+
+                return _aCommonInternalDal.DataContainerDataTable(query, DataBase.HRDB);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
+
+        public DataTable GetActiveDeadlineFinancialYear(int EmpID)
+        {
+            try
+            {
+                string query = @" SELECT TOP 1 ff.FinancialYearId, ff.FinancialYearDesc
+FROM tblBSCAppraisalDeadlineMaster dlmas
+INNER JOIN tblBSCAppraisalDeadLineDetails dldtl ON dldtl.BSCAppraisalDeadLineMasterId = dlmas.BSCAppraisalDeadLineMasterId
+INNER JOIN tblFinancialYear ff ON ff.FinancialYearId = dlmas.FinancialYearId
+WHERE dldtl.EmpinfoId=" + EmpID + @" and convert(date,isnull(dldtl.ExtensionDate, dldtl.DeadLine)) >= convert(date,getdate())
+ORDER BY ff.FinancialYearDesc desc";
 
                 return _aCommonInternalDal.DataContainerDataTable(query, DataBase.HRDB);
             }
