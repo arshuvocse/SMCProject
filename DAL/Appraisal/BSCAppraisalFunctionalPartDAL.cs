@@ -342,7 +342,7 @@ where app.CurrentStatus='Approved' and app.EmpInfoId in (" + id + ") and fy.Fina
                     string delQuery = @"Delete from tblBSCAppraisalMaster where BSCAppraisalSelfMasterId = @BSCAppraisalSelfMasterId ";
                bool r = _aCommonInternalDal.DeleteDataByDeleteCommand(delQuery, aParameters, DataBase.HRDB);
 
-               string query = @"Insert into tblBSCAppraisalMaster (EmpInfoId,FinancialYearId,EntryBy,EntryDate,BSCAppraisalSelfMasterId,FYDes_BSCDec) values(@EmpInfoId,@FinancialYearId,@EntryBy,@EntryDate,@BSCAppraisalSelfMasterId,  (SELECT FinancialYearDesc 
+               string query = @"Insert into tblBSCAppraisalMaster (EmpInfoId,FinancialYearId,EntryBy,EntryDate,BSCAppraisalSelfMasterId,FYDes_BSCApp) values(@EmpInfoId,@FinancialYearId,@EntryBy,@EntryDate,@BSCAppraisalSelfMasterId,  (SELECT FinancialYearDesc 
                     FROM dbo.tblFinancialYear 
                     WHERE FinancialYearId = @FinancialYearId ))";
                
