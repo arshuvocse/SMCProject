@@ -476,7 +476,7 @@ IS NULL THEN 'Pending' ELSE 'Completed' END) END  AS ExitFormStatus,ActionStatus
 
        public DataTable LoadInformationALlApprovalNew(string param)
        {
-           string queryStr = @"SELECT DISTINCT  STUFF((
+           string queryStr = @"SELECT DISTINCT    STUFF((
     SELECT ', ' + emp2.EmpName + ' (' + emp2.EmpMasterCode + ')'
         + ISNULL(
             CASE WHEN dtl2.IsDone = 0 THEN
@@ -504,6 +504,9 @@ CAST(
         WHEN dtlX.EmpInfoId = 3001 
              AND supDone.SupervisorDoneDate IS NULL
         THEN 0
+
+
+
         WHEN dtlX.IsDone = 1
         THEN isnull(DATEDIFF(
                 DAY,
@@ -518,10 +521,12 @@ CAST(
         THEN isnull(DATEDIFF(
                 DAY,
                 CASE 
-                    WHEN dtlX.EmpInfoId = 3001 
+                    WHEN dtlX.EmpInfoId <> 3001 and  EmpMain.DivisionId=45
                     THEN CONVERT(date,supDone.SupervisorDoneDate)
                     ELSE CONVERT(date,EIM.EntryDate)
-                END,
+                END
+				
+				,
                 CONVERT(date,GETDATE())
              )  ,0)+1
         ELSE 0
@@ -557,7 +562,6 @@ EIM.EntryDate
 
 From dbo.tblEmpExitMaster EIM
 LEFT JOIN tblEmployeeJobLeft EPE ON EIM.EmployeeId = EPE.EmployeeId 
-
 
 
 -- ✅ FIX: LEFT JOIN এর বদলে OUTER APPLY TOP 1
@@ -860,6 +864,8 @@ inner JOIN   tblEmpAllRefference reff  ON emp.EmpInfoId = reff.RefferenceEmpId
 
 
 -- ============ Approval Status Comma String ============
+
+-- ============ Approval Status Comma String ============
 LEFT JOIN 
 (
     SELECT 
@@ -919,6 +925,18 @@ CAST(
 WHEN dtlX.EmpInfoId <> 3001  and empX.DivisionId=45
           AND isnull(tbCount.AppCountICTDiv,0)<>1
         THEN 0
+
+		WHEN dtlX.EmpInfoId <> 3001  and empX.DivisionId=45
+          AND isnull(tbCount.AppCountICTDiv,0)=1
+         THEN isnull(DATEDIFF(
+                DAY,
+                CASE 
+                    WHEN dtlX.EmpInfoId <> 3001  and empX.DivisionId=45  and isnull(tbCount.AppCountICTDiv,0)=1
+                    THEN CONVERT(date,supDone.SupervisorDoneDate)
+                    ELSE CONVERT(date,mas.EntryDate)
+                END,
+                ISNULL(CONVERT(date,clrForm.IsDoneDate), CONVERT(date,GETDATE()))
+             )  ,0)+1
 
         -- Done হলে
         WHEN dtlX.IsDone = 1

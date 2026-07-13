@@ -1991,7 +1991,13 @@ public partial class Appraisal_ApppraisalApprove : System.Web.UI.Page
 
 
 
-
+                DataTable dtDoc = _appraisalPartBdal.GetDocDataById(masterID.ToString());
+                if (dtDoc.Rows.Count > 0)
+                {
+                    ViewState["DocGrid_List"] = dtDoc;
+                    gv_DocumentUpload.DataSource = dtDoc;
+                    gv_DocumentUpload.DataBind();
+                }
 
                 DataTable dt = _appraisalPartBdal.GetAppraiSalFinalStatus(masterID);
                 if (dt.Rows.Count > 0)

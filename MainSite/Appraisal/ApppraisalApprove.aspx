@@ -2144,8 +2144,40 @@ TargetControlID="SupervisorScore" FilterType="Custom" ValidChars="0123456789."><
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div id="gridContainser1" style="height: auto; overflow: auto; width: auto; overflow-y: scroll; overflow-x: hidden;">
-                                                        <asp:GridView ID="loadGridView" runat="server" AutoGenerateColumns="False"
+                                                    <div id="gridContainser1" style="height: auto; overflow: auto; width: auto;">
+                                                   <asp:GridView Width="100%" ShowHeader="True" ID="gv_DocumentUpload" runat="server" AutoGenerateColumns="false" CssClass="AddToListCssTable" OnPreRender="gv_DocumentUpload_PreRender">
+     <Columns>
+         <asp:TemplateField HeaderText="SL#">
+             <ItemTemplate>
+                 <%#Container.DataItemIndex + 1%>
+             </ItemTemplate>
+         </asp:TemplateField>
+
+
+         <asp:TemplateField HeaderText="Document">
+             <ItemTemplate>
+                 <asp:HyperLink ID="HLDocumentLink" Target="_blank" runat="server" NavigateUrl='<%# Eval("DocumentLink") %>' Text='Preview'>
+                 </asp:HyperLink>
+
+                 <%--        <a   Target="_blank"    href="<%# Eval("DocumentLink")%>">Download</a>--%>
+                 <asp:Label ID="lbl_DocumentLink" Visible="False" runat="server" Text='<%#Eval("DocumentLink")%>'></asp:Label>
+                 <asp:HiddenField runat="server" ID="hfFileName" Value='<%#Eval("FileName")%>' />
+                 <asp:HiddenField runat="server" ID="hfDocumentLink" Value='<%#Eval("DocumentLink")%>' />
+             </ItemTemplate>
+         </asp:TemplateField>
+
+
+         <asp:TemplateField HeaderText="Summary Note	">
+             <ItemTemplate>
+                 <asp:Label ID="lbl_DocumentNote" runat="server" Text='<%#Eval("DocumentNote") %>'></asp:Label>
+             </ItemTemplate>
+         </asp:TemplateField>
+
+
+ 
+     </Columns>
+ </asp:GridView>
+      <asp:GridView ID="loadGridView" runat="server" AutoGenerateColumns="False"
                                                             CssClass="AddToListCssTable" OnPreRender="gv_DocumentUpload_PreRender">
                                                             <Columns>
                                                                 <asp:TemplateField HeaderText="SL">
