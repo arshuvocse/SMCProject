@@ -3471,6 +3471,7 @@ A Employee's Appraisal is waiting for your approval. <br/><br/>
                 
                 TextBox txtResult = (TextBox)gv_AppraisalFunc.Rows[i].FindControl("txtResult");
                 TextBox txtMark = (TextBox)gv_AppraisalFunc.Rows[i].FindControl("txtselfMark");
+                HiddenField hfSupervisorMark = (HiddenField)gv_AppraisalFunc.Rows[i].FindControl("hfSupervisorMark");
                 CheckBox isActiveCheckBox = (CheckBox)gv_AppraisalFunc.Rows[i].FindControl("isActiveCheckBox");
 
                 if (tbKpi.Text != "" && txtTarget.Text != "" && txtWeight.Text != "")
@@ -3513,7 +3514,16 @@ A Employee's Appraisal is waiting for your approval. <br/><br/>
                     }
                     area.Deadline = Convert.ToDateTime(txtDeadLine.Text.Trim().ToString());
 
-                    area.SupervisorMark = 0;
+                    decimal supervisorMark;
+
+                    if (decimal.TryParse(hfSupervisorMark.Value, out supervisorMark))
+                    {
+                        area.SupervisorMark = supervisorMark;
+                    }
+                    else
+                    {
+                        area.SupervisorMark = null;
+                    }
                     area.MidYearStatus = txtMidStatusNew.Text.Trim().ToString();
 
                     functional.Add(area);

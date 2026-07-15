@@ -763,6 +763,12 @@
                                                         <asp:TemplateField HeaderText="Key Performance Indicator">
                                                             <ItemTemplate>
                                                                 <asp:TextBox ReadOnly="True" Width="530px" runat="server" ID="txtKpi" class="form-control " Rows="2" TextMode="MultiLine" Text='<%#Eval("KpiInfo") %>'></asp:TextBox>
+
+                                                                 <asp:HiddenField
+            ID="hfSupervisorMark"
+            runat="server"
+            Value='<%# Eval("SupervisorMark") %>' />
+
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Weight (Number)">

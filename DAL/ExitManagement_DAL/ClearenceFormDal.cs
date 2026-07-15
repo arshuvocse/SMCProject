@@ -474,17 +474,21 @@ UPDATE [dbo].[tblEmpExitDetail]
         {
             string queryStr = @"
 
- SELECT   ApprovalCondition,Recommend,  MainRemarks, dgs.Designation, IsDoneEmpId, Resource, com.ShortName  Remarks, case when  tblDepWiseClearanceResourceUpdate.SetInfo='Dep' then tblDepartment.DepartmentName   else tblDivision.DivisionName end  DepartmentName ,emp.ImagePath ImagePath, IsDoneDate  from tblDepWiseClearanceResourceUpdate
+SELECT distinct  ApprovalCondition,Recommend,  MainRemarks, dgs.Designation, IsDoneEmpId, CASE
+        WHEN NULLIF(LTRIM(RTRIM(Resource)), '') IS NULL
+            THEN 'No pending issues'
+        ELSE Resource
+    END AS Resource, com.ShortName  Remarks, case when  tblDepWiseClearanceResourceUpdate.SetInfo='Dep' then tblDepartment.DepartmentName   else tblDivision.DivisionName end  DepartmentName ,emp.ImagePath ImagePath, IsDoneDate  from tblDepWiseClearanceResourceUpdate
 								 left join tblDepartment on tblDepWiseClearanceResourceUpdate.DepID=tblDepartment.DepartmentId
 								 	 left join tblDivision on tblDepWiseClearanceResourceUpdate.DepID=tblDivision.DivisionId
 								 left  JOIN dbo.tblEmpGeneralInfo emp ON emp.EmpInfoId=dbo.tblDepWiseClearanceResourceUpdate.IsDoneEmpId
 								 left  JOIN dbo.tblEmpGeneralInfo empMain ON empMain.EmpInfoId=dbo.tblDepWiseClearanceResourceUpdate.EmpID
 								 left  JOIN dbo.tblCompanyInfo com ON com.CompanyId=empMain.CompanyId
 
-
+								 left join tblEmpExitDetail ed on ed.ExitDetailId=tblDepWiseClearanceResourceUpdate.exitDetailIdNew
 
 								  INNER JOIN dbo.tblDesignation dgs ON emp.DesignationId=dgs.DesignationId
-								  where   Resource<>'' and EmpID= '" + empId + "'   ORDER BY ApprovalCondition DESC   ";
+								  where   ed.IsDone=1 and   EmpID= '" + empId + "'   ORDER BY ApprovalCondition DESC   ";
 
             return aCommonInternalDal.DataContainerDataTable(queryStr, DataBase.HRDB);
         }

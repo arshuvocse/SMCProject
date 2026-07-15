@@ -722,7 +722,10 @@ where app.CurrentStatus='Approved' and app.EmpInfoId in (" + id + ") and fy.Fina
                     aParameters.Add(new SqlParameter("@MidYearStatus", item.MidYearStatus));
                     aParameters.Add(new SqlParameter("@ResultYearEnd", item.ResultYearEnd ));
 
-                    aParameters.Add(new SqlParameter("@SupervisorMark", item.SupervisorMark));
+                    aParameters.Add(new SqlParameter(
+     "@SupervisorMark",
+     item.SupervisorMark.HasValue ? (object)item.SupervisorMark.Value : DBNull.Value
+ ));
                     aParameters.Add(new SqlParameter("@Target", item.Target));
                     aParameters.Add(new SqlParameter("@TargetPer", item.TargetPer));
                     aParameters.Add(new SqlParameter("@IsActive", item.IsActive));
@@ -732,7 +735,7 @@ where app.CurrentStatus='Approved' and app.EmpInfoId in (" + id + ") and fy.Fina
                   
                     if (item.AppraisalSelfFucAreaId==0)
                     {
-                        string queryD = @"insert into tblAppraisalSelfFuncArea(AppraisalSelfMasterId, KpiInfo, KpiWeight, Deadline, MidYearStatus,  SelfMark, Target,KpiWeightPer,TargetPer,IsActive) values(@AppraisalSelfMasterId, @KpiInfo, @KpiWeight, @Deadline, @MidYearStatus,  @SelfMark, @Target,@KpiWeightPer,@TargetPer,@IsActive)";
+                        string queryD = @"insert into tblAppraisalSelfFuncArea(AppraisalSelfMasterId, KpiInfo, KpiWeight, Deadline, MidYearStatus,  SelfMark, Target,KpiWeightPer,TargetPer,IsActive,SupervisorMark) values(@AppraisalSelfMasterId, @KpiInfo, @KpiWeight, @Deadline, @MidYearStatus,  @SelfMark, @Target,@KpiWeightPer,@TargetPer,@IsActive,@SupervisorMark)";
                        
                         int pk = _aCommonInternalDal.SaveDataByInsertCommandById(queryD, aParameters, DataBase.HRDB);
                         item.AppraisalSelfFucAreaId = pk;
@@ -2400,7 +2403,7 @@ public DataTable GetAppraisalPartB(int id)
                 aParameters.Add(new SqlParameter("@AppraisalSelfMasterId", appselfMasterId));
 
                 string query = @"insert into tblAppraisalMaster
-(FinancialYearId,EmpInfoId,EntryDate,EntryBy,UpdateBy,UpdateDate,IsDelete,DeleteBy,IsApprove,ApproveBy,ApproveDate,AppraisalSelfMasterId,ActionVersion,CurrentStatus,SelfApprove,FYDes_Self) 
+(FinancialYearId,EmpInfoId,EntryDate,EntryBy,UpdateBy,UpdateDate,IsDelete,DeleteBy,IsApprove,ApproveBy,ApproveDate,AppraisalSelfMasterId,ActionVersion,CurrentStatus,SelfApprove,FYDes_App) 
 select FinancialYearId,EmpInfoId,EntryDate,EntryBy,UpdateBy,UpdateDate,IsDelete,DeleteBy,IsApprove,ApproveBy,ApproveDate,AppraisalSelfMasterId,'0',ActionStatus,'Posted',  (SELECT FinancialYearDesc 
                     FROM dbo.tblFinancialYear 
                     WHERE FinancialYearId = tblAppraisalSelfMaster.FinancialYearId ) from tblAppraisalSelfMaster where AppraisalSelfMasterId=@AppraisalSelfMasterId";
