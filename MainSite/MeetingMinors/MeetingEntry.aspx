@@ -8,8 +8,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g==" crossorigin="anonymous"></script>
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" integrity="sha512-yVvxUQV0QESBt1SyZbNJMAwyKvFTLMyXSyBHDO4BG5t7k/Lw34tyqlSDlKIrIENIzCl+RVUNjmCPG+V/GMesRw==" crossorigin="anonymous" />
+    
+    <!-- Flatpickr for Time Selection -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
         div#cpFormBody_ddlDepartment_chosen {
             width: 300px !important;
@@ -175,6 +178,163 @@
                 top: -2px;
                 width: 5px;
             }
+
+        /* Premium UI Modernization */
+        .title-widget {
+            color: #1e293b !important;
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-left: 4px solid #5B799E !important;
+            padding-left: 12px;
+            margin-bottom: 20px;
+            font-family: inherit !important;
+            text-shadow: none !important;
+        }
+        .title-widget::before {
+            display: none !important;
+        }
+        
+        .meeting-entry-form .form-control {
+            border-radius: 6px !important;
+            border: 1px solid #cbd5e1 !important;
+            font-size: 13.5px !important;
+            padding: 6px 12px !important;
+            transition: all 0.2s ease !important;
+            height: 38px !important;
+        }
+
+        .meeting-entry-form textarea.form-control {
+            height: auto !important;
+        }
+
+        .meeting-entry-form .form-control:focus {
+            border-color: #5B799E !important;
+            box-shadow: 0 0 0 3px rgba(91, 121, 158, 0.15) !important;
+        }
+
+        .meeting-entry-form .control-label {
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            color: #334155 !important;
+        }
+
+        .card {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+        }
+
+        fieldset.for-panel {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 10px !important;
+            background-color: #f8fafc !important;
+            padding: 20px !important;
+            margin-bottom: 20px !important;
+        }
+
+        fieldset.for-panel legend {
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            color: #5B799E !important;
+            background-color: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 6px !important;
+            padding: 6px 14px !important;
+        }
+
+        /* GridView Styling */
+        .blueTableNew, .AddToListCssTable {
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            width: 100% !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .blueTableNew th, .AddToListCssTable th {
+            background: #5B799E !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            padding: 12px 16px !important;
+            border-bottom: 2px solid #475e7a !important;
+            border-top: none !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle !important;
+        }
+
+        .blueTableNew td, .AddToListCssTable td {
+            padding: 10px 16px !important;
+            font-size: 13px !important;
+            color: #334155 !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            border-top: none !important;
+            background-color: #ffffff;
+            vertical-align: middle !important;
+            transition: background-color 0.2s ease;
+        }
+
+        .blueTableNew tr:hover td, .AddToListCssTable tr:hover td {
+            background-color: #f8fafc !important;
+        }
+
+        .blueTableNew tr:last-child td, .AddToListCssTable tr:last-child td {
+            border-bottom: none !important;
+        }
+
+        .chkChoice {
+            display: inline-table;
+            border: none !important;
+        }
+
+        .chkChoice td {
+            padding: 2px 8px !important;
+            border: none !important;
+            background: transparent !important;
+        }
+
+        .chkChoice label {
+            font-size: 13px !important;
+            color: #475569 !important;
+            font-weight: 500 !important;
+            cursor: pointer;
+            margin-bottom: 0 !important;
+            padding-left: 6px !important;
+        }
+
+        .chkChoice input[type="radio"], .chkChoice input[type="checkbox"] {
+            margin-top: 2px;
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        .blueTableNew .form-control {
+            border-radius: 6px !important;
+            border: 1px solid #cbd5e1 !important;
+            height: 32px !important;
+            font-size: 13px !important;
+            padding: 4px 8px !important;
+            transition: all 0.2s ease;
+        }
+
+        .blueTableNew .form-control:focus {
+            border-color: #5B799E !important;
+            box-shadow: 0 0 0 3px rgba(91, 121, 158, 0.15) !important;
+        }
+
+        .blueTableNew .btn {
+            border-radius: 6px !important;
+            padding: 4px 8px !important;
+            font-size: 12px !important;
+            margin: 0 2px;
+        }
     </style>
 
 </asp:Content>
@@ -226,6 +386,11 @@
                                                         '#<%=ddlEmp.ClientID%>, ' +
                                                         '#<%=ddlDivisionAPP.ClientID%>, ' +
                                                         '#<%=ddlDepartmentAPP.ClientID%>, ' +
+                                                        '#<%=ddlCompanyLocation.ClientID%>, ' +
+                                                        '#<%=ddlOffice.ClientID%>, ' +
+                                                        '#<%=ddlLocation.ClientID%>, ' +
+                                                        '#<%=ddlFloor.ClientID%>, ' +
+                                                        '#<%=ddlMettingRoomName.ClientID%>, ' +
                                                         '.SelectMe33'
                                                     );
 
@@ -241,6 +406,16 @@
                                                             search_contains: true,
                                                             width: '100%'
                                                         });
+                                                    });
+
+                                                    // Initialize flatpickr for time inputs
+                                                    $('.flatpickr-time').flatpickr({
+                                                        enableTime: true,
+                                                        noCalendar: true,
+                                                        dateFormat: "H:i", // Sent to server
+                                                        altInput: true,
+                                                        altFormat: "h:i K", // Shown to user (AM/PM)
+                                                        time_24hr: false // User-friendly AM/PM in the picker
                                                     });
                                                 }
                                             </script>
@@ -730,169 +905,7 @@
 
 
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" style="width: 90%" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog2 " role="document">
-                    <asp:UpdatePanel runat="server">
-                        <ContentTemplate>
-                            <asp:UpdateProgress ID="UpdateProgress3" runat="server" ClientIDMode="Static" DisplayAfter="0" DynamicLayout="true">
-                                <ProgressTemplate>
-                                    <div class="divWaiting">
-                                        <asp:Image ID="imgWait10" CssClass="position-set" runat="server" ImageAlign="Middle" ImageUrl="~/Assets/img/progress-bar-opt.gif" Width="120px" Height="120px" />
-                                    </div>
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
 
-
-                                        <asp:RadioButtonList runat="server" AutoPostBack="True" ID="rbLocation" OnSelectedIndexChanged="rbLocation_OnSelectedIndexChanged" CssClass="chkChoice" RepeatDirection="Horizontal">
-
-
-                                            <asp:ListItem Value="Office">Office Premisis</asp:ListItem>
-                                            <asp:ListItem Value="Outer">Outer Premisis</asp:ListItem>
-                                            <asp:ListItem Value="Virtual">Virtual Meeting</asp:ListItem>
-                                        </asp:RadioButtonList>
-
-
-
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Office Premisis</h2>
-                                            <div class="row">
-                                                <div class="col-md-4" style="padding-top: 8px">
-                                                    <label class="control-label pull-right">
-                                                        Office
-:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlOffice_OnSelectedIndexChanged" ID="ddlOffice" CssClass="form-control form-control-sm" />
-                                                </div>
-                                            </div>
-
-                                            <div style="padding-top: 5px;"></div>
-                                            <div class="row">
-                                                <div class="col-md-4" style="padding-top: 8px">
-                                                    <label class="control-label pull-right">
-                                                        Location
-
-:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <asp:DropDownList runat="server" ID="ddlLocation" AutoPostBack="True" OnSelectedIndexChanged="ddlLocation_OnSelectedIndexChanged" CssClass="form-control form-control-sm" />
-                                                </div>
-                                            </div>
-
-                                            <div style="padding-top: 5px;"></div>
-                                            <div class="row">
-                                                <div class="col-md-4" style="padding-top: 8px">
-                                                    <label class="control-label pull-right">
-                                                        Floor
-
-:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFloor_OnSelectedIndexChanged" ID="ddlFloor" CssClass="form-control form-control-sm" />
-                                                </div>
-                                            </div>
-
-                                            <div style="padding-top: 5px;"></div>
-
-                                            <div class="row">
-                                                <div class="col-md-4" style="padding-top: 8px">
-                                                    <label class="control-label pull-right">Meeting Room:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlMettingRoomName_OnSelectedIndexChanged" ID="ddlMettingRoomName" CssClass="form-control form-control-sm" />
-                                                </div>
-                                            </div>
-
-                                            <div style="padding-top: 5px;"></div>
-
-                                            <div class="row" style="display: none;">
-                                                <div class="col-md-4" style="padding-top: 8px">
-                                                    <label class="control-label pull-right">
-                                                        Capacity
-
-
-:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <asp:TextBox runat="server" ID="txtCapacity" CssClass="form-control form-control-sm" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-
-                                            <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Outer Premisis</h2>
-                                            <div class="row">
-                                                <div class="col-md-4" style="padding-top: 8px">
-                                                    <label class="control-label pull-right">
-                                                        Location   
-
-
-
-:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <asp:TextBox runat="server" ID="txtLocation" CssClass="form-control form-control-sm" />
-                                                </div>
-                                            </div>
-
-                                            <div style="padding-top: 5px;"></div>
-
-
-                                            <div class="row">
-                                                <div class="col-md-4" style="padding-top: 8px">
-                                                    <label class="control-label pull-right">
-                                                        Description
-
-
-
-:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <asp:TextBox runat="server" TextMode="MultiLine" Rows="2" ID="txtDescription" CssClass="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-
-                                            <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Virtual Meeting</h2>
-                                            <div class="row">
-                                                <div class="col-md-4" style="padding-top: 8px">
-                                                    <label class="control-label pull-right">
-                                                        Remarks   
-
-
-
-:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <asp:TextBox runat="server" ID="txtRemarks" CssClass="form-control" TextMode="MultiLine" Rows="3" />
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-            </div>
 
 
 
@@ -950,33 +963,6 @@
                                                                 </div>
 
                                                                 <div style="padding-top: 5px;"></div>
-
-                                                                <div class="row">
-                                                                    <div class="col-md-3" style="padding-top: 8px">
-                                                                        <label class="control-label pull-right">Meeting Category:<span style="color: red;" title="please fill out this field"> * </span></label>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <asp:DropDownList runat="server" ID="ddlCategory" AutoPostBack="True" OnSelectedIndexChanged="ddlCategory_OnSelectedIndexChanged" class="form-control form-control-sm">
-                                                                        </asp:DropDownList>
-
-
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div style="padding-top: 5px;"></div>
-
-                                                                <div class="row" runat="server" visible="False" id="DivSubCommitte">
-                                                                    <div class="col-md-3" style="padding-top: 8px">
-                                                                        <label class="control-label pull-right">Sub-Committee Name:<span style="color: red;" title="please fill out this field"> * </span></label>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <asp:DropDownList runat="server" ID="ddlSubCommittee" AutoPostBack="True" OnSelectedIndexChanged="ddlSubCommittee_OnSelectedIndexChanged" class="form-control form-control-sm">
-                                                                        </asp:DropDownList>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div style="padding-top: 5px;"></div>
                                                                 <div class="row">
                                                                     <div class="col-md-3" style="padding-top: 8px">
                                                                         <label class="control-label pull-right">
@@ -999,7 +985,7 @@
                                                                     </div>
                                                                     <div class="col-md-6" style="margin-top:6px">
                                                                          
-                                                                        <asp:RadioButtonList runat="server" ID="rbNotice" RepeatDirection="Horizontal" >
+                                                                        <asp:RadioButtonList runat="server" ID="rbNotice" CssClass="chkChoice" RepeatDirection="Horizontal" >
                                                                               <asp:ListItem Selected="True" Value="1">Yes</asp:ListItem>
       <asp:ListItem Value="2">No</asp:ListItem>
                                                                         </asp:RadioButtonList>
@@ -1053,24 +1039,29 @@
 
                                                             <div class="row">
                                                                 <div class="col-md-3" style="padding-top: 8px">
-                                                                    <label class="control-label pull-right">
-                                                                        Classification	
-:</label>
+                                                                    <label class="control-label pull-right" style="white-space: nowrap;">Meeting Category:<span style="color: red;" title="please fill out this field"> * </span></label>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <asp:DropDownList runat="server" ID="ddlClassification" class="form-control form-control-sm">
-
-
-
-                                                                        <asp:ListItem>Select One....</asp:ListItem>
-                                                                        <asp:ListItem>External</asp:ListItem>
-                                                                        <asp:ListItem>Internal</asp:ListItem>
-                                                                        <asp:ListItem>Others</asp:ListItem>
+                                                                    <asp:DropDownList runat="server" ID="ddlCategory"  class="form-control form-control-sm">
+                                                                        <%--AutoPostBack="True" OnSelectedIndexChanged="ddlCategory_OnSelectedIndexChanged"--%>
                                                                     </asp:DropDownList>
                                                                 </div>
                                                             </div>
 
                                                             <div style="padding-top: 5px;"></div>
+
+                                                            <div class="row" runat="server" visible="False" id="DivSubCommitte">
+                                                                <div class="col-md-3" style="padding-top: 8px">
+                                                                    <label class="control-label pull-right" style="white-space: nowrap;">Sub-Committee Name:<span style="color: red;" title="please fill out this field"> * </span></label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <asp:DropDownList runat="server" ID="ddlSubCommittee" AutoPostBack="True" OnSelectedIndexChanged="ddlSubCommittee_OnSelectedIndexChanged" class="form-control form-control-sm">
+                                                                    </asp:DropDownList>
+                                                                </div>
+                                                            </div>
+
+                                                            <div style="padding-top: 5px;"></div>
+
                                                             <div class="row">
                                                                 <div class="col-md-3" style="padding-top: 8px">
                                                                     <label class="control-label pull-right">Meeting Date:<span style="color: red;" title="please fill out this field"> * </span></label>
@@ -1090,7 +1081,7 @@
                                                                     <label class="control-label pull-right">Start Time:</label>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <asp:TextBox runat="server" ID="txtStartTime" TextMode="Time" class="form-control form-control-sm" />
+                                                                    <asp:TextBox runat="server" ID="txtStartTime" class="form-control form-control-sm flatpickr-time" placeholder="Select Start Time" />
                                                                 </div>
                                                             </div>
 
@@ -1102,28 +1093,122 @@
                                                                     <label class="control-label pull-right">End Time:</label>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <asp:TextBox runat="server" ID="txtEndTime" TextMode="Time" class="form-control form-control-sm" />
+                                                                    <asp:TextBox runat="server" ID="txtEndTime" class="form-control form-control-sm flatpickr-time" placeholder="Select End Time" />
                                                                 </div>
                                                             </div>
 
-
-                                                            <br />
-
-                                                            <div class="row">
-
-                                                                <div class="col-md-3">
-                                                                </div>
-                                                                <div class="col-md-3">
-
-                                                                    <asp:LinkButton data-toggle="modal" data-target="#exampleModal" class="btn btn-info  pull-right" runat="server" ID="lblLocation"><i class="fa fa-map-marker"></i>&nbsp; Set Location</asp:LinkButton>
-
-                                                                </div>
-                                                            </div>
 
                                                         </div>
                                                     </div>
+
+                                                    <div style="padding-top: 15px;"></div>
+
+                                                    <fieldset class="for-panel" style="margin-top: 15px; margin-bottom: 15px;">
+                                                        <legend>Meeting Location</legend>
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-2" style="padding-top: 8px">
+                                                                <label class="control-label pull-right">Location Type:</label>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <asp:RadioButtonList runat="server" AutoPostBack="True" ID="rbLocation" OnSelectedIndexChanged="rbLocation_OnSelectedIndexChanged" CssClass="chkChoice" RepeatDirection="Horizontal">
+                                                                    <asp:ListItem Value="Office">Office Premisis</asp:ListItem>
+                                                                    <asp:ListItem Value="Outer">Outer Premisis</asp:ListItem>
+                                                                    <asp:ListItem Value="Virtual">Virtual Meeting</asp:ListItem>
+                                                                </asp:RadioButtonList>
+                                                            </div>
+                                                        </div>
+                                                             <div class="row">
+                                                                 <div class="col-md-8 offset-md-2 location-panel-office">
+                                                                     <h2 class="blue title-widget" style="font-size: 14px; margin-bottom: 10px;">Office Premisis</h2>
+                                                                     <div class="row">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Company:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCompanyLocation_OnSelectedIndexChanged" ID="ddlCompanyLocation" CssClass="form-control form-control-sm" />
+                                                                         </div>
+                                                                     </div>
+                                                                     <div style="padding-top: 5px;"></div>
+                                                                     <div class="row">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Office:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlOffice_OnSelectedIndexChanged" ID="ddlOffice" CssClass="form-control form-control-sm" />
+                                                                         </div>
+                                                                     </div>
+                                                                     <div style="padding-top: 5px;"></div>
+                                                                     <div class="row">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Location:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:DropDownList runat="server" ID="ddlLocation" AutoPostBack="True" OnSelectedIndexChanged="ddlLocation_OnSelectedIndexChanged" CssClass="form-control form-control-sm" />
+                                                                         </div>
+                                                                     </div>
+                                                                     <div style="padding-top: 5px;"></div>
+                                                                     <div class="row">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Floor:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFloor_OnSelectedIndexChanged" ID="ddlFloor" CssClass="form-control form-control-sm" />
+                                                                         </div>
+                                                                     </div>
+                                                                     <div style="padding-top: 5px;"></div>
+                                                                     <div class="row">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Meeting Room:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlMettingRoomName_OnSelectedIndexChanged" ID="ddlMettingRoomName" CssClass="form-control form-control-sm" />
+                                                                         </div>
+                                                                     </div>
+                                                                     <div style="padding-top: 5px;"></div>
+                                                                     <div class="row" style="display: none;">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Capacity:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:TextBox runat="server" ID="txtCapacity" CssClass="form-control form-control-sm" />
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                                 <div class="col-md-8 offset-md-2 location-panel-outer">
+                                                                     <h2 class="blue title-widget" style="font-size: 14px; margin-bottom: 10px;">Outer Premisis</h2>
+                                                                     <div class="row">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Location:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:TextBox runat="server" ID="txtLocation" CssClass="form-control form-control-sm" />
+                                                                         </div>
+                                                                     </div>
+                                                                     <div style="padding-top: 5px;"></div>
+                                                                     <div class="row">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Description:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:TextBox runat="server" TextMode="MultiLine" Rows="2" ID="txtDescription" CssClass="form-control" />
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                                 <div class="col-md-8 offset-md-2 location-panel-virtual">
+                                                                     <h2 class="blue title-widget" style="font-size: 14px; margin-bottom: 10px;">Virtual Meeting</h2>
+                                                                     <div class="row">
+                                                                         <div class="col-md-4" style="padding-top: 8px">
+                                                                             <label class="control-label pull-right">Remarks:</label>
+                                                                         </div>
+                                                                         <div class="col-md-8">
+                                                                             <asp:TextBox runat="server" ID="txtRemarks" CssClass="form-control" TextMode="MultiLine" Rows="3" />
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                    </fieldset>
                                                     <div class="row">
-                                                        <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Members List</h2>
+                                                        <h2 class="blue title-widget">Members List</h2>
 
                                                         <div class="col-md-12">
 
@@ -1209,83 +1294,70 @@
                                                     <br />
 
                                                     <div class="row">
-                                                        <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Add Employees</h2>
+                                                         <h2 class="blue title-widget">Add Employees</h2>
 
-                                                        <div class="col-md-4"></div>
-                                                    </div>
+                                                         <div class="col-md-4"></div>
+                                                     </div>
 
-                                                    <div class="row">
-
-                                                        <div class="col-md-2" style="padding-top: 8px">
-                                                            <asp:LinkButton runat="server" ID="LinkButton3" data-toggle="modal" data-target="#exampleModal2" CssClass="btn btn-sm btn-secondary">Add More Employee   </asp:LinkButton>
-                                                            <%--  <label class="control-label">Attendee Group
-</label>--%>
-                                                        </div>
-                                                        <div class="col-md-4">
-
-                                                            <%--   <asp:DropDownList runat="server" ID="dll" CssClass="form-control form-control-sm"/>--%>
-                                                        </div>
-                                                        <div class="col-md-4"></div>
-                                                    </div>
-                                                    <br />
-                                                    <div class="row">
+                                                     <div class="row">
 
 
-                                                        <div class="col-md-12">
+                                                         <div class="col-md-12">
 
-                                                            <asp:UpdatePanel runat="server">
-                                                                <ContentTemplate>
-                                                                    <asp:UpdateProgress ID="UpdateProgress5" runat="server" ClientIDMode="Static" DisplayAfter="0" DynamicLayout="true">
-                                                                        <ProgressTemplate>
-                                                                            <div class="divWaiting">
-                                                                                <asp:Image ID="imgWait1" CssClass="position-set" runat="server" ImageAlign="Middle" ImageUrl="~/Assets/img/progress-bar-opt.gif" Width="120px" Height="120px" />
-                                                                            </div>
-                                                                        </ProgressTemplate>
-                                                                    </asp:UpdateProgress>
-                                                                    <asp:GridView Width="100%" ShowHeader="True" ID="gv_Details_Save" runat="server" AutoGenerateColumns="false" CssClass="blueTableNew" OnPreRender="gv_DocumentUpload_PreRender">
-                                                                        <Columns>
-                                                                            <asp:TemplateField HeaderText="SL#">
-                                                                                <ItemTemplate>
-                                                                                    <%#Container.DataItemIndex + 1%>
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
+                                                             <asp:UpdatePanel runat="server">
+                                                                 <ContentTemplate>
+                                                                     <asp:UpdateProgress ID="UpdateProgress5" runat="server" ClientIDMode="Static" DisplayAfter="0" DynamicLayout="true">
+                                                                         <ProgressTemplate>
+                                                                             <div class="divWaiting">
+                                                                                 <asp:Image ID="imgWait1" CssClass="position-set" runat="server" ImageAlign="Middle" ImageUrl="~/Assets/img/progress-bar-opt.gif" Width="120px" Height="120px" />
+                                                                             </div>
+                                                                         </ProgressTemplate>
+                                                                     </asp:UpdateProgress>
+                                                                     <asp:GridView Width="100%" ShowHeader="True" ID="gv_Details_Save" runat="server" AutoGenerateColumns="false" CssClass="blueTableNew" OnPreRender="gv_DocumentUpload_PreRender">
+                                                                         <Columns>
+                                                                             <asp:TemplateField HeaderText="SL#">
+                                                                                 <ItemTemplate>
+                                                                                     <%#Container.DataItemIndex + 1%>
+                                                                                 </ItemTemplate>
+                                                                             </asp:TemplateField>
 
 
 
-                                                                            <asp:TemplateField HeaderText="Type">
-                                                                                <ItemTemplate>
-                                                                                    <asp:RadioButtonList runat="server" ID="rbType" CssClass="chkChoice" AutoPostBack="True" OnSelectedIndexChanged="rbType_OnSelectedIndexChanged" RepeatDirection="Horizontal">
+                                                                             <asp:TemplateField HeaderText="Type">
+                                                                                 <ItemTemplate>
+                                                                                     <asp:RadioButtonList runat="server" ID="rbType" CssClass="chkChoice" AutoPostBack="True" OnSelectedIndexChanged="rbType_OnSelectedIndexChanged" RepeatDirection="Horizontal">
 
 
-                                                                                        <asp:ListItem>Employee</asp:ListItem>
-                                                                                        <asp:ListItem>Guest</asp:ListItem>
-                                                                                    </asp:RadioButtonList>
+                                                                                         <asp:ListItem>Employee</asp:ListItem>
+                                                                                         <asp:ListItem>Guest</asp:ListItem>
+                                                                                     </asp:RadioButtonList>
 
-                                                                                    <asp:HiddenField runat="server" ID="hfType" Value='<%#Eval("Type")%>' />
+                                                                                     <asp:HiddenField runat="server" ID="hfType" Value='<%#Eval("Type")%>' />
 
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
+                                                                                 </ItemTemplate>
+                                                                             </asp:TemplateField>
 
-                                                                            <asp:TemplateField HeaderText="Employee ID">
-                                                                                <ItemTemplate>
-                                                                                    <asp:TextBox ID="txt_EmpMasterCode" CssClass="form-control form-control-sm" runat="server" Text='<%#Eval("EmpMasterCode") %>'></asp:TextBox>
-
-                                                                                    <asp:HiddenField runat="server" ID="hfBMemberSetupDetailsID" Value='<%#Eval("BMemberSetupDetailsID")%>' />
-                                                                                    <asp:HiddenField runat="server" ID="hfIsBoardMember" Value='<%#Eval("IsBoardMember")%>' />
-                                                                                    <asp:HiddenField runat="server" ID="ShfEmpInfoId" Value='<%#Eval("EmpInfoId")%>' />
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-
-
-                                                                            <asp:TemplateField HeaderText="Employee Name">
-                                                                                <ItemTemplate>
-                                                                                    <asp:TextBox ID="txt_EmpName" CssClass="form-control form-control-sm" runat="server" Text='<%#Eval("EmpName") %>'></asp:TextBox>
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
+                                                                              <asp:TemplateField HeaderText="Company">
+                                                                                  <ItemTemplate>
+                                                                                      <asp:RadioButtonList ID="ddlCompanySave" runat="server" CssClass="chkChoice" style="display: inline-block; min-width: 160px;" RepeatDirection="Horizontal" AutoPostBack="True" OnSelectedIndexChanged="ddlCompanySave_SelectedIndexChanged"></asp:RadioButtonList>
+                                                                                      <asp:HiddenField runat="server" ID="hfCompanySave" />
+                                                                                     <asp:HiddenField runat="server" ID="hfEmpMasterCode" Value='<%#Eval("EmpMasterCode")%>' />
+                                                                                     <asp:HiddenField runat="server" ID="hfBMemberSetupDetailsID" Value='<%#Eval("BMemberSetupDetailsID")%>' />
+                                                                                     <asp:HiddenField runat="server" ID="hfIsBoardMember" Value='<%#Eval("IsBoardMember")%>' />
+                                                                                     <asp:HiddenField runat="server" ID="ShfEmpInfoId" Value='<%#Eval("EmpInfoId")%>' />
+                                                                                 </ItemTemplate>
+                                                                             </asp:TemplateField>
+ 
+                                                                             <asp:TemplateField HeaderText="Employee Name">
+                                                                                 <ItemTemplate>
+                                                                                     <asp:DropDownList ID="ddlEmployeeSave" runat="server" CssClass="form-control form-control-sm form-select SelectMe33" style="width: 220px !important;" AutoPostBack="True" OnSelectedIndexChanged="ddlEmployeeSave_SelectedIndexChanged"></asp:DropDownList>
+                                                                                     <asp:TextBox ID="txt_EmpName" CssClass="form-control form-control-sm" runat="server" style="width: 220px !important;" Text='<%#Eval("EmpName") %>'></asp:TextBox>
+                                                                                 </ItemTemplate>
+                                                                             </asp:TemplateField>
 
                                                                             <asp:TemplateField HeaderText="Designation">
                                                                                 <ItemTemplate>
-                                                                                    <asp:TextBox ID="txt_Designation" CssClass="form-control form-control-sm" runat="server" Text='<%#Eval("Designation") %>'></asp:TextBox>
+                                                                                    <asp:TextBox ID="txt_Designation" CssClass="form-control form-control-sm" runat="server" style="width: 160px !important;" Text='<%#Eval("Designation") %>'></asp:TextBox>
                                                                                 </ItemTemplate>
                                                                             </asp:TemplateField>
 
@@ -1795,8 +1867,7 @@
                                             <link href="../UserSetup/ButtonGrups.css" rel="stylesheet" />
                                             <div class="ui-group-buttons">
 
-                                                <asp:LinkButton ID="lbDraft" OnClick="lbDraft_OnClick" Visible="False" OnClientClick="return confirm('Are you sure you want to Draft ?')" CssClass="btn btn-sm btn-success" runat="server"> 
- &nbsp;Draft</asp:LinkButton>
+
                                                 <%--<div class="or or-sm" runat="server"   id="orBTN"></div>--%>
 
                                                 <asp:LinkButton ID="delButton" OnClientClick="return confirm('Are you sure you want to Delete ?')" Text="Delete" CssClass="btn btn-sm btn-danger" Visible="False" runat="server" OnClick="delButton_OnClick"> &nbsp; Delete</asp:LinkButton>
@@ -2062,13 +2133,34 @@
                         }
                     }, true);
 
+                    function applyLocationVisibility() {
+                        var rb = document.getElementById('<%= rbLocation.ClientID %>');
+                        if (!rb) return;
+                        var selectedVal = '';
+                        var inputs = rb.getElementsByTagName('input');
+                        for (var i = 0; i < inputs.length; i++) {
+                            if (inputs[i].checked) {
+                                selectedVal = inputs[i].value;
+                                break;
+                            }
+                        }
+                        var officePanel = document.querySelector('.location-panel-office');
+                        var outerPanel = document.querySelector('.location-panel-outer');
+                        var virtualPanel = document.querySelector('.location-panel-virtual');
+                        if (officePanel) officePanel.style.display = (selectedVal === 'Office') ? '' : 'none';
+                        if (outerPanel) outerPanel.style.display = (selectedVal === 'Outer') ? '' : 'none';
+                        if (virtualPanel) virtualPanel.style.display = (selectedVal === 'Virtual') ? '' : 'none';
+                    }
+
                     function initializeMeetingWizardValidation() {
                         window.setTimeout(updateNextState, 0);
+                        applyLocationVisibility();
 
                         if (window.Sys && Sys.WebForms && Sys.WebForms.PageRequestManager) {
                             var pageRequestManager = Sys.WebForms.PageRequestManager.getInstance();
                             pageRequestManager.add_endRequest(function () {
                                 window.setTimeout(updateNextState, 0);
+                                applyLocationVisibility();
                             });
                         }
                     }

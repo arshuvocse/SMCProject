@@ -21,7 +21,7 @@ public partial class MeetingMinors_MemberInformationView : System.Web.UI.Page
         if (!IsPostBack)
         {
             Dropdownlist();
-            load();
+            
             // load();
         }
 
@@ -70,23 +70,31 @@ public partial class MeetingMinors_MemberInformationView : System.Web.UI.Page
 
     private void load()
     {
-        DataTable dt = aMinors.loadMember("");
-
-        if (dt.Rows.Count > 0)
+        try
         {
-            gv_loadGridView.DataSource = dt;
-            gv_loadGridView.DataBind();
-            gv_loadGridView.UseAccessibleHeader = true;
-            gv_loadGridView.HeaderRow.TableSection = TableRowSection.TableHeader;
-            gv_loadGridView.FooterRow.TableSection = TableRowSection.TableFooter;
-            gv_loadGridView.UseAccessibleHeader = true;
+            DataTable dt = aMinors.loadMember(" and BMSM.BMSM.CompanyId=" + ddlCompany.SelectedValue);
+
+            if (dt.Rows.Count > 0)
+            {
+                gv_loadGridView.DataSource = dt;
+                gv_loadGridView.DataBind();
+                gv_loadGridView.UseAccessibleHeader = true;
+                gv_loadGridView.HeaderRow.TableSection = TableRowSection.TableHeader;
+                gv_loadGridView.FooterRow.TableSection = TableRowSection.TableFooter;
+                gv_loadGridView.UseAccessibleHeader = true;
+            }
+            else
+            {
+
+                gv_loadGridView.DataSource = null;
+                gv_loadGridView.DataBind();
+                // aShowMessage.ShowMessageBox("Data Not Found",this);
+            }
         }
-        else
+        catch
         {
-
             gv_loadGridView.DataSource = null;
             gv_loadGridView.DataBind();
-           // aShowMessage.ShowMessageBox("Data Not Found",this);
         }
 
       
@@ -220,7 +228,7 @@ public partial class MeetingMinors_MemberInformationView : System.Web.UI.Page
     {
         if (ddlCompany.SelectedValue != "")
         {
-
+            load();
             using (DataTable dt = aMinors.GetUser(Convert.ToInt32(ddlCompany.SelectedValue)))
             {
                 ddlCreateBy.DataSource = dt;

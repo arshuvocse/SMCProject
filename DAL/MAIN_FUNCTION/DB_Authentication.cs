@@ -4,9 +4,9 @@ namespace DAL.MAIN_FUNCTION
     internal class DB_Authentication
     {
 
-        public static string DataSource = "(local)";
-        public static string UserId = "sa";
-        public static string Password = "SMC**10";
+        //public static string DataSource = "(local)";
+        //public static string UserId = "sa";
+        //public static string Password = "SMC**10";
 
         //public static string DataSource = "MD-RANA";
         //public static string UserId = "sa";
@@ -53,8 +53,8 @@ namespace DAL.MAIN_FUNCTION
         //public static string Password = "sa1234";
 
 
-        //public static string DataSource = "NASA-PC\\MSSQLSERVER2019";
-        //public static string UserId = "sa";
-        //public static string Password = "sa1234";
+        public static string DataSource = "NASA-PC\\MSSQLSERVER2019";
+        public static string UserId = "sa";
+        public static string Password = "sa1234";
     }
 }

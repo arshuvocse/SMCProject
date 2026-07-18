@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Data;
@@ -51,7 +51,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
                     ddlSubCommittee.SelectedValue = dtMaster.Rows[0]["SubCommitteeId"].ToString();
 
                     txtMeetingpurpose.Text = dtMaster.Rows[0]["MeetingPurpose"].ToString();
-                    ddlClassification.SelectedValue = dtMaster.Rows[0]["Classification"].ToString();
+                    //ddlClassification.SelectedValue = dtMaster.Rows[0]["Classification"].ToString();
 
                     try
                     {
@@ -468,13 +468,13 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             if (Session["Status"].ToString() == "Add")
             {
                 submitButton.Visible = true;
-                lbDraft.Visible = true;
+                //lbDraft.Visible = true;
             }
             else if (Session["Status"].ToString() == "Edit")
             {
                 editButton.Visible = true;
 
-                lbDraft.Visible = true;
+                //lbDraft.Visible = true;
 
             }
             else if (Session["Status"].ToString() == "Delete")
@@ -497,6 +497,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
     private void LoadDropDownList()
     {
         AMAsterDal.GetCompanyListIntoDropdown(ddlCompany);
+        AMAsterDal.GetCompanyListIntoDropdown(ddlCompanyLocation);
         AMAsterDal.GetCategoryListIntoDropdown(ddlCategory);
         AMAsterDal.GetCompanyListIntoDropdownAll(ddlComSearch);
         ddlCompany.SelectedIndex = 1;
@@ -1589,6 +1590,9 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         //ddlPresentor.SelectedIndex = 0;
         //        }
         //    }
+        
+        // Reload member list and subcommittees based on the new company selection
+        ddlCategory_OnSelectedIndexChanged(null, null);
         }
         else
         {
@@ -2630,10 +2634,10 @@ Meeting Entry Demo Mail.<br/><br/>
 
                 aMaster.CompanyId = Convert.ToInt32(ddlCompany.SelectedValue);
                 string classfic = "";
-                if (ddlClassification.SelectedValue != "")
-                {
-                    classfic = ddlCategory.SelectedItem.Text.Trim();
-                }
+                //if (ddlClassification.SelectedValue != "")
+                //{
+                //    classfic = ddlCategory.SelectedItem.Text.Trim();
+                //}
 
                 MasterSearch = MasterSearch + txtTitle.Text.Trim() + " "
                                +
@@ -2646,7 +2650,7 @@ Meeting Entry Demo Mail.<br/><br/>
                 aMaster.CategoryID = Convert.ToInt32(ddlCategory.SelectedIndex > 0 ? ddlCategory.SelectedValue : null);
 
                 aMaster.MeetingPurpose = txtMeetingpurpose.Text.Trim();
-                aMaster.Classification = ddlClassification.SelectedIndex > 0 ? ddlClassification.SelectedValue : null;
+                aMaster.Classification = null; // ddlClassification.SelectedIndex > 0 ? ddlClassification.SelectedValue : null;
                 aMaster.MeetingDate = string.IsNullOrEmpty(txtMeetingDate.Text)
                     ? (DateTime?) null
                     : DateTime.Parse(txtMeetingDate.Text).Date;
@@ -3286,12 +3290,20 @@ Meeting Entry Demo Mail.<br/><br/>
         int rowIndex = ((GridViewRow)(((RadioButtonList)sender).Parent.Parent)).RowIndex;
 
         RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("rbType"));
-
         HiddenField hfType = ((HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("hfType"));
+        RadioButtonList ddlCompanySave = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("ddlCompanySave"));
 
         hfType.Value = rbType.SelectedValue;
 
-
+        if (rbType.SelectedValue == "Guest")
+        {
+            ddlCompanySave.ClearSelection();
+            ddlCompanySave.Enabled = false;
+        }
+        else
+        {
+            ddlCompanySave.Enabled = true;
+        }
     }
 
     protected void chkNotification_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -3397,47 +3409,47 @@ Meeting Entry Demo Mail.<br/><br/>
     {
         DivSubCommitte.Visible = false;
         ddlSubCommittee.Items.Clear();
-        if (ddlCategory.SelectedValue!="")
+
+        string effectiveCategory = ddlCategory.SelectedValue == "" ? "1" : ddlCategory.SelectedValue;
+
+        if (effectiveCategory == "1")
         {
-
-            if (ddlCategory.SelectedValue == "1")
+            DataTable jobCreationInfos = new DataTable();
+            jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoByCategory(ddlCompany.SelectedValue);
+            if (jobCreationInfos.Rows.Count > 0)
             {
-                DataTable jobCreationInfos = new DataTable();
-                jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoByCategory(ddlCompany.SelectedValue);
-                if (jobCreationInfos.Rows.Count > 0)
+                ViewState["gv_BoardMember_List"] = jobCreationInfos;
+                gv_BoardMember.DataSource = jobCreationInfos;
+                gv_BoardMember.DataBind();
+                DataTable dtMemberPostion = aMinors.GetDDLMemberPostion();
+
+                for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
                 {
+                    DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
+                    ddlPosition.DataSource = dtMemberPostion;
+                    ddlPosition.DataValueField = "Value";
+                    ddlPosition.DataTextField = "TextField";
+                    ddlPosition.DataBind();
 
-                    ViewState["gv_BoardMember_List"] = jobCreationInfos;
-                    gv_BoardMember.DataSource = jobCreationInfos;
-                    gv_BoardMember.DataBind();
-                    DataTable dtMemberPostion = aMinors.GetDDLMemberPostion();
-
-                    for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
+                    for (int k = 0; k < jobCreationInfos.Rows.Count; k++)
                     {
-                        DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-                        ddlPosition.DataSource = dtMemberPostion;
-                        ddlPosition.DataValueField = "Value";
-                        ddlPosition.DataTextField = "TextField";
-                        ddlPosition.DataBind();
-
-                        for (int k = 0; k < jobCreationInfos.Rows.Count; k++)
+                        try
                         {
-                            try
-                            {
-                                ddlPosition.SelectedValue = jobCreationInfos.Rows[k]["PositionId"].ToString();
-                            }
-                            catch (Exception ex)
-                            {
-                                
-                            }
-
-
+                            ddlPosition.SelectedValue = jobCreationInfos.Rows[k]["PositionId"].ToString();
+                        }
+                        catch (Exception ex)
+                        {
                         }
                     }
-
-
-
-
+                }
+            }
+            else
+            {
+                if (Session["MeetingMastetID"] != null && ddlCategory.SelectedValue == "")
+                {
+                    DataTable dt = (DataTable)ViewState["gv_BoardMember_List"];
+                    gv_BoardMember.DataSource = dt;
+                    gv_BoardMember.DataBind();
                 }
                 else
                 {
@@ -3447,56 +3459,47 @@ Meeting Entry Demo Mail.<br/><br/>
                     LoadInitialGridDetails_Save();
                 }
             }
-            else
+        }
+        else
+        {
+            ViewState["gv_BoardMember_List"] = null;
+            gv_BoardMember.DataSource = null;
+            gv_BoardMember.DataBind();
+            LoadInitialGridBoardMember();
+        }
+
+        if (ddlCategory.SelectedValue != "" && ddlCategory.SelectedValue != "1")
+        {
+            DivSubCommitte.Visible = true;
+
+            if (id_mastetID.Value=="")
             {
-                ViewState["gv_BoardMember_List"] = null;
-                gv_BoardMember.DataSource = null;
-                gv_BoardMember.DataBind();
-                LoadInitialGridBoardMember();
-            }
-
-            if (ddlCategory.SelectedValue != "1")
-            {
-                DivSubCommitte.Visible = true;
-
-                
-                if (id_mastetID.Value=="")
+                using (DataTable dt = AMeetingEntryDal.GetDDLComDivisionEntry(ddlCompany.SelectedValue, ddlCategory.SelectedValue))
                 {
-                    using (DataTable dt = AMeetingEntryDal.GetDDLComDivisionEntry(ddlCompany.SelectedValue, ddlCategory.SelectedValue))
-                    {
-
-                        if (dt.Rows.Count>0)
-                        {
-                            ddlSubCommittee.DataSource = dt;
-                            ddlSubCommittee.DataValueField = "Value";
-                            ddlSubCommittee.DataTextField = "TextField";
-                            ddlSubCommittee.DataBind();
-                        }
-                        else
-                        {
-                            DivSubCommitte.Visible = false;
-                        }
-                      
-
-
-                    }
-                }
-                else
-                {
-                    using (DataTable dt = AMeetingEntryDal.GetDDLComDivision(ddlCompany.SelectedValue, ddlCategory.SelectedValue))
+                    if (dt.Rows.Count>0)
                     {
                         ddlSubCommittee.DataSource = dt;
                         ddlSubCommittee.DataValueField = "Value";
                         ddlSubCommittee.DataTextField = "TextField";
                         ddlSubCommittee.DataBind();
-
-
+                    }
+                    else
+                    {
+                        DivSubCommitte.Visible = false;
                     }
                 }
-               
-                LoadInitialGridDetails_Save();
             }
-
+            else
+            {
+                using (DataTable dt = AMeetingEntryDal.GetDDLComDivision(ddlCompany.SelectedValue, ddlCategory.SelectedValue))
+                {
+                    ddlSubCommittee.DataSource = dt;
+                    ddlSubCommittee.DataValueField = "Value";
+                    ddlSubCommittee.DataTextField = "TextField";
+                    ddlSubCommittee.DataBind();
+                }
+            }
+            LoadInitialGridDetails_Save();
         }
     }
     MemberInfoDaL aMinors = new MemberInfoDaL();
@@ -3995,5 +3998,16 @@ Meeting Entry Demo Mail.<br/><br/>
     {
         throw new NotImplementedException();
     }
-     
+
+    protected void ddlCompanySave_SelectedIndexChanged(object sender, EventArgs e)
+    {
+    }
+
+    protected void ddlEmployeeSave_SelectedIndexChanged(object sender, EventArgs e)
+    {
+    }
+
+    protected void ddlCompanyLocation_OnSelectedIndexChanged(object sender, EventArgs e)
+    {
+    }
 }

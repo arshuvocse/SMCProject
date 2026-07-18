@@ -26,8 +26,32 @@ namespace DAL.COMMON_DAL
         }
         public DataTable GetCompany()
         {
-            string queryStr = @"SELECT CompanyId as Value,CompanyName, ShortName as TextField FROM tblCompanyInfo WHERE CompanyId IN (SELECT CompanyId FROM dbo.tblUserCompanyMaping WHERE IsActive =1 AND UserId='"+HttpContext.Current.Session["UserId"].ToString()+"')";
+            string queryStr = @"SELECT CompanyId as Value,CompanyName, ShortName as TextField FROM tblCompanyInfo WHERE CompanyId IN (SELECT CompanyId FROM dbo.tblUserCompanyMaping WHERE IsActive =1 AND UserId='" + HttpContext.Current.Session["UserId"].ToString() + "')";
             return aCommonInternalDal.GetDTforDDL(queryStr, null, DataBase.HRDB);
+        }
+
+        public string GetCompanyIdByOfficeId(string officeId)
+        {
+            try
+            {
+                string query = string.Format("SELECT COALESCE(ComID, '') AS ComID FROM tblSalaryLocation WHERE SalaryLoationId = '{0}'", officeId.Replace("'", "''"));
+                DataTable dt = aCommonInternalDal.GetDTforDDL(query, null, DataBase.HRDB);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    return dt.Rows[0]["ComID"].ToString();
+                }
+            }
+            catch { }
+            return "";
+        }
+
+        public DataTable GetDDLSalaryLocationByCompany(string companyId)
+        {
+            string query = string.Format(@"SELECT dt.SalaryLoationId AS Value, dt.SalaryLocation AS TextField 
+                                           FROM dbo.tblSalaryLocation dt 
+                                           WHERE dt.IsActive = 1 AND dt.ComID = '{0}'
+                                           ORDER BY dt.SalaryLocation", companyId.Replace("'", "''"));
+            return aCommonInternalDal.GetDTforDDL(query, null, DataBase.HRDB);
         }
         public DataTable GetCompanyHC()
         {

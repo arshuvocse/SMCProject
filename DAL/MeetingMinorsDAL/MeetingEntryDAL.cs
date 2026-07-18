@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -1834,5 +1834,36 @@ INSERT INTO [dbo].[tblMeeting_MeetingInfoAgenda]
                throw;
            }
        }
+
+        public string GetCompanyIdByEmpInfoId(string empInfoId)
+        {
+            try
+            {
+                string query = "SELECT CompanyId FROM dbo.tblEmpGeneralInfo WITH (NOLOCK) WHERE EmpInfoId = " + empInfoId;
+                System.Data.DataTable dt = aCommonInternalDal.DataContainerDataTable(query, DataBase.HRDB);
+                if (dt.Rows.Count > 0)
+                {
+                    return dt.Rows[0]["CompanyId"].ToString();
+                }
+                return "";
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        public System.Data.DataTable GetEmpDetailsByEmpInfoId(string empInfoId)
+        {
+            try
+            {
+                string query = "SELECT emp.EmpName, emp.EmpMasterCode, des.DesignationName AS Designation FROM dbo.tblEmpGeneralInfo emp WITH (NOLOCK) LEFT JOIN dbo.tblDesignation des WITH (NOLOCK) ON des.DesignationId = emp.DesignationId WHERE emp.EmpInfoId = " + empInfoId;
+                return aCommonInternalDal.DataContainerDataTable(query, DataBase.HRDB);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

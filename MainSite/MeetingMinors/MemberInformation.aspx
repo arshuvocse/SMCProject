@@ -93,7 +93,7 @@
 <div class="card">
    <div class="card-body">
        
-         <div class="row" runat="server" Visible="false">
+         <div class="row" runat="server"  >
                <div class="col-md-3">
                    </div>
                     <div class="col-md-6">
