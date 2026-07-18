@@ -3893,19 +3893,30 @@ Meeting Entry Demo Mail.<br/><br/>
         if (ViewState["gv_BoardMember_List"] != null)
         {
             DataTable dt = (DataTable)ViewState["gv_BoardMember_List"];
-            
+
+            // Detect actual column name (DB data uses "PositionId", add-handler data uses "Position")
+            string posColName = dt.Columns.Contains("Position") ? "Position" :
+                                dt.Columns.Contains("PositionId") ? "PositionId" : null;
+
             for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
             {
                 TextBox txtBoardMember_EmpName = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_EmpName");
                 TextBox txtBoardMember_Designation = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_Designation");
                 DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-                
-                try { dt.Rows[i]["EmpName"] = txtBoardMember_EmpName.Text; } catch {}
-                try { dt.Rows[i]["Designation"] = txtBoardMember_Designation.Text; } catch {}
-                try { dt.Rows[i]["Position"] = ddlPosition.SelectedValue; } catch {}
+
+                if (txtBoardMember_EmpName != null && dt.Columns.Contains("EmpName"))
+                    dt.Rows[i]["EmpName"] = txtBoardMember_EmpName.Text;
+                if (txtBoardMember_Designation != null && dt.Columns.Contains("Designation"))
+                    dt.Rows[i]["Designation"] = txtBoardMember_Designation.Text;
+                if (ddlPosition != null && posColName != null)
+                    dt.Rows[i][posColName] = ddlPosition.SelectedValue;
             }
 
             dt.Rows.Remove(dt.Rows[rowID]);
+            // AcceptChanges resets RowState to Unchanged — prevents ViewState from
+            // accumulating modified-row metadata across postbacks (reduces ViewState size).
+            dt.AcceptChanges();
+
             if (dt.Rows.Count > 0)
             {
                 ViewState["gv_BoardMember_List"] = dt;
@@ -3919,37 +3930,30 @@ Meeting Entry Demo Mail.<br/><br/>
                 gv_BoardMember.DataBind();
             }
         }
-        //Set Previous Data on Postbacks  
-        //  SetDocGrid_List();
 
         // Use session-cached position list — avoids DB hit on every remove click
         DataTable dtMemberPostion = MemberPositionCache;
+        DataTable jobCreationInfos = (DataTable)ViewState["gv_BoardMember_List"];
 
-
-        DataTable jobCreationInfos = (DataTable) ViewState["gv_BoardMember_List"];
+        // Detect column name from the updated DataTable
+        string posCol2 = jobCreationInfos != null && jobCreationInfos.Columns.Contains("Position") ? "Position" :
+                         jobCreationInfos != null && jobCreationInfos.Columns.Contains("PositionId") ? "PositionId" : null;
 
         for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
         {
             DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
+            if (ddlPosition == null) continue;
+
             ddlPosition.DataSource = dtMemberPostion;
             ddlPosition.DataValueField = "Value";
             ddlPosition.DataTextField = "TextField";
             ddlPosition.DataBind();
 
-            if (jobCreationInfos != null && i < jobCreationInfos.Rows.Count)
+            if (posCol2 != null && jobCreationInfos != null && i < jobCreationInfos.Rows.Count)
             {
-                try
-                {
-                    ddlPosition.SelectedValue = jobCreationInfos.Rows[i]["Position"].ToString();
-                }
-                catch (Exception ex)
-                {
-
-                }
+                try { ddlPosition.SelectedValue = jobCreationInfos.Rows[i][posCol2].ToString(); }
+                catch { }
             }
-
-
-            //}
         }
     }
 
@@ -3960,7 +3964,7 @@ Meeting Entry Demo Mail.<br/><br/>
         DataTable aTable = new DataTable();
         aTable.Columns.Add("EmpName");
         aTable.Columns.Add("Designation");
-        aTable.Columns.Add("Position");
+        aTable.Columns.Add("PositionId"); // use PositionId to match DB column name
         aTable.Columns.Add("BMemberSetupDetailsID");
 
         DataRow dr;
@@ -3975,7 +3979,7 @@ Meeting Entry Demo Mail.<br/><br/>
 
             dr["EmpName"] = txtBoardMember_EmpName != null ? txtBoardMember_EmpName.Text : "";
             dr["Designation"] = txtBoardMember_Designation != null ? txtBoardMember_Designation.Text : "";
-            dr["Position"] = ddlPosition != null ? ddlPosition.SelectedValue : "";
+            dr["PositionId"] = ddlPosition != null ? ddlPosition.SelectedValue : "";
             dr["BMemberSetupDetailsID"] = hfBMemberSetupDetailsIDb != null ? hfBMemberSetupDetailsIDb.Value : "";
 
             aTable.Rows.Add(dr);
@@ -3985,7 +3989,7 @@ Meeting Entry Demo Mail.<br/><br/>
                 dr = aTable.NewRow();
                 dr["EmpName"] = "";
                 dr["Designation"] = "";
-                dr["Position"] = "";
+                dr["PositionId"] = "";
                 dr["BMemberSetupDetailsID"] = "";
                 aTable.Rows.Add(dr);
             }
@@ -4007,15 +4011,10 @@ Meeting Entry Demo Mail.<br/><br/>
                 ddlPosition.DataTextField = "TextField";
                 ddlPosition.DataBind();
 
-                if (aTable != null && i < aTable.Rows.Count)
+                if (i < aTable.Rows.Count)
                 {
-                    try
-                    {
-                        ddlPosition.SelectedValue = aTable.Rows[i]["Position"].ToString();
-                    }
-                    catch (Exception)
-                    {
-                    }
+                    try { ddlPosition.SelectedValue = aTable.Rows[i]["PositionId"].ToString(); }
+                    catch { }
                 }
             }
         }
