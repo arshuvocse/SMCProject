@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -87,6 +87,11 @@ namespace DAL.MeetingMinorsDAL
                                    AND UserId='" + HttpContext.Current.Session["UserId"].ToString() + @"'
                              )";
             return aCommonInternalDal.GetDTforDDL(query, null, DataBase.HRDB);
+        }
+        public DataTable GetAllCompaniesForRadioButton()
+        {
+            string query = @"SELECT CompanyId AS Value, ShortName AS TextField FROM tblCompanyInfo WITH (NOLOCK)";
+            return aCommonInternalDal.DataContainerDataTable(query, "HRDB");
         }
         public DataTable GetDDLmemberType()
         {

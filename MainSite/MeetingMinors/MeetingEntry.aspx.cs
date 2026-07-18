@@ -21,6 +21,39 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
     MiscellaneousInformationDAL AMAsterDal = new MiscellaneousInformationDAL();
     MeetingEntryDAL AMeetingEntryDal = new MeetingEntryDAL();
     private SubcommitteeSetupDAL AMAster = new SubcommitteeSetupDAL();
+    MemberInfoDaL aMinors = new MemberInfoDaL();
+    
+    // Session-backed caches so dropdown data survives across postbacks
+    // and is not re-fetched on every add/remove click.
+    private DataTable CompaniesCache
+    {
+        get
+        {
+            if (Session["__MtgEntry_Companies"] == null)
+                Session["__MtgEntry_Companies"] = aMinors.GetAllCompaniesForRadioButton();
+            return (DataTable)Session["__MtgEntry_Companies"];
+        }
+    }
+
+    private DataTable GetEmployeesForCompany(string companyId)
+    {
+        string key = "__MtgEntry_Emps_" + companyId;
+        if (Session[key] == null)
+            Session[key] = AMAsterDal.GetDDLEmpInfo(companyId);
+        return (DataTable)Session[key];
+    }
+
+    // Member position options (Chairman, Member, etc.) — static reference data,
+    // no need to re-query the DB on every add/remove click.
+    private DataTable MemberPositionCache
+    {
+        get
+        {
+            if (Session["__MtgEntry_MemberPos"] == null)
+                Session["__MtgEntry_MemberPos"] = aMinors.GetDDLMemberPostion();
+            return (DataTable)Session["__MtgEntry_MemberPos"];
+        }
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -385,6 +418,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         DataTable dtDetails = new DataTable();
 
         dtDetails.Columns.Add("Type");
+        dtDetails.Columns.Add("CompanyId");
 
         dtDetails.Columns.Add("EmpMasterCode");
         dtDetails.Columns.Add("EmpInfoId");
@@ -402,6 +436,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         dr = dtDetails.NewRow();
 
         dr["Type"] = "";
+        dr["CompanyId"] = "";
 
         dr["EmpMasterCode"] = "";
         dr["EmpInfoId"] = "";
@@ -503,13 +538,13 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         ddlCompany.SelectedIndex = 1;
         ddlComSearch.SelectedIndex = 1;
 
-        using (DataTable dt = _commonDataLoad.GetDDLSalaryLocation())
-        {
-            ddlOffice.DataSource = dt;
-            ddlOffice.DataValueField = "Value";
-            ddlOffice.DataTextField = "TextField";
-            ddlOffice.DataBind();
-        }
+        //using (DataTable dt = _commonDataLoad.GetDDLSalaryLocation())
+        //{
+        //    ddlOffice.DataSource = dt;
+        //    ddlOffice.DataValueField = "Value";
+        //    ddlOffice.DataTextField = "TextField";
+        //    ddlOffice.DataBind();
+        //}
 
         ddlCompany_OnSelectedIndexChanged(null, null);
         ddlComSearch_OnSelectedIndexChanged(null, null);
@@ -762,21 +797,48 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         if (ViewState["gv_Details_List"] != null)
         {
             DataTable dt = (DataTable)ViewState["gv_Details_List"];
+            for (int i = 0; i < gv_Details_Save.Rows.Count; i++)
+            {
+                RadioButtonList rbType = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType");
+                RadioButtonList ddlCompanySave = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("ddlCompanySave");
+                DropDownList ddlEmployeeSave = (DropDownList)gv_Details_Save.Rows[i].FindControl("ddlEmployeeSave");
+                TextBox txt_EmpName = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpName");
+                TextBox txt_Designation = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_Designation");
+                TextBox txt_EmpMasterCode = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpMasterCode");
+                RadioButtonList chkPosition = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition");
+                CheckBoxList chkNotification = (CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification");
+                
+                try { dt.Rows[i]["Type"] = rbType != null ? rbType.SelectedValue : ""; } catch {}
+                try { dt.Rows[i]["EmpName"] = txt_EmpName != null ? txt_EmpName.Text : ""; } catch {}
+                try { dt.Rows[i]["Designation"] = txt_Designation != null ? txt_Designation.Text : ""; } catch {}
+                try { dt.Rows[i]["EmpInfoId"] = ddlEmployeeSave != null ? ddlEmployeeSave.SelectedValue : ""; } catch {}
+                try { dt.Rows[i]["EmpMasterCode"] = txt_EmpMasterCode != null ? txt_EmpMasterCode.Text : ""; } catch {}
+                try { dt.Rows[i]["CompanyId"] = ddlCompanySave != null ? ddlCompanySave.SelectedValue : ""; } catch {}
+                try { dt.Rows[i]["Position"] = chkPosition != null ? chkPosition.SelectedValue : ""; } catch {}
+                try 
+                { 
+                    if (chkNotification != null && chkNotification.Items.Count > 1)
+                    {
+                        dt.Rows[i]["NotificationEmail"] = chkNotification.Items[0].Selected.ToString();
+                        dt.Rows[i]["NotificationSMS"] = chkNotification.Items[1].Selected.ToString();
+                    }
+                } 
+                catch {}
+                
+                HiddenField hfCompanySave = (HiddenField)gv_Details_Save.Rows[i].FindControl("hfCompanySave");
+                if (hfCompanySave != null && ddlCompanySave != null) hfCompanySave.Value = ddlCompanySave.SelectedValue;
+            }
+
             dt.Rows.Remove(dt.Rows[rowID]);
             if (dt.Rows.Count > 0)
             {
-                //Store the current data in ViewState for future reference  
                 ViewState["gv_Details_List"] = dt;
-                //Re bind the GridView for the updated data  
                 gv_Details_Save.DataSource = dt;
                 gv_Details_Save.DataBind();
-
-
             }
             else
             {
                 ViewState["gv_Details_List"] = null;
-                //Re bind the GridView for the updated data  
                 gv_Details_Save.DataSource = null;
                 gv_Details_Save.DataBind();
             }
@@ -1575,24 +1637,54 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
                 }
             }
 
-        //    using (DataTable dt2 = AMeetingEntryDal.GetEmpInfobyID(ddlCompany.SelectedValue))
-        //    {
+            //    using (DataTable dt2 = AMeetingEntryDal.GetEmpInfobyID(ddlCompany.SelectedValue))
+            //    {
 
-        //        for (int i = 0; i < gv_AgendaList.Rows.Count; i++)
-        //        {
-        //DropDownList ddlPresentor= ((DropDownList)gv_AgendaList.Rows[i].Cells[2].FindControl("ddlPresentor"));
+            //        for (int i = 0; i < gv_AgendaList.Rows.Count; i++)
+            //        {
+            //DropDownList ddlPresentor= ((DropDownList)gv_AgendaList.Rows[i].Cells[2].FindControl("ddlPresentor"));
 
-        //ddlPresentor.DataSource = dt2;
-        //ddlPresentor.DataValueField = "EmpInfoId";
-        //ddlPresentor.DataTextField = "EmpName";
-        //ddlPresentor.DataBind();
-        //ddlPresentor.Items.Insert(0, new ListItem("Please Select an Employee.....", String.Empty));
-        //ddlPresentor.SelectedIndex = 0;
-        //        }
-        //    }
-        
-        // Reload member list and subcommittees based on the new company selection
-        ddlCategory_OnSelectedIndexChanged(null, null);
+            //ddlPresentor.DataSource = dt2;
+            //ddlPresentor.DataValueField = "EmpInfoId";
+            //ddlPresentor.DataTextField = "EmpName";
+            //ddlPresentor.DataBind();
+            //ddlPresentor.Items.Insert(0, new ListItem("Please Select an Employee.....", String.Empty));
+            //ddlPresentor.SelectedIndex = 0;
+            //        }
+            //    }
+
+            // Reload member list and subcommittees based on the new company selection
+            //ddlCategory_OnSelectedIndexChanged(null, null);
+            gv_BoardMember.DataSource = null;
+            gv_BoardMember.DataBind();
+            DataTable jobCreationInfos = new DataTable();
+            jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoByCategory(ddlCompany.SelectedValue);
+            if (jobCreationInfos.Rows.Count > 0)
+            {
+                ViewState["gv_BoardMember_List"] = jobCreationInfos;
+                gv_BoardMember.DataSource = jobCreationInfos;
+                gv_BoardMember.DataBind();
+                DataTable dtMemberPostion = MemberPositionCache;
+
+                for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
+                {
+                    DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
+                    ddlPosition.DataSource = dtMemberPostion;
+                    ddlPosition.DataValueField = "Value";
+                    ddlPosition.DataTextField = "TextField";
+                    ddlPosition.DataBind();
+
+                    // Fix: use row index i, not inner loop over all rows (was O(n²))
+                    try
+                    {
+                        if (i < jobCreationInfos.Rows.Count)
+                            ddlPosition.SelectedValue = jobCreationInfos.Rows[i]["PositionId"].ToString();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
         }
         else
         {
@@ -2571,11 +2663,14 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
                         {
                             if (acst != "Drafted")
                             {
-                                SenMailForApprved(Convert.ToInt32(MeetingInfoDetail.EmpInfoId),
-                                    " Meeting Information ", @"  <br/> Dear Sir, <br/>
+                                // Send email asynchronously so it doesn't block the save operation
+                                int empId = Convert.ToInt32(MeetingInfoDetail.EmpInfoId);
+                                System.Threading.Tasks.Task.Run(() =>
+                                    SenMailForApprved(empId,
+                                        " Meeting Information ", @"  <br/> Dear Sir, <br/>
 Meeting Entry Demo Mail.<br/><br/>
  please login for the details from the below link.<br/><br/>   http://182.160.103.234:8088/
-");
+"));
                             }
                         }
                         catch (Exception)
@@ -3097,6 +3192,7 @@ Meeting Entry Demo Mail.<br/><br/>
         DataTable aTable = new DataTable();
 
         aTable.Columns.Add("Type");
+        aTable.Columns.Add("CompanyId");
 
         aTable.Columns.Add("EmpMasterCode");
         aTable.Columns.Add("EmpInfoId");
@@ -3143,39 +3239,29 @@ Meeting Entry Demo Mail.<br/><br/>
             dr["IsBoardMember"] = hfIsBoardMember.Value;
             dr["BMemberSetupDetailsID"] = hfBMemberSetupDetailsID.Value;
 
-            dr["EmpInfoId"] = ShfEmpInfoId.Value;
+            DropDownList ddlEmployeeSave = (DropDownList)gv_Details_Save.Rows[i].FindControl("ddlEmployeeSave");
+            dr["EmpInfoId"] = ddlEmployeeSave != null ? ddlEmployeeSave.SelectedValue : "";
 
             dr["EmpMasterCode"] = txt_EmpMasterCode.Text;
             dr["EmpName"] = txt_EmpName.Text;
             dr["Designation"] = txt_Designation.Text;
-            hfType.Value = "Guest";
+            dr["Type"] = rbType != null ? rbType.SelectedValue : "";
             
-            dr["Type"] = hfType.Value.Trim();
-            if (dr["Type"].ToString() != "")
+            RadioButtonList ddlCompanySave = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("ddlCompanySave");
+            dr["CompanyId"] = ddlCompanySave != null ? ddlCompanySave.SelectedValue : "";
+            
+            if (chkNotification != null && chkNotification.Items.Count > 1)
             {
-
-                dr["Type"] = rbType.SelectedValue;
+                dr["NotificationEmail"] = chkNotification.Items[0].Selected.ToString();
+                dr["NotificationSMS"] = chkNotification.Items[1].Selected.ToString();
             }
-            dr["NotificationEmail"] = HiNotificationEmail.Value.Trim();
-            if (dr["NotificationEmail"].ToString() != "")
+            else
             {
-                dr["NotificationEmail"] = chkNotification.Items[0].Selected;
-
-            }
-
-
-            dr["NotificationSMS"] = hfNotificationSMS.Value.Trim();
-            if (dr["NotificationSMS"].ToString() != "")
-            {
-                dr["NotificationSMS"] = chkNotification.Items[1].Selected;
-
+                dr["NotificationEmail"] = "False";
+                dr["NotificationSMS"] = "False";
             }
 
-            dr["Position"] = hfPosition.Value.Trim();
-            if (dr["Position"].ToString() != "")
-            {
-                dr["Position"] = hfPosition.Value.Trim();
-            } 
+            dr["Position"] = chkPosition != null ? chkPosition.SelectedValue : "";
                    
 
 
@@ -3292,17 +3378,26 @@ Meeting Entry Demo Mail.<br/><br/>
         RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("rbType"));
         HiddenField hfType = ((HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("hfType"));
         RadioButtonList ddlCompanySave = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("ddlCompanySave"));
+        DropDownList ddlEmployeeSave = ((DropDownList)gv_Details_Save.Rows[rowIndex].FindControl("ddlEmployeeSave"));
+        TextBox txt_EmpName = ((TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_EmpName"));
 
         hfType.Value = rbType.SelectedValue;
 
         if (rbType.SelectedValue == "Guest")
         {
-            ddlCompanySave.ClearSelection();
-            ddlCompanySave.Enabled = false;
+            if (ddlCompanySave != null)
+            {
+                ddlCompanySave.ClearSelection();
+                ddlCompanySave.Enabled = false;
+            }
+            if (ddlEmployeeSave != null) ddlEmployeeSave.Visible = false;
+            if (txt_EmpName != null) txt_EmpName.Visible = true;
         }
         else
         {
-            ddlCompanySave.Enabled = true;
+            if (ddlCompanySave != null) ddlCompanySave.Enabled = true;
+            if (ddlEmployeeSave != null) ddlEmployeeSave.Visible = true;
+            if (txt_EmpName != null) txt_EmpName.Visible = false;
         }
     }
 
@@ -3421,7 +3516,7 @@ Meeting Entry Demo Mail.<br/><br/>
                 ViewState["gv_BoardMember_List"] = jobCreationInfos;
                 gv_BoardMember.DataSource = jobCreationInfos;
                 gv_BoardMember.DataBind();
-                DataTable dtMemberPostion = aMinors.GetDDLMemberPostion();
+                DataTable dtMemberPostion = MemberPositionCache;
 
                 for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
                 {
@@ -3431,15 +3526,14 @@ Meeting Entry Demo Mail.<br/><br/>
                     ddlPosition.DataTextField = "TextField";
                     ddlPosition.DataBind();
 
-                    for (int k = 0; k < jobCreationInfos.Rows.Count; k++)
+                    // Fix: use row index i, not inner loop over all rows (was O(n²))
+                    try
                     {
-                        try
-                        {
-                            ddlPosition.SelectedValue = jobCreationInfos.Rows[k]["PositionId"].ToString();
-                        }
-                        catch (Exception ex)
-                        {
-                        }
+                        if (i < jobCreationInfos.Rows.Count)
+                            ddlPosition.SelectedValue = jobCreationInfos.Rows[i]["PositionId"].ToString();
+                    }
+                    catch (Exception)
+                    {
                     }
                 }
             }
@@ -3502,14 +3596,13 @@ Meeting Entry Demo Mail.<br/><br/>
             LoadInitialGridDetails_Save();
         }
     }
-    MemberInfoDaL aMinors = new MemberInfoDaL();
 
     protected void ddlSubCommittee_OnSelectedIndexChanged(object sender, EventArgs e)
     {
         if (ddlCategory.SelectedValue != "")
         {
 
-        DataTable dtMemberPostion = aMinors.GetDDLMemberPostion();
+        DataTable dtMemberPostion = MemberPositionCache;
 
             DataTable jobCreationInfos = new DataTable();
                 jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoBySubCOmmitte(ddlCompany.SelectedValue,
@@ -3528,12 +3621,15 @@ Meeting Entry Demo Mail.<br/><br/>
                     ddlPosition.DataTextField = "TextField";
                     ddlPosition.DataBind();
 
-                    for (int k = 0; k < jobCreationInfos.Rows.Count; k++)
+                    // Fix: use row index i, not inner loop over all rows (was O(n²))
+                    try
                     {
-                        ddlPosition.SelectedValue = jobCreationInfos.Rows[k]["PositionId"].ToString();
-
-                      
-                        }
+                        if (i < jobCreationInfos.Rows.Count)
+                            ddlPosition.SelectedValue = jobCreationInfos.Rows[i]["PositionId"].ToString();
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
 
                 }
@@ -3797,21 +3893,28 @@ Meeting Entry Demo Mail.<br/><br/>
         if (ViewState["gv_BoardMember_List"] != null)
         {
             DataTable dt = (DataTable)ViewState["gv_BoardMember_List"];
+            
+            for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
+            {
+                TextBox txtBoardMember_EmpName = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_EmpName");
+                TextBox txtBoardMember_Designation = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_Designation");
+                DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
+                
+                try { dt.Rows[i]["EmpName"] = txtBoardMember_EmpName.Text; } catch {}
+                try { dt.Rows[i]["Designation"] = txtBoardMember_Designation.Text; } catch {}
+                try { dt.Rows[i]["Position"] = ddlPosition.SelectedValue; } catch {}
+            }
+
             dt.Rows.Remove(dt.Rows[rowID]);
             if (dt.Rows.Count > 0)
             {
-                //Store the current data in ViewState for future reference  
                 ViewState["gv_BoardMember_List"] = dt;
-                //Re bind the GridView for the updated data  
                 gv_BoardMember.DataSource = dt;
                 gv_BoardMember.DataBind();
-
-
             }
             else
             {
                 ViewState["gv_BoardMember_List"] = null;
-                //Re bind the GridView for the updated data  
                 gv_BoardMember.DataSource = null;
                 gv_BoardMember.DataBind();
             }
@@ -3819,7 +3922,8 @@ Meeting Entry Demo Mail.<br/><br/>
         //Set Previous Data on Postbacks  
         //  SetDocGrid_List();
 
-        DataTable dtMemberPostion = aMinors.GetDDLMemberPostion();
+        // Use session-cached position list — avoids DB hit on every remove click
+        DataTable dtMemberPostion = MemberPositionCache;
 
 
         DataTable jobCreationInfos = (DataTable) ViewState["gv_BoardMember_List"];
@@ -3832,29 +3936,20 @@ Meeting Entry Demo Mail.<br/><br/>
             ddlPosition.DataTextField = "TextField";
             ddlPosition.DataBind();
 
-            //for (int k = 0; k < jobCreationInfos.Rows.Count; k++)
-            //{
-            //    try
-            //    {
-            //        ddlPosition.SelectedValue = jobCreationInfos.Rows[k]["PositionId"].ToString();
-            //    }
-            //    catch (Exception ex)
-            //    {
+            if (jobCreationInfos != null && i < jobCreationInfos.Rows.Count)
+            {
+                try
+                {
+                    ddlPosition.SelectedValue = jobCreationInfos.Rows[i]["Position"].ToString();
+                }
+                catch (Exception ex)
+                {
 
-            //    }
+                }
+            }
 
 
             //}
-        }
-        for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-        {
-
-            RadioButtonList chkBoardMemberPosition = ((RadioButtonList)gv_BoardMember.Rows[i].FindControl("chkBoardMemberPosition"));
-
-            HiddenField hfBoardMemberPosition = ((HiddenField)gv_BoardMember.Rows[i].FindControl("hfBoardMemberPosition"));
-            DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-            chkBoardMemberPosition.SelectedValue = hfBoardMemberPosition.Value;
-            ddlPosition.SelectedValue = hfBoardMemberPosition.Value;
         }
     }
 
@@ -3863,151 +3958,211 @@ Meeting Entry Demo Mail.<br/><br/>
         int rowIndex = ((GridViewRow)(((LinkButton)sender).Parent.Parent)).RowIndex;
 
         DataTable aTable = new DataTable();
-         
         aTable.Columns.Add("EmpName");
         aTable.Columns.Add("Designation");
-         
         aTable.Columns.Add("Position");
-        
-
+        aTable.Columns.Add("BMemberSetupDetailsID");
 
         DataRow dr;
-
-
 
         for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
         {
             dr = aTable.NewRow();
             TextBox txtBoardMember_EmpName = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_EmpName");
             TextBox txtBoardMember_Designation = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_Designation");
+            DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
+            HiddenField hfBMemberSetupDetailsIDb = (HiddenField)gv_BoardMember.Rows[i].FindControl("hfBMemberSetupDetailsIDb");
 
-            HiddenField hfBoardMemberPosition = ((HiddenField)gv_BoardMember.Rows[i].FindControl("hfBoardMemberPosition"));
-
-
-
-            RadioButtonList chkBoardMemberPosition = ((RadioButtonList)gv_BoardMember.Rows[i].FindControl("chkBoardMemberPosition"));
-
-
-
-
-
-
-
-            dr["EmpName"] = txtBoardMember_EmpName.Text;
-            dr["Designation"] = txtBoardMember_Designation.Text;
-
-
-
-            dr["Position"] = hfBoardMemberPosition.Value.Trim();
-            if (dr["Position"].ToString() != "")
-            {
-                dr["Position"] = hfBoardMemberPosition.Value.Trim();
-            }
-
-
-
-
-
-
+            dr["EmpName"] = txtBoardMember_EmpName != null ? txtBoardMember_EmpName.Text : "";
+            dr["Designation"] = txtBoardMember_Designation != null ? txtBoardMember_Designation.Text : "";
+            dr["Position"] = ddlPosition != null ? ddlPosition.SelectedValue : "";
+            dr["BMemberSetupDetailsID"] = hfBMemberSetupDetailsIDb != null ? hfBMemberSetupDetailsIDb.Value : "";
 
             aTable.Rows.Add(dr);
 
             if (rowIndex == i)
             {
                 dr = aTable.NewRow();
-
-
-           
                 dr["EmpName"] = "";
                 dr["Designation"] = "";
-                
-
                 dr["Position"] = "";
-                chkBoardMemberPosition.SelectedValue = null;
-
+                dr["BMemberSetupDetailsID"] = "";
                 aTable.Rows.Add(dr);
             }
         }
 
-        //Session["table"] = (DataTable)aTable;
-        gv_BoardMember.DataSource = null;
-        gv_BoardMember.DataBind();
         gv_BoardMember.DataSource = aTable;
-        ViewState["gv_Details_List"] = aTable;
-
+        ViewState["gv_BoardMember_List"] = aTable;
         gv_BoardMember.DataBind();
 
-        //using (DataTable dt2 = AMeetingEntryDal.GetEmpInfobyID(ddlCompany.SelectedValue))
-        //{
-
+        // Use session-cached position list — avoids DB hit on every add click
+        DataTable dtMemberPostion = MemberPositionCache;
         for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
         {
-            RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType"));
-            rbType.SelectedValue = ((HiddenField)gv_Details_Save.Rows[i].Cells[1].FindControl("hfType"))
-                    .Value;
-
-
-
-            CheckBoxList chkNotification = ((CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification"));
-
-            HiddenField HiNotificationEmail = ((HiddenField)gv_Details_Save.Rows[i].FindControl("HiNotificationEmail"));
-            HiddenField hfNotificationSMS = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfNotificationSMS"));
-
-            if (HiNotificationEmail.Value != "")
+            DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
+            if (ddlPosition != null)
             {
-                try
-                {
-                    chkNotification.Items[0].Selected = Convert.ToBoolean(HiNotificationEmail.Value);
-                }
-                catch (Exception)
-                {
+                ddlPosition.DataSource = dtMemberPostion;
+                ddlPosition.DataValueField = "Value";
+                ddlPosition.DataTextField = "TextField";
+                ddlPosition.DataBind();
 
-                    //throw;
+                if (aTable != null && i < aTable.Rows.Count)
+                {
+                    try
+                    {
+                        ddlPosition.SelectedValue = aTable.Rows[i]["Position"].ToString();
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
-
             }
-
-            if (hfNotificationSMS.Value != "")
-            {
-                try
-                {
-                    chkNotification.Items[1].Selected = Convert.ToBoolean(hfNotificationSMS.Value);
-                }
-                catch (Exception)
-                {
-
-                    //throw;
-                }
-
-            }
-
-
-            RadioButtonList chkPosition = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition"));
-
-            HiddenField hfPosition = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfPosition"));
-
-            chkPosition.SelectedValue = hfPosition.Value;
-
         }
-        //}
-
-   
     }
-
     protected void DropDownList2_OnSelectedIndexChanged(object sender, EventArgs e)
     {
         throw new NotImplementedException();
     }
 
+    protected void gv_Details_Save_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            RadioButtonList ddlCompanySave = (RadioButtonList)e.Row.FindControl("ddlCompanySave");
+            HiddenField hfCompanySave = (HiddenField)e.Row.FindControl("hfCompanySave");
+            if (ddlCompanySave != null && ddlCompanySave.Items.Count == 0)
+            {
+                // Use session-cached company list — avoids DB hit on every grid rebind
+                ddlCompanySave.DataSource = CompaniesCache;
+                ddlCompanySave.DataValueField = "Value";
+                ddlCompanySave.DataTextField = "TextField";
+                ddlCompanySave.DataBind();
+
+                ListItem selectItem = ddlCompanySave.Items.FindByText("Select...");
+                if (selectItem != null)
+                    ddlCompanySave.Items.Remove(selectItem);
+
+                if (hfCompanySave != null && !string.IsNullOrEmpty(hfCompanySave.Value))
+                {
+                    try { ddlCompanySave.SelectedValue = hfCompanySave.Value; } catch { }
+
+                    DropDownList ddlEmployeeSaveRow = (DropDownList)e.Row.FindControl("ddlEmployeeSave");
+                    if (ddlEmployeeSaveRow != null)
+                    {
+                        // Use session-cached employee list — avoids DB hit per row
+                        ddlEmployeeSaveRow.DataSource = GetEmployeesForCompany(hfCompanySave.Value);
+                        ddlEmployeeSaveRow.DataValueField = "Value";
+                        ddlEmployeeSaveRow.DataTextField = "TextField";
+                        ddlEmployeeSaveRow.DataBind();
+                        ddlEmployeeSaveRow.Items.Insert(0, new ListItem("Select...", ""));
+
+                        HiddenField ShfEmpInfoId = (HiddenField)e.Row.FindControl("ShfEmpInfoId");
+                        if (ShfEmpInfoId != null && !string.IsNullOrEmpty(ShfEmpInfoId.Value))
+                        {
+                            try { ddlEmployeeSaveRow.SelectedValue = ShfEmpInfoId.Value; } catch { }
+                        }
+                    }
+                }
+            }
+            
+            RadioButtonList chkPosition = (RadioButtonList)e.Row.FindControl("chkPosition");
+            HiddenField hfPosition = (HiddenField)e.Row.FindControl("hfPosition");
+            if (chkPosition != null && hfPosition != null && !string.IsNullOrEmpty(hfPosition.Value))
+            {
+                try { chkPosition.SelectedValue = hfPosition.Value; } catch { }
+            }
+
+            CheckBoxList chkNotification = (CheckBoxList)e.Row.FindControl("chkNotification");
+            HiddenField HiNotificationEmail = (HiddenField)e.Row.FindControl("HiNotificationEmail");
+            HiddenField hfNotificationSMS = (HiddenField)e.Row.FindControl("hfNotificationSMS");
+            if (chkNotification != null && chkNotification.Items.Count > 1)
+            {
+                if (HiNotificationEmail != null && !string.IsNullOrEmpty(HiNotificationEmail.Value))
+                {
+                    try { chkNotification.Items[0].Selected = Convert.ToBoolean(HiNotificationEmail.Value); } catch { }
+                }
+                if (hfNotificationSMS != null && !string.IsNullOrEmpty(hfNotificationSMS.Value))
+                {
+                    try { chkNotification.Items[1].Selected = Convert.ToBoolean(hfNotificationSMS.Value); } catch { }
+                }
+            }
+            
+            RadioButtonList rbType = (RadioButtonList)e.Row.FindControl("rbType");
+            HiddenField hfType = (HiddenField)e.Row.FindControl("hfType");
+            if (rbType != null && hfType != null && !string.IsNullOrEmpty(hfType.Value))
+            {
+                try { rbType.SelectedValue = hfType.Value.Trim(); } catch { }
+            }
+            
+            DropDownList ddlEmployeeSave = (DropDownList)e.Row.FindControl("ddlEmployeeSave");
+            TextBox txt_EmpName = (TextBox)e.Row.FindControl("txt_EmpName");
+
+            if (rbType != null && rbType.SelectedValue == "Guest")
+            {
+                if (ddlCompanySave != null)
+                {
+                    ddlCompanySave.ClearSelection();
+                    ddlCompanySave.Enabled = false;
+                }
+                if (ddlEmployeeSave != null) ddlEmployeeSave.Visible = false;
+                if (txt_EmpName != null) txt_EmpName.Visible = true;
+            }
+            else
+            {
+                if (ddlCompanySave != null) ddlCompanySave.Enabled = true;
+                if (ddlEmployeeSave != null) ddlEmployeeSave.Visible = true;
+                if (txt_EmpName != null) txt_EmpName.Visible = false;
+            }
+        }
+    }
+
     protected void ddlCompanySave_SelectedIndexChanged(object sender, EventArgs e)
     {
+        int rowIndex = ((GridViewRow)(((RadioButtonList)sender).Parent.Parent)).RowIndex;
+        RadioButtonList ddlCompanySave = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("ddlCompanySave"));
+        DropDownList ddlEmployeeSave = ((DropDownList)gv_Details_Save.Rows[rowIndex].FindControl("ddlEmployeeSave"));
+
+        if (ddlCompanySave != null && ddlCompanySave.SelectedValue != "" && ddlEmployeeSave != null)
+        {
+            // Store in session cache so subsequent add/remove rows reuse the data
+            string key = "__MtgEntry_Emps_" + ddlCompanySave.SelectedValue;
+            if (Session[key] == null)
+                Session[key] = AMAsterDal.GetDDLEmpInfo(ddlCompanySave.SelectedValue);
+
+            ddlEmployeeSave.DataSource = (DataTable)Session[key];
+            ddlEmployeeSave.DataValueField = "Value";
+            ddlEmployeeSave.DataTextField = "TextField";
+            ddlEmployeeSave.DataBind();
+            ddlEmployeeSave.Items.Insert(0, new ListItem("Select...", ""));
+        }
     }
 
     protected void ddlEmployeeSave_SelectedIndexChanged(object sender, EventArgs e)
     {
+        int rowIndex = ((GridViewRow)(((DropDownList)sender).Parent.Parent)).RowIndex;
+        DropDownList ddlEmployeeSave = ((DropDownList)gv_Details_Save.Rows[rowIndex].FindControl("ddlEmployeeSave"));
+        TextBox txt_EmpName = ((TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_EmpName"));
+
+        if (ddlEmployeeSave.SelectedValue != "")
+        {
+            txt_EmpName.Text = ddlEmployeeSave.SelectedItem.Text;
+        }
     }
 
     protected void ddlCompanyLocation_OnSelectedIndexChanged(object sender, EventArgs e)
     {
+        if (ddlCompanyLocation.SelectedValue != "")
+        {
+            CommonDataLoadDAL commonDataLoad = new CommonDataLoadDAL();
+            using (DataTable dt = commonDataLoad.GetDDLSalaryLocationByCompany(ddlCompanyLocation.SelectedValue))
+            {
+                ddlOffice.DataSource = dt;
+                ddlOffice.DataValueField = "Value";
+                ddlOffice.DataTextField = "TextField";
+                ddlOffice.DataBind();
+                ddlOffice.Items.Insert(0, new ListItem("Select...", ""));
+            }
+        }
     }
 }

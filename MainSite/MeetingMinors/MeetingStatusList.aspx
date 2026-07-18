@@ -302,7 +302,7 @@
         <div class="card">
    <div class="card-body">
        
-          <div class="row mb-3">
+          <div class="row mb-3" style="display:none;">
               <div class="col-md-12 text-center">
                   <asp:RadioButtonList runat="server" ID="rblSearchSection" RepeatDirection="Horizontal" RepeatLayout="Flow" CssClass="search-section-selector">
                       <asp:ListItem Value="All" Selected="True">All</asp:ListItem>

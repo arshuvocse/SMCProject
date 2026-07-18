@@ -251,7 +251,7 @@
             width: 100% !important;
             border: 1px solid #e2e8f0 !important;
             border-radius: 8px !important;
-            overflow: hidden !important;
+            overflow: visible !important;
             margin-top: 10px;
             margin-bottom: 15px;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
@@ -1313,7 +1313,7 @@
                                                                              </div>
                                                                          </ProgressTemplate>
                                                                      </asp:UpdateProgress>
-                                                                     <asp:GridView Width="100%" ShowHeader="True" ID="gv_Details_Save" runat="server" AutoGenerateColumns="false" CssClass="blueTableNew" OnPreRender="gv_DocumentUpload_PreRender">
+                                                                     <asp:GridView Width="100%" ShowHeader="True" ID="gv_Details_Save" runat="server" AutoGenerateColumns="false" CssClass="blueTableNew" OnPreRender="gv_DocumentUpload_PreRender" OnRowDataBound="gv_Details_Save_RowDataBound">
                                                                          <Columns>
                                                                              <asp:TemplateField HeaderText="SL#">
                                                                                  <ItemTemplate>
@@ -1340,8 +1340,8 @@
                                                                               <asp:TemplateField HeaderText="Company">
                                                                                   <ItemTemplate>
                                                                                       <asp:RadioButtonList ID="ddlCompanySave" runat="server" CssClass="chkChoice" style="display: inline-block; min-width: 160px;" RepeatDirection="Horizontal" AutoPostBack="True" OnSelectedIndexChanged="ddlCompanySave_SelectedIndexChanged"></asp:RadioButtonList>
-                                                                                      <asp:HiddenField runat="server" ID="hfCompanySave" />
-                                                                                     <asp:HiddenField runat="server" ID="hfEmpMasterCode" Value='<%#Eval("EmpMasterCode")%>' />
+                                                                                      <asp:HiddenField runat="server" ID="hfCompanySave" Value='<%#Eval("CompanyId")%>' />
+                                                                                      <asp:TextBox runat="server" ID="txt_EmpMasterCode" Visible="false" Text='<%#Eval("EmpMasterCode")%>'></asp:TextBox>
                                                                                      <asp:HiddenField runat="server" ID="hfBMemberSetupDetailsID" Value='<%#Eval("BMemberSetupDetailsID")%>' />
                                                                                      <asp:HiddenField runat="server" ID="hfIsBoardMember" Value='<%#Eval("IsBoardMember")%>' />
                                                                                      <asp:HiddenField runat="server" ID="ShfEmpInfoId" Value='<%#Eval("EmpInfoId")%>' />
@@ -1350,7 +1350,7 @@
  
                                                                              <asp:TemplateField HeaderText="Employee Name">
                                                                                  <ItemTemplate>
-                                                                                     <asp:DropDownList ID="ddlEmployeeSave" runat="server" CssClass="form-control form-control-sm form-select SelectMe33" style="width: 220px !important;" AutoPostBack="True" OnSelectedIndexChanged="ddlEmployeeSave_SelectedIndexChanged"></asp:DropDownList>
+                                                                                     <asp:DropDownList ID="ddlEmployeeSave" runat="server" CssClass="form-control form-control-sm SelectMe33" style="width: 220px !important;" AutoPostBack="True" OnSelectedIndexChanged="ddlEmployeeSave_SelectedIndexChanged"></asp:DropDownList>
                                                                                      <asp:TextBox ID="txt_EmpName" CssClass="form-control form-control-sm" runat="server" style="width: 220px !important;" Text='<%#Eval("EmpName") %>'></asp:TextBox>
                                                                                  </ItemTemplate>
                                                                              </asp:TemplateField>

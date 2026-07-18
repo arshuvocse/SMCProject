@@ -620,11 +620,10 @@ WITH (NOLOCK)  WHERE CompanyId=" + ComId + " AND CreateBy=" + UserId + " ORDER B
 
        public DataTable GetEmpMemberInfoByCategory(string comId)
        {
-           string query = @"SELECT  1 IsBoardMember, 'Employee' AS Type,'' EmpMasterCode, '' EmpInfoId, mas.Name EmpName, '' Designation ,0 NotificationEmail,0 NotificationSMS, 
-0 AS Position,   * FROM tblMeeting_BoardMemberSetupDetails mas 
- INNER JOIN dbo.tblMeeting_BoardMemberSetupMaster dtl ON dtl.BMemberSetupMasterID = mas.BMemberSetupMasterID
- INNER JOIN dbo.tblMeeting_MemberSetupDetails dtl2 ON mas.MemberSetupDetailsID = dtl2.MemberSetupDetailsID
-WHERE dtl.CompanyId=" + comId + "   ORDER  BY dtl2.OrderNo ASC  ";
+           string query = @"SELECT  1 IsBoardMember, 'Employee' AS Type,  mas.MemberSetupDetailsID BMemberSetupDetailsID,'' EmpMasterCode, '' EmpInfoId, mas.Name EmpName, '' Designation ,0 NotificationEmail,0 NotificationSMS, 
+0 AS Position,   * FROM tblMeeting_MemberSetupDetails mas 
+ 
+WHERE mas.CompanyId=" + comId + "   ORDER  BY mas.OrderNo ASC  ";
 
            return aCommonInternalDal.DataContainerDataTable(query, "HRDB");
        }
