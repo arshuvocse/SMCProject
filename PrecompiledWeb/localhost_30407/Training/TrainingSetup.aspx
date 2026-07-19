@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Trainning_TrainingSetup, App_Web_mrxnmqyp" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Trainning_TrainingSetup, App_Web_4ksmt414" %>
 <%@ Register Assembly="TimePicker" Namespace="MKB.TimePicker" TagPrefix="cc1" %>
 <asp:Content ID="c1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

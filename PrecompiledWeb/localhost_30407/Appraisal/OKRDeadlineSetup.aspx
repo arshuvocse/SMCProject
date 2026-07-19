@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Appraisal_OKRDeadlineSetup, App_Web_vrkkomae" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Appraisal_OKRDeadlineSetup, App_Web_opi41nq5" %>
 
 <%@ Register Assembly="TimePicker" Namespace="MKB.TimePicker" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">

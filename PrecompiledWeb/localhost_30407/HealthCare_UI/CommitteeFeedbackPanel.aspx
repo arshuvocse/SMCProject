@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="HealthCare_UI_CommitteeFeedbackPanel, App_Web_lhs312w4" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="HealthCare_UI_CommitteeFeedbackPanel, App_Web_ph02dzwm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

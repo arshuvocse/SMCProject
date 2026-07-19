@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="Appraisal_KPIInformationView, App_Web_c50avwtr" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="Appraisal_KPIInformationView, App_Web_5xfc1ptq" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

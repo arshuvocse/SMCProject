@@ -379,7 +379,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             {
                 // Add mode (no MID): emit empty JSON so MeetingGridA/B hydrate with a blank row
                 EmitGridAJson(true, new DataTable());
-                EmitGridBJson(new DataTable());
+
             }
         }
     }

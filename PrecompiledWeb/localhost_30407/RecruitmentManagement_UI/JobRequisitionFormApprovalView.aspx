@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="RecruitmentManagement_UI_JobRequisitionFormApprovalView, App_Web_pbtofben" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="RecruitmentManagement_UI_JobRequisitionFormApprovalView, App_Web_u1jnmm5b" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

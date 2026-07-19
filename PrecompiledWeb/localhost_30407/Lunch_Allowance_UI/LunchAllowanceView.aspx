@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="Lunch_Allowance_UI_LunchAllowanceView, App_Web_jxxmc4xb" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="Lunch_Allowance_UI_LunchAllowanceView, App_Web_lu2w1glo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

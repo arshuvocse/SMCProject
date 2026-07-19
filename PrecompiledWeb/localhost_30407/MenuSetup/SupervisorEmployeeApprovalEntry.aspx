@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" enableeventvalidation="false" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="MenuSetup_SupervisorApprovalEntry, App_Web_xjhegwyc" %>
+﻿<%@ page title="" language="C#" enableeventvalidation="false" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="MenuSetup_SupervisorApprovalEntry, App_Web_jyqqdvn1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     

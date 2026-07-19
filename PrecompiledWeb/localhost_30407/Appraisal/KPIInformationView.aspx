@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="Appraisal_KPIInformationView, App_Web_islyke5r" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="Appraisal_KPIInformationView, App_Web_d1hlzxx1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 

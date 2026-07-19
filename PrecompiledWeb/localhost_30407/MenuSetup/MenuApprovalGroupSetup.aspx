@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="MenuSetup_MenuApprovalGroupSetup, App_Web_xjhegwyc" %>
+﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="MenuSetup_MenuApprovalGroupSetup, App_Web_jyqqdvn1" %>
 
 
 <asp:Content ID="c1" ContentPlaceHolderID="head" runat="Server">

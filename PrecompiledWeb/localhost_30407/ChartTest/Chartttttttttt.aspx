@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" inherits="ChartTest_Chartttttttttt, App_Web_ofgblo2u" %>
+﻿<%@ page language="C#" autoeventwireup="true" inherits="ChartTest_Chartttttttttt, App_Web_52fzrl54" %>
 
 <!DOCTYPE html>
 

@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="Report_Pages_TrainingMarksReport, App_Web_iquqfkp5" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="Report_Pages_TrainingMarksReport, App_Web_erefupp1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 

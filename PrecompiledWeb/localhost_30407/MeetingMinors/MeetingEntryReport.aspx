@@ -1,4 +1,4 @@
-﻿<%@ page title="Board Minutes Entry Report" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MeetingMinors_MeetingEntryReport, App_Web_xzty341n" %>
+﻿<%@ page title="Board Minutes Entry Report" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MeetingMinors_MeetingEntryReport, App_Web_ypjgimxj" %>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">

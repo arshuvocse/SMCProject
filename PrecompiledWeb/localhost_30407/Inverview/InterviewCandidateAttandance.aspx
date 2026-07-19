@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="Inverview_InterviewCandidateAttandance, App_Web_slfzoonb" %>
+﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="Inverview_InterviewCandidateAttandance, App_Web_4ilpzk1k" %>
 <%@ Register TagPrefix="cc1" Namespace="MKB.TimePicker" Assembly="TimePicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d25e9f59e49c4d2f" %>
 <%@ Register Src="~/Report_Pages/IVSearchControlReport.ascx" TagPrefix="uc1" TagName="IVSearchControl" %>
 

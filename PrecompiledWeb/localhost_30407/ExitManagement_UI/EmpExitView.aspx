@@ -1,4 +1,4 @@
-<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="ExitManagement_UI_EmpExitView, App_Web_0xwmrdsp" %>
+<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="ExitManagement_UI_EmpExitView, App_Web_ispq0dfk" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">

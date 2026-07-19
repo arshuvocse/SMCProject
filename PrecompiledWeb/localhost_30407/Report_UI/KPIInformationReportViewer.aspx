@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" inherits="Report_UI_KPIInformationReportViewer, App_Web_hdlusgzy" %>
+﻿<%@ page language="C#" autoeventwireup="true" inherits="Report_UI_KPIInformationReportViewer, App_Web_2g3gwod2" %>
 <%@ Register TagPrefix="CR" Namespace="CrystalDecisions.Web" Assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" %>
 
 <!DOCTYPE html>

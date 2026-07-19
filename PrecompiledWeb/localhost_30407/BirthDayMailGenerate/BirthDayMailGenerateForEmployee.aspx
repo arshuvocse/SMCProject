@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="BirthDayMailGenerate_BirthDayMailGenerateForEmployee, App_Web_zv40fntn" enableeventvalidation="false" %>
+﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="BirthDayMailGenerate_BirthDayMailGenerateForEmployee, App_Web_difrq3nz" enableeventvalidation="false" %>
 
 
 <asp:Content ID="c1" ContentPlaceHolderID="head" runat="Server">

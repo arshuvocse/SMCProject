@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="ChartTest_ChartNew, App_Web_ofgblo2u" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="ChartTest_ChartNew, App_Web_52fzrl54" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <%--<script src="../Assets/js/vendors/jquery/jquery.min.js"></script>--%>
