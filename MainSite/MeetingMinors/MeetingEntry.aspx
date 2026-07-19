@@ -378,15 +378,10 @@
 
                                             <asp:DropDownList runat="server" ID="ddlComSearch" AutoPostBack="True" OnSelectedIndexChanged="ddlComSearch_OnSelectedIndexChanged" class="form-control form-control-sm" />
                                             <script type="text/javascript">
-                                                function pageLoad() {
-                                                    // Repaint the client-driven Add-Employees / Members-List tables
-                                                    // from their in-memory row arrays. This runs after the initial
-                                                    // load AND after every async postback (MS AJAX convention), which
-                                                    // is what lets these tables survive unrelated UpdatePanel refreshes
-                                                    // that would otherwise wipe their <tbody> markup.
-                                                    if (window.MeetingGridA) MeetingGridA.render();
-                                                    if (window.MeetingGridB) MeetingGridB.render();
-
+                                                // Shared so client-side-only re-renders (Grid B's Add/Remove row
+                                                // buttons, which don't cause a postback) can re-apply Chosen too —
+                                                // not just pageLoad(), which only fires after an actual postback.
+                                                function refreshChosenWidgets() {
                                                     var $chosenSelects = $(
                                                         '#<%=ddlComSearch.ClientID%>, ' +
                                                         '#<%=ddlDivision.ClientID%>, ' +
@@ -415,6 +410,18 @@
                                                             width: '100%'
                                                         });
                                                     });
+                                                }
+
+                                                function pageLoad() {
+                                                    // Repaint the client-driven Add-Employees / Members-List tables
+                                                    // from their in-memory row arrays. This runs after the initial
+                                                    // load AND after every async postback (MS AJAX convention), which
+                                                    // is what lets these tables survive unrelated UpdatePanel refreshes
+                                                    // that would otherwise wipe their <tbody> markup.
+                                                    if (window.MeetingGridA) MeetingGridA.render();
+                                                    if (window.MeetingGridB) MeetingGridB.render();
+
+                                                    refreshChosenWidgets();
 
                                                     // Initialize flatpickr for time inputs
                                                     $('.flatpickr-time').flatpickr({
@@ -1393,11 +1400,7 @@
 
 
                                     <div id="step-9">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Minutes Entry</h2>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="form-group">
                                             <div class="row">
 
@@ -2445,6 +2448,25 @@
                         body.innerHTML = rows.map(rowHtml).join('');
                     }
 
+                    // render() rebuilds every row purely from `rows[i].Position`, so any
+                    // selection that hasn't (yet) made it into that array via the 'change'
+                    // listener — e.g. a Chosen pick right before clicking Remove — would be
+                    // silently dropped. Read the live DOM once, right before we destroy it,
+                    // so nothing gets lost regardless of event timing.
+                    function syncFromDom() {
+                        var body = document.getElementById('gridB_Body');
+                        if (!body) return;
+                        var selects = body.querySelectorAll('select');
+                        for (var i = 0; i < selects.length; i++) {
+                            var sel = selects[i];
+                            var tr = sel.closest ? sel.closest('tr') : null;
+                            if (!tr) continue;
+                            var idx = parseInt(tr.getAttribute('data-row-idx'), 10);
+                            if (isNaN(idx) || !rows[idx]) continue;
+                            rows[idx].Position = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '';
+                        }
+                    }
+
                     return {
                         get rows() { return rows; },
                         setPositionOptions: function (positions) {
@@ -2455,6 +2477,7 @@
                             if (rows.length === 0) rows = [blankRow()];
                         },
                         removeRow: function (idx) {
+                            syncFromDom();
                             rows.splice(idx, 1);
                             if (rows.length === 0) rows = [blankRow()];
                             render();
@@ -2482,6 +2505,11 @@
                             MeetingGridB.removeRow(idx);
                             break;
                     }
+
+                    // These re-renders replace the row markup wholesale, which wipes any
+                    // Chosen widget on Grid B's Position <select> — re-apply it so a
+                    // previously-picked Position doesn't appear to reset after Add/Remove.
+                    refreshChosenWidgets();
                 });
 
                 // Value-only changes (radios/select) — sync into the row array without a full

@@ -162,13 +162,16 @@ public partial class MeetingMinors_MeetingStatusList : System.Web.UI.Page
             if (!string.IsNullOrWhiteSpace(txtKeySearch.Text))
             {
                 string attachmentText = txtKeySearch.Text.Replace("'", "''").Trim();
-                query.Append(string.Format(@" AND EXISTS (
-                    SELECT 1
-                    FROM dbo.tblMeeting_MintuesEntryInfoDocument document WITH (NOLOCK)
-                    WHERE document.MeetingInfoId = mas.MeetingInfoID
-                      AND (document.ExtractedText LIKE '%{0}%'
-                           OR document.DocumentNote LIKE '%{0}%'
-                           OR document.FileName LIKE '%{0}%')
+                query.Append(string.Format(@" AND (
+                    mas.KeySearch LIKE '%{0}%'
+                    OR EXISTS (
+                        SELECT 1
+                        FROM dbo.tblMeeting_MintuesEntryInfoDocument document WITH (NOLOCK)
+                        WHERE document.MeetingInfoId = mas.MeetingInfoID
+                          AND (document.ExtractedText LIKE '%{0}%'
+                               OR document.DocumentNote LIKE '%{0}%'
+                               OR document.FileName LIKE '%{0}%')
+                    )
                 )", attachmentText));
             }
         }

@@ -321,7 +321,7 @@
                       <asp:DropDownList runat="server" ID="ddlCompany" AutoPostBack="True" OnSelectedIndexChanged="ddlCompany_OnSelectedIndexChanged" CssClass="form-control form-control-sm" />
                   </div>
               </div>
-              <div class="col-md-3 filter-group filter-meeting" style="display:none;">
+              <div class="col-md-3" style="display:none;">
                   <div class="form-group">
                       <label>Meeting No</label>
                       <asp:TextBox runat="server" ID="txtMeetingNo" CssClass="form-control form-control-sm" />

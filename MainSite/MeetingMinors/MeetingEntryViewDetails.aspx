@@ -503,7 +503,7 @@
                                             <div class="row">
                                                 <div class="col-md-4" style="padding-top: 8px">
                                                     <label class="control-label pull-right">
-                                                        Capacity
+                                                         
 
 
 :</label>
@@ -1083,7 +1083,7 @@
                     <br />
                     <br />
                     <div class="row">
-                        <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Mintues Information</h2>
+                        
                         <div class="col-md-12">
                             <fieldset class="for-panel" runat="server" visible="False" id="divDoc">
                                 <legend>Document </legend>
@@ -1341,11 +1341,11 @@
                                                             <div class="row">
                                                                 <div class="col-md-3" style="padding-top: 8px">
                                                                     <label class="control-label pull-right">
-                                                                        Classification	
+                                                                         	
 :</label>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <asp:DropDownList runat="server" ID="ddlClassification" class="form-control form-control-sm">
+                                                                    <asp:DropDownList runat="server" Visible="false"  ID="ddlClassification" class="form-control form-control-sm">
 
 
 
