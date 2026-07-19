@@ -878,7 +878,7 @@ public partial class Appraisal_KPIInformationView : System.Web.UI.Page
                         {
                             DataTable dtKPISamePer = _aFincDal.GetKPIIfSamePersonBSC(Convert.ToInt32(hfMainId.Value));
 
-                            if (ddlForwordEmp.SelectedValue == dtKPISamePer.Rows[0]["EmpInfoId"].ToString())
+                            if (dtKPISamePer.Rows.Count > 0 && ddlForwordEmp.SelectedValue == dtKPISamePer.Rows[0]["EmpInfoId"].ToString())
                             {
                                 status = _aFincDal.UpdateKPIApprovePersonContracturalSameBSC(hfMasterId.Value, ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue, hfMainId.Value);
                             }
@@ -891,23 +891,31 @@ public partial class Appraisal_KPIInformationView : System.Web.UI.Page
                         catch (Exception)
                         {
 
-                            //throw;
+                            status = false;
                         }
                     }
                     else
                     {
 
-                        DataTable dtKPISamePer = _aFincDal.GetAppraisalIfSamePersonBSC(Convert.ToInt32(hfMainId.Value));
+                        try
+                        {
+                            DataTable dtKPISamePer = _aFincDal.GetAppraisalIfSamePersonBSC(Convert.ToInt32(hfMainId.Value));
 
-                        if (ddlForwordEmp.SelectedValue == dtKPISamePer.Rows[0]["EmpInfoId"].ToString())
-                        {
-                            status = _aFincDal.UpdateAppprisalApprovePersonContracturalSamePerBSC(hfMasterId.Value,
-                                ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue, hfMainId.Value);
+                            if (dtKPISamePer.Rows.Count > 0 && ddlForwordEmp.SelectedValue == dtKPISamePer.Rows[0]["EmpInfoId"].ToString())
+                            {
+                                status = _aFincDal.UpdateAppprisalApprovePersonContracturalSamePerBSC(hfMasterId.Value,
+                                    ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue, hfMainId.Value);
+                            }
+                            else
+                            {
+                                status = _aFincDal.UpdateAppprisalApprovePersonContracturalBSC(hfMasterId.Value,
+                                    ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue);
+                            }
                         }
-                        else
+                        catch (Exception)
                         {
-                            status = _aFincDal.UpdateAppprisalApprovePersonContracturalBSC(hfMasterId.Value,
-                                ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue);
+
+                            status = false;
                         }
 
                     }
@@ -922,7 +930,7 @@ public partial class Appraisal_KPIInformationView : System.Web.UI.Page
                 {
                     DataTable dtKPISamePer = _aFincDal.GetKPIIfSamePerson(Convert.ToInt32(hfMainId.Value));
 
-                    if (ddlForwordEmp.SelectedValue == dtKPISamePer.Rows[0]["EmpInfoId"].ToString())
+                    if (dtKPISamePer.Rows.Count > 0 && ddlForwordEmp.SelectedValue == dtKPISamePer.Rows[0]["EmpInfoId"].ToString())
                     {
                         status = _aFincDal.UpdateKPIApprovePersonContracturalSame(hfMasterId.Value, ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue, hfMainId.Value);
                     }
@@ -934,24 +942,32 @@ public partial class Appraisal_KPIInformationView : System.Web.UI.Page
                 }
                 catch (Exception)
                 {
-                    
-                    //throw;
+
+                    status = false;
                 }
             }
             else
             {
 
-                DataTable dtKPISamePer = _aFincDal.GetAppraisalIfSamePerson(Convert.ToInt32(hfMainId.Value));
+                try
+                {
+                    DataTable dtKPISamePer = _aFincDal.GetAppraisalIfSamePerson(Convert.ToInt32(hfMainId.Value));
 
-                if (ddlForwordEmp.SelectedValue == dtKPISamePer.Rows[0]["EmpInfoId"].ToString())
-                {
-                    status = _aFincDal.UpdateAppprisalApprovePersonContracturalSamePer(hfMasterId.Value,
-                        ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue, hfMainId.Value);
+                    if (dtKPISamePer.Rows.Count > 0 && ddlForwordEmp.SelectedValue == dtKPISamePer.Rows[0]["EmpInfoId"].ToString())
+                    {
+                        status = _aFincDal.UpdateAppprisalApprovePersonContracturalSamePer(hfMasterId.Value,
+                            ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue, hfMainId.Value);
+                    }
+                    else
+                    {
+                        status = _aFincDal.UpdateAppprisalApprovePersonContractural(hfMasterId.Value,
+                            ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue);
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    status = _aFincDal.UpdateAppprisalApprovePersonContractural(hfMasterId.Value,
-                        ddlForwordEmp.SelectedValue, ddlEmpInfo.SelectedValue);
+
+                    status = false;
                 }
 
             }
@@ -963,6 +979,11 @@ public partial class Appraisal_KPIInformationView : System.Web.UI.Page
 
                 SearchButton_OnClick(null, null);
                 mpFunctionalSup.Hide();
+            }
+            else
+            {
+
+                aShowMessage.ShowMessageBox("Something went wrong!", this);
             }
         }
         else

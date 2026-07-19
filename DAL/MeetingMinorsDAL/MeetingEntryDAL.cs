@@ -1182,8 +1182,7 @@ WHERE mas.AuditTrail_MeetingInfoID =
                    aParameters.Add(new SqlParameter("@UpdateDate", System.DateTime.Now));
 
                    string query = @"UPDATE [dbo].[tblMeeting_MeetingInfo]
-   SET [MeetingCode] = null
-      ,[CompanyId] = @CompanyId 
+   SET [CompanyId] = @CompanyId
       ,[CategoryID] = @CategoryID 
       ,[MeetingPurpose] = @MeetingPurpose 
       ,[Classification] = @Classification 

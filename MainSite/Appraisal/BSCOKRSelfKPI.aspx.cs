@@ -18,6 +18,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Transactions;
 
 public partial class Appraisal_BSCOKRSelfKPI : System.Web.UI.Page
 {
@@ -335,43 +336,50 @@ public partial class Appraisal_BSCOKRSelfKPI : System.Web.UI.Page
                             if (pk > 0)
                             {
 
-                                AppraisalSelfAppLogDAO appLogDao = new AppraisalSelfAppLogDAO();
-
-                                appLogDao.ActionStatus = "Drafted";
-                                appLogDao.ApproveDate = DateTime.Now;
-                                appLogDao.ApproveBy = HttpContext.Current.Session["UserId"].ToString();
-                                appLogDao.PreEmpInfoId = Convert.ToInt32(0);
-                                appLogDao.ForEmpInfoId = Convert.ToInt32(HttpContext.Current.Session["EmpInfoid"].ToString());
-                                appLogDao.BSCAppraisalSelfMasterId = Convert.ToInt32(pk);
-                                appLogDao.Comments = Comments;
-                                appLogDao.CommentsEMP = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString());
-                                appLogDao.ShowStatus = "Drafted";
-
-
-
-                                int idd = _appPartA.SaveEmpAppLog(appLogDao);
-
-
-                                AppraisalSelfAppLogDAO aMastera = new AppraisalSelfAppLogDAO();
-                                aMastera.BSCAppraisalSelfMasterId
-                                    = Convert.ToInt32(pk);
-
-                                aMastera.ActionStatus = "Verified";
-                                bool status = _appPartA.UpdateContractural(aMastera);
-                                AppraisalSelfAppLogDAO appLogDao1 = new AppraisalSelfAppLogDAO()
+                                AppraisalSelfAppLogDAO appLogDao1;
+                                using (TransactionScope scope = new TransactionScope())
                                 {
-                                    ActionStatus = "Verified",
-                                    ApproveDate = DateTime.Now,
-                                    ApproveBy = HttpContext.Current.Session["UserId"].ToString(),
-                                    PreEmpInfoId = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString()),
-                                    ForEmpInfoId = Convert.ToInt32(CheckFinalApproval.Rows[0]["EmpInfoId"].ToString()),
-                                    BSCAppraisalSelfMasterId = Convert.ToInt32(pk),
-                                    Comments = Comments,
-                                    CommentsEMP = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString()),
-                                     ShowStatus = "Submitted"
+                                    AppraisalSelfAppLogDAO appLogDao = new AppraisalSelfAppLogDAO();
 
-                                };
-                                int id = _appPartA.SaveEmpAppLog(appLogDao1);
+                                    appLogDao.ActionStatus = "Drafted";
+                                    appLogDao.ApproveDate = DateTime.Now;
+                                    appLogDao.ApproveBy = HttpContext.Current.Session["UserId"].ToString();
+                                    appLogDao.PreEmpInfoId = Convert.ToInt32(0);
+                                    appLogDao.ForEmpInfoId = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString());
+                                    appLogDao.BSCAppraisalSelfMasterId = Convert.ToInt32(pk);
+                                    appLogDao.Comments = Comments;
+                                    appLogDao.CommentsEMP = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString());
+                                    appLogDao.ShowStatus = "Drafted";
+
+
+
+                                    int idd = _appPartA.SaveEmpAppLog(appLogDao);
+
+
+                                    AppraisalSelfAppLogDAO aMastera = new AppraisalSelfAppLogDAO();
+                                    aMastera.BSCAppraisalSelfMasterId
+                                        = Convert.ToInt32(pk);
+
+                                    aMastera.ActionStatus = "Verified";
+                                    bool status = _appPartA.UpdateContractural(aMastera);
+                                    appLogDao1 = new AppraisalSelfAppLogDAO()
+                                    {
+                                        ActionStatus = "Verified",
+                                        ApproveDate = DateTime.Now,
+                                        ApproveBy = HttpContext.Current.Session["UserId"].ToString(),
+                                        PreEmpInfoId = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString()),
+                                        ForEmpInfoId = Convert.ToInt32(CheckFinalApproval.Rows[0]["EmpInfoId"].ToString()),
+                                        BSCAppraisalSelfMasterId = Convert.ToInt32(pk),
+                                        Comments = Comments,
+                                        CommentsEMP = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString()),
+                                         ShowStatus = "Submitted"
+
+                                    };
+                                    int id = _appPartA.SaveEmpAppLog(appLogDao1);
+
+                                    scope.Complete();
+                                }
+
                                 _Result = true;
                                 _msg = "Data Submitted successfully!";
                                 bool v = SenMailForApprved(appLogDao1.ForEmpInfoId, " BSC Approval ", @"  <br/> Dear Sir, <br/>
@@ -397,43 +405,50 @@ public partial class Appraisal_BSCOKRSelfKPI : System.Web.UI.Page
                             if (pk > 0)
                             {
 
-                                AppraisalSelfAppLogDAO appLogDao = new AppraisalSelfAppLogDAO();
-
-                                appLogDao.ActionStatus = "Drafted";
-                                appLogDao.ApproveDate = DateTime.Now;
-                                appLogDao.ApproveBy = HttpContext.Current.Session["UserId"].ToString();
-                                appLogDao.PreEmpInfoId = Convert.ToInt32(0);
-                                appLogDao.ForEmpInfoId = Convert.ToInt32(HttpContext.Current.Session["EmpInfoid"].ToString());
-                                appLogDao.BSCAppraisalSelfMasterId = Convert.ToInt32(pk);
-                                appLogDao.Comments = Comments;
-                                appLogDao.CommentsEMP = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString());
-                                appLogDao.ShowStatus = "Drafted";
-
-
-
-
-                                int idd = _appPartA.SaveEmpAppLog(appLogDao);
-
-
-                                AppraisalSelfAppLogDAO aMastera = new AppraisalSelfAppLogDAO();
-                                aMastera.BSCAppraisalSelfMasterId
-                                    = Convert.ToInt32(pk);
-                                aMastera.ActionStatus = "Verified";
-                                bool status = _appPartA.UpdateContractural(aMastera);
-                                AppraisalSelfAppLogDAO appLogDao1 = new AppraisalSelfAppLogDAO()
+                                AppraisalSelfAppLogDAO appLogDao1;
+                                using (TransactionScope scope = new TransactionScope())
                                 {
-                                    ActionStatus = "Verified",
-                                    ApproveDate = DateTime.Now,
-                                    ApproveBy = HttpContext.Current.Session["UserId"].ToString(),
-                                    PreEmpInfoId = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString()),
-                                    ForEmpInfoId = Convert.ToInt32(dtempdata.Rows[0]["ReportingEmpId"].ToString()),
-                                    BSCAppraisalSelfMasterId = Convert.ToInt32(pk),
-                                    Comments = Comments,
-                                    CommentsEMP = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString()),
-                                    ShowStatus = "Submitted"
+                                    AppraisalSelfAppLogDAO appLogDao = new AppraisalSelfAppLogDAO();
 
-                                };
-                                int id = _appPartA.SaveEmpAppLog(appLogDao1);
+                                    appLogDao.ActionStatus = "Drafted";
+                                    appLogDao.ApproveDate = DateTime.Now;
+                                    appLogDao.ApproveBy = HttpContext.Current.Session["UserId"].ToString();
+                                    appLogDao.PreEmpInfoId = Convert.ToInt32(0);
+                                    appLogDao.ForEmpInfoId = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString());
+                                    appLogDao.BSCAppraisalSelfMasterId = Convert.ToInt32(pk);
+                                    appLogDao.Comments = Comments;
+                                    appLogDao.CommentsEMP = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString());
+                                    appLogDao.ShowStatus = "Drafted";
+
+
+
+
+                                    int idd = _appPartA.SaveEmpAppLog(appLogDao);
+
+
+                                    AppraisalSelfAppLogDAO aMastera = new AppraisalSelfAppLogDAO();
+                                    aMastera.BSCAppraisalSelfMasterId
+                                        = Convert.ToInt32(pk);
+                                    aMastera.ActionStatus = "Verified";
+                                    bool status = _appPartA.UpdateContractural(aMastera);
+                                    appLogDao1 = new AppraisalSelfAppLogDAO()
+                                    {
+                                        ActionStatus = "Verified",
+                                        ApproveDate = DateTime.Now,
+                                        ApproveBy = HttpContext.Current.Session["UserId"].ToString(),
+                                        PreEmpInfoId = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString()),
+                                        ForEmpInfoId = Convert.ToInt32(dtempdata.Rows[0]["ReportingEmpId"].ToString()),
+                                        BSCAppraisalSelfMasterId = Convert.ToInt32(pk),
+                                        Comments = Comments,
+                                        CommentsEMP = Convert.ToInt32(HttpContext.Current.Session["EmpInfoId"].ToString()),
+                                        ShowStatus = "Submitted"
+
+                                    };
+                                    int id = _appPartA.SaveEmpAppLog(appLogDao1);
+
+                                    scope.Complete();
+                                }
+
                                 _Result = true;
                                 _msg = "Data Submitted successfully!";
                                 bool v = SenMailForApprved(appLogDao1.ForEmpInfoId, " BSC Approval ", @"  <br/> Dear Sir, <br/>

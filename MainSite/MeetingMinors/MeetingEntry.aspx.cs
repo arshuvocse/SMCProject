@@ -131,6 +131,29 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this, this.GetType(), "GridB_" + Guid.NewGuid().ToString("N"), script, true);
     }
 
+    // A full (non-Ajax) postback wipes MeetingGridA/B's client-side JS state — the
+    // browser reloads the whole page and the tbody markup starts empty again. On a
+    // successful save the page navigates away, so it doesn't matter; but on a
+    // validation failure the page re-renders in place and needs its grids re-hydrated
+    // from the hidden JSON fields the client already posted, or Members List / Add
+    // Employees appear empty even though the data is still present in the hidden fields.
+    private void RestoreClientGridsAfterValidationFailure()
+    {
+        string gridAJson = hfGridA_Json.Value;
+        if (!string.IsNullOrWhiteSpace(gridAJson) && gridAJson != "[]" && gridAJson != "null")
+        {
+            string scriptA = "MeetingGridA.hydrate(" + gridAJson + "); MeetingGridA.render();";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "GridA_Restore_" + Guid.NewGuid().ToString("N"), scriptA, true);
+        }
+
+        string gridBJson = hfGridB_Json.Value;
+        if (!string.IsNullOrWhiteSpace(gridBJson) && gridBJson != "[]" && gridBJson != "null")
+        {
+            string scriptB = "MeetingGridB.hydrate(" + gridBJson + "); MeetingGridB.render();";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "GridB_Restore_" + Guid.NewGuid().ToString("N"), scriptB, true);
+        }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
          Page.Form.Attributes.Add("enctype", "multipart/form-data");
@@ -1998,6 +2021,13 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             return false;
         }
 
+        if (rbLocation.SelectedIndex < 0)
+        {
+            aShowMessage.ShowMessageBox("please select a Meeting Location Type", this);
+            rbLocation.Focus();
+            return false;
+        }
+
         if (gv_DocumentUpload.Rows.Count == 0)
         {
             aShowMessage.ShowMessageBox("Please Add Document Information", this);
@@ -2451,12 +2481,18 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
                 else
                 {
                     AlertMessageBoxShow("Operation Failed");
+                    RestoreClientGridsAfterValidationFailure();
                 }
             }
             else
             {
                 AlertMessageBoxShow("Sequence No Can not be Same");
+                RestoreClientGridsAfterValidationFailure();
             }
+        }
+        else
+        {
+            RestoreClientGridsAfterValidationFailure();
         }
     }
 

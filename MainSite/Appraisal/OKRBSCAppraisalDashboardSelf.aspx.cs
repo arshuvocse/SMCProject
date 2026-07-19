@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
+using System.Transactions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -3707,10 +3708,17 @@ A Employee's Appraisal is waiting for your approval. <br/><br/>
             bool result = false;
             if (functional.Count > 0)
             {
-                int pk = _appPartA.SaveAppraisalMaster(aMaster, Session["UserId"].ToString());
-                if (pk > 0)
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    result = _appPartA.SaveAppraialFunctionalDetails(functional, pk, aMaster.AppraisalSelfMasterId);
+                    int pk = _appPartA.SaveAppraisalMaster(aMaster, Session["UserId"].ToString());
+                    if (pk > 0)
+                    {
+                        result = _appPartA.SaveAppraialFunctionalDetails(functional, pk, aMaster.AppraisalSelfMasterId);
+                    }
+                    if (result)
+                    {
+                        scope.Complete();
+                    }
                 }
             }
             else
@@ -4214,7 +4222,15 @@ A Employee's Appraisal is waiting for your approval. <br/><br/>
             }
             if (aList.Count > 0)
             {
-                bool result = _appraisalPartBdal.SaveAppraisalPartB(aList, Convert.ToInt32(id_selfID.Value));
+                bool result;
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    result = _appraisalPartBdal.SaveAppraisalPartB(aList, Convert.ToInt32(id_selfID.Value));
+                    if (result)
+                    {
+                        scope.Complete();
+                    }
+                }
                 if (result == true)
                 {
 
@@ -4322,7 +4338,15 @@ A Employee's Appraisal is waiting for your approval. <br/><br/>
 
             if (aList.Count > 0)
             {
-                bool result = _appraisalPartBdal.SaveTrainingNeeds(aList);
+                bool result;
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    result = _appraisalPartBdal.SaveTrainingNeeds(aList);
+                    if (result)
+                    {
+                        scope.Complete();
+                    }
+                }
                 if (result == true)
                 {
 

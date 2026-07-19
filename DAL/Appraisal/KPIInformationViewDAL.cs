@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Remoting.Contexts;
@@ -31,17 +32,17 @@ namespace DAL.Appraisal
 
             try
             {
-                
-                     
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@PreviousForEmpInfoId", PreviousForEmpInfoId));
+                aParameters.Add(new SqlParameter("@ForwardBy", HttpContext.Current.Session["UserId"].ToString()));
+                aParameters.Add(new SqlParameter("@AppraisalSelfAppLogId", masterId));
 
+                string query =
+                    @"update dbo.tblAppraisalSelfAppLog SET ForEmpInfoId=@EmpId, PreviousForEmpInfoId=@PreviousForEmpInfoId, ForwardBy=@ForwardBy, ForwardDate=GETDATE() where AppraisalSelfAppLogId=@AppraisalSelfAppLogId";
 
-                    string query =
-                        @"update dbo.tblAppraisalSelfAppLog SET ForEmpInfoId='" + EmpId + "'  , PreviousForEmpInfoId='" + PreviousForEmpInfoId + "'  , ForwardBy='" + HttpContext.Current.Session["UserId"].ToString() + "',ForwardDate=GETDATE()   where AppraisalSelfAppLogId =" + masterId;
-
-                    bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
-                    return result;
-
-               
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
+                return result;
 
             }
             catch (Exception exception)
@@ -49,7 +50,6 @@ namespace DAL.Appraisal
 
                 throw exception;
             }
-            return true;
         }
 
         public DataTable GetAppraisalIfSamePersonBSC(int id)
@@ -70,17 +70,17 @@ namespace DAL.Appraisal
 
             try
             {
-
-
-
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@PreviousForEmpInfoId", PreviousForEmpInfoId));
+                aParameters.Add(new SqlParameter("@ForwardBy", HttpContext.Current.Session["UserId"].ToString()));
+                aParameters.Add(new SqlParameter("@BSCAppraisalSelfAppLogId", masterId));
 
                 string query =
-                    @"update dbo.tblBSCAppraisalSelfAppLog SET ForEmpInfoId='" + EmpId + "'  , PreviousForEmpInfoId='" + PreviousForEmpInfoId + "'  , ForwardBy='" + HttpContext.Current.Session["UserId"].ToString() + "',ForwardDate=GETDATE()   where BSCAppraisalSelfAppLogId =" + masterId;
+                    @"update dbo.tblBSCAppraisalSelfAppLog SET ForEmpInfoId=@EmpId, PreviousForEmpInfoId=@PreviousForEmpInfoId, ForwardBy=@ForwardBy, ForwardDate=GETDATE() where BSCAppraisalSelfAppLogId=@BSCAppraisalSelfAppLogId";
 
-                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
-
-
 
             }
             catch (Exception exception)
@@ -88,7 +88,6 @@ namespace DAL.Appraisal
 
                 throw exception;
             }
-            return true;
         }
 
         public bool UpdateKPIApprovePersonContracturalSameBSC(string masterId, string EmpId, string PreviousForEmpInfoId, string MainId)
@@ -96,17 +95,27 @@ namespace DAL.Appraisal
 
             try
             {
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@MainId", MainId));
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@PreviousForEmpInfoId", PreviousForEmpInfoId));
+                aParameters.Add(new SqlParameter("@ForwardBy", HttpContext.Current.Session["UserId"].ToString()));
+                aParameters.Add(new SqlParameter("@BSCAppraisalSelfAppLogId", masterId));
 
+                string query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    update dbo.tblBSCAppraisalSelfMaster SET ActionStatus='Drafted' where BSCAppraisalSelfMasterId=@MainId
+    update dbo.tblBSCAppraisalSelfAppLog SET ForEmpInfoId=@EmpId, PreviousForEmpInfoId=@PreviousForEmpInfoId, ForwardBy=@ForwardBy, ForwardDate=GETDATE() where BSCAppraisalSelfAppLogId=@BSCAppraisalSelfAppLogId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
 
-
-
-                string query =
-                    @"   update dbo.tblBSCAppraisalSelfMaster SET  ActionStatus='Drafted'  where BSCAppraisalSelfMasterId ='" + MainId + "'   update dbo.tblBSCAppraisalSelfAppLog SET ForEmpInfoId='" + EmpId + "'  , PreviousForEmpInfoId='" + PreviousForEmpInfoId + "'  , ForwardBy='" + HttpContext.Current.Session["UserId"].ToString() + "',ForwardDate=GETDATE()      where BSCAppraisalSelfAppLogId =" + masterId;
-
-                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
-
-
 
             }
             catch (Exception exception)
@@ -114,7 +123,6 @@ namespace DAL.Appraisal
 
                 throw exception;
             }
-            return true;
         }
 
         public bool UpdateKPIApprovePersonContracturalSame(string masterId, string EmpId, string PreviousForEmpInfoId, string MainId)
@@ -122,17 +130,27 @@ namespace DAL.Appraisal
 
             try
             {
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@MainId", MainId));
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@PreviousForEmpInfoId", PreviousForEmpInfoId));
+                aParameters.Add(new SqlParameter("@ForwardBy", HttpContext.Current.Session["UserId"].ToString()));
+                aParameters.Add(new SqlParameter("@AppraisalSelfAppLogId", masterId));
 
+                string query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    update dbo.tblAppraisalSelfMaster SET ActionStatus='Drafted' where AppraisalSelfMasterId=@MainId
+    update dbo.tblAppraisalSelfAppLog SET ForEmpInfoId=@EmpId, PreviousForEmpInfoId=@PreviousForEmpInfoId, ForwardBy=@ForwardBy, ForwardDate=GETDATE() where AppraisalSelfAppLogId=@AppraisalSelfAppLogId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
 
-
-
-                string query =
-                    @"   update dbo.tblAppraisalSelfMaster SET  ActionStatus='Drafted'  where AppraisalSelfMasterId ='" + MainId + "'   update dbo.tblAppraisalSelfAppLog SET ForEmpInfoId='" + EmpId + "'  , PreviousForEmpInfoId='" + PreviousForEmpInfoId + "'  , ForwardBy='" + HttpContext.Current.Session["UserId"].ToString() + "',ForwardDate=GETDATE()      where AppraisalSelfAppLogId =" + masterId;
-
-                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
-
-
 
             }
             catch (Exception exception)
@@ -140,7 +158,6 @@ namespace DAL.Appraisal
 
                 throw exception;
             }
-            return true;
         }
 
         public bool UpdateAppprisalApprovePersonContracturalBSC(string masterId, string EmpId, string PreviousForEmpInfoId)
@@ -148,17 +165,17 @@ namespace DAL.Appraisal
 
             try
             {
-
-
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@PreviousForEmpInfoId", PreviousForEmpInfoId));
+                aParameters.Add(new SqlParameter("@ForwardBy", HttpContext.Current.Session["UserId"].ToString()));
+                aParameters.Add(new SqlParameter("@BSCAppraisalMasterAppLogId", masterId));
 
                 string query =
-                      @"update dbo.tblBSCAppraisalMasterAppLog SET ForEmpInfoId='" + EmpId + "'  , PreviousForEmpInfoId='" + PreviousForEmpInfoId + "'  , ForwardBy='" + HttpContext.Current.Session["UserId"].ToString() + "',ForwardDate=GETDATE()   where BSCAppraisalMasterAppLogId =" + masterId;
+                      @"update dbo.tblBSCAppraisalMasterAppLog SET ForEmpInfoId=@EmpId, PreviousForEmpInfoId=@PreviousForEmpInfoId, ForwardBy=@ForwardBy, ForwardDate=GETDATE() where BSCAppraisalMasterAppLogId=@BSCAppraisalMasterAppLogId";
 
-
-                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
-
-
 
             }
             catch (Exception exception)
@@ -166,7 +183,6 @@ namespace DAL.Appraisal
 
                 throw exception;
             }
-            return true;
         }
 
         public bool UpdateAppprisalApprovePersonContractural(string masterId, string EmpId, string PreviousForEmpInfoId)
@@ -174,17 +190,17 @@ namespace DAL.Appraisal
 
             try
             {
-
-
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@PreviousForEmpInfoId", PreviousForEmpInfoId));
+                aParameters.Add(new SqlParameter("@ForwardBy", HttpContext.Current.Session["UserId"].ToString()));
+                aParameters.Add(new SqlParameter("@AppraisalMasterAppLogId", masterId));
 
                 string query =
-                      @"update dbo.tblAppraisalMasterAppLog SET ForEmpInfoId='" + EmpId + "'  , PreviousForEmpInfoId='" + PreviousForEmpInfoId + "'  , ForwardBy='" + HttpContext.Current.Session["UserId"].ToString() + "',ForwardDate=GETDATE()   where AppraisalMasterAppLogId =" + masterId;
-                
+                      @"update dbo.tblAppraisalMasterAppLog SET ForEmpInfoId=@EmpId, PreviousForEmpInfoId=@PreviousForEmpInfoId, ForwardBy=@ForwardBy, ForwardDate=GETDATE() where AppraisalMasterAppLogId=@AppraisalMasterAppLogId";
 
-                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
-
-
 
             }
             catch (Exception exception)
@@ -192,7 +208,6 @@ namespace DAL.Appraisal
 
                 throw exception;
             }
-            return true;
         }
 
         public bool UpdateAppprisalApprovePersonContracturalSamePerBSC(string masterId, string EmpId, string PreviousForEmpInfoId, string MainId)
@@ -200,17 +215,27 @@ namespace DAL.Appraisal
 
             try
             {
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@MainId", MainId));
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@PreviousForEmpInfoId", PreviousForEmpInfoId));
+                aParameters.Add(new SqlParameter("@ForwardBy", HttpContext.Current.Session["UserId"].ToString()));
+                aParameters.Add(new SqlParameter("@BSCAppraisalMasterAppLogId", masterId));
 
+                string query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    update dbo.tblBSCAppraisalMaster SET CurrentStatus='Drafted' where BSCAppraisalMasterId=@MainId
+    update dbo.tblBSCAppraisalMasterAppLog SET ForEmpInfoId=@EmpId, PreviousForEmpInfoId=@PreviousForEmpInfoId, ForwardBy=@ForwardBy, ForwardDate=GETDATE() where BSCAppraisalMasterAppLogId=@BSCAppraisalMasterAppLogId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
 
-
-                string query =
-                      @"   update dbo.tblBSCAppraisalMaster SET  CurrentStatus='Drafted'  where BSCAppraisalMasterId ='" + MainId + "'  update dbo.tblBSCAppraisalMasterAppLog SET ForEmpInfoId='" + EmpId + "'  , PreviousForEmpInfoId='" + PreviousForEmpInfoId + "'  , ForwardBy='" + HttpContext.Current.Session["UserId"].ToString() + "',ForwardDate=GETDATE()     where BSCAppraisalMasterAppLogId =" + masterId;
-
-
-                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
-
-
 
             }
             catch (Exception exception)
@@ -218,7 +243,6 @@ namespace DAL.Appraisal
 
                 throw exception;
             }
-            return true;
         }
 
         public bool UpdateAppprisalApprovePersonContracturalSamePer(string masterId, string EmpId, string PreviousForEmpInfoId, string MainId)
@@ -226,17 +250,27 @@ namespace DAL.Appraisal
 
             try
             {
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@MainId", MainId));
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@PreviousForEmpInfoId", PreviousForEmpInfoId));
+                aParameters.Add(new SqlParameter("@ForwardBy", HttpContext.Current.Session["UserId"].ToString()));
+                aParameters.Add(new SqlParameter("@AppraisalMasterAppLogId", masterId));
 
+                string query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    update dbo.tblAppraisalMaster SET CurrentStatus='Drafted' where AppraisalMasterId=@MainId
+    update dbo.tblAppraisalMasterAppLog SET ForEmpInfoId=@EmpId, PreviousForEmpInfoId=@PreviousForEmpInfoId, ForwardBy=@ForwardBy, ForwardDate=GETDATE() where AppraisalMasterAppLogId=@AppraisalMasterAppLogId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
 
-
-                string query =
-                      @"   update dbo.tblAppraisalMaster SET  CurrentStatus='Drafted'  where AppraisalMasterId ='" + MainId + "'  update dbo.tblAppraisalMasterAppLog SET ForEmpInfoId='" + EmpId + "'  , PreviousForEmpInfoId='" + PreviousForEmpInfoId + "'  , ForwardBy='" + HttpContext.Current.Session["UserId"].ToString() + "',ForwardDate=GETDATE()     where AppraisalMasterAppLogId =" + masterId;
-
-
-                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
-
-
 
             }
             catch (Exception exception)
@@ -244,7 +278,6 @@ namespace DAL.Appraisal
 
                 throw exception;
             }
-            return true;
         }
 
         public bool CancelAppprisalApprovePersonContractural(string MainAppraisalMasterId, string masterId, string EmpId)
@@ -279,28 +312,41 @@ update dbo.tblAppraisalMaster SET CurrentStatus='Verified' WHERE AppraisalMaster
 
             try
             {
-
-
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@MainAppraisalMasterId", MainAppraisalMasterId));
 
                 string query = "";
-   
-                if(OptionType=="KPI")
-                { 
-                query =
-                   @"
-update dbo.tblAppraisalMaster SET CurrentStatus='Drafted' WHERE AppraisalMasterId='" + MainAppraisalMasterId + "'       delete from  dbo.tblAppraisalMasterAppLog   WHERE AppraisalMasterId=" + MainAppraisalMasterId
-;
-                }
 
+                if (OptionType == "KPI")
+                {
+                    query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    update dbo.tblAppraisalMaster SET CurrentStatus='Drafted' WHERE AppraisalMasterId=@MainAppraisalMasterId
+    delete from dbo.tblAppraisalMasterAppLog WHERE AppraisalMasterId=@MainAppraisalMasterId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
+                }
                 else
                 {
-                    query =
-             @"
-update dbo.tblBSCAppraisalMaster SET CurrentStatus='Drafted' WHERE BSCAppraisalMasterId='" + MainAppraisalMasterId + "'       delete from  dbo.tblBSCAppraisalMasterAppLog   WHERE BSCAppraisalMasterId=" + MainAppraisalMasterId
-;
+                    query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    update dbo.tblBSCAppraisalMaster SET CurrentStatus='Drafted' WHERE BSCAppraisalMasterId=@MainAppraisalMasterId
+    delete from dbo.tblBSCAppraisalMasterAppLog WHERE BSCAppraisalMasterId=@MainAppraisalMasterId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
                 }
 
-                    bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
 
 
@@ -311,40 +357,54 @@ update dbo.tblBSCAppraisalMaster SET CurrentStatus='Drafted' WHERE BSCAppraisalM
 
                 throw exception;
             }
-            return true;
         }
         public bool KPIDelPreviosuLogApproved(string AppraisalMasterId, string SelfMasterId, string EmpId, string FinancialYearId, string OptionType)
         {
 
             try
             {
-
-
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@AppraisalMasterId", AppraisalMasterId));
+                aParameters.Add(new SqlParameter("@FinancialYearId", FinancialYearId));
+                aParameters.Add(new SqlParameter("@EmpId", EmpId));
+                aParameters.Add(new SqlParameter("@SelfMasterId", SelfMasterId));
 
                 string query = "";
-   
-                if(OptionType=="KPI")
-                { 
-                query =
-                   @"    delete from tblAppraisalMaster where AppraisalMasterId='" + AppraisalMasterId + @"'
 
-delete from tblKPIMIDAppraisalMaster where FinancialYearId='" + FinancialYearId + @"' and EmpInfoId='" + EmpId + @"'
-
-update dbo.tblAppraisalSelfMaster SET ActionStatus='Drafted' WHERE AppraisalSelfMasterId='" + SelfMasterId + "'       delete from  dbo.tblAppraisalSelfAppLog   WHERE AppraisalSelfMasterId=" + SelfMasterId
-;
+                if (OptionType == "KPI")
+                {
+                    query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    delete from tblAppraisalMaster where AppraisalMasterId=@AppraisalMasterId
+    delete from tblKPIMIDAppraisalMaster where FinancialYearId=@FinancialYearId and EmpInfoId=@EmpId
+    update dbo.tblAppraisalSelfMaster SET ActionStatus='Drafted' WHERE AppraisalSelfMasterId=@SelfMasterId
+    delete from dbo.tblAppraisalSelfAppLog WHERE AppraisalSelfMasterId=@SelfMasterId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
                 }
-
                 else
                 {
-                    query =
-                     @"    delete from tblBSCAppraisalMaster where BSCAppraisalMasterId='" + AppraisalMasterId + @"'
-
-delete from tblMBSCAppraisalMaster where FinancialYearId='" + FinancialYearId + @"' and EmpInfoId='" + EmpId + @"'
-
-update dbo.tblBSCAppraisalSelfMaster SET ActionStatus='Drafted' WHERE BSCAppraisalSelfMasterId='" + SelfMasterId + "'       delete from  dbo.tblBSCAppraisalSelfAppLog   WHERE BSCAppraisalSelfMasterId=" + SelfMasterId;
+                    query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    delete from tblBSCAppraisalMaster where BSCAppraisalMasterId=@AppraisalMasterId
+    delete from tblMBSCAppraisalMaster where FinancialYearId=@FinancialYearId and EmpInfoId=@EmpId
+    update dbo.tblBSCAppraisalSelfMaster SET ActionStatus='Drafted' WHERE BSCAppraisalSelfMasterId=@SelfMasterId
+    delete from dbo.tblBSCAppraisalSelfAppLog WHERE BSCAppraisalSelfMasterId=@SelfMasterId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
                 }
 
-                    bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
 
 
@@ -355,35 +415,47 @@ update dbo.tblBSCAppraisalSelfMaster SET ActionStatus='Drafted' WHERE BSCApprais
 
                 throw exception;
             }
-            return true;
         }
         public bool AppraisalDelPreviosuLogApproved(string MainAppraisalMasterId, string masterId, string EmpId, string OptionType)
         {
 
             try
             {
-
-
+                var aParameters = new List<SqlParameter>();
+                aParameters.Add(new SqlParameter("@MainAppraisalMasterId", MainAppraisalMasterId));
 
                 string query = "";
-   
-                if(OptionType=="KPI")
-                { 
-                query =
-                   @"
-update dbo.tblAppraisalMaster SET CurrentStatus='Drafted' WHERE AppraisalMasterId='" + MainAppraisalMasterId + "'       delete from  dbo.tblAppraisalMasterAppLog   WHERE AppraisalMasterId=" + MainAppraisalMasterId
-;
-                }
 
+                if (OptionType == "KPI")
+                {
+                    query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    update dbo.tblAppraisalMaster SET CurrentStatus='Drafted' WHERE AppraisalMasterId=@MainAppraisalMasterId
+    delete from dbo.tblAppraisalMasterAppLog WHERE AppraisalMasterId=@MainAppraisalMasterId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
+                }
                 else
                 {
-                    query =
-             @"
-update dbo.tblBSCAppraisalMaster SET CurrentStatus='Drafted' WHERE BSCAppraisalMasterId='" + MainAppraisalMasterId + "'       delete from  dbo.tblBSCAppraisalMasterAppLog   WHERE BSCAppraisalMasterId=" + MainAppraisalMasterId
-;
+                    query = @"
+BEGIN TRANSACTION;
+BEGIN TRY
+    update dbo.tblBSCAppraisalMaster SET CurrentStatus='Drafted' WHERE BSCAppraisalMasterId=@MainAppraisalMasterId
+    delete from dbo.tblBSCAppraisalMasterAppLog WHERE BSCAppraisalMasterId=@MainAppraisalMasterId
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    IF XACT_STATE() <> 0 ROLLBACK TRANSACTION;
+    THROW;
+END CATCH";
                 }
 
-                    bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, DataBase.HRDB);
+                bool result = _aCommonInternalDal.UpdateDataByUpdateCommand(query, aParameters, DataBase.HRDB);
                 return result;
 
 
@@ -394,7 +466,6 @@ update dbo.tblBSCAppraisalMaster SET CurrentStatus='Drafted' WHERE BSCAppraisalM
 
                 throw exception;
             }
-            return true;
         }
         public DataTable GetApprisalApprovaer(int id)
         {

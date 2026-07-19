@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.ServiceModel.Security;
+using System.Transactions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -1462,7 +1463,10 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                                         bool result = false;
                                         if (functional.Count > 0)
                                         {
-                                            int pk = _appPartA.SaveAppraisalSelfMasterforSupper(aMaster, Session["UserId"].ToString());
+                                            int pk = 0;
+                                            using (TransactionScope scope = new TransactionScope())
+                                            {
+                                            pk = _appPartA.SaveAppraisalSelfMasterforSupper(aMaster, Session["UserId"].ToString());
                                             if (pk > 0)
                                             {
 
@@ -1505,6 +1509,12 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                                                 _appPartA.SaveAppraisalMasterFromAppraisalSelf(
                                                     aMasterApp.AppraisalSelfMasterId.ToString());
 
+                                                scope.Complete();
+                                            }
+                                            }
+
+                                            if (pk > 0)
+                                            {
                                                 ScriptManager.RegisterStartupScript(this, this.GetType(),
                                                     "alert",
                                                     "alert('Operation Successful...');window.location ='AppraisalSupApprove.aspx';",
@@ -1624,7 +1634,7 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
 
 
 
-                                        DataTable dtempdata = _appPartA.GetEmpInfoPrevious(Session["EmpInfoid"].ToString(),
+                                        DataTable dtempdata = _appPartA.GetEmpInfoPrevious(Session["EmpInfoId"].ToString(),
                                             id_mastetID.Value);
                                         DataTable dtempdata2 =
                                             _appPartA.GetEmpInfoPrevious(dtempdata.Rows[0]["PreEmpInfoId"].ToString(),
@@ -1647,8 +1657,12 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                                                 CommentsEMP = Convert.ToInt32(Session["EmpInfoId"].ToString()),
 
                                             };
-                                            _appPartA.UpdateAppLog("Review", Session["AppLogId"].ToString());
-                                            int id = _appPartA.SaveEmpAppLog(appLogDao);
+                                            using (TransactionScope scope = new TransactionScope())
+                                            {
+                                                _appPartA.UpdateAppLog("Review", Session["AppLogId"].ToString());
+                                                int id = _appPartA.SaveEmpAppLog(appLogDao);
+                                                scope.Complete();
+                                            }
 
 
 
@@ -1767,6 +1781,8 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                             bool result = false;
                             if (functional.Count > 0)
                             {
+                                using (TransactionScope scope = new TransactionScope())
+                                {
                                 int pk = _appPartA.SaveAppraisalSelfMasterforSupper(aMaster, Session["UserId"].ToString());
                                 if (pk > 0)
                                 {
@@ -1780,6 +1796,8 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
 
                                     result = _appPartA.SaveAppraialSelfFunctionalDetails(functional, pk);
                                     result = SaveAppraisalSelfB(pk);
+                                }
+                                scope.Complete();
                                 }
                             }
 
@@ -1799,19 +1817,16 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                                     CommentsEMP = Convert.ToInt32(Session["EmpInfoId"].ToString()),
 
                                 };
-                                int id = _appPartA.SaveEmpAppLog(appLogDao);
+                                using (TransactionScope scope = new TransactionScope())
+                                {
+                                    int id = _appPartA.SaveEmpAppLog(appLogDao);
+                                    scope.Complete();
+                                }
                             }
                             else if (aMasterApp.ActionStatus == "Approved")
                             {
 
                                 DataTable dtaa = _appPartA.GetCheckApprisalAlreadyExist(Convert.ToInt32(id_mastetID.Value));
-                                if (dtaa.Rows.Count > 0)
-                                {
-                                    int AppraisalMasterId = Convert.ToInt32(dtaa.Rows[0]["AppraisalMasterId"].ToString());
-
-                                    _appPartA.DeleteAppraisalSetupNew(Convert.ToInt32(AppraisalMasterId));
-
-                                }
 
 
                                 //DataTable dtempdata = aContractualEmpManageDAL.GetEmpInfo(" WHERE EmpInfoId='" + empInfoId.Value + "'");
@@ -1827,8 +1842,20 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                                     CommentsEMP = Convert.ToInt32(Session["EmpInfoId"].ToString()),
 
                                 };
-                                int id = _appPartA.SaveEmpAppLog(appLogDao);
-                                _appPartA.SaveAppraisalMasterFromAppraisalSelf(aMasterApp.AppraisalSelfMasterId.ToString());
+                                using (TransactionScope scope = new TransactionScope())
+                                {
+                                    if (dtaa.Rows.Count > 0)
+                                    {
+                                        int AppraisalMasterId = Convert.ToInt32(dtaa.Rows[0]["AppraisalMasterId"].ToString());
+
+                                        _appPartA.DeleteAppraisalSetupNew(Convert.ToInt32(AppraisalMasterId));
+
+                                    }
+
+                                    int id = _appPartA.SaveEmpAppLog(appLogDao);
+                                    _appPartA.SaveAppraisalMasterFromAppraisalSelf(aMasterApp.AppraisalSelfMasterId.ToString());
+                                    scope.Complete();
+                                }
 
                                 SenMailForApprved(appLogDao.ForEmpInfoId, " KPI Setup Approval ", @"  <br/> Dear Sir, <br/>
 An Employee's KPI is waiting for your approval. <br/><br/>
@@ -1839,7 +1866,7 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                             }
                             else if (aMasterApp.ActionStatus == "Review")
                             {
-                                DataTable dtempdata = _appPartA.GetEmpInfoPrevious(Session["EmpInfoid"].ToString(), id_mastetID.Value);
+                                DataTable dtempdata = _appPartA.GetEmpInfoPrevious(Session["EmpInfoId"].ToString(), id_mastetID.Value);
                                 DataTable dtempdata2 = _appPartA.GetEmpInfoPrevious(dtempdata.Rows[0]["PreEmpInfoId"].ToString(), id_mastetID.Value);
 
                                 if (dtempdata2.Rows.Count > 0)
@@ -1856,8 +1883,12 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                                         CommentsEMP = Convert.ToInt32(Session["EmpInfoId"].ToString()),
 
                                     };
-                                    _appPartA.UpdateAppLog("Review", Session["AppLogId"].ToString());
-                                    int id = _appPartA.SaveEmpAppLog(appLogDao);
+                                    using (TransactionScope scope = new TransactionScope())
+                                    {
+                                        _appPartA.UpdateAppLog("Review", Session["AppLogId"].ToString());
+                                        int id = _appPartA.SaveEmpAppLog(appLogDao);
+                                        scope.Complete();
+                                    }
 
 
 
@@ -2234,6 +2265,8 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
                 bool result = false;
                 if (functional.Count > 0)
                 {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
                     int pk = _appPartA.SaveAppraisalSelfMasterforSupper(aMaster, Session["UserId"].ToString());
                     if (pk > 0)
                     {
@@ -2247,6 +2280,8 @@ please login with the below link.<br/><br/>   http://182.160.103.234:8088/
 
                         result = _appPartA.SaveAppraialSelfFunctionalDetails(functional, pk);
                         result = SaveAppraisalSelfB(pk);
+                    }
+                    scope.Complete();
                     }
                 }
                 else
