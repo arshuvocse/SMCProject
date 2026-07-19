@@ -1876,7 +1876,7 @@ INSERT INTO [dbo].[tblMeeting_MeetingInfoAgenda]
                 new SqlParameter("@Term", "%" + (term ?? string.Empty) + "%")
             };
             string query = @"SELECT TOP 20 emp.EmpInfoId AS EmpInfoId, emp.EmpMasterCode AS EmpMasterCode,
-                                     emp.EmpName AS EmpName, ISNULL(des.DesignationName,'') AS Designation
+                                     emp.EmpName AS EmpName, ISNULL(des.Designation,'') AS Designation
                               FROM dbo.tblEmpGeneralInfo emp WITH (NOLOCK)
                               LEFT JOIN dbo.tblDesignation des WITH (NOLOCK) ON des.DesignationId = emp.DesignationId
                               WHERE emp.IsActive = 1 AND emp.CompanyId = @CompanyId

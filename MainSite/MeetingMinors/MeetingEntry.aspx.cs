@@ -371,6 +371,12 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
 
 
             }
+            else
+            {
+                // Add mode (no MID): emit empty JSON so MeetingGridA/B hydrate with a blank row
+                EmitGridAJson(true, new DataTable());
+                EmitGridBJson(new DataTable());
+            }
         }
     }
     private void LoadInitialGrid()
@@ -1243,6 +1249,19 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             // Reload member list based on the new company selection
             DataTable jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoByCategory(ddlCompany.SelectedValue);
             EmitGridBJson(jobCreationInfos);
+
+            // Preserve the Add Employees rows across this postback by re-emitting GridA
+            // from the hidden field the JS serialised before the form submitted.
+            string gridAJson = hfGridA_Json.Value;
+            if (!string.IsNullOrWhiteSpace(gridAJson) && gridAJson != "[]" && gridAJson != "null")
+            {
+                string scriptA = "MeetingGridA.hydrate(" + gridAJson + ");";
+                ClientScript.RegisterStartupScript(this.GetType(), "GridA_CompanyRestore", scriptA, true);
+            }
+            else
+            {
+                EmitGridAJson(true, new DataTable());
+            }
         }
         else
         {
@@ -2994,13 +3013,14 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
     // this page — including the Members List grid sharing the same ViewState — feeling
     // stuck on "loading" whenever these grids were touched).
     [System.Web.Services.WebMethod(EnableSession = true), ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public List<object> AjaxSearchEmployeesForMeeting(string companyId, string term)
+    public static List<object> AjaxSearchEmployeesForMeeting(string companyId, string term)
     {
         var results = new List<object>();
 
-        // WebMethod requests bypass the master page's Page_Load auth-redirect, so guard
-        // explicitly here — this endpoint returns employee PII and must stay session-gated.
-        if (System.Web.HttpContext.Current.Session == null || Session["UserId"] == null)
+        // WebMethod must be static — guard session explicitly since Page_Load auth-redirect
+        // is bypassed for WebMethod requests. This endpoint returns employee PII.
+        var session = System.Web.HttpContext.Current.Session;
+        if (session == null || session["UserId"] == null)
         {
             return results;
         }
@@ -3010,16 +3030,18 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             return results;
         }
 
-        DataTable dt = AMeetingEntryDal.SearchEmpForMeeting(companyId.Trim(), term.Trim());
+        // Create a local DAL instance (static context — no instance fields available).
+        var dal = new DAL.MeetingMinorsDAL.MeetingEntryDAL();
+        DataTable dt = dal.SearchEmpForMeeting(companyId.Trim(), term.Trim());
         if (dt == null) return results;
 
         foreach (DataRow row in dt.Rows)
         {
             results.Add(new
             {
-                EmpInfoId = row["EmpInfoId"].ToString(),
+                EmpInfoId  = row["EmpInfoId"].ToString(),
                 EmpMasterCode = row["EmpMasterCode"].ToString(),
-                EmpName = row["EmpName"].ToString(),
+                EmpName    = row["EmpName"].ToString(),
                 Designation = row["Designation"].ToString()
             });
         }
