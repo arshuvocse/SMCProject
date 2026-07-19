@@ -1,4 +1,4 @@
-<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="UserProfile_ChangePassword, App_Web_rongzsh2" %>
+<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="UserProfile_ChangePassword, App_Web_cknpe1gd" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style>

@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Lunch_Allowance_UI_launchAllawenceReportPageSelf, App_Web_fltbm1mn" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Lunch_Allowance_UI_launchAllawenceReportPageSelf, App_Web_a1jakixh" %>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">

@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="ExitManagement_UI_EmployeeJobLeftEntryView, App_Web_pecdhlor" %>
+<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="ExitManagement_UI_EmployeeJobLeftEntryView, App_Web_fbiye0lh" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -68,37 +68,49 @@
 
                             <br/>
                                  </div>
-                            <div id="gridContasiner1" style="height: auto; overflow: auto; width: auto; overflow-y: scroll; overflow-x: scroll;">
-                                <asp:GridView ID="loadGridView" runat="server" AutoGenerateColumns="False"
-                                     CssClass="AddToListCssTable"
-                                     OnPreRender="gv_DocumentUpload_PreRender"  DataKeyNames="EmployeeJobLeftId,EmployeeId,ExitDetailId,ApprovalStatusShow,ExitMasterId,DivisionId,CompanyName"
-                                    OnRowCommand="loadGridView_RowCommand" OnRowCreated="loadGridView_OnRowCreated">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="SL">
-                                            <ItemTemplate>
-                                                <asp:Label ID="LabelSL" Text='<%# Container.DataItemIndex + 1 %>' runat="server"></asp:Label>
-                                                <asp:HiddenField runat="server" ID="HFExitMasterId" Value='<%#Eval("ExitMasterId")%>' /> <asp:HiddenField runat="server" ID="hfApprovalStatusShow" Value='<%#Eval("ApprovalStatusShow")%>' />
-                                                <asp:HiddenField runat="server" ID="hfDivisionId" Value='<%#Eval("DivisionId")%>' />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        
-                                         <asp:TemplateField HeaderText="View Details" Visible="False">
-                                            <ItemTemplate>
-                                                <asp:ImageButton ID="ViewReportImageButton1" runat="server" class="btn btn-white btn-sm  " CommandArgument='<%#Eval("EmployeeId") %>'
-                                                    CommandName="Clearence" ImageUrl="~/Assets/report_magnify.png" />
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:BoundField DataField="CompanyName" HeaderText="Company Name" />
+                             <div style="margin-bottom: 10px; text-align: left; padding-left: 5px;">
+                                 <strong>Assign List Status: </strong> 
+                                 <span style="padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; background-color: #28a745; color: white; margin-right: 5px;">Done</span>
+                                 <span style="padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; background-color: #fd7e14; color: white;">Pending</span>
+                             </div>
+                             <div id="gridContasiner1" class="table-responsive" style="height: auto; width: 100%; overflow: auto;">
+                                 <asp:GridView ID="loadGridView" runat="server" AutoGenerateColumns="False"
+                                      CssClass="AddToListCssTable"
+                                      OnPreRender="gv_DocumentUpload_PreRender"  DataKeyNames="EmployeeJobLeftId,EmployeeId,ExitDetailId,ApprovalStatusShow,ExitMasterId,DivisionId,CompanyName, empinfoidForMain,EmpInfoIdApproval"
+                                     OnRowCommand="loadGridView_RowCommand" OnRowCreated="loadGridView_OnRowCreated">
+                                     <Columns>
+                                         <asp:TemplateField HeaderText="SL">
+                                             <ItemTemplate>
+                                                 <asp:Label ID="LabelSL" Text='<%# Container.DataItemIndex + 1 %>' runat="server"></asp:Label>
+                                                 <asp:HiddenField runat="server" ID="HFExitMasterId" Value='<%#Eval("ExitMasterId")%>' /> <asp:HiddenField runat="server" ID="hfApprovalStatusShow" Value='<%#Eval("ApprovalStatusShow")%>' />
+                                                 <asp:HiddenField runat="server" ID="hfDivisionId" Value='<%#Eval("DivisionId")%>' />
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+                                         
+                                          <asp:TemplateField HeaderText="View Details" Visible="False">
+                                             <ItemTemplate>
+                                                 <asp:ImageButton ID="ViewReportImageButton1" runat="server" class="btn btn-white btn-sm  " CommandArgument='<%#Eval("EmployeeId") %>'
+                                                     CommandName="Clearence" ImageUrl="~/Assets/report_magnify.png" />
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+                                         <asp:BoundField DataField="CompanyName" HeaderText="Company Name" />
 
-                                        <asp:BoundField DataField="EmpMasterCode" HeaderText="Empployee ID" />
-                                        <asp:BoundField DataField="EmpName" HeaderText="Empployee Name" />
-                                      
-                                        <asp:BoundField DataField="JobLeftType" HeaderText="Job Left Type" />
-                                        
-                                        <asp:BoundField DataField="JobLeftDate" HeaderText="Job Left Date" DataFormatString="{0:dd-MMM-yyyy}" />
+                                         <asp:BoundField DataField="EmpMasterCode" HeaderText="Empployee ID" />
+                                         <asp:BoundField DataField="EmpName" HeaderText="Empployee Name" />
+                                       
+                                         <asp:BoundField DataField="JobLeftType" HeaderText="Job Left Type" />
+                                         
+                                         <asp:BoundField DataField="JobLeftDate" HeaderText="Job Left Date" DataFormatString="{0:dd-MMM-yyyy}" />
 
-                                        <asp:BoundField DataField="Reason" HeaderText="Reason" />
-                                        <asp:BoundField DataField="ApprovalStatusShow" HeaderText="Approval Status" />
+                                         <asp:BoundField DataField="Reason" HeaderText="Reason" Visible="False" />
+                                         <asp:BoundField DataField="ApprovalStatusShow" HeaderText="Approval Status" Visible="False" />
+                                         <asp:TemplateField HeaderText="Assign List Status">
+                                             <ItemTemplate>
+                                                 <div style="display: flex; flex-wrap: wrap; gap: 4px; min-width: 250px;">
+                                                     <asp:Literal ID="litAssignListStatus" runat="server" Text='<%# GetAssignListStatusColored(Eval("EmpNameStatusforAssaignList")) %>'></asp:Literal>
+                                                 </div>
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Other Comments" Visible="False">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lblComments" runat="server"  CssClass="btn btn-sm btnMyDesignScan"
@@ -108,7 +120,11 @@
                                         </asp:TemplateField>
                                        
                                         <asp:BoundField DataField="PendingDaysInfo" HeaderText="Pending Days" />
-                                        <asp:BoundField DataField="Forward" HeaderText="Forwarded" />
+                                        <asp:TemplateField HeaderText="Forwarded Status">
+                                            <ItemTemplate>
+                                                <asp:Literal ID="litForward" runat="server" Text='<%# GetForwardStatusBadge(Eval("Forward")) %>'></asp:Literal>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                      <%--   <asp:BoundField DataField="EntryDate" HeaderText="Entry Date" DataFormatString="{0:dd-MMM-yyyy}" />
                                         <asp:BoundField DataField="UpdateBy" HeaderText="UpdateBy" />
                                         <asp:BoundField DataField="UpdateDate" HeaderText="UpdateDate" DataFormatString="{0:dd-MMM-yyyy}" />--%>

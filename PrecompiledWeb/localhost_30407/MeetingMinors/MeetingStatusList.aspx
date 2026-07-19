@@ -1,4 +1,4 @@
-<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="MeetingMinors_MeetingStatusList, App_Web_hog5t1mv" %>
+<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="MeetingMinors_MeetingStatusList, App_Web_ce25useu" %>
 <%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
@@ -118,6 +118,141 @@
     font-weight: 600;
     box-shadow: 0 4px 6px rgba(91, 121, 158, 0.25);
 }
+
+/* Key Search Style Enhancements */
+.key-search-box {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    margin-top: 15px;
+    margin-bottom: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 3px solid #5B799E; /* Primary color indicator */
+}
+
+.key-search-box:hover {
+    border-color: #5B799E;
+    box-shadow: 0 10px 15px -3px rgba(91, 121, 158, 0.12), 0 4px 6px -2px rgba(91, 121, 158, 0.05);
+}
+
+.key-search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.key-search-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+    margin-bottom: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+}
+
+.key-search-title i {
+    color: #5B799E;
+    font-size: 14px;
+}
+
+.key-search-badge {
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+    border: 1px solid #bee3f8;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.key-search-badge i {
+    font-size: 11px;
+}
+
+.key-search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.key-search-input-wrapper .search-icon {
+    position: absolute;
+    left: 14px;
+    color: #a0aec0;
+    font-size: 14px;
+    transition: color 0.2s ease;
+    pointer-events: none;
+}
+
+.key-search-input-wrapper .search-textbox {
+    padding-left: 40px !important;
+    padding-right: 95px !important;
+    height: 42px !important;
+    border-radius: 6px !important;
+    border: 1px solid #cbd5e0 !important;
+    font-size: 13.5px !important;
+    transition: all 0.2s ease !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.key-search-input-wrapper .search-textbox:focus {
+    border-color: #5B799E !important;
+    box-shadow: 0 0 0 3px rgba(91, 121, 158, 0.15) !important;
+    background-color: #fff !important;
+}
+
+.key-search-input-wrapper .search-textbox:focus ~ .search-icon {
+    color: #5B799E;
+}
+
+.key-search-input-wrapper .file-types-hint {
+    position: absolute;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+}
+
+.file-types-hint span {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.file-types-hint .badge-pdf {
+    background-color: #fff5f5;
+    color: #e53e3e;
+    border: 1px solid #fed7d7;
+}
+
+.file-types-hint .badge-img {
+    background-color: #f0fff4;
+    color: #38a169;
+    border: 1px solid #c6f6d5;
+}
+
+.key-search-footer-hint {
+    margin-top: 8px;
+    font-size: 11.5px;
+    color: #718096;
+    display: flex;
+    align-items: center;
+}
+
+.key-search-footer-hint i {
+    font-size: 12px;
+}
           </style>
     
      <div class="content" id="content">
@@ -125,11 +260,32 @@
                     <div class="page-heading">
                         <div class="page-heading__container">
                              
-                            <h1 class="title" style="font-size: 18px; padding-top: 0px;"><img src="../Report_Pages/app.png"  width="20px" />  Meeting Status List </h1>
+                            <h1 class="title" style="font-size: 18px; padding-top: 0px;"><img src="../Report_Pages/app.png"  width="20px" />  Meeting </h1>
                         </div>
                          <div class="page-heading__container float-right d-none d-sm-block">
-                         
-                <asp:Button ID="AddNewButton" Text="Add New" CssClass="btn btn-sm btn-outline-secondary " runat="server" OnClick="AddNewButton_OnClick"  />
+                            <style>
+                                .btn-custom-add {
+                                    background: linear-gradient(135deg, #5B799E 0%, #3a5372 100%);
+                                    color: #ffffff !important;
+                                    border: none;
+                                    padding: 10px 24px;
+                                    font-size: 15px;
+                                    font-weight: 600;
+                                    border-radius: 6px;
+                                    box-shadow: 0 4px 6px rgba(91, 121, 158, 0.3);
+                                    transition: all 0.3s ease;
+                                    text-transform: uppercase;
+                                    letter-spacing: 0.5px;
+                                }
+
+                                .btn-custom-add:hover {
+                                    background: linear-gradient(135deg, #4a6586 0%, #2c425d 100%);
+                                    box-shadow: 0 6px 12px rgba(91, 121, 158, 0.4);
+                                    transform: translateY(-2px);
+                                    color: #ffffff !important;
+                                }
+                            </style>
+                <asp:Button ID="AddNewButton" Text="Add New" CssClass="btn-custom-add" runat="server" OnClick="AddNewButton_OnClick"  />
                 <%--<asp:Button ID="reloadButton" Text="Reload" CssClass="btn btn-sm btn-outline-success" runat="server" OnClick="reloadButton_OnClick" />--%>
             </div>
                     </div>
@@ -146,7 +302,7 @@
         <div class="card">
    <div class="card-body">
        
-          <div class="row mb-3">
+          <div class="row mb-3" style="display:none;">
               <div class="col-md-12 text-center">
                   <asp:RadioButtonList runat="server" ID="rblSearchSection" RepeatDirection="Horizontal" RepeatLayout="Flow" CssClass="search-section-selector">
                       <asp:ListItem Value="All" Selected="True">All</asp:ListItem>
@@ -167,24 +323,14 @@
               </div>
               <div class="col-md-3 filter-group filter-meeting">
                   <div class="form-group">
-                      <label>Meeting ID / Meeting No</label>
+                      <label>Meeting No</label>
                       <asp:TextBox runat="server" ID="txtMeetingNo" CssClass="form-control form-control-sm" />
-                      <cc1:AutoCompleteExtender ID="MeetingIdNoAutoComplete" runat="server"
-                          EnableCaching="true" Enabled="True" MinimumPrefixLength="1" CompletionSetCount="10"
-                          ServiceMethod="GetMeetingIdNoSuggestions" ServicePath="~/WebService.asmx" TargetControlID="txtMeetingNo"
-                          CompletionListCssClass="autocomplete_completionListElement222"
-                          CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" />
                   </div>
               </div>
               <div class="col-md-3 filter-group filter-meeting">
                   <div class="form-group">
                       <label>Meeting Title</label>
                       <asp:TextBox runat="server" ID="txtTitle" CssClass="form-control form-control-sm" />
-                      <cc1:AutoCompleteExtender ID="MeetingTitleAutoComplete" runat="server"
-                          EnableCaching="true" Enabled="True" MinimumPrefixLength="1" CompletionSetCount="10"
-                          ServiceMethod="GetMeetingTitleSuggestions" ServicePath="~/WebService.asmx" TargetControlID="txtTitle"
-                          CompletionListCssClass="autocomplete_completionListElement222"
-                          CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem" />
                   </div>
               </div>
               <div class="col-md-3 filter-group filter-meeting">
@@ -194,7 +340,7 @@
                   </div>
               </div>
 
-              <div class="col-md-3 filter-group filter-meeting">
+              <div class="col-md-3 filter-group filter-meeting" style="display: none;">
                   <div class="form-group">
                       <label>Classification</label>
                       <asp:DropDownList runat="server" ID="ddlClassificationSearch" CssClass="form-control form-control-sm">
@@ -207,13 +353,13 @@
               </div>
               <div class="col-md-3 filter-group filter-meeting">
                   <div class="form-group">
-                      <label>Meeting Date From</label>
+                      <label>Meeting Held From Date</label>
                       <asp:TextBox runat="server" TextMode="Date" ID="txtMeetingDateFrom" CssClass="form-control form-control-sm" />
                   </div>
               </div>
               <div class="col-md-3 filter-group filter-meeting">
                   <div class="form-group">
-                      <label>Meeting Date To</label>
+                      <label>Meeting Held To Date</label>
                       <asp:TextBox runat="server" TextMode="Date" ID="txtMeetingDateTo" CssClass="form-control form-control-sm" />
                   </div>
               </div>
@@ -224,19 +370,19 @@
                   </div>
               </div>
 
-              <div class="col-md-3 created-by-fields">
+              <div class="col-md-3 created-by-fields" style="display: none;">
                   <div class="form-group">
                       <label>Created Date From</label>
                       <asp:TextBox runat="server" TextMode="Date" ID="txtCreatedDate" CssClass="form-control form-control-sm" />
                   </div>
               </div>
-              <div class="col-md-3 created-by-fields">
+              <div class="col-md-3 created-by-fields" style="display: none;">
                   <div class="form-group">
                       <label>Created Date To</label>
                       <asp:TextBox runat="server" TextMode="Date" ID="txtToDate" CssClass="form-control form-control-sm" />
                   </div>
               </div>
-              <div class="col-md-3 filter-group filter-meeting">
+              <div class="col-md-3 filter-group filter-meeting" style="display: none;">
                   <div class="form-group">
                       <label>Meeting Status</label>
                       <asp:DropDownList runat="server" ID="ddlMeetingStatus" CssClass="form-control form-control-sm">
@@ -247,7 +393,7 @@
                       </asp:DropDownList>
                   </div>
               </div>
-              <div class="col-md-3 filter-group filter-approval">
+              <div class="col-md-3 filter-group filter-approval" style="display: none;">
                   <div class="form-group">
                       <label>Approval Status</label>
                       <asp:DropDownList runat="server" ID="ddlApprovalStatus" CssClass="form-control form-control-sm">
@@ -261,7 +407,7 @@
                   </div>
               </div>
 
-              <div class="col-md-3 filter-group filter-agenda">
+              <div class="col-md-3 filter-group filter-agenda" style="display: none;">
                   <div class="form-group">
                       <label>Implementation Status</label>
                       <asp:DropDownList runat="server" ID="ddlImplementationStatus" CssClass="form-control form-control-sm">
@@ -275,23 +421,34 @@
               <div class="col-md-3 filter-group filter-meeting">
                   <div class="form-group">
                       <label>Member / Employee ID</label>
-                      <asp:DropDownList runat="server" ID="ddlMemberEmployeeId" CssClass="form-control form-control-sm" />
+                      <asp:ListBox runat="server" ID="ddlMemberEmployeeId" SelectionMode="Multiple" CssClass="form-control form-control-sm" />
                   </div>
               </div>
-              <div class="col-md-3 filter-group filter-minutes">
-                  <div class="form-group">
-                      <label>Key Search</label>
-                      <asp:TextBox runat="server" ID="txtKeySearch" CssClass="form-control form-control-sm" />
-                      <cc1:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" DelimiterCharacters=""
-                          EnableCaching="true" Enabled="True" MinimumPrefixLength="1" CompletionSetCount="10"
-                          ServiceMethod="getMeetingKeySearch" ServicePath="~/WebService.asmx" TargetControlID="txtKeySearch"
-                          UseContextKey="True" CompletionListCssClass="autocomplete_completionListElement222"
-                          CompletionListItemCssClass="autocomplete_listItem" CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
-                          ShowOnlyCurrentWordInCompletionListItem="true">
-                      </cc1:AutoCompleteExtender>
-                      <asp:DropDownList runat="server" ID="ddlKeySearch" Visible="False" CssClass="form-control form-control-sm" />
-                  </div>
-              </div>
+               <div class="col-md-8 offset-md-2 filter-group filter-minutes">
+                   <div class="key-search-box">
+                       <div class="key-search-header">
+                           <label class="key-search-title">
+                               <i class="fa fa-search mr-2"></i> Key Search
+                           </label>
+                           <span class="key-search-badge">
+                               <i class="fa fa-magic mr-1"></i> Attachment Deep Scan
+                           </span>
+                       </div>
+                       <div class="key-search-input-wrapper">
+                           <i class="fa fa-keyboard-o search-icon"></i>
+                           <asp:TextBox runat="server" ID="txtKeySearch" CssClass="form-control search-textbox"
+                               placeholder="Search text inside PDF or image attachments..." />
+                           <div class="file-types-hint">
+                               <span class="badge-pdf"><i class="fa fa-file-pdf-o"></i> PDF</span>
+                               <span class="badge-img"><i class="fa fa-file-image-o"></i> IMG</span>
+                           </div>
+                       </div>
+                       <div class="key-search-footer-hint">
+                           <i class="fa fa-info-circle text-info mr-1"></i>
+                           Searches through OCR-extracted text and notes within uploaded meeting documents.
+                       </div>
+                   </div>
+               </div>
           </div>
 
           <script type="text/javascript">
@@ -310,6 +467,8 @@
                   } else {
                       $('.meeting-search-panel .filter-' + selectedSection.toLowerCase()).show();
                   }
+
+                  $('#<%=ddlClassificationSearch.ClientID%>, #<%=txtCreatedDate.ClientID%>, #<%=txtToDate.ClientID%>, #<%=ddlMeetingStatus.ClientID%>, #<%=ddlImplementationStatus.ClientID%>, #<%=ddlApprovalStatus.ClientID%>').closest('.col-md-3').hide();
               }
 
               function pageLoad() {
@@ -384,7 +543,7 @@
                            title: 'SMC',
                            messageTop: 'Meeting Status List',
                            exportOptions: {
-                               columns: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                               columns: [0, 1, 2, 3, 4, 5]
                            }
                        }
                        ]
@@ -419,7 +578,7 @@
                                   title: 'SMC',
                                   messageTop: 'Meeting Status List',
                                   exportOptions: {
-                                      columns: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                      columns: [0, 1, 2, 3, 4, 5]
                                   }
                               }
                               ]
@@ -528,22 +687,26 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
 
-                                              <asp:TemplateField HeaderText="Purpose">
+                                              <asp:TemplateField HeaderText="Meeting Notes">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lbl_Purpose" runat="server" Text='<%#Eval("MeetingPurpose") %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                     <asp:BoundField DataField="ActionStatusShow" HeaderText="Approval Status" />
+                                                     <asp:BoundField DataField="ActionStatusShow" HeaderText="Approval Status" Visible="False" />
                                         
-                                        <asp:BoundField DataField="AwEmpName" HeaderText="Awaiting Employee" />
+                                        <asp:BoundField DataField="AwEmpName" HeaderText="Awaiting Employee" Visible="False" />
                                                    <asp:TemplateField HeaderText="Created By">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lbl_CreateBy" runat="server" Text='<%#Eval("CreateBy") %>'></asp:Label>
+                                                        <asp:Label ID="lbl_CreateByName" runat="server" Text='<%#Eval("CreatedByEmployeeName") %>'></asp:Label>
+                                                        <asp:PlaceHolder runat="server" Visible='<%# !string.IsNullOrWhiteSpace(Convert.ToString(Eval("CreatedByEmployeeId"))) %>'>
+                                                            <br />
+                                                            <asp:Label ID="lbl_CreateByEmployeeId" runat="server" Text='<%#Eval("CreatedByEmployeeId") %>'></asp:Label>
+                                                        </asp:PlaceHolder>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 
                                                 
-                                                  <asp:BoundField DataField="CreateDate" HeaderText="Created Date" DataFormatString="{0:dd-MMM-yyyy}" /> 
+                                                  <asp:BoundField DataField="CreateDate" HeaderText="Created Date" DataFormatString="{0:dd-MMM-yyyy}" Visible="False" /> 
                                                 
                                                 
                                                 

@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" validaterequest="false" inherits="Survey_SurveyParticipantSendMAil, App_Web_5hdveotf" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" validaterequest="false" inherits="Survey_SurveyParticipantSendMAil, App_Web_olpokqsc" %>
 
 <%@ Register Assembly="FreeTextBox" Namespace="FreeTextBoxControls" TagPrefix="FTB" %>
 

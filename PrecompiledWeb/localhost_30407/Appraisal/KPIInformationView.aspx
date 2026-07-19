@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="Appraisal_KPIInformationView, App_Web_wydqcrei" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="Appraisal_KPIInformationView, App_Web_34c0ai3r" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 
@@ -415,20 +415,20 @@ background-color: #E24F3B !important;
                                     
                                     
                                     
-                                    <asp:TemplateField HeaderText="Reset Approval Person">
+                                    <asp:TemplateField HeaderText="Forwarding Person (This option will be disabled after approval)">
                                         <ItemTemplate>
-                                            <asp:LinkButton runat="server" ID="btn_KPI"  OnClick="btn_KPI_OnClick" CssClass="btn btn-xs btn-KPI" Text='<%#Eval("OptionInfo") %>'> 
+                                            <asp:LinkButton runat="server" ID="btn_KPI"  OnClick="btn_KPI_OnClick" CssClass="btn btn-xs btn-KPI" Text='<%# String.Format("{0} Forwarding", Eval("OptionInfo")) %>'  > 
                                             </asp:LinkButton>
                                             <div style="padding-top: 3px!important"></div>
                                             &nbsp;
                                             &nbsp;
-                                             <asp:LinkButton runat="server" ID="btnApprisal" OnClick="btnApprisal_OnClick" CssClass="btn btn-xs btn-Appraisal" >Appraisal
+                                             <asp:LinkButton runat="server" ID="btnApprisal" OnClick="btnApprisal_OnClick" CssClass="btn btn-xs btn-Appraisal" >Appraisal Forwarding
                                             </asp:LinkButton>                                                                                  
                                             
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
-                                     <asp:TemplateField HeaderText="Cancel Appraisal Approval">
+                                     <asp:TemplateField HeaderText="Remove Appraisal (Available after appraisal approval.)">
                                            <ItemTemplate>
                                           <asp:LinkButton runat="server" ID="lbApprisalCancel" OnClick="btnApprisalCancel_OnClick" CssClass="btn btn-xs btn-CancelApp" ToolTip="Click to Cancel Appraisal Approval" >Cancel
                                             </asp:LinkButton>
@@ -438,7 +438,7 @@ background-color: #E24F3B !important;
 
                                     
                                     
-                                    <asp:TemplateField HeaderText="Draft Info">
+                                    <asp:TemplateField HeaderText="Back to Draft Status">
                                         <ItemTemplate>
                                             <asp:LinkButton runat="server" ID="btn_ChangeMarks"   Visible='<%# Eval("ActionStatusAppraisal") != null && Eval("ActionStatusAppraisal").ToString() == "Approved" %>'  OnClientClick="return confirmChangeMarks('changeMark');" OnClick="btn_ChangeMarks_Click" CssClass="btn btn-sm button12"  >Change Mark 
                                             </asp:LinkButton>
@@ -450,14 +450,14 @@ background-color: #E24F3B !important;
             OnClientClick="return confirmChangeMarks('kpi');" 
             OnClick="btnDraftKPI_Click" 
             CssClass="btn btn-sm draft-btn kpi-btn"  
-            Text="KPI">
+            Text="Make the KPI Draft">
         </asp:LinkButton> 
         
         <asp:LinkButton runat="server" ID="btnDraftAppraisal" 
             OnClientClick="return confirmChangeMarks('appraisal');" 
             OnClick="btnDraftAppraisal_Click" 
             CssClass="btn btn-sm draft-btn appraisal-btn"  
-            Text="Appraisal">
+            Text="Make the Appraisal Draft">
         </asp:LinkButton>
     </ItemTemplate>
 </asp:TemplateField>

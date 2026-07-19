@@ -379,6 +379,14 @@
                                             <asp:DropDownList runat="server" ID="ddlComSearch" AutoPostBack="True" OnSelectedIndexChanged="ddlComSearch_OnSelectedIndexChanged" class="form-control form-control-sm" />
                                             <script type="text/javascript">
                                                 function pageLoad() {
+                                                    // Repaint the client-driven Add-Employees / Members-List tables
+                                                    // from their in-memory row arrays. This runs after the initial
+                                                    // load AND after every async postback (MS AJAX convention), which
+                                                    // is what lets these tables survive unrelated UpdatePanel refreshes
+                                                    // that would otherwise wipe their <tbody> markup.
+                                                    if (window.MeetingGridA) MeetingGridA.render();
+                                                    if (window.MeetingGridB) MeetingGridB.render();
+
                                                     var $chosenSelects = $(
                                                         '#<%=ddlComSearch.ClientID%>, ' +
                                                         '#<%=ddlDivision.ClientID%>, ' +
@@ -465,6 +473,7 @@
 
                                     <div class="member-search-actions">
                                         <asp:LinkButton runat="server" ID="btnAddToListEmp" CssClass="btn btn-success btn-sm"
+                                            OnClientClick="prepareGridAExistingCodes();"
                                             OnClick="btnStageMembers_OnClick"><i class="fa fa-plus-circle"></i>&nbsp; Add To List</asp:LinkButton>
                                     </div>
 
@@ -551,6 +560,7 @@
 
                                         <div class="text-right" style="margin-top: 12px;">
                                             <asp:LinkButton runat="server" ID="btnSubmitDraftMembers" CssClass="btn btn-info btn-sm"
+                                                OnClientClick="prepareGridAExistingCodes();"
                                                 OnClick="btnSubmitDraftMembers_OnClick"><i class="fa fa-check"></i>&nbsp; Submit</asp:LinkButton>
                                         </div>
                                     </div>
@@ -1221,69 +1231,18 @@
                                                                             </div>
                                                                         </ProgressTemplate>
                                                                     </asp:UpdateProgress>
-                                                                    <asp:GridView Width="100%" ShowHeader="True" ID="gv_BoardMember" runat="server" AutoGenerateColumns="false" CssClass="blueTableNew" OnPreRender="gv_DocumentUpload_PreRender">
-                                                                        <Columns>
-                                                                            <asp:TemplateField HeaderText="SL#">
-                                                                                <ItemTemplate>
-                                                                                    <%#Container.DataItemIndex + 1%>
-                                                                                    <asp:HiddenField runat="server" ID="hfBMemberSetupDetailsIDb" Value='<%#Eval("BMemberSetupDetailsID")%>' />
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-
-
-
-
-
-
-
-
-                                                                            <asp:TemplateField HeaderText="Employee Name">
-                                                                                <ItemTemplate>
-                                                                                    <asp:TextBox ID="txtBoardMember_EmpName" CssClass="form-control form-control-sm" runat="server" Text='<%#Eval("EmpName") %>'></asp:TextBox>
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-
-                                                                            <asp:TemplateField HeaderText="Designation">
-                                                                                <ItemTemplate>
-                                                                                    <asp:TextBox ID="txtBoardMember_Designation" CssClass="form-control form-control-sm" runat="server" Text='<%#Eval("Designation") %>'></asp:TextBox>
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-
-
-
-
-                                                                            <asp:TemplateField HeaderText="Position">
-                                                                                <ItemTemplate>
-
-                                                                                    <asp:DropDownList runat="server" Width="350px" ID="ddlPosition" class="form-control form-control-sm SelectMe33" />
-                                                                                    <asp:HiddenField runat="server" ID="hfBoardMemberPosition" Value='<%#Eval("Position")%>' />
-
-                                                                                    <asp:RadioButtonList runat="server" Visible="false" ID="chkBoardMemberPosition" AutoPostBack="True" OnSelectedIndexChanged="chkBoardMemberPosition_OnSelectedIndexChanged" CssClass="chkChoice" RepeatDirection="Horizontal">
-
-
-                                                                                        <asp:ListItem>Member</asp:ListItem>
-                                                                                        <asp:ListItem>Convenor</asp:ListItem>
-                                                                                        <asp:ListItem>Secretary</asp:ListItem>
-                                                                                    </asp:RadioButtonList>
-
-
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderText="Actions">
-                                                                                <ItemTemplate>
-
-                                                                                    <%-- <asp:LinkButton runat="server" ID="btnBoardMember_DetailsAdd"   OnClick="btnBoardMember_DetailsAdd_OnClick" CssClass="btn btn-sm btn-success"><i class="fa fa-plus"></i> </asp:LinkButton> --%>
-                                                                                    <asp:LinkButton runat="server" ID="btnBoardMember_DetailsRemove" OnClick="btnBoardMember_DetailsRemove_OnClick" CssClass="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i> </asp:LinkButton>
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-
-
-
-
-
-
-                                                                        </Columns>
-                                                                    </asp:GridView>
+                                                                    <table id="gridB_Table" width="100%" class="blueTableNew">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>SL#</th>
+                                                                                <th>Employee Name</th>
+                                                                                <th>Designation</th>
+                                                                                <th>Position</th>
+                                                                                <th>Actions</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="gridB_Body"></tbody>
+                                                                    </table>
                                                                 </ContentTemplate>
                                                             </asp:UpdatePanel>
 
@@ -1313,106 +1272,20 @@
                                                                              </div>
                                                                          </ProgressTemplate>
                                                                      </asp:UpdateProgress>
-                                                                     <asp:GridView Width="100%" ShowHeader="True" ID="gv_Details_Save" runat="server" AutoGenerateColumns="false" CssClass="blueTableNew" OnPreRender="gv_DocumentUpload_PreRender" OnRowDataBound="gv_Details_Save_RowDataBound">
-                                                                         <Columns>
-                                                                             <asp:TemplateField HeaderText="SL#">
-                                                                                 <ItemTemplate>
-                                                                                     <%#Container.DataItemIndex + 1%>
-                                                                                 </ItemTemplate>
-                                                                             </asp:TemplateField>
-
-
-
-                                                                             <asp:TemplateField HeaderText="Type">
-                                                                                 <ItemTemplate>
-                                                                                     <asp:RadioButtonList runat="server" ID="rbType" CssClass="chkChoice" AutoPostBack="True" OnSelectedIndexChanged="rbType_OnSelectedIndexChanged" RepeatDirection="Horizontal">
-
-
-                                                                                         <asp:ListItem>Employee</asp:ListItem>
-                                                                                         <asp:ListItem>Guest</asp:ListItem>
-                                                                                     </asp:RadioButtonList>
-
-                                                                                     <asp:HiddenField runat="server" ID="hfType" Value='<%#Eval("Type")%>' />
-
-                                                                                 </ItemTemplate>
-                                                                             </asp:TemplateField>
-
-                                                                              <asp:TemplateField HeaderText="Company">
-                                                                                  <ItemTemplate>
-                                                                                      <asp:RadioButtonList ID="ddlCompanySave" runat="server" CssClass="chkChoice" style="display: inline-block; min-width: 160px;" RepeatDirection="Horizontal" AutoPostBack="True" OnSelectedIndexChanged="ddlCompanySave_SelectedIndexChanged"></asp:RadioButtonList>
-                                                                                      <asp:HiddenField runat="server" ID="hfCompanySave" Value='<%#Eval("CompanyId")%>' />
-                                                                                      <asp:TextBox runat="server" ID="txt_EmpMasterCode" style="display:none" Text='<%#Eval("EmpMasterCode")%>'></asp:TextBox>
-                                                                                     <asp:HiddenField runat="server" ID="hfBMemberSetupDetailsID" Value='<%#Eval("BMemberSetupDetailsID")%>' />
-                                                                                     <asp:HiddenField runat="server" ID="hfIsBoardMember" Value='<%#Eval("IsBoardMember")%>' />
-                                                                                     <asp:HiddenField runat="server" ID="ShfEmpInfoId" Value='<%#Eval("EmpInfoId")%>' />
-                                                                                 </ItemTemplate>
-                                                                             </asp:TemplateField>
-
-                                                                             <asp:TemplateField HeaderText="Employee Name">
-                                                                                 <ItemTemplate>
-                                                                                     <div class="emp-typeahead-wrap" style="position: relative; width: 220px;">
-                                                                                         <asp:TextBox ID="txt_EmpName" CssClass="form-control form-control-sm emp-typeahead-input" runat="server" autocomplete="off" style="width: 220px !important;" Text='<%#Eval("EmpName") %>'></asp:TextBox>
-                                                                                         <div class="emp-typeahead-results"></div>
-                                                                                     </div>
-                                                                                 </ItemTemplate>
-                                                                             </asp:TemplateField>
-
-                                                                            <asp:TemplateField HeaderText="Designation">
-                                                                                <ItemTemplate>
-                                                                                    <asp:TextBox ID="txt_Designation" CssClass="form-control form-control-sm" runat="server" style="width: 160px !important;" Text='<%#Eval("Designation") %>'></asp:TextBox>
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-
-                                                                            <asp:TemplateField HeaderText="Notification" Visible="False">
-                                                                                <ItemTemplate>
-
-                                                                                    <asp:HiddenField runat="server" ID="HiNotificationEmail" Value='<%#Eval("NotificationEmail")%>' />
-                                                                                    <asp:HiddenField runat="server" ID="hfNotificationSMS" Value='<%#Eval("NotificationSMS")%>' />
-
-
-                                                                                    <asp:CheckBoxList runat="server" ID="chkNotification" AutoPostBack="True" OnSelectedIndexChanged="chkNotification_OnSelectedIndexChanged" CssClass="chkChoice" RepeatDirection="Horizontal">
-
-
-                                                                                        <asp:ListItem>Email</asp:ListItem>
-                                                                                        <asp:ListItem>SMS</asp:ListItem>
-                                                                                    </asp:CheckBoxList>
-
-
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-
-
-                                                                            <asp:TemplateField HeaderText="Position">
-                                                                                <ItemTemplate>
-                                                                                    <asp:HiddenField runat="server" ID="hfPosition" Value='<%#Eval("Position")%>' />
-
-
-                                                                                    <asp:RadioButtonList runat="server" ID="chkPosition" AutoPostBack="True" OnSelectedIndexChanged="chkPosition_OnSelectedIndexChanged" CssClass="chkChoice" RepeatDirection="Horizontal">
-
-
-                                                                                        <asp:ListItem>Member</asp:ListItem>
-                                                                                        <asp:ListItem>Convenor</asp:ListItem>
-                                                                                        <asp:ListItem>Secretary</asp:ListItem>
-                                                                                    </asp:RadioButtonList>
-
-
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderText="Actions">
-                                                                                <ItemTemplate>
-
-                                                                                    <asp:LinkButton runat="server" ID="btn_DetailsAdd" OnClick="btn_DetailsAdd_OnClick" CssClass="btn btn-sm btn-success"><i class="fa fa-plus"></i> </asp:LinkButton>
-                                                                                    <asp:LinkButton runat="server" ID="btn_DetailsRemove" OnClick="btn_DetailsRemove_OnClick" CssClass="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i> </asp:LinkButton>
-                                                                                </ItemTemplate>
-                                                                            </asp:TemplateField>
-
-
-
-
-
-
-                                                                        </Columns>
-                                                                    </asp:GridView>
+                                                                                     <table id="gridA_Table" width="100%" class="blueTableNew">
+                                                                                         <thead>
+                                                                                             <tr>
+                                                                                                 <th>SL#</th>
+                                                                                                 <th>Type</th>
+                                                                                                 <th>Company</th>
+                                                                                                 <th>Employee Name</th>
+                                                                                                 <th>Designation</th>
+                                                                                                 <th>Position</th>
+                                                                                                 <th>Actions</th>
+                                                                                             </tr>
+                                                                                         </thead>
+                                                                                         <tbody id="gridA_Body"></tbody>
+                                                                                     </table>
                                                                 </ContentTemplate>
                                                             </asp:UpdatePanel>
 
@@ -1653,11 +1526,14 @@
                                                     <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
                                                         <div class="col-md-12 text-left">
                                                             <asp:LinkButton ID="submitButton" Visible="False" OnClick="btnSave_OnClick"
-                                                                OnClientClick="return confirm('Are you sure you want to Submit ?')"
+                                                                OnClientClick="return handleMeetingGridsSave() &amp;&amp; confirm('Are you sure you want to Submit ?')"
                                                                 CssClass="btn btn-lg btn-info" runat="server">&nbsp; Submit</asp:LinkButton>
                                                             <asp:HiddenField runat="server" ID="id_mastetID" />
+                                                            <asp:HiddenField runat="server" ID="hfGridA_Json" />
+                                                            <asp:HiddenField runat="server" ID="hfGridB_Json" />
+                                                            <asp:HiddenField runat="server" ID="hfGridA_ExistingCodes" />
                                                             <asp:LinkButton ID="editButton"
-                                                                OnClientClick="return confirm('Are you sure you want to Update ?')"
+                                                                OnClientClick="return handleMeetingGridsSave() &amp;&amp; confirm('Are you sure you want to Update ?')"
                                                                 CssClass="btn btn-lg btn-info" Visible="False" runat="server"
                                                                 OnClick="editButton_OnClick">&nbsp; Update &amp; Submit</asp:LinkButton>
                                                         </div>
@@ -2243,6 +2119,13 @@
                     }
 
                     function selectEmployee(input, row, box, item) {
+                        var rowIdx = row.getAttribute('data-row-idx');
+                        if (window.MeetingGridA && MeetingGridA.isDuplicateEmployee(item.EmpMasterCode, parseInt(rowIdx, 10))) {
+                            alert('Already Exist !!!');
+                            hideResults(box);
+                            return;
+                        }
+
                         input.value = item.EmpName;
                         input.setAttribute('data-selected-name', item.EmpName);
 
@@ -2253,6 +2136,10 @@
                         if (hfEmpInfo) hfEmpInfo.value = item.EmpInfoId;
                         if (hfCode) hfCode.value = item.EmpMasterCode;
                         if (txtDesg) txtDesg.value = item.Designation || '';
+
+                        // The typeahead only mutates DOM fields directly (no input/change event),
+                        // so pull the pick back into MeetingGridA's row array here.
+                        if (window.MeetingGridA) MeetingGridA.syncRowFromDom(row);
 
                         hideResults(box);
                     }
@@ -2365,6 +2252,321 @@
                         });
                     });
                 })();
+            </script>
+
+            <script type="text/javascript">
+                // Client-driven replacements for the old gv_Details_Save ("Add Employees") and
+                // gv_BoardMember ("Members List") GridViews. Row state lives only in these two
+                // in-memory arrays; the server never renders rows into the <tbody> markup again
+                // after the first paint. render() is called from pageLoad() (see the script near
+                // the top of this page), which MS AJAX invokes after the initial load AND after
+                // every async postback — that's what makes these tables survive unrelated
+                // UpdatePanel refreshes elsewhere on this page (they'd otherwise lose their rows
+                // since the <tbody> markup itself gets wiped and re-sent empty on every such
+                // postback). Only the page's Submit / Update & Submit buttons ever read this
+                // state back into the server, via handleMeetingGridsSave() serializing both
+                // arrays into hidden fields right before those buttons' postback fires.
+                function escapeHtml(s) {
+                    return String(s == null ? '' : s)
+                        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                }
+
+                window.MeetingGridA = (function () {
+                    var rows = [];
+                    var referenceData = { companies: [] };
+
+                    function blankRow() {
+                        return {
+                            Type: '', CompanyId: '', EmpMasterCode: '', EmpInfoId: null,
+                            EmpName: '', Designation: '', Position: '',
+                            IsBoardMember: '0', BMemberSetupDetailsID: '0'
+                        };
+                    }
+
+                    function normalize(r) {
+                        return {
+                            Type: r.Type || '',
+                            CompanyId: (r.CompanyId === undefined || r.CompanyId === null) ? '' : String(r.CompanyId),
+                            EmpMasterCode: r.EmpMasterCode || '',
+                            EmpInfoId: (r.EmpInfoId === undefined || r.EmpInfoId === null || r.EmpInfoId === '') ? null : r.EmpInfoId,
+                            EmpName: r.EmpName || '',
+                            Designation: r.Designation || '',
+                            Position: r.Position || '',
+                            IsBoardMember: '0',
+                            BMemberSetupDetailsID: (r.BMemberSetupDetailsID === undefined || r.BMemberSetupDetailsID === null || r.BMemberSetupDetailsID === '') ? '0' : String(r.BMemberSetupDetailsID)
+                        };
+                    }
+
+                    function companyOptionsHtml(idx, selectedCompanyId) {
+                        var html = '';
+                        (referenceData.companies || []).forEach(function (c) {
+                            var checked = (String(c.Value) === String(selectedCompanyId)) ? ' checked' : '';
+                            html += '<label style="margin-right:10px;font-weight:normal;">' +
+                                '<input type="radio" name="gridA_' + idx + '_company" value="' + escapeHtml(c.Value) + '"' + checked + '> ' +
+                                escapeHtml(c.TextField) + '</label>';
+                        });
+                        return html;
+                    }
+
+                    var POSITIONS = ['Member', 'Convenor', 'Secretary'];
+
+                    function rowHtml(r, idx) {
+                        var typeEmployee = r.Type === 'Employee' ? ' checked' : '';
+                        var typeGuest = r.Type === 'Guest' ? ' checked' : '';
+                        var companyDisabled = r.Type === 'Guest' ? ' disabled' : '';
+
+                        var positionsHtml = POSITIONS.map(function (p) {
+                            var checked = r.Position === p ? ' checked' : '';
+                            return '<label style="margin-right:8px;font-weight:normal;"><input type="radio" name="gridA_' + idx + '_position" value="' + p + '"' + checked + '> ' + p + '</label>';
+                        }).join('');
+
+                        return '' +
+                            '<tr data-row-idx="' + idx + '">' +
+                            '<td>' + (idx + 1) + '</td>' +
+                            '<td><span id="gridA_row_' + idx + '_rbType" class="chkChoice">' +
+                            '<label style="margin-right:10px;font-weight:normal;"><input type="radio" name="gridA_' + idx + '_type" value="Employee"' + typeEmployee + '> Employee</label>' +
+                            '<label style="font-weight:normal;"><input type="radio" name="gridA_' + idx + '_type" value="Guest"' + typeGuest + '> Guest</label>' +
+                            '</span></td>' +
+                            '<td><span id="gridA_row_' + idx + '_ddlCompanySave" class="chkChoice"' + companyDisabled + '>' + companyOptionsHtml(idx, r.CompanyId) + '</span></td>' +
+                            '<td>' +
+                            '<div class="emp-typeahead-wrap" style="position: relative; width: 220px;">' +
+                            '<input type="text" id="gridA_row_' + idx + '_txt_EmpName" class="form-control form-control-sm emp-typeahead-input" autocomplete="off" style="width: 220px !important;" value="' + escapeHtml(r.EmpName) + '">' +
+                            '<div class="emp-typeahead-results"></div>' +
+                            '</div>' +
+                            '<input type="hidden" id="gridA_row_' + idx + '_ShfEmpInfoId" value="' + escapeHtml(r.EmpInfoId == null ? '' : r.EmpInfoId) + '">' +
+                            '<input type="text" id="gridA_row_' + idx + '_txt_EmpMasterCode" style="display:none" value="' + escapeHtml(r.EmpMasterCode) + '">' +
+                            '</td>' +
+                            '<td><input type="text" id="gridA_row_' + idx + '_txt_Designation" class="form-control form-control-sm" style="width: 160px !important;" value="' + escapeHtml(r.Designation) + '"></td>' +
+                            '<td>' + positionsHtml + '</td>' +
+                            '<td>' +
+                            '<button type="button" class="btn btn-sm btn-success" data-action="addA" data-row-idx="' + idx + '"><i class="fa fa-plus"></i></button> ' +
+                            '<button type="button" class="btn btn-sm btn-danger" data-action="removeA" data-row-idx="' + idx + '"><i class="fa fa-minus-circle"></i></button>' +
+                            '</td>' +
+                            '</tr>';
+                    }
+
+                    function render() {
+                        var body = document.getElementById('gridA_Body');
+                        if (!body) return;
+                        body.innerHTML = rows.map(rowHtml).join('');
+                    }
+
+                    return {
+                        get rows() { return rows; },
+                        setReferenceData: function (companies) {
+                            referenceData.companies = companies || [];
+                        },
+                        hydrate: function (jsonRows) {
+                            rows = (jsonRows || []).map(normalize);
+                            if (rows.length === 0) rows = [blankRow()];
+                        },
+                        appendRows: function (jsonRows) {
+                            (jsonRows || []).forEach(function (r) { rows.push(normalize(r)); });
+                        },
+                        addRowAfter: function (idx) {
+                            rows.splice(idx + 1, 0, blankRow());
+                            render();
+                        },
+                        removeRow: function (idx) {
+                            rows.splice(idx, 1);
+                            if (rows.length === 0) rows = [blankRow()];
+                            render();
+                        },
+                        isDuplicateEmployee: function (empMasterCode, excludeIdx) {
+                            if (!empMasterCode) return false;
+                            for (var i = 0; i < rows.length; i++) {
+                                if (i === excludeIdx) continue;
+                                if (rows[i].EmpMasterCode && rows[i].EmpMasterCode.toLowerCase() === String(empMasterCode).toLowerCase()) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        },
+                        syncRowFromDom: function (rowEl) {
+                            var idx = parseInt(rowEl.getAttribute('data-row-idx'), 10);
+                            if (isNaN(idx) || !rows[idx]) return;
+                            var hfEmpInfo = rowEl.querySelector('[id$="_ShfEmpInfoId"]');
+                            var hfCode = rowEl.querySelector('[id$="_txt_EmpMasterCode"]');
+                            var txtName = rowEl.querySelector('[id$="_txt_EmpName"]');
+                            var txtDesg = rowEl.querySelector('[id$="_txt_Designation"]');
+                            rows[idx].EmpInfoId = hfEmpInfo && hfEmpInfo.value !== '' ? hfEmpInfo.value : null;
+                            rows[idx].EmpMasterCode = hfCode ? hfCode.value : '';
+                            rows[idx].EmpName = txtName ? txtName.value : '';
+                            rows[idx].Designation = txtDesg ? txtDesg.value : '';
+                        },
+                        render: render
+                    };
+                })();
+
+                window.MeetingGridB = (function () {
+                    var rows = [];
+                    var positionOptions = [];
+
+                    function blankRow() {
+                        return { EmpName: '', Designation: '', Position: '', BMemberSetupDetailsID: '0' };
+                    }
+
+                    function normalize(r) {
+                        return {
+                            EmpName: r.EmpName || '',
+                            Designation: r.Designation || '',
+                            Position: r.Position || '',
+                            BMemberSetupDetailsID: (r.BMemberSetupDetailsID === undefined || r.BMemberSetupDetailsID === null || r.BMemberSetupDetailsID === '') ? '0' : String(r.BMemberSetupDetailsID)
+                        };
+                    }
+
+                    function positionOptionsHtml(selectedText) {
+                        return (positionOptions || []).map(function (p) {
+                            var selected = p.TextField === selectedText ? ' selected' : '';
+                            return '<option value="' + escapeHtml(p.Value) + '"' + selected + '>' + escapeHtml(p.TextField) + '</option>';
+                        }).join('');
+                    }
+
+                    function rowHtml(r, idx) {
+                        return '' +
+                            '<tr data-row-idx="' + idx + '">' +
+                            '<td>' + (idx + 1) + '</td>' +
+                            '<td><input type="text" id="gridB_row_' + idx + '_txtBoardMember_EmpName" class="form-control form-control-sm" value="' + escapeHtml(r.EmpName) + '"></td>' +
+                            '<td><input type="text" id="gridB_row_' + idx + '_txtBoardMember_Designation" class="form-control form-control-sm" value="' + escapeHtml(r.Designation) + '"></td>' +
+                            '<td><select id="gridB_row_' + idx + '_ddlPosition" class="form-control form-control-sm SelectMe33">' + positionOptionsHtml(r.Position) + '</select></td>' +
+                            '<td><button type="button" class="btn btn-sm btn-danger" data-action="removeB" data-row-idx="' + idx + '"><i class="fa fa-minus-circle"></i></button></td>' +
+                            '</tr>';
+                    }
+
+                    function render() {
+                        var body = document.getElementById('gridB_Body');
+                        if (!body) return;
+                        body.innerHTML = rows.map(rowHtml).join('');
+                    }
+
+                    return {
+                        get rows() { return rows; },
+                        setPositionOptions: function (positions) {
+                            positionOptions = positions || [];
+                        },
+                        hydrate: function (jsonRows) {
+                            rows = (jsonRows || []).map(normalize);
+                            if (rows.length === 0) rows = [blankRow()];
+                        },
+                        removeRow: function (idx) {
+                            rows.splice(idx, 1);
+                            if (rows.length === 0) rows = [blankRow()];
+                            render();
+                        },
+                        render: render
+                    };
+                })();
+
+                // Structural changes (add/remove row) — these re-render, so Chosen (on Grid B's
+                // Position <select>) gets destroyed/recreated only here, never on every keystroke.
+                document.addEventListener('click', function (e) {
+                    var btn = e.target.closest ? e.target.closest('[data-action]') : null;
+                    if (!btn) return;
+                    var idx = parseInt(btn.getAttribute('data-row-idx'), 10);
+                    if (isNaN(idx)) return;
+
+                    switch (btn.getAttribute('data-action')) {
+                        case 'addA':
+                            MeetingGridA.addRowAfter(idx);
+                            break;
+                        case 'removeA':
+                            MeetingGridA.removeRow(idx);
+                            break;
+                        case 'removeB':
+                            MeetingGridB.removeRow(idx);
+                            break;
+                    }
+                });
+
+                // Value-only changes (radios/select) — sync into the row array without a full
+                // re-render, except Type/Company which also reset the row's employee fields
+                // (matching the old rbType_OnSelectedIndexChanged / ddlCompanySave_SelectedIndexChanged
+                // behavior) and so do need a re-render to reflect the clear + enable/disable.
+                document.addEventListener('change', function (e) {
+                    var el = e.target;
+                    var rowEl = el.closest ? el.closest('tr') : null;
+                    if (!rowEl) return;
+                    var idx = parseInt(rowEl.getAttribute('data-row-idx'), 10);
+                    if (isNaN(idx)) return;
+
+                    if (rowEl.parentElement && rowEl.parentElement.id === 'gridA_Body') {
+                        if (!MeetingGridA.rows[idx]) return;
+                        if (el.type === 'radio' && el.name.indexOf('_type') > -1) {
+                            var row = MeetingGridA.rows[idx];
+                            row.Type = el.value;
+                            row.EmpInfoId = null;
+                            row.EmpMasterCode = '';
+                            row.EmpName = '';
+                            row.Designation = '';
+                            if (el.value === 'Guest') row.CompanyId = '';
+                            MeetingGridA.render();
+                        } else if (el.type === 'radio' && el.name.indexOf('_company') > -1) {
+                            var row2 = MeetingGridA.rows[idx];
+                            row2.CompanyId = el.value;
+                            row2.EmpInfoId = null;
+                            row2.EmpMasterCode = '';
+                            row2.EmpName = '';
+                            row2.Designation = '';
+                            MeetingGridA.render();
+                        } else if (el.type === 'radio' && el.name.indexOf('_position') > -1) {
+                            MeetingGridA.rows[idx].Position = el.value;
+                        }
+                    } else if (rowEl.parentElement && rowEl.parentElement.id === 'gridB_Body') {
+                        if (!MeetingGridB.rows[idx]) return;
+                        if (el.tagName === 'SELECT') {
+                            MeetingGridB.rows[idx].Position = el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '';
+                        }
+                    }
+                });
+
+                // Plain keystrokes — sync only, never re-render (keeps focus/typing smooth and
+                // leaves Grid B's Chosen widget untouched).
+                document.addEventListener('input', function (e) {
+                    var el = e.target;
+                    var rowEl = el.closest ? el.closest('tr') : null;
+                    if (!rowEl) return;
+                    var idx = parseInt(rowEl.getAttribute('data-row-idx'), 10);
+                    if (isNaN(idx)) return;
+
+                    if (rowEl.parentElement && rowEl.parentElement.id === 'gridA_Body' && MeetingGridA.rows[idx]) {
+                        if (el.id.indexOf('_txt_Designation') > -1) {
+                            MeetingGridA.rows[idx].Designation = el.value;
+                        } else if (el.classList.contains('emp-typeahead-input')) {
+                            MeetingGridA.rows[idx].EmpName = el.value;
+                        }
+                    } else if (rowEl.parentElement && rowEl.parentElement.id === 'gridB_Body' && MeetingGridB.rows[idx]) {
+                        if (el.id.indexOf('_txtBoardMember_EmpName') > -1) {
+                            MeetingGridB.rows[idx].EmpName = el.value;
+                        } else if (el.id.indexOf('_txtBoardMember_Designation') > -1) {
+                            MeetingGridB.rows[idx].Designation = el.value;
+                        }
+                    }
+                }, true);
+
+                // Populates hfGridA_ExistingCodes right before a postback that needs to know
+                // Grid A's current EmpMasterCodes server-side (the Search-Member modal's
+                // "Add To List" / "Submit" buttons, which check for duplicates via CheckEmpList()).
+                function prepareGridAExistingCodes() {
+                    var codes = MeetingGridA.rows
+                        .map(function (r) { return r.EmpMasterCode || ''; })
+                        .filter(function (c) { return c; });
+                    var hf = document.getElementById('<%= hfGridA_ExistingCodes.ClientID %>');
+                    if (hf) hf.value = codes.join('|');
+                }
+
+                // Populates hfGridA_Json / hfGridB_Json right before the page's Submit / Update &
+                // Submit postback, which is what SaveUpdateInfo() reads server-side instead of
+                // walking GridView rows. Always returns true — the boolean is only there so it
+                // can be chained with "&& confirm(...)" in OnClientClick and still let the
+                // confirm's own answer decide whether the postback proceeds.
+                function handleMeetingGridsSave() {
+                    var hfA = document.getElementById('<%= hfGridA_Json.ClientID %>');
+                    var hfB = document.getElementById('<%= hfGridB_Json.ClientID %>');
+                    if (hfA) hfA.value = JSON.stringify(MeetingGridA.rows);
+                    if (hfB) hfB.value = JSON.stringify(MeetingGridB.rows);
+                    return true;
+                }
             </script>
 
         </div>

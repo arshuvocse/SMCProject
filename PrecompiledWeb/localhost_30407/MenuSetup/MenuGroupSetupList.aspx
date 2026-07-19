@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="MenuSetup_MenuGroupSetupList, App_Web_bvyyj4ad" %>
+﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="MenuSetup_MenuGroupSetupList, App_Web_x0z2nf0z" %>
 <asp:Content ID="c1" ContentPlaceHolderID="head" runat="Server">
     <link href="../Assets/MaterialDT/dataTables.material.min.css" rel="stylesheet" />
     <link href="../Assets/MaterialDT/material.min.css" rel="stylesheet" />

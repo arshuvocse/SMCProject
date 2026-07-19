@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Training_BudgetWiseAllocationList, App_Web_mbpnwvle" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Training_BudgetWiseAllocationList, App_Web_oihwcrk1" %>
 
 <asp:Content ID="c1" ContentPlaceHolderID="head" runat="Server">
     <link href="../Assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" />

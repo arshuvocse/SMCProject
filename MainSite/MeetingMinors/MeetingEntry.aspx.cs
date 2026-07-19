@@ -16,6 +16,7 @@ using DAO.HRIS_DAO;
 using DAO.HRIS_DAO_EF;
 using DAO.MeetingMinorsDAO;
 using HELPER_FUNCTIONS.HELPERS;
+using Newtonsoft.Json;
 
 public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
 {
@@ -56,15 +57,85 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         }
     }
 
+    // Client-driven "Add Employees" (MeetingGridA) / "Members List" (MeetingGridB) tables.
+    // These replace the old gv_Details_Save / gv_BoardMember GridViews: row state now lives
+    // in a JS array, and these helpers just hand the browser fresh JSON to hydrate/append —
+    // no ViewState, no FindControl. See MeetingGridA/MeetingGridB in the .aspx for the client side.
+    private void EmitGridReferenceData()
+    {
+        // The old ddlCompanySave RowDataBound stripped a "Select..." placeholder row that
+        // CompaniesCache includes for dropdown use — do the same here since Grid A's Company
+        // options are rendered as a radio group (no placeholder needed).
+        DataTable companies = CompaniesCache.Clone();
+        foreach (DataRow row in CompaniesCache.Rows)
+        {
+            if (!string.Equals(row["TextField"].ToString(), "Select...", StringComparison.OrdinalIgnoreCase))
+            {
+                companies.ImportRow(row);
+            }
+        }
+
+        string companiesJson = JsonConvert.SerializeObject(companies);
+        string positionsJson = JsonConvert.SerializeObject(MemberPositionCache);
+        string script = "MeetingGridA.setReferenceData(" + companiesJson + ");MeetingGridB.setPositionOptions(" + positionsJson + ");";
+        ClientScript.RegisterStartupScript(this.GetType(), "MeetingGridRefData", script, true);
+    }
+
+    private void EmitGridAJson(bool replace, DataTable rows)
+    {
+        string json = JsonConvert.SerializeObject(rows ?? new DataTable());
+        string method = replace ? "hydrate" : "appendRows";
+        string script = "MeetingGridA." + method + "(" + json + ");";
+        ClientScript.RegisterStartupScript(this.GetType(), "GridA_" + Guid.NewGuid().ToString("N"), script, true);
+    }
+
+    // Board-Member Position arrives from different sources as either a numeric PositionId
+    // (Category/Sub-Committee queries) or an already-resolved text label (edit-mode load,
+    // and what Save always writes) — resolve to text here so the client never has to care.
+    private void ResolveBoardMemberPositionText(DataTable dt)
+    {
+        if (dt == null || dt.Rows.Count == 0 || !dt.Columns.Contains("PositionId"))
+            return;
+
+        if (dt.Columns.Contains("Position"))
+            dt.Columns.Remove("Position");
+        dt.Columns.Add("Position", typeof(string));
+
+        DataTable positions = MemberPositionCache;
+        foreach (DataRow row in dt.Rows)
+        {
+            string posId = row["PositionId"] == null ? "" : row["PositionId"].ToString();
+            string label = "";
+            foreach (DataRow p in positions.Rows)
+            {
+                if (string.Equals(p["Value"].ToString(), posId, StringComparison.OrdinalIgnoreCase))
+                {
+                    label = p["TextField"].ToString();
+                    break;
+                }
+            }
+            row["Position"] = label;
+        }
+    }
+
+    private void EmitGridBJson(DataTable rows)
+    {
+        DataTable dt = rows ?? new DataTable();
+        ResolveBoardMemberPositionText(dt);
+        string json = JsonConvert.SerializeObject(dt);
+        string script = "MeetingGridB.hydrate(" + json + ");";
+        ClientScript.RegisterStartupScript(this.GetType(), "GridB_" + Guid.NewGuid().ToString("N"), script, true);
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
          Page.Form.Attributes.Add("enctype", "multipart/form-data");
          FUDocument.Attributes["onchange"] = "UploadFile(this)";
+        EmitGridReferenceData();
         if (!IsPostBack)
         {
        ButtonVisible();
             LoadInitialGrid();
-            LoadInitialGridDetails_Save();
             LoadDropDownList();
 
             if (!string.IsNullOrEmpty(Request.QueryString["MID"]))
@@ -197,87 +268,10 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
                 }
 
                 DataTable MeetingInfoDetail = AMeetingEntryDal.GetMeetingInfoDetailByIdEmp(id_mastetID.Value);
-                if (MeetingInfoDetail.Rows.Count > 0)
-                {
-                    ViewState["gv_Details_List"] = MeetingInfoDetail;
-                    gv_Details_Save.DataSource = MeetingInfoDetail;
-                    gv_Details_Save.DataBind();
-
-
-                    for (int i = 0; i < MeetingInfoDetail.Rows.Count; i++)
-                    {
-                        RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType"));
-                        rbType.SelectedValue = MeetingInfoDetail.Rows[i]["Type"].ToString();
-
-                        CheckBoxList chkNotification = ((CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification"));
-
-                        bool NotificationEmail = Convert.ToBoolean(MeetingInfoDetail.Rows[i]["NotificationEmail"].ToString());
-                        bool NotificationSMS = Convert.ToBoolean(MeetingInfoDetail.Rows[i]["NotificationSMS"].ToString());
-
-                        if (NotificationEmail==true)
-                        {
-                            chkNotification.Items[0].Selected = true;
-                        }
-
-                        if (NotificationSMS == true)
-                        {
-                            chkNotification.Items[1].Selected = true;
-                        }
-
-
- 
-
-
-                        RadioButtonList chkPosition = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition"));
-
-
-
-                        chkPosition.SelectedValue = MeetingInfoDetail.Rows[i]["Position"].ToString();
-
-                    }
-                }
-
+                EmitGridAJson(true, MeetingInfoDetail);
 
                 DataTable MeetingInfoDetailemp = AMeetingEntryDal.GetMeetingInfoDetailByIdBoardMember(id_mastetID.Value);
-                if (MeetingInfoDetailemp.Rows.Count > 0)
-                {
-                    ViewState["gv_BoardMember_List"] = MeetingInfoDetailemp;
-                    gv_BoardMember.DataSource = MeetingInfoDetailemp;
-                    gv_BoardMember.DataBind();
-
-                    DataTable dtMemberPostion = aMinors.GetDDLMemberPostion();
-
-                    for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-                    {
-                        DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-                        ddlPosition.DataSource = dtMemberPostion;
-                        ddlPosition.DataValueField = "Value";
-                        ddlPosition.DataTextField = "TextField";
-                        ddlPosition.DataBind();
-
-                       
-                                ddlPosition.SelectedItem.Text = MeetingInfoDetailemp.Rows[i]["Position"].ToString();
-                           
-
-
-                        
-                    }
-                    //for (int i = 0; i < MeetingInfoDetailemp.Rows.Count; i++)
-                    //{
-
-
-
-                    //    DropDownList ddlPosition = ((DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition"));
-
-                    //    RadioButtonList chkBoardMemberPosition = ((RadioButtonList)gv_BoardMember.Rows[i].FindControl("chkBoardMemberPosition"));
-
-
-
-                    //    chkBoardMemberPosition.SelectedValue = MeetingInfoDetailemp.Rows[i]["Position"].ToString();
-                    //    ddlPosition.SelectedValue = MeetingInfoDetailemp.Rows[i]["Position"].ToString();
-
-                    //}
-                }
+                EmitGridBJson(MeetingInfoDetailemp);
                 DataTable ApprovalPath = AMeetingEntryDal.GetMeetingApprovalPathById(id_mastetID.Value);
                 if (ApprovalPath.Rows.Count > 0)
                 {
@@ -413,89 +407,6 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
 
     }
 
-
-    private void LoadInitialGridDetails_Save()
-    {
-        DataTable dtDetails = new DataTable();
-
-        dtDetails.Columns.Add("Type");
-        dtDetails.Columns.Add("CompanyId");
-
-        dtDetails.Columns.Add("EmpMasterCode");
-        dtDetails.Columns.Add("EmpInfoId");
-        dtDetails.Columns.Add("EmpName");
-        dtDetails.Columns.Add("Designation");
-        dtDetails.Columns.Add("NotificationEmail");
-        dtDetails.Columns.Add("NotificationSMS");
-        dtDetails.Columns.Add("Position");
-        dtDetails.Columns.Add("IsBoardMember");
-        dtDetails.Columns.Add("BMemberSetupDetailsID");
-        
-        
-
-        DataRow dr = null;
-        dr = dtDetails.NewRow();
-
-        dr["Type"] = "";
-        dr["CompanyId"] = "";
-
-        dr["EmpMasterCode"] = "";
-        dr["EmpInfoId"] = "";
-        dr["EmpName"] = "";
-        dr["Designation"] = "";
-
-        dr["NotificationEmail"] = "";
-        dr["NotificationSMS"] = "";
-        dr["Position"] = "";
-        dr["IsBoardMember"] = "";
-        dr["BMemberSetupDetailsID"] = "";
-        
-
-
-
-        dtDetails.Rows.Add(dr);
-
-        gv_Details_Save.DataSource = null;
-        gv_Details_Save.DataBind();
-        gv_Details_Save.DataSource = dtDetails;
-        gv_Details_Save.DataBind();
-
-    }
-
-    private void LoadInitialGridBoardMember()
-    {
-        DataTable dtDetails = new DataTable();
-         
-         
-        dtDetails.Columns.Add("EmpName");
-        dtDetails.Columns.Add("Designation"); 
-        dtDetails.Columns.Add("Position");
-        dtDetails.Columns.Add("BMemberSetupDetailsID"); 
-
-        
-
-        DataRow dr = null;
-        dr = dtDetails.NewRow();
-
-        
-        dr["EmpName"] = "";
-        dr["Designation"] = "";
-
-
-        dr["Position"] = "";
-        dr["BMemberSetupDetailsID"] = "";
-       
-
-
-
-        dtDetails.Rows.Add(dr);
-
-        gv_BoardMember.DataSource = null;
-        gv_BoardMember.DataBind();
-        gv_BoardMember.DataSource = dtDetails;
-        gv_BoardMember.DataBind();
-
-    }
 
     public void ButtonVisible()
     {
@@ -790,115 +701,6 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         //    HyperLink2.Text = "No File Uploaded";
         }
     }
-    protected void btn_DetailsRemove_OnClick(object sender, EventArgs e)
-    {
-        LinkButton lb = (LinkButton)sender;
-        GridViewRow gvRow = (GridViewRow)lb.NamingContainer;
-        int rowID = gvRow.RowIndex;
-        if (ViewState["gv_Details_List"] != null)
-        {
-            DataTable dt = (DataTable)ViewState["gv_Details_List"];
-            for (int i = 0; i < gv_Details_Save.Rows.Count; i++)
-            {
-                RadioButtonList rbType = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType");
-                RadioButtonList ddlCompanySave = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("ddlCompanySave");
-                HiddenField ShfEmpInfoId = (HiddenField)gv_Details_Save.Rows[i].FindControl("ShfEmpInfoId");
-                TextBox txt_EmpName = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpName");
-                TextBox txt_Designation = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_Designation");
-                TextBox txt_EmpMasterCode = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpMasterCode");
-                RadioButtonList chkPosition = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition");
-                CheckBoxList chkNotification = (CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification");
-
-                try { dt.Rows[i]["Type"] = rbType != null ? rbType.SelectedValue : ""; } catch {}
-                try { dt.Rows[i]["EmpName"] = txt_EmpName != null ? txt_EmpName.Text : ""; } catch {}
-                try { dt.Rows[i]["Designation"] = txt_Designation != null ? txt_Designation.Text : ""; } catch {}
-                try { dt.Rows[i]["EmpInfoId"] = ShfEmpInfoId != null ? ShfEmpInfoId.Value : ""; } catch {}
-                try { dt.Rows[i]["EmpMasterCode"] = txt_EmpMasterCode != null ? txt_EmpMasterCode.Text : ""; } catch {}
-                try { dt.Rows[i]["CompanyId"] = ddlCompanySave != null ? ddlCompanySave.SelectedValue : ""; } catch {}
-                try { dt.Rows[i]["Position"] = chkPosition != null ? chkPosition.SelectedValue : ""; } catch {}
-                try 
-                { 
-                    if (chkNotification != null && chkNotification.Items.Count > 1)
-                    {
-                        dt.Rows[i]["NotificationEmail"] = chkNotification.Items[0].Selected.ToString();
-                        dt.Rows[i]["NotificationSMS"] = chkNotification.Items[1].Selected.ToString();
-                    }
-                } 
-                catch {}
-                
-                HiddenField hfCompanySave = (HiddenField)gv_Details_Save.Rows[i].FindControl("hfCompanySave");
-                if (hfCompanySave != null && ddlCompanySave != null) hfCompanySave.Value = ddlCompanySave.SelectedValue;
-            }
-
-            dt.Rows.Remove(dt.Rows[rowID]);
-            if (dt.Rows.Count > 0)
-            {
-                ViewState["gv_Details_List"] = dt;
-                gv_Details_Save.DataSource = dt;
-                gv_Details_Save.DataBind();
-            }
-            else
-            {
-                ViewState["gv_Details_List"] = null;
-                gv_Details_Save.DataSource = null;
-                gv_Details_Save.DataBind();
-            }
-        }
-        //Set Previous Data on Postbacks  
-        //  SetDocGrid_List();
-
-
-        for (int i = 0; i < gv_Details_Save.Rows.Count; i++)
-        {
-            RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType"));
-            rbType.SelectedValue = ((HiddenField)gv_Details_Save.Rows[i].Cells[1].FindControl("hfType"))
-                    .Value;
-
-
-
-            CheckBoxList chkNotification = ((CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification"));
-
-            HiddenField HiNotificationEmail = ((HiddenField)gv_Details_Save.Rows[i].FindControl("HiNotificationEmail"));
-            HiddenField hfNotificationSMS = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfNotificationSMS"));
-
-            if (HiNotificationEmail.Value != "")
-            {
-                try
-                {
-                    chkNotification.Items[0].Selected = Convert.ToBoolean(HiNotificationEmail.Value);
-                }
-                catch (Exception)
-                {
-
-                    //throw;
-                }
-
-            }
-
-            if (hfNotificationSMS.Value != "")
-            {
-                try
-                {
-                    chkNotification.Items[1].Selected = Convert.ToBoolean(hfNotificationSMS.Value);
-                }
-                catch (Exception)
-                {
-
-                    //throw;
-                }
-
-            }
-
-
-            RadioButtonList chkPosition = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition"));
-
-            HiddenField hfPosition = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfPosition"));
-
-            chkPosition.SelectedValue = hfPosition.Value;
-
-        }
-    }
-
     private bool AddMemberValidation()
     {
         if (gv_EmpListSearch.Rows.Count == 0)
@@ -1054,29 +856,25 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
     }
     public bool CheckEmpList()
     {
+        // Grid A ("Add Employees") no longer lives server-side — its current EmpMasterCodes
+        // are handed over via hfGridA_ExistingCodes by prepareGridAExistingCodes() (client JS)
+        // right before this postback fires.
+        string[] existingCodes = (hfGridA_ExistingCodes.Value ?? "")
+            .Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+
         for (int i = 0; i < gv_EmpListSearch.Rows.Count; i++)
         {
             var chkBoxRows = (CheckBox)gv_EmpListSearch.Rows[i].Cells[0].FindControl("chkSelect");
-            for (int j = 0; j < gv_Details_Save.Rows.Count; j++)
+            if (!chkBoxRows.Checked) continue;
+
+            Label EmpDI = (Label)gv_EmpListSearch.Rows[i].FindControl("lbl_EmpMasterCode");
+            foreach (var code in existingCodes)
             {
-                if (chkBoxRows.Checked)
+                if (string.Equals(EmpDI.Text.Trim(), code.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
-                    TextBox SSStxt_empId = (TextBox)gv_Details_Save.Rows[j].FindControl("txt_EmpMasterCode");
-
-                    Label EmpDI = (Label)gv_EmpListSearch.Rows[i].FindControl("lbl_EmpMasterCode");
-
-                    if (EmpDI.Text == SSStxt_empId.Text)
-                    {
-
-
-                        return false;
-
-                    }
-
+                    return false;
                 }
-
             }
-
         }
         return true;
     }
@@ -1108,16 +906,13 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         DataTable draft = ViewState["DraftMemberList"] as DataTable ?? CreateDraftMemberTable();
         var draftCodes = new HashSet<string>(draft.AsEnumerable()
             .Select(row => row["EmpMasterCode"].ToString()), StringComparer.OrdinalIgnoreCase);
-        var savedCodes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-        foreach (GridViewRow row in gv_Details_Save.Rows)
-        {
-            TextBox code = row.FindControl("txt_EmpMasterCode") as TextBox;
-            if (code != null && !string.IsNullOrWhiteSpace(code.Text))
-            {
-                savedCodes.Add(code.Text.Trim());
-            }
-        }
+        // Grid A ("Add Employees") no longer lives server-side — its current EmpMasterCodes
+        // are handed over via hfGridA_ExistingCodes by prepareGridAExistingCodes() (client JS)
+        // right before this postback fires.
+        var savedCodes = new HashSet<string>(
+            (hfGridA_ExistingCodes.Value ?? "").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(c => c.Trim()),
+            StringComparer.OrdinalIgnoreCase);
 
         foreach (GridViewRow row in gv_EmpListSearch.Rows)
         {
@@ -1212,14 +1007,13 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         {
             if (CheckEmpList())
             {
-
+                // Grid A ("Add Employees") state now lives client-side; only the newly
+                // picked rows are appended (MeetingGridA.appendRows), not the whole table.
                 DataTable aDataTable = new DataTable();
                 aDataTable.Columns.Add("EmpInfoId");
                 aDataTable.Columns.Add("EmpMasterCode");
                 aDataTable.Columns.Add("EmpName");
                 aDataTable.Columns.Add("Designation");
-
-
                 aDataTable.Columns.Add("Type");
                 aDataTable.Columns.Add("NotificationEmail");
                 aDataTable.Columns.Add("NotificationSMS");
@@ -1227,12 +1021,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
                 aDataTable.Columns.Add("IsBoardMember");
                 aDataTable.Columns.Add("BMemberSetupDetailsID");
 
-
-
-
-                DataRow dataRow = null;
-
-        int count = 0;
+                DataRow dataRow;
 
                 for (int i = 0; i < gv_EmpListSearch.Rows.Count; i++)
                 {
@@ -1244,227 +1033,24 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
 
                     if (chkSelect.Checked)
                     {
-                        count++;
-                        //  if (HasDCStoreId(Convert.ToInt32(loadGridView.DataKeys[i][0].ToString())))
-                        {
+                        dataRow = aDataTable.NewRow();
+                        dataRow["IsBoardMember"] = "0";
+                        dataRow["BMemberSetupDetailsID"] = "0";
+                        dataRow["EmpInfoId"] = hfEmpInfoId.Value;
+                        dataRow["EmpMasterCode"] = lbl_EmpMasterCode.Text;
+                        dataRow["EmpName"] = lbl_EmpName.Text;
+                        dataRow["Designation"] = lbl_Designation.Text;
+                        // Everyone added via this search modal is a real employee record.
+                        dataRow["Type"] = "Employee";
+                        dataRow["NotificationEmail"] = "";
+                        dataRow["NotificationSMS"] = "";
+                        dataRow["Position"] = "";
 
-
-
-                            dataRow = aDataTable.NewRow();
-                            dataRow["IsBoardMember"] = "0";
-                            dataRow["BMemberSetupDetailsID"] = "0";
-                            dataRow["EmpInfoId"] = hfEmpInfoId.Value;
-
-                            dataRow["EmpMasterCode"] = lbl_EmpMasterCode.Text;
-                            dataRow["EmpName"] = lbl_EmpName.Text;
-                            dataRow["Designation"] = lbl_Designation.Text;
-
-                            dataRow["Type"] = "";
-
-                            dataRow["NotificationEmail"] = "";
-                            dataRow["NotificationSMS"] = "";
-                          
-
-                            dataRow["Position"] = "";
-
-                            dataRow["IsBoardMember"] = "0";
-
-                            aDataTable.Rows.Add(dataRow);
-                        }
+                        aDataTable.Rows.Add(dataRow);
                     }
                 }
-                for (int i = 0; i < gv_Details_Save.Rows.Count; i++)
-                {
 
-
-                    HiddenField hfIsBoardMember = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfIsBoardMember"));
-                    HiddenField hfBMemberSetupDetailsID = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfBMemberSetupDetailsID"));
-                    HiddenField hfType = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfType"));
-                    TextBox txt_EmpMasterCode = ((TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpMasterCode"));
-                    HiddenField ShfEmpInfoId = ((HiddenField)gv_Details_Save.Rows[i].FindControl("ShfEmpInfoId"));
-                    TextBox txt_EmpName = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpName");
-                    TextBox txt_Designation = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_Designation");
-
-                    HiddenField HiNotificationEmail = ((HiddenField)gv_Details_Save.Rows[i].FindControl("HiNotificationEmail"));
-                    HiddenField hfNotificationSMS = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfNotificationSMS"));
-                    HiddenField hfPosition = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfPosition"));
-
-
-
-                    RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType"));
-                    CheckBoxList chkNotification = ((CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification"));
-                    RadioButtonList chkPosition = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition"));
-                   
-
-
-             
-
-
-
-                    dataRow = aDataTable.NewRow();
-                    dataRow["EmpInfoId"] = ShfEmpInfoId.Value;
-                    dataRow["IsBoardMember"] = hfIsBoardMember.Value;
-                    dataRow["BMemberSetupDetailsID"] = hfBMemberSetupDetailsID.Value;
-
-                    dataRow["EmpMasterCode"] = txt_EmpMasterCode.Text;
-                    dataRow["EmpName"] = txt_EmpName.Text;
-                    dataRow["Designation"] = txt_Designation.Text;
-                    
-                    dataRow["Type"] = hfType.Value.Trim();
-                    if (hfType.Value.Trim()!="")
-                    {
-                        try
-                        {
-                            rbType.SelectedValue = hfType.Value.Trim();
-                        }
-                        catch (Exception)
-                        {
-                            
-                            //throw;
-                        }
-                         
-                    }
-                    dataRow["NotificationEmail"] = HiNotificationEmail.Value.Trim();
-                    if (HiNotificationEmail.Value.Trim() != "")
-                    {
-                        try
-                        {
-                            chkNotification.Items[0].Selected = Convert.ToBoolean(HiNotificationEmail.Value.Trim());
-                        }
-                        catch (Exception)
-                        {
-                            chkNotification.Items[0].Selected = false;
-                            // throw;
-                        }
-
-                    }
-
-                    dataRow["NotificationSMS"] = hfNotificationSMS.Value.Trim();
-                    if (hfNotificationSMS.Value.Trim() != "")
-                    {
-                        try
-                        {
-                            chkNotification.Items[1].Selected = Convert.ToBoolean(hfNotificationSMS.Value.Trim());
-                        }
-                        catch (Exception)
-                        {
-
-                            chkNotification.Items[1].Selected = false;
-                        }
-
-                    }
-
-                    dataRow["Position"] = hfPosition.Value.Trim();
-                    if (hfPosition.Value.Trim()!="")
-                    {
-                        try
-                        {
-                            chkPosition.SelectedValue = hfPosition.Value.Trim();
-                        }
-                        catch (Exception)
-                        {
-                            
-                            //throw;
-                        }
-                    } 
-                   
-
-
-
-
-
-
-
-                    aDataTable.Rows.Add(dataRow);
-                }
-                ViewState["gv_Details_List"] = aDataTable;
-                gv_Details_Save.DataSource = aDataTable;
-                gv_Details_Save.DataBind();
-
-
-
-                 
-
-
-                for (int i = 0; i < gv_Details_Save.Rows.Count; i++)
-                {
-                    RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType"));
-                    rbType.SelectedValue = ((HiddenField)gv_Details_Save.Rows[i].Cells[1].FindControl("hfType"))
-                            .Value;
-
-
-
-                    CheckBoxList chkNotification = ((CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification"));
-
-                    HiddenField HiNotificationEmail = ((HiddenField)gv_Details_Save.Rows[i].FindControl("HiNotificationEmail"));
-                    HiddenField hfNotificationSMS = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfNotificationSMS"));
-
-                    if (HiNotificationEmail.Value != "")
-                    {
-                        try
-                        {
-                            chkNotification.Items[0].Selected = Convert.ToBoolean(HiNotificationEmail.Value);
-                        }
-                        catch (Exception)
-                        {
-
-                            //throw;
-                        }
-
-                    }
-
-                    if (hfNotificationSMS.Value != "")
-                    {
-                        try
-                        {
-                            chkNotification.Items[1].Selected = Convert.ToBoolean(hfNotificationSMS.Value);
-                        }
-                        catch (Exception)
-                        {
-
-                            //throw;
-                        }
-
-                    }
-
-
-                    RadioButtonList chkPosition = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition"));
-
-                    HiddenField hfPosition = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfPosition"));
-
-                    chkPosition.SelectedValue = hfPosition.Value;
-
-                }
-
-
-                for (int i = 0; i < gv_EmpListSearch.Rows.Count; i++)
-                {
-                    var chkBoxRows = (CheckBox)gv_EmpListSearch.Rows[i].Cells[0].FindControl("chkSelect");
-                    for (int j = 0; j < gv_Details_Save.Rows.Count; j++)
-                    {
-                        if (chkBoxRows.Checked)
-                        {
-                            TextBox SSStxt_empId = (TextBox)gv_Details_Save.Rows[j].FindControl("txt_EmpMasterCode");
-
-                            Label EmpDI = (Label)gv_EmpListSearch.Rows[i].FindControl("lbl_EmpMasterCode");
-
-                            if (EmpDI.Text == SSStxt_empId.Text)
-                            {
-
-                                RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[j].FindControl("rbType"));
-                                rbType.SelectedValue = "Employee";
-
-                                ((HiddenField)gv_Details_Save.Rows[j].Cells[1].FindControl("hfType"))
-                                    .Value = "Employee";
-                               
-
-                            }
-
-                        }
-
-                    }
-
-                }
+                EmitGridAJson(false, aDataTable);
             }
             else
             {
@@ -1654,38 +1240,9 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             //        }
             //    }
 
-            // Reload member list and subcommittees based on the new company selection
-            //ddlCategory_OnSelectedIndexChanged(null, null);
-            gv_BoardMember.DataSource = null;
-            gv_BoardMember.DataBind();
-            DataTable jobCreationInfos = new DataTable();
-            jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoByCategory(ddlCompany.SelectedValue);
-            if (jobCreationInfos.Rows.Count > 0)
-            {
-                ViewState["gv_BoardMember_List"] = jobCreationInfos;
-                gv_BoardMember.DataSource = jobCreationInfos;
-                gv_BoardMember.DataBind();
-                DataTable dtMemberPostion = MemberPositionCache;
-
-                for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-                {
-                    DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-                    ddlPosition.DataSource = dtMemberPostion;
-                    ddlPosition.DataValueField = "Value";
-                    ddlPosition.DataTextField = "TextField";
-                    ddlPosition.DataBind();
-
-                    // Fix: use row index i, not inner loop over all rows (was O(n²))
-                    try
-                    {
-                        if (i < jobCreationInfos.Rows.Count)
-                            ddlPosition.SelectedValue = jobCreationInfos.Rows[i]["PositionId"].ToString();
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-            }
+            // Reload member list based on the new company selection
+            DataTable jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoByCategory(ddlCompany.SelectedValue);
+            EmitGridBJson(jobCreationInfos);
         }
         else
         {
@@ -2583,144 +2140,39 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
 
 
 
-                List<MeetingInfoDetailDAO> MeetingInfoDetailList = new List<MeetingInfoDetailDAO>();
+                // Grid A ("Add Employees") / Grid B ("Members List") rows are posted as JSON
+                // from the client-side arrays (see hfGridA_Json/hfGridB_Json + handleMeetingGridsSave()
+                // in the .aspx) instead of being read back from a server-side GridView.
+                List<MeetingInfoDetailDAO> MeetingInfoDetailList =
+                    JsonConvert.DeserializeObject<List<MeetingInfoDetailDAO>>(hfGridA_Json.Value) ?? new List<MeetingInfoDetailDAO>();
 
-                for (int i = 0; i < gv_Details_Save.Rows.Count; i++)
+                foreach (var MeetingInfoDetail in MeetingInfoDetailList)
                 {
-                    HiddenField hfBMemberSetupDetailsID =
-                        ((HiddenField) gv_Details_Save.Rows[i].FindControl("hfBMemberSetupDetailsID"));
-                    HiddenField hfIsBoardMember = ((HiddenField) gv_Details_Save.Rows[i].FindControl("hfIsBoardMember"));
-                    HiddenField hfType = ((HiddenField) gv_Details_Save.Rows[i].FindControl("hfType"));
-                    TextBox txt_EmpMasterCode = ((TextBox) gv_Details_Save.Rows[i].FindControl("txt_EmpMasterCode"));
-                    HiddenField ShfEmpInfoId = ((HiddenField) gv_Details_Save.Rows[i].FindControl("ShfEmpInfoId"));
-                    TextBox txt_EmpName = (TextBox) gv_Details_Save.Rows[i].FindControl("txt_EmpName");
-                    TextBox txt_Designation = (TextBox) gv_Details_Save.Rows[i].FindControl("txt_Designation");
-
-                    HiddenField hfNotification = ((HiddenField) gv_Details_Save.Rows[i].FindControl("hfNotification"));
-                    HiddenField hfPosition = ((HiddenField) gv_Details_Save.Rows[i].FindControl("hfPosition"));
-
-
-                    //DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-                    RadioButtonList rbType = ((RadioButtonList) gv_Details_Save.Rows[i].FindControl("rbType"));
-                    CheckBoxList chkNotification =
-                        ((CheckBoxList) gv_Details_Save.Rows[i].FindControl("chkNotification"));
-                    RadioButtonList chkPosition = ((RadioButtonList) gv_Details_Save.Rows[i].FindControl("chkPosition"));
-
-
-
-
-                    MeetingInfoDetailDAO MeetingInfoDetail = new MeetingInfoDetailDAO();
-
-
-                    MeetingInfoDetail.Type = rbType.SelectedValue;
-
-                    if (rbType.SelectedValue == "Employee")
-                    {
-
-                        try
-                        {
-                            MeetingInfoDetail.EmpInfoId = Convert.ToInt32(ShfEmpInfoId.Value);
-                        }
-                        catch (Exception)
-                        {
-
-                            MeetingInfoDetail.EmpInfoId = null;
-                        }
-                    }
-                    else
+                    MeetingInfoDetail.IsBoardMember = "0";
+                    if (MeetingInfoDetail.Type != "Employee")
                     {
                         MeetingInfoDetail.EmpInfoId = null;
-
-
-
-
                     }
+                    // Notification UI is hidden on this grid — always false, same as before.
+                    MeetingInfoDetail.NotificationEmail = false;
+                    MeetingInfoDetail.NotificationSMS = false;
 
-                    MeetingInfoDetail.EmpMasterCode = (txt_EmpMasterCode.Text.Trim());
-                    MeetingInfoDetail.IsBoardMember = "0";
-
-                    MeetingInfoDetail.BMemberSetupDetailsID = (hfBMemberSetupDetailsID.Value.Trim());
-                    MeetingInfoDetail.EmpName = (txt_EmpName.Text.Trim());
-                    MeetingInfoDetail.Designation = (txt_Designation.Text.Trim());
-                    MeetingInfoDetail.NotificationEmail = (chkNotification.Items[0].Selected);
-                    MeetingInfoDetail.NotificationSMS = (chkNotification.Items[1].Selected);
-                    try
-                    {
-                         MeetingInfoDetail.Position = chkPosition.SelectedItem.Text;
-                    }
-                    catch (Exception)
-                    {
-
-                        MeetingInfoDetail.Position = "";
-                    }
-                   
-
-                    MemberSearch = MemberSearch + txt_EmpName.Text.Trim() + " ";
-
-
-                    if (chkNotification.Items[0].Selected==true)
-                    {
-                        try
-                        {
-                            if (acst != "Drafted")
-                            {
-                                // Send email asynchronously so it doesn't block the save operation
-                                int empId = Convert.ToInt32(MeetingInfoDetail.EmpInfoId);
-                                System.Threading.Tasks.Task.Run(() =>
-                                    SenMailForApprved(empId,
-                                        " Meeting Information ", @"  <br/> Dear Sir, <br/>
-Meeting Entry Demo Mail.<br/><br/>
- please login for the details from the below link.<br/><br/>   http://182.160.103.234:8088/
-"));
-                            }
-                        }
-                        catch (Exception)
-                        {
-                            
-                            //throw;
-                        }
-                    }
-
-
-                    MeetingInfoDetailList.Add(MeetingInfoDetail);
+                    MemberSearch = MemberSearch + (MeetingInfoDetail.EmpName ?? "").Trim() + " ";
                 }
 
-                List<MeetingInfoDetailDAO> MeetingInfoDetailList2 = new List<MeetingInfoDetailDAO>();
+                List<MeetingInfoDetailDAO> MeetingInfoDetailList2 =
+                    JsonConvert.DeserializeObject<List<MeetingInfoDetailDAO>>(hfGridB_Json.Value) ?? new List<MeetingInfoDetailDAO>();
 
-
-                for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
+                foreach (var MeetingInfoDetail in MeetingInfoDetailList2)
                 {
-
-                    TextBox txtBoardMember_EmpName = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_EmpName");
-                    TextBox txtBoardMember_Designation = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_Designation");
-                    HiddenField hfBMemberSetupDetailsIDb = ((HiddenField)gv_BoardMember.Rows[i].FindControl("hfBMemberSetupDetailsIDb"));
-
-
-                    DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-
-                    RadioButtonList chkBoardMemberPosition = ((RadioButtonList)gv_BoardMember.Rows[i].FindControl("chkBoardMemberPosition"));
-
-                    MeetingInfoDetailDAO MeetingInfoDetail = new MeetingInfoDetailDAO();
-                     
-                    MemberSearch = MemberSearch + txtBoardMember_EmpName.Text.Trim() + " ";
-
                     MeetingInfoDetail.Type = "";
-
-                    MeetingInfoDetail.EmpInfoId =null;
-                        
-
-                    MeetingInfoDetail.EmpMasterCode ="";
+                    MeetingInfoDetail.EmpInfoId = null;
+                    MeetingInfoDetail.EmpMasterCode = "";
                     MeetingInfoDetail.IsBoardMember = "1";
-
-                    MeetingInfoDetail.BMemberSetupDetailsID = (hfBMemberSetupDetailsIDb.Value.Trim());
-                    MeetingInfoDetail.EmpName = (txtBoardMember_EmpName.Text.Trim());
-                    MeetingInfoDetail.Designation = (txtBoardMember_Designation.Text.Trim());
-                    MeetingInfoDetail.NotificationEmail =false;
+                    MeetingInfoDetail.NotificationEmail = false;
                     MeetingInfoDetail.NotificationSMS = false;
-                    //MeetingInfoDetail.Position = (chkBoardMemberPosition.SelectedValue);
-                    MeetingInfoDetail.Position = (ddlPosition.SelectedItem.Text);
 
-                    MeetingInfoDetailList2.Add(MeetingInfoDetail);
+                    MemberSearch = MemberSearch + (MeetingInfoDetail.EmpName ?? "").Trim() + " ";
                 }
 
 
@@ -3186,251 +2638,6 @@ Meeting Entry Demo Mail.<br/><br/>
         }
     }
 
-    protected void btn_DetailsAdd_OnClick(object sender, EventArgs e)
-    {
-        int rowIndex = ((GridViewRow)(((LinkButton)sender).Parent.Parent)).RowIndex;
-
-        DataTable aTable = new DataTable();
-
-        aTable.Columns.Add("Type");
-        aTable.Columns.Add("CompanyId");
-
-        aTable.Columns.Add("EmpMasterCode");
-        aTable.Columns.Add("EmpInfoId");
-        aTable.Columns.Add("EmpName");
-        aTable.Columns.Add("Designation");
-        aTable.Columns.Add("NotificationEmail");
-        aTable.Columns.Add("NotificationSMS");
-        aTable.Columns.Add("Position");
-        aTable.Columns.Add("IsBoardMember");
-        aTable.Columns.Add("BMemberSetupDetailsID");
-        
-        
-
-        DataRow dr;
-
-
-
-        for (int i = 0; i < gv_Details_Save.Rows.Count; i++)
-        {
-            dr = aTable.NewRow();
-            HiddenField hfBMemberSetupDetailsID = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfBMemberSetupDetailsID"));
-            HiddenField hfIsBoardMember = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfIsBoardMember"));
-            HiddenField hfType = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfType"));
-            TextBox txt_EmpMasterCode = ((TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpMasterCode"));
-            HiddenField ShfEmpInfoId = ((HiddenField)gv_Details_Save.Rows[i].FindControl("ShfEmpInfoId"));
-            TextBox txt_EmpName = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpName");
-            TextBox txt_Designation = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_Designation");
-
-            HiddenField HiNotificationEmail = ((HiddenField)gv_Details_Save.Rows[i].FindControl("HiNotificationEmail"));
-            HiddenField hfNotificationSMS = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfNotificationSMS"));
-            HiddenField hfPosition = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfPosition"));
-
-
-
-            RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType"));
-            CheckBoxList chkNotification = ((CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification"));
-            RadioButtonList chkPosition = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition"));
-
-
-
-
-
-
-            dr["IsBoardMember"] = hfIsBoardMember.Value;
-            dr["BMemberSetupDetailsID"] = hfBMemberSetupDetailsID.Value;
-
-            dr["EmpInfoId"] = ShfEmpInfoId != null ? ShfEmpInfoId.Value : "";
-
-            dr["EmpMasterCode"] = txt_EmpMasterCode.Text;
-            dr["EmpName"] = txt_EmpName.Text;
-            dr["Designation"] = txt_Designation.Text;
-            dr["Type"] = rbType != null ? rbType.SelectedValue : "";
-            
-            RadioButtonList ddlCompanySave = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("ddlCompanySave");
-            dr["CompanyId"] = ddlCompanySave != null ? ddlCompanySave.SelectedValue : "";
-            
-            if (chkNotification != null && chkNotification.Items.Count > 1)
-            {
-                dr["NotificationEmail"] = chkNotification.Items[0].Selected.ToString();
-                dr["NotificationSMS"] = chkNotification.Items[1].Selected.ToString();
-            }
-            else
-            {
-                dr["NotificationEmail"] = "False";
-                dr["NotificationSMS"] = "False";
-            }
-
-            dr["Position"] = chkPosition != null ? chkPosition.SelectedValue : "";
-                   
-
-
-
-
-
-
-            aTable.Rows.Add(dr);
-
-            if (rowIndex == i)
-            {
-                dr = aTable.NewRow();
-              
-
-                dr["EmpInfoId"] = "";
-
-                dr["EmpMasterCode"] = "";
-                dr["EmpName"] = "";
-                dr["Designation"] = "";
-                 hfIsBoardMember.Value="2";
-                dr["IsBoardMember"] = hfIsBoardMember.Value;
-
-                hfBMemberSetupDetailsID.Value="0";
-                dr["BMemberSetupDetailsID"] = hfBMemberSetupDetailsID.Value;
-
-
-                hfType.Value = "Guest";
-
-                dr["Type"] = hfType.Value.Trim();
-                if (dr["Type"].ToString() != "")
-                {
-
-                    rbType.SelectedValue = hfType.Value.Trim();
-                }
-                dr["NotificationEmail"] = "";
-                dr["NotificationSMS"] = "";
-                chkNotification.SelectedValue = null;
-
-                dr["Position"] = "";
-                chkPosition.SelectedValue = null;
-
-                aTable.Rows.Add(dr);
-            }
-        }
-
-        //Session["table"] = (DataTable)aTable;
-        gv_Details_Save.DataSource = null;
-        gv_Details_Save.DataBind();
-        gv_Details_Save.DataSource = aTable;
-        ViewState["gv_Details_List"] = aTable;
-
-        gv_Details_Save.DataBind();
-
-        //using (DataTable dt2 = AMeetingEntryDal.GetEmpInfobyID(ddlCompany.SelectedValue))
-        //{
-
-        for (int i = 0; i < gv_Details_Save.Rows.Count; i++)
-        {
-               RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType"));
-             rbType.SelectedValue = ((HiddenField)gv_Details_Save.Rows[i].Cells[1].FindControl("hfType"))
-                     .Value;
-
-
-
-             CheckBoxList chkNotification = ((CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification"));
-
-             HiddenField HiNotificationEmail = ((HiddenField)gv_Details_Save.Rows[i].FindControl("HiNotificationEmail"));
-             HiddenField hfNotificationSMS = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfNotificationSMS"));
-
-             if (HiNotificationEmail.Value!="")
-            {
-                try
-                {
-                    chkNotification.Items[0].Selected = Convert.ToBoolean(HiNotificationEmail.Value);
-                }
-                catch (Exception)
-                {
-                    
-                    //throw;
-                }
-                 
-            }
-
-             if (hfNotificationSMS.Value != "")
-             {
-                 try
-                 {
-                     chkNotification.Items[1].Selected = Convert.ToBoolean(hfNotificationSMS.Value);
-                 }
-                 catch (Exception)
-                 {
-                     
-                     //throw;
-                 }
-
-             }
-
-
-             RadioButtonList chkPosition = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition"));
-
-             HiddenField hfPosition = ((HiddenField)gv_Details_Save.Rows[i].FindControl("hfPosition"));
-
-             chkPosition.SelectedValue = hfPosition.Value;
-             
-        }
-        //}chkNotification_OnSelectedIndexChanged
-
-    }
-
-    protected void rbType_OnSelectedIndexChanged(object sender, EventArgs e)
-    {
-        int rowIndex = ((GridViewRow)(((RadioButtonList)sender).Parent.Parent)).RowIndex;
-
-        RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("rbType"));
-        HiddenField hfType = ((HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("hfType"));
-        RadioButtonList ddlCompanySave = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("ddlCompanySave"));
-
-        hfType.Value = rbType.SelectedValue;
-
-        // Reset employee details for this row as the type has toggled
-        HiddenField ShfEmpInfoId = (HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("ShfEmpInfoId");
-        TextBox txt_EmpMasterCode = (TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_EmpMasterCode");
-        TextBox txt_EmpName = (TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_EmpName");
-        TextBox txt_Designation = (TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_Designation");
-
-        if (ShfEmpInfoId != null) ShfEmpInfoId.Value = "";
-        if (txt_EmpMasterCode != null) txt_EmpMasterCode.Text = "";
-        if (txt_EmpName != null) txt_EmpName.Text = "";
-        if (txt_Designation != null) txt_Designation.Text = "";
-
-        if (rbType.SelectedValue == "Guest")
-        {
-            if (ddlCompanySave != null)
-            {
-                ddlCompanySave.ClearSelection();
-                ddlCompanySave.Enabled = false;
-            }
-        }
-        else
-        {
-            if (ddlCompanySave != null) ddlCompanySave.Enabled = true;
-        }
-    }
-
-    protected void chkNotification_OnSelectedIndexChanged(object sender, EventArgs e)
-    {
-        int rowIndex = ((GridViewRow)(((CheckBoxList)sender).Parent.Parent)).RowIndex;
-
-        CheckBoxList chkNotification = ((CheckBoxList)gv_Details_Save.Rows[rowIndex].FindControl("chkNotification"));
-
-        HiddenField HiNotificationEmail = ((HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("HiNotificationEmail"));
-        HiddenField hfNotificationSMS = ((HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("hfNotificationSMS"));
-
-        HiNotificationEmail.Value = chkNotification.Items[0].Selected.ToString();
-        hfNotificationSMS.Value = chkNotification.Items[1].Selected.ToString();
-
-    }
-
-    protected void chkPosition_OnSelectedIndexChanged(object sender, EventArgs e)
-    {
-        int rowIndex = ((GridViewRow)(((RadioButtonList)sender).Parent.Parent)).RowIndex;
-
-        RadioButtonList chkPosition = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("chkPosition"));
-
-        HiddenField hfPosition = ((HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("hfPosition"));
-
-        hfPosition.Value = chkPosition.SelectedValue;
-    }
-
     protected void chkNotificationApp_OnSelectedIndexChanged(object sender, EventArgs e)
     {
         int rowIndex = ((GridViewRow) (((CheckBoxList) sender).Parent.Parent)).RowIndex;
@@ -3514,57 +2721,19 @@ Meeting Entry Demo Mail.<br/><br/>
 
         if (effectiveCategory == "1")
         {
-            DataTable jobCreationInfos = new DataTable();
-            jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoByCategory(ddlCompany.SelectedValue);
+            DataTable jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoByCategory(ddlCompany.SelectedValue);
             if (jobCreationInfos.Rows.Count > 0)
             {
-                ViewState["gv_BoardMember_List"] = jobCreationInfos;
-                gv_BoardMember.DataSource = jobCreationInfos;
-                gv_BoardMember.DataBind();
-                DataTable dtMemberPostion = MemberPositionCache;
-
-                for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-                {
-                    DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-                    ddlPosition.DataSource = dtMemberPostion;
-                    ddlPosition.DataValueField = "Value";
-                    ddlPosition.DataTextField = "TextField";
-                    ddlPosition.DataBind();
-
-                    // Fix: use row index i, not inner loop over all rows (was O(n²))
-                    try
-                    {
-                        if (i < jobCreationInfos.Rows.Count)
-                            ddlPosition.SelectedValue = jobCreationInfos.Rows[i]["PositionId"].ToString();
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
+                EmitGridBJson(jobCreationInfos);
             }
             else
             {
-                if (Session["MeetingMastetID"] != null && ddlCategory.SelectedValue == "")
-                {
-                    DataTable dt = (DataTable)ViewState["gv_BoardMember_List"];
-                    gv_BoardMember.DataSource = dt;
-                    gv_BoardMember.DataBind();
-                }
-                else
-                {
-                    ViewState["gv_BoardMember_List"] = null;
-                    gv_BoardMember.DataSource = null;
-                    gv_BoardMember.DataBind();
-                    LoadInitialGridDetails_Save();
-                }
+                EmitGridAJson(true, new DataTable());
             }
         }
         else
         {
-            ViewState["gv_BoardMember_List"] = null;
-            gv_BoardMember.DataSource = null;
-            gv_BoardMember.DataBind();
-            LoadInitialGridBoardMember();
+            EmitGridBJson(new DataTable());
         }
 
         if (ddlCategory.SelectedValue != "" && ddlCategory.SelectedValue != "1")
@@ -3598,7 +2767,7 @@ Meeting Entry Demo Mail.<br/><br/>
                     ddlSubCommittee.DataBind();
                 }
             }
-            LoadInitialGridDetails_Save();
+            EmitGridAJson(true, new DataTable());
         }
     }
 
@@ -3606,78 +2775,12 @@ Meeting Entry Demo Mail.<br/><br/>
     {
         if (ddlCategory.SelectedValue != "")
         {
-
-        DataTable dtMemberPostion = MemberPositionCache;
-
-            DataTable jobCreationInfos = new DataTable();
-                jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoBySubCOmmitte(ddlCompany.SelectedValue,
-                    ddlSubCommittee.SelectedValue);
-                if (jobCreationInfos.Rows.Count > 0)
-                {
-
-                    ViewState["gv_BoardMember_List"] = jobCreationInfos;
-                    gv_BoardMember.DataSource = jobCreationInfos;
-                    gv_BoardMember.DataBind();
-                for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-                {
-                    DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-                    ddlPosition.DataSource = dtMemberPostion;
-                    ddlPosition.DataValueField = "Value";
-                    ddlPosition.DataTextField = "TextField";
-                    ddlPosition.DataBind();
-
-                    // Fix: use row index i, not inner loop over all rows (was O(n²))
-                    try
-                    {
-                        if (i < jobCreationInfos.Rows.Count)
-                            ddlPosition.SelectedValue = jobCreationInfos.Rows[i]["PositionId"].ToString();
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-
-                }
-                else
-                {
-                    ViewState["gv_BoardMember_List"] = null;
-                    gv_BoardMember.DataSource = null;
-                    gv_BoardMember.DataBind();
-                    LoadInitialGridBoardMember();
-                }
+            DataTable jobCreationInfos = AMeetingEntryDal.GetEmpMemberInfoBySubCOmmitte(ddlCompany.SelectedValue,
+                ddlSubCommittee.SelectedValue);
+            EmitGridBJson(jobCreationInfos);
 
             DataTable dtMember_List = AMAster.GetMemberListDataById(ddlSubCommittee.SelectedValue);
-
-            if (dtMember_List.Rows.Count > 0)
-            {
-
-                ViewState["gv_Details_List"] = dtMember_List;
-                gv_Details_Save.DataSource = dtMember_List;
-                gv_Details_Save.DataBind();
-                for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-                {
-                    try
-                    {
-                        RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType"));
-                        rbType.SelectedValue = ((HiddenField)gv_Details_Save.Rows[i].Cells[1].FindControl("hfType"))
-                                .Value;
-                    }
-                    catch(Exception ex)
-                    {
-
-                    }
-                }
-
-                }
-            else
-            {
-                ViewState["gv_Details_List"] = null;
-                gv_Details_Save.DataSource = null;
-                gv_Details_Save.DataBind();
-            LoadInitialGridDetails_Save();
-
-            }
-
+            EmitGridAJson(true, dtMember_List);
         }
     }
 
@@ -3879,222 +2982,9 @@ Meeting Entry Demo Mail.<br/><br/>
         ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalBoardMember').modal('show')", true);
     }
 
-    protected void chkBoardMemberPosition_OnSelectedIndexChanged(object sender, EventArgs e)
-    {
-        int rowIndex = ((GridViewRow)(((RadioButtonList)sender).Parent.Parent)).RowIndex;
-
-        RadioButtonList chkBoardMemberPosition = ((RadioButtonList)gv_BoardMember.Rows[rowIndex].FindControl("chkBoardMemberPosition"));
-
-        HiddenField hfBoardMemberPosition = ((HiddenField)gv_BoardMember.Rows[rowIndex].FindControl("hfBoardMemberPosition"));
-
-        hfBoardMemberPosition.Value = chkBoardMemberPosition.SelectedValue;
-    }
-
-    protected void btnBoardMember_DetailsRemove_OnClick(object sender, EventArgs e)
-    {
-        LinkButton lb = (LinkButton)sender;
-        GridViewRow gvRow = (GridViewRow)lb.NamingContainer;
-        int rowID = gvRow.RowIndex;
-        if (ViewState["gv_BoardMember_List"] != null)
-        {
-            DataTable dt = (DataTable)ViewState["gv_BoardMember_List"];
-
-            // Detect actual column name (DB data uses "PositionId", add-handler data uses "Position")
-            string posColName = dt.Columns.Contains("Position") ? "Position" :
-                                dt.Columns.Contains("PositionId") ? "PositionId" : null;
-
-            for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-            {
-                TextBox txtBoardMember_EmpName = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_EmpName");
-                TextBox txtBoardMember_Designation = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_Designation");
-                DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-
-                if (txtBoardMember_EmpName != null && dt.Columns.Contains("EmpName"))
-                    dt.Rows[i]["EmpName"] = txtBoardMember_EmpName.Text;
-                if (txtBoardMember_Designation != null && dt.Columns.Contains("Designation"))
-                    dt.Rows[i]["Designation"] = txtBoardMember_Designation.Text;
-                if (ddlPosition != null && posColName != null)
-                    dt.Rows[i][posColName] = ddlPosition.SelectedValue;
-            }
-
-            dt.Rows.Remove(dt.Rows[rowID]);
-            // AcceptChanges resets RowState to Unchanged — prevents ViewState from
-            // accumulating modified-row metadata across postbacks (reduces ViewState size).
-            dt.AcceptChanges();
-
-            if (dt.Rows.Count > 0)
-            {
-                ViewState["gv_BoardMember_List"] = dt;
-                gv_BoardMember.DataSource = dt;
-                gv_BoardMember.DataBind();
-            }
-            else
-            {
-                ViewState["gv_BoardMember_List"] = null;
-                gv_BoardMember.DataSource = null;
-                gv_BoardMember.DataBind();
-            }
-        }
-
-        // Use session-cached position list — avoids DB hit on every remove click
-        DataTable dtMemberPostion = MemberPositionCache;
-        DataTable jobCreationInfos = (DataTable)ViewState["gv_BoardMember_List"];
-
-        // Detect column name from the updated DataTable
-        string posCol2 = jobCreationInfos != null && jobCreationInfos.Columns.Contains("Position") ? "Position" :
-                         jobCreationInfos != null && jobCreationInfos.Columns.Contains("PositionId") ? "PositionId" : null;
-
-        for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-        {
-            DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-            if (ddlPosition == null) continue;
-
-            ddlPosition.DataSource = dtMemberPostion;
-            ddlPosition.DataValueField = "Value";
-            ddlPosition.DataTextField = "TextField";
-            ddlPosition.DataBind();
-
-            if (posCol2 != null && jobCreationInfos != null && i < jobCreationInfos.Rows.Count)
-            {
-                try { ddlPosition.SelectedValue = jobCreationInfos.Rows[i][posCol2].ToString(); }
-                catch { }
-            }
-        }
-    }
-
-    protected void btnBoardMember_DetailsAdd_OnClick(object sender, EventArgs e)
-    {
-        int rowIndex = ((GridViewRow)(((LinkButton)sender).Parent.Parent)).RowIndex;
-
-        DataTable aTable = new DataTable();
-        aTable.Columns.Add("EmpName");
-        aTable.Columns.Add("Designation");
-        aTable.Columns.Add("PositionId"); // use PositionId to match DB column name
-        aTable.Columns.Add("BMemberSetupDetailsID");
-
-        DataRow dr;
-
-        for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-        {
-            dr = aTable.NewRow();
-            TextBox txtBoardMember_EmpName = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_EmpName");
-            TextBox txtBoardMember_Designation = (TextBox)gv_BoardMember.Rows[i].FindControl("txtBoardMember_Designation");
-            DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-            HiddenField hfBMemberSetupDetailsIDb = (HiddenField)gv_BoardMember.Rows[i].FindControl("hfBMemberSetupDetailsIDb");
-
-            dr["EmpName"] = txtBoardMember_EmpName != null ? txtBoardMember_EmpName.Text : "";
-            dr["Designation"] = txtBoardMember_Designation != null ? txtBoardMember_Designation.Text : "";
-            dr["PositionId"] = ddlPosition != null ? ddlPosition.SelectedValue : "";
-            dr["BMemberSetupDetailsID"] = hfBMemberSetupDetailsIDb != null ? hfBMemberSetupDetailsIDb.Value : "";
-
-            aTable.Rows.Add(dr);
-
-            if (rowIndex == i)
-            {
-                dr = aTable.NewRow();
-                dr["EmpName"] = "";
-                dr["Designation"] = "";
-                dr["PositionId"] = "";
-                dr["BMemberSetupDetailsID"] = "";
-                aTable.Rows.Add(dr);
-            }
-        }
-
-        gv_BoardMember.DataSource = aTable;
-        ViewState["gv_BoardMember_List"] = aTable;
-        gv_BoardMember.DataBind();
-
-        // Use session-cached position list — avoids DB hit on every add click
-        DataTable dtMemberPostion = MemberPositionCache;
-        for (int i = 0; i < gv_BoardMember.Rows.Count; i++)
-        {
-            DropDownList ddlPosition = (DropDownList)gv_BoardMember.Rows[i].FindControl("ddlPosition");
-            if (ddlPosition != null)
-            {
-                ddlPosition.DataSource = dtMemberPostion;
-                ddlPosition.DataValueField = "Value";
-                ddlPosition.DataTextField = "TextField";
-                ddlPosition.DataBind();
-
-                if (i < aTable.Rows.Count)
-                {
-                    try { ddlPosition.SelectedValue = aTable.Rows[i]["PositionId"].ToString(); }
-                    catch { }
-                }
-            }
-        }
-    }
     protected void DropDownList2_OnSelectedIndexChanged(object sender, EventArgs e)
     {
         throw new NotImplementedException();
-    }
-
-    protected void gv_Details_Save_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            RadioButtonList ddlCompanySave = (RadioButtonList)e.Row.FindControl("ddlCompanySave");
-            HiddenField hfCompanySave = (HiddenField)e.Row.FindControl("hfCompanySave");
-            if (ddlCompanySave != null && ddlCompanySave.Items.Count == 0)
-            {
-                // Use session-cached company list — avoids DB hit on every grid rebind
-                ddlCompanySave.DataSource = CompaniesCache;
-                ddlCompanySave.DataValueField = "Value";
-                ddlCompanySave.DataTextField = "TextField";
-                ddlCompanySave.DataBind();
-
-                ListItem selectItem = ddlCompanySave.Items.FindByText("Select...");
-                if (selectItem != null)
-                    ddlCompanySave.Items.Remove(selectItem);
-
-                if (hfCompanySave != null && !string.IsNullOrEmpty(hfCompanySave.Value))
-                {
-                    try { ddlCompanySave.SelectedValue = hfCompanySave.Value; } catch { }
-                }
-            }
-            
-            RadioButtonList chkPosition = (RadioButtonList)e.Row.FindControl("chkPosition");
-            HiddenField hfPosition = (HiddenField)e.Row.FindControl("hfPosition");
-            if (chkPosition != null && hfPosition != null && !string.IsNullOrEmpty(hfPosition.Value))
-            {
-                try { chkPosition.SelectedValue = hfPosition.Value; } catch { }
-            }
-
-            CheckBoxList chkNotification = (CheckBoxList)e.Row.FindControl("chkNotification");
-            HiddenField HiNotificationEmail = (HiddenField)e.Row.FindControl("HiNotificationEmail");
-            HiddenField hfNotificationSMS = (HiddenField)e.Row.FindControl("hfNotificationSMS");
-            if (chkNotification != null && chkNotification.Items.Count > 1)
-            {
-                if (HiNotificationEmail != null && !string.IsNullOrEmpty(HiNotificationEmail.Value))
-                {
-                    try { chkNotification.Items[0].Selected = Convert.ToBoolean(HiNotificationEmail.Value); } catch { }
-                }
-                if (hfNotificationSMS != null && !string.IsNullOrEmpty(hfNotificationSMS.Value))
-                {
-                    try { chkNotification.Items[1].Selected = Convert.ToBoolean(hfNotificationSMS.Value); } catch { }
-                }
-            }
-            
-            RadioButtonList rbType = (RadioButtonList)e.Row.FindControl("rbType");
-            HiddenField hfType = (HiddenField)e.Row.FindControl("hfType");
-            if (rbType != null && hfType != null && !string.IsNullOrEmpty(hfType.Value))
-            {
-                try { rbType.SelectedValue = hfType.Value.Trim(); } catch { }
-            }
-            
-            if (rbType != null && rbType.SelectedValue == "Guest")
-            {
-                if (ddlCompanySave != null)
-                {
-                    ddlCompanySave.ClearSelection();
-                    ddlCompanySave.Enabled = false;
-                }
-            }
-            else
-            {
-                if (ddlCompanySave != null) ddlCompanySave.Enabled = true;
-            }
-        }
     }
 
     // Called from the Employee Name typeahead in gv_Details_Save ("Add Employees") as the
@@ -4134,29 +3024,6 @@ Meeting Entry Demo Mail.<br/><br/>
             });
         }
         return results;
-    }
-
-    protected void ddlCompanySave_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        RadioButtonList ddlCompanySave = (RadioButtonList)sender;
-        GridViewRow row = (GridViewRow)ddlCompanySave.NamingContainer;
-
-        HiddenField hfCompanySave = (HiddenField)row.FindControl("hfCompanySave");
-        if (hfCompanySave != null)
-        {
-            hfCompanySave.Value = ddlCompanySave.SelectedValue;
-        }
-
-        // Clean up any previously selected employee for this row — the old selection
-        // belonged to the previous company's roster and no longer applies.
-        HiddenField ShfEmpInfoId = (HiddenField)row.FindControl("ShfEmpInfoId");
-        if (ShfEmpInfoId != null) ShfEmpInfoId.Value = "";
-        TextBox txt_EmpMasterCode = (TextBox)row.FindControl("txt_EmpMasterCode");
-        if (txt_EmpMasterCode != null) txt_EmpMasterCode.Text = "";
-        TextBox txt_EmpName = (TextBox)row.FindControl("txt_EmpName");
-        if (txt_EmpName != null) txt_EmpName.Text = "";
-        TextBox txt_Designation = (TextBox)row.FindControl("txt_Designation");
-        if (txt_Designation != null) txt_Designation.Text = "";
     }
 
     protected void ddlCompanyLocation_OnSelectedIndexChanged(object sender, EventArgs e)

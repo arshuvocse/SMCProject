@@ -1,4 +1,4 @@
-<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="ExitManagement_UI_EmpExitView, App_Web_pecdhlor" %>
+<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="ExitManagement_UI_EmpExitView, App_Web_rvs0zl5h" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
@@ -55,6 +55,37 @@
             width: 17px;
             height: 17px;
             border-radius: 3px;
+        }
+
+        .mail-notification-note {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px 18px;
+            border: 2px solid #123ee8;
+            border-radius: 6px;
+            background-color: #fff;
+            color: #111;
+            font-size: 16px;
+            line-height: 1.4;
+            box-shadow: 0 0 4px rgba(18, 62, 232, .25);
+        }
+
+        .mail-notification-note-container {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .mail-notification-note i,
+        .mail-notification-note strong {
+            color: #123ee8;
+        }
+
+        .mail-notification-note i {
+            flex: 0 0 auto;
+            font-size: 30px;
         }
     </style>
 </asp:Content>
@@ -189,6 +220,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="mail-notification-note-container">
+                                <div class="mail-notification-note">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    <span><strong>Note:</strong> To send or run a mail notification, please tick the checkbox <strong>to the right of the employee name.</strong></span>
+                                </div>
+                            </div>
                             <div class="approval-status-legend" style="align-items: center;">
                                 <span class="approval-status-legend-item">
                                     <span class="approval-status-legend-color approval-status-done"></span>Done
@@ -198,9 +235,6 @@
                                 </span>
                                 <span class="approval-status-legend-item">
                                     <span class="approval-status-legend-color approval-status-not-reached"></span>Not Yet Reached
-                                </span>
-                                <span style="margin-left: auto; font-size: 12px; font-weight: normal; color: #555; display: inline-flex; align-items: center; gap: 4px; background-color: #f8f9fa; padding: 3px 8px; border-radius: 4px; border: 1px dashed #ccc;">
-                                    <i class="fa fa-info-circle" style="color: #0288d1; font-size: 14px;"></i> Note: To send/run a mail notification, please check/tick the checkbox next to the pending employee name.
                                 </span>
                             </div>
                             <div id="gridContasdiner1" style="height: auto; overflow: auto; width: auto; overflow-y: scroll; overflow-x: scroll;">

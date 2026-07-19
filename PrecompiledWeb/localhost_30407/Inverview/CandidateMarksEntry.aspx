@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="Inverview_CandidateMarksEntry, App_Web_lfugtupv" %>
+﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="Inverview_CandidateMarksEntry, App_Web_pjimrsd3" %>
 
 <asp:Content ID="c1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">

@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="DashBoard_UI_DashBoard, App_Web_b1bxagm4" %>
+<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="DashBoard_UI_DashBoard, App_Web_f1c1r2sr" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -231,7 +231,7 @@
 
 
                                             <asp:GridView Visible="False" ID="loadGridView" runat="server" AutoGenerateColumns="False"
-                                                CssClass="table table-bordered text-center thead-dark" DataKeyNames="EmployeeJobLeftId,EmployeeId,ExitDetailId,ApprovalStatus,ExitMasterId">
+                                                CssClass="table table-bordered text-center thead-dark" DataKeyNames="EmployeeJobLeftId,EmployeeId,ExitDetailId,ApprovalStatus,ExitMasterId,empinfoidForMain,EmpInfoIdApproval">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="SL">
                                                         <ItemTemplate>

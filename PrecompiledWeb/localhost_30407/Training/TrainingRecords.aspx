@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableviewstate="true" maintainscrollpositiononpostback="true" autoeventwireup="true" inherits="Training_TrainingRecords, App_Web_mbpnwvle" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableviewstate="true" maintainscrollpositiononpostback="true" autoeventwireup="true" inherits="Training_TrainingRecords, App_Web_xwtimgu0" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

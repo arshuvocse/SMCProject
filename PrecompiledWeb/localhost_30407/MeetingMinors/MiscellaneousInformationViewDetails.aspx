@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MeetingMinors_MiscellaneousInformationViewDetails, App_Web_4bsbzvky" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MeetingMinors_MiscellaneousInformationViewDetails, App_Web_3szep0bn" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 

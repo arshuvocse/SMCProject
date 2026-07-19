@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="HealthCare_UI_EmployeeInfo_Sap, App_Web_uliyke4l" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="HealthCare_UI_EmployeeInfo_Sap, App_Web_hwgvgsui" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     

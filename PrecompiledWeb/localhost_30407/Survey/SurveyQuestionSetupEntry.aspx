@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="Survey_SurveyQuestionSetupEntry, App_Web_5hdveotf" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="Survey_SurveyQuestionSetupEntry, App_Web_avludriw" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 

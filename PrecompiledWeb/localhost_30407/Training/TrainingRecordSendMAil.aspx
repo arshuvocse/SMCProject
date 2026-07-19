@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" validaterequest="false" inherits="Training_TrainingRecordSendMAil, App_Web_vgnvy5fu" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" validaterequest="false" inherits="Training_TrainingRecordSendMAil, App_Web_h4zufl0w" %>
 
 <%@ Register Assembly="FreeTextBox" Namespace="FreeTextBoxControls" TagPrefix="FTB" %>
 
