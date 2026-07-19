@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="MeetingMinors_MeetingRoomView, App_Web_3szep0bn" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="MeetingMinors_MeetingRoomView, App_Web_ums4bd52" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     

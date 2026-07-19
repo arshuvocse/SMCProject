@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="ContractualEmployeeManagement_UI_ContractualEmpApprovalList, App_Web_twefrlzw" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="ContractualEmployeeManagement_UI_ContractualEmpApprovalList, App_Web_foomiwxj" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     

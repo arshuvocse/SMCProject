@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" enableeventvalidation="false" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="MenuSetup_SystemLoginLog, App_Web_x0z2nf0z" %>
+﻿<%@ page title="" language="C#" enableeventvalidation="false" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="MenuSetup_SystemLoginLog, App_Web_0xr3swsf" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     

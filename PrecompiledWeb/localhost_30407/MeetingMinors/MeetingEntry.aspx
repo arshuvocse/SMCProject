@@ -1,4 +1,4 @@
-<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MeetingMinors_MeetingEntry, App_Web_ce25useu" %>
+<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MeetingMinors_MeetingEntry, App_Web_xzty341n" %>
 
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 
@@ -956,7 +956,7 @@
                                                                         <label class="control-label pull-right">Company:<span style="color: red;" title="please fill out this field"> * </span></label>
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCompany_OnSelectedIndexChanged" ID="ddlCompany" class="form-control form-control-sm" />
+                                                                        <asp:DropDownList runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCompany_OnSelectedIndexChanged" ID="ddlCompany" class="form-control form-control-sm" onchange="handleMeetingGridsSave();" />
 
 
 
@@ -2298,12 +2298,17 @@
                         };
                     }
 
-                    function companyOptionsHtml(idx, selectedCompanyId) {
+                    function companyOptionsHtml(idx, selectedCompanyId, isDisabled) {
                         var html = '';
                         (referenceData.companies || []).forEach(function (c) {
-                            var checked = (String(c.Value) === String(selectedCompanyId)) ? ' checked' : '';
-                            html += '<label style="margin-right:10px;font-weight:normal;">' +
-                                '<input type="radio" name="gridA_' + idx + '_company" value="' + escapeHtml(c.Value) + '"' + checked + '> ' +
+                            // When Guest: never pre-check any company, and mark each radio disabled
+                            var checked   = (!isDisabled && String(c.Value) === String(selectedCompanyId)) ? ' checked' : '';
+                            var disabledAttr = isDisabled ? ' disabled' : '';
+                            var labelStyle = isDisabled
+                                ? 'margin-right:10px;font-weight:normal;opacity:0.45;cursor:not-allowed;'
+                                : 'margin-right:10px;font-weight:normal;';
+                            html += '<label style="' + labelStyle + '">' +
+                                '<input type="radio" name="gridA_' + idx + '_company" value="' + escapeHtml(c.Value) + '"' + checked + disabledAttr + '> ' +
                                 escapeHtml(c.TextField) + '</label>';
                         });
                         return html;
@@ -2312,9 +2317,9 @@
                     var POSITIONS = ['Member', 'Convenor', 'Secretary'];
 
                     function rowHtml(r, idx) {
+                        var isGuest      = r.Type === 'Guest';
                         var typeEmployee = r.Type === 'Employee' ? ' checked' : '';
-                        var typeGuest = r.Type === 'Guest' ? ' checked' : '';
-                        var companyDisabled = r.Type === 'Guest' ? ' disabled' : '';
+                        var typeGuest    = isGuest ? ' checked' : '';
 
                         var positionsHtml = POSITIONS.map(function (p) {
                             var checked = r.Position === p ? ' checked' : '';
@@ -2328,7 +2333,7 @@
                             '<label style="margin-right:10px;font-weight:normal;"><input type="radio" name="gridA_' + idx + '_type" value="Employee"' + typeEmployee + '> Employee</label>' +
                             '<label style="font-weight:normal;"><input type="radio" name="gridA_' + idx + '_type" value="Guest"' + typeGuest + '> Guest</label>' +
                             '</span></td>' +
-                            '<td><span id="gridA_row_' + idx + '_ddlCompanySave" class="chkChoice"' + companyDisabled + '>' + companyOptionsHtml(idx, r.CompanyId) + '</span></td>' +
+                            '<td><span id="gridA_row_' + idx + '_ddlCompanySave" class="chkChoice">' + companyOptionsHtml(idx, r.CompanyId, isGuest) + '</span></td>' +
                             '<td>' +
                             '<div class="emp-typeahead-wrap" style="position: relative; width: 220px;">' +
                             '<input type="text" id="gridA_row_' + idx + '_txt_EmpName" class="form-control form-control-sm emp-typeahead-input" autocomplete="off" style="width: 220px !important;" value="' + escapeHtml(r.EmpName) + '">' +

@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MasterSetup_UI_JobLeftType, App_Web_hk22sbk3" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MasterSetup_UI_JobLeftType, App_Web_hw5wua30" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 

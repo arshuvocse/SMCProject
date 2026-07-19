@@ -78,15 +78,17 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         string companiesJson = JsonConvert.SerializeObject(companies);
         string positionsJson = JsonConvert.SerializeObject(MemberPositionCache);
         string script = "MeetingGridA.setReferenceData(" + companiesJson + ");MeetingGridB.setPositionOptions(" + positionsJson + ");";
-        ClientScript.RegisterStartupScript(this.GetType(), "MeetingGridRefData", script, true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "MeetingGridRefData", script, true);
     }
 
     private void EmitGridAJson(bool replace, DataTable rows)
     {
         string json = JsonConvert.SerializeObject(rows ?? new DataTable());
         string method = replace ? "hydrate" : "appendRows";
-        string script = "MeetingGridA." + method + "(" + json + ");";
-        ClientScript.RegisterStartupScript(this.GetType(), "GridA_" + Guid.NewGuid().ToString("N"), script, true);
+        // Call render() immediately after hydrate/appendRows so the DOM updates
+        // whether we're in a full postback or an async (UpdatePanel) postback.
+        string script = "MeetingGridA." + method + "(" + json + "); MeetingGridA.render();";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "GridA_" + Guid.NewGuid().ToString("N"), script, true);
     }
 
     // Board-Member Position arrives from different sources as either a numeric PositionId
@@ -123,8 +125,10 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         DataTable dt = rows ?? new DataTable();
         ResolveBoardMemberPositionText(dt);
         string json = JsonConvert.SerializeObject(dt);
-        string script = "MeetingGridB.hydrate(" + json + ");";
-        ClientScript.RegisterStartupScript(this.GetType(), "GridB_" + Guid.NewGuid().ToString("N"), script, true);
+        // Call render() immediately after hydrate so the DOM updates whether we're
+        // in a full postback or an async (UpdatePanel) postback.
+        string script = "MeetingGridB.hydrate(" + json + "); MeetingGridB.render();";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "GridB_" + Guid.NewGuid().ToString("N"), script, true);
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -490,7 +494,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         if (ddlDivision.SelectedValue != "")
         {
 
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
 
             AMAsterDal.GetDepartmentByDivList(ddlDepartment, ddlDivision.SelectedValue);
 
@@ -713,7 +717,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         {
 
             AlertMessageBoxShow("Please select at least one employee !!!");
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
 
             return false;
         }
@@ -723,7 +727,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         if (totalCount == 0)
         {
             aShowMessage.ShowMessageBox("Please Select Employee", this);
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
 
 
 
@@ -745,7 +749,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         {
 
             AlertMessageBoxShow("Please select at least one employee !!!");
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
 
             return false;
         }
@@ -755,7 +759,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         if (totalCount == 0)
         {
             aShowMessage.ShowMessageBox("Please Select Employee", this);
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
 
 
 
@@ -778,7 +782,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         {
 
             AlertMessageBoxShow("Please select at least one employee !!!");
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalBoardMember').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModalBoardMember').modal('show')", true);
 
             return false;
         }
@@ -788,7 +792,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         if (totalCount == 0)
         {
             aShowMessage.ShowMessageBox("Please Select Employee", this);
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalBoardMember').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModalBoardMember').modal('show')", true);
 
 
 
@@ -949,7 +953,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         }
 
         BindDraftMemberList(draft);
-        ClientScript.RegisterStartupScript(GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
     }
 
     protected void btnRemoveDraftMember_OnClick(object sender, EventArgs e)
@@ -977,7 +981,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             BindDraftMemberList(draft);
         }
 
-        ClientScript.RegisterStartupScript(GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
     }
 
     protected void btnSubmitDraftMembers_OnClick(object sender, EventArgs e)
@@ -986,7 +990,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         if (draft == null || draft.Rows.Count == 0)
         {
             AlertMessageBoxShow("Please add at least one employee to the draft list.");
-            ClientScript.RegisterStartupScript(GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
             return;
         }
 
@@ -1074,7 +1078,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             var chkBoxRows = (CheckBox)gv_EmpListSearch.Rows[i].Cells[0].FindControl("chkSelect");
             chkBoxRows.Checked = chkBoxHeader.Checked;
         }
-        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
 
     }
 
@@ -1082,7 +1086,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
 
     protected void btnSearch_OnClick(object sender, EventArgs e)
     {
-        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModal2').modal('show')", true);
         if (ddlCompany.SelectedIndex > 0)
         {
             LoadEMPInfo();
@@ -1255,8 +1259,8 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             string gridAJson = hfGridA_Json.Value;
             if (!string.IsNullOrWhiteSpace(gridAJson) && gridAJson != "[]" && gridAJson != "null")
             {
-                string scriptA = "MeetingGridA.hydrate(" + gridAJson + ");";
-                ClientScript.RegisterStartupScript(this.GetType(), "GridA_CompanyRestore", scriptA, true);
+                string scriptA = "MeetingGridA.hydrate(" + gridAJson + "); MeetingGridA.render();";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "GridA_CompanyRestore", scriptA, true);
             }
             else
             {
@@ -1649,7 +1653,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         if (ddlDivisionAPP.SelectedValue != "")
         {
 
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
 
             AMAsterDal.GetDepartmentByDivList(ddlDepartmentAPP, ddlDivisionAPP.SelectedValue);
 
@@ -1663,7 +1667,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
 
     protected void btnSearchAPP_OnClick(object sender, EventArgs e)
     {
-        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
         if (ddlCompany.SelectedIndex > 0)
         {
             LoadEMPInfoAappEmp();
@@ -1684,7 +1688,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             var chkBoxRows = (CheckBox)gv_EmpListSearchAPP.Rows[i].Cells[0].FindControl("chkSelectAPP");
             chkBoxRows.Checked = chkBoxHeader.Checked;
         }
-        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModalAPPEmpp').modal('show')", true);
     }
 
     protected void btnAddToListEmpAPP_OnClick(object sender, EventArgs e)
@@ -2747,7 +2751,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             }
             else
             {
-                EmitGridAJson(true, new DataTable());
+                EmitGridBJson(new DataTable());
             }
         }
         else
@@ -2998,7 +3002,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             var chkBoxRows = (CheckBox)gv_loadGridView.Rows[i].Cells[0].FindControl("BchkSelect");
             chkBoxRows.Checked = chkBoxHeader.Checked;
         }
-        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#exampleModalBoardMember').modal('show')", true);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "$('#exampleModalBoardMember').modal('show')", true);
     }
 
     protected void DropDownList2_OnSelectedIndexChanged(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" validaterequest="false" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MeetingMinors_MiscellaneousInformation, App_Web_hwgvgsui" %>
+﻿<%@ page title="" language="C#" validaterequest="false" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="false" autoeventwireup="true" inherits="MeetingMinors_MiscellaneousInformation, App_Web_lhs312w4" %>
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">

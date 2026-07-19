@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" inherits="Report_UI_MemoPrintJobCirculationReportViwer, App_Web_3prfr5bz" %>
+﻿<%@ page language="C#" autoeventwireup="true" inherits="Report_UI_MemoPrintJobCirculationReportViwer, App_Web_lyydzvuy" %>
 
 <%@ Register Assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 

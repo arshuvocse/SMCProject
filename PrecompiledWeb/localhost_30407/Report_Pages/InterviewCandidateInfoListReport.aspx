@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="true" inherits="Report_Pages_InterviewCandidateInfoListReport, App_Web_wwscih54" %>
+﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" enableeventvalidation="true" inherits="Report_Pages_InterviewCandidateInfoListReport, App_Web_h140fsiy" %>
 
 <%@ Register Src="~/Report_Pages/IVSearchControlReport.ascx" TagPrefix="uc1" TagName="IVSearchControl" %>
 

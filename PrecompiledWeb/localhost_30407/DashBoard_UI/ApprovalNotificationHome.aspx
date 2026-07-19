@@ -1,4 +1,4 @@
-<%@ page title="Approval Notification" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="DashBoard_UI_ApprovalNotificationHome, App_Web_f1c1r2sr" %>
+<%@ page title="Approval Notification" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="DashBoard_UI_ApprovalNotificationHome, App_Web_z3md150c" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>

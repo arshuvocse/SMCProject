@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" enableviewstate="true" maintainscrollpositiononpostback="true" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Medica_Ul_EmpMedicalCheckUpView, App_Web_bkmxv0wd" %>
+﻿<%@ page title="" language="C#" enableviewstate="true" maintainscrollpositiononpostback="true" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" inherits="Medica_Ul_EmpMedicalCheckUpView, App_Web_cgkrlyay" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

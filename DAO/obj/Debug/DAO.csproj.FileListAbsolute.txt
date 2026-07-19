@@ -510,8 +510,6 @@ d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\bin\Debug\itextsharp.dll
 d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\bin\Debug\EntityFramework.xml
 d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\bin\Debug\EntityFramework.SqlServer.xml
 d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\bin\Debug\itextsharp.xml
-d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\obj\Debug\DAO.csproj.AssemblyReference.cache
-d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
-d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\obj\Debug\DAO.csproj.Up2Date
 d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\obj\Debug\DAO.dll
 d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\obj\Debug\DAO.pdb
+d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\DAO\obj\Debug\DAO.csprojResolveAssemblyReference.cache

@@ -1,4 +1,4 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="Skill_Will_Assessment_SKIllWillFinalResult, App_Web_xrkiyotq" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/MasterPages/MainMasterPage.master" autoeventwireup="true" enableeventvalidation="false" inherits="Skill_Will_Assessment_SKIllWillFinalResult, App_Web_p43x4dcb" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

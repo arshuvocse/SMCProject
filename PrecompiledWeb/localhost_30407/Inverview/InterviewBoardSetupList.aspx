@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="Inverview_InterviewBoardSetupList, App_Web_pjimrsd3" %>
+﻿<%@ page language="C#" autoeventwireup="true" masterpagefile="~/MasterPages/MainMasterPage.master" inherits="Inverview_InterviewBoardSetupList, App_Web_slfzoonb" %>
 <%@ Register Src="~/Report_Pages/IVSearchControlReport.ascx" TagPrefix="uc1" TagName="IVSearchControl" %>
 <asp:Content ID="c1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
