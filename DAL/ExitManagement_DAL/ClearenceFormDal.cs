@@ -538,7 +538,7 @@ left JOIN dbo.tblDepartment dept ON dept.DepartmentId = e.DepartmentId  WHERE  E
         public DataTable ResourceDataForDepartment(int empId, int id, string Condi,int  ExitMasterId, int ExitDetailId)
         {
             string queryStr = @"select  tblDepWiseClearanceResourceUpdate.Resource as Otherconsumption,tblDepWiseClearanceResourceUpdate.Remarks,tblDepWiseClearanceResourceUpdate.MainRemarks, Recommend  FROM tblDepWiseClearanceResourceUpdate 
-            where EmpID=" + empId + " and exitMasterIdNew=" + ExitMasterId + " and exitDetailIdNew=" + ExitDetailId + "  and DepID=" + id + " and ApprovalCondition='" + Condi+"'";
+            where EmpID=" + empId + " and exitMasterIdNew=" + ExitMasterId + " and exitDetailIdNew=" + ExitDetailId ;
             return aCommonInternalDal.DataContainerDataTable(queryStr, DataBase.HRDB);
         }
         public DataTable ResourceDataForDivision(int empId, int id, string Condi)

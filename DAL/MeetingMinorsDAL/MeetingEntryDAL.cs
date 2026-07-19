@@ -1864,5 +1864,25 @@ INSERT INTO [dbo].[tblMeeting_MeetingInfoAgenda]
                 return null;
             }
         }
+
+        // Top-N, server-filtered employee lookup for the Add Employees row typeahead —
+        // avoids loading a company's entire active roster into a GridView row's
+        // DropDownList (and ViewState) on every postback like GetDDLEmpInfo did.
+        public System.Data.DataTable SearchEmpForMeeting(string companyId, string term)
+        {
+            var parameters = new List<SqlParameter>
+            {
+                new SqlParameter("@CompanyId", companyId),
+                new SqlParameter("@Term", "%" + (term ?? string.Empty) + "%")
+            };
+            string query = @"SELECT TOP 20 emp.EmpInfoId AS EmpInfoId, emp.EmpMasterCode AS EmpMasterCode,
+                                     emp.EmpName AS EmpName, ISNULL(des.DesignationName,'') AS Designation
+                              FROM dbo.tblEmpGeneralInfo emp WITH (NOLOCK)
+                              LEFT JOIN dbo.tblDesignation des WITH (NOLOCK) ON des.DesignationId = emp.DesignationId
+                              WHERE emp.IsActive = 1 AND emp.CompanyId = @CompanyId
+                                AND (emp.EmpName LIKE @Term OR emp.EmpMasterCode LIKE @Term)
+                              ORDER BY emp.EmpName";
+            return aCommonInternalDal.DataContainerDataTable(query, parameters, DataBase.HRDB);
+        }
     }
 }

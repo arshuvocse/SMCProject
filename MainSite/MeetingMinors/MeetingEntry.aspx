@@ -1341,17 +1341,19 @@
                                                                                   <ItemTemplate>
                                                                                       <asp:RadioButtonList ID="ddlCompanySave" runat="server" CssClass="chkChoice" style="display: inline-block; min-width: 160px;" RepeatDirection="Horizontal" AutoPostBack="True" OnSelectedIndexChanged="ddlCompanySave_SelectedIndexChanged"></asp:RadioButtonList>
                                                                                       <asp:HiddenField runat="server" ID="hfCompanySave" Value='<%#Eval("CompanyId")%>' />
-                                                                                      <asp:TextBox runat="server" ID="txt_EmpMasterCode" Visible="false" Text='<%#Eval("EmpMasterCode")%>'></asp:TextBox>
+                                                                                      <asp:TextBox runat="server" ID="txt_EmpMasterCode" style="display:none" Text='<%#Eval("EmpMasterCode")%>'></asp:TextBox>
                                                                                      <asp:HiddenField runat="server" ID="hfBMemberSetupDetailsID" Value='<%#Eval("BMemberSetupDetailsID")%>' />
                                                                                      <asp:HiddenField runat="server" ID="hfIsBoardMember" Value='<%#Eval("IsBoardMember")%>' />
                                                                                      <asp:HiddenField runat="server" ID="ShfEmpInfoId" Value='<%#Eval("EmpInfoId")%>' />
                                                                                  </ItemTemplate>
                                                                              </asp:TemplateField>
- 
+
                                                                              <asp:TemplateField HeaderText="Employee Name">
                                                                                  <ItemTemplate>
-                                                                                     <asp:DropDownList ID="ddlEmployeeSave" runat="server" CssClass="form-control form-control-sm SelectMe33" style="width: 220px !important;" AutoPostBack="True" OnSelectedIndexChanged="ddlEmployeeSave_SelectedIndexChanged"></asp:DropDownList>
-                                                                                     <asp:TextBox ID="txt_EmpName" CssClass="form-control form-control-sm" runat="server" style="width: 220px !important;" Text='<%#Eval("EmpName") %>'></asp:TextBox>
+                                                                                     <div class="emp-typeahead-wrap" style="position: relative; width: 220px;">
+                                                                                         <asp:TextBox ID="txt_EmpName" CssClass="form-control form-control-sm emp-typeahead-input" runat="server" autocomplete="off" style="width: 220px !important;" Text='<%#Eval("EmpName") %>'></asp:TextBox>
+                                                                                         <div class="emp-typeahead-results"></div>
+                                                                                     </div>
                                                                                  </ItemTemplate>
                                                                              </asp:TemplateField>
 
@@ -1649,14 +1651,14 @@
                                                     </asp:UpdatePanel>
 
                                                     <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
-                                                        <div class="col-md-12 text-center">
+                                                        <div class="col-md-12 text-left">
                                                             <asp:LinkButton ID="submitButton" Visible="False" OnClick="btnSave_OnClick"
                                                                 OnClientClick="return confirm('Are you sure you want to Submit ?')"
-                                                                CssClass="btn btn-sm btn-info" runat="server">&nbsp; Submit</asp:LinkButton>
+                                                                CssClass="btn btn-lg btn-info" runat="server">&nbsp; Submit</asp:LinkButton>
                                                             <asp:HiddenField runat="server" ID="id_mastetID" />
                                                             <asp:LinkButton ID="editButton"
                                                                 OnClientClick="return confirm('Are you sure you want to Update ?')"
-                                                                CssClass="btn btn-sm btn-info" Visible="False" runat="server"
+                                                                CssClass="btn btn-lg btn-info" Visible="False" runat="server"
                                                                 OnClick="editButton_OnClick">&nbsp; Update &amp; Submit</asp:LinkButton>
                                                         </div>
                                                     </div>
@@ -2173,8 +2175,197 @@
                 })();
             </script>
 
+            <style type="text/css">
+                .emp-typeahead-results {
+                    display: none;
+                    position: absolute;
+                    z-index: 1000;
+                    left: 0;
+                    right: 0;
+                    top: 100%;
+                    background: #fff;
+                    border: 1px solid #ccc;
+                    max-height: 220px;
+                    overflow-y: auto;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+                }
 
+                .emp-typeahead-option {
+                    padding: 4px 8px;
+                    cursor: pointer;
+                    font-size: 13px;
+                    white-space: nowrap;
+                }
 
+                .emp-typeahead-option:hover,
+                .emp-typeahead-option.active {
+                    background: #f0f0f0;
+                }
+
+                .emp-typeahead-empty {
+                    padding: 4px 8px;
+                    font-size: 12px;
+                    color: #888;
+                }
+            </style>
+
+            <script type="text/javascript">
+                // Add Employees ("gv_Details_Save") — Employee Name search-as-you-type.
+                // Looks employees up via AjaxSearchEmployeesForMeeting (scoped to the row's
+                // selected Company, top 20 matches) instead of the old approach of binding
+                // every active employee in the company into that row's DropDownList, which
+                // put the whole roster into ViewState per Employee-type row on every postback.
+                // Listeners are delegated on document so they keep working after this grid's
+                // UpdatePanel re-renders a row (no re-init needed).
+                (function () {
+                    var searchTimer = null;
+                    var MIN_TERM_LENGTH = 2;
+                    var DEBOUNCE_MS = 250;
+
+                    function closestRow(el) {
+                        return el.closest ? el.closest('tr') : null;
+                    }
+
+                    function fieldInRow(row, idSuffix) {
+                        return row.querySelector('[id$="_' + idSuffix + '"]');
+                    }
+
+                    function checkedRadioValueInRow(row, idSuffix) {
+                        var container = fieldInRow(row, idSuffix);
+                        if (!container) return '';
+                        var checked = container.querySelector('input[type=radio]:checked');
+                        return checked ? checked.value : '';
+                    }
+
+                    function hideResults(box) {
+                        box.style.display = 'none';
+                        box.innerHTML = '';
+                    }
+
+                    function selectEmployee(input, row, box, item) {
+                        input.value = item.EmpName;
+                        input.setAttribute('data-selected-name', item.EmpName);
+
+                        var hfEmpInfo = fieldInRow(row, 'ShfEmpInfoId');
+                        var hfCode = fieldInRow(row, 'txt_EmpMasterCode');
+                        var txtDesg = fieldInRow(row, 'txt_Designation');
+
+                        if (hfEmpInfo) hfEmpInfo.value = item.EmpInfoId;
+                        if (hfCode) hfCode.value = item.EmpMasterCode;
+                        if (txtDesg) txtDesg.value = item.Designation || '';
+
+                        hideResults(box);
+                    }
+
+                    function renderResults(input, row, box, items) {
+                        box.innerHTML = '';
+                        if (!items || !items.length) {
+                            var empty = document.createElement('div');
+                            empty.className = 'emp-typeahead-empty';
+                            empty.textContent = 'No matching employee';
+                            box.appendChild(empty);
+                            box.style.display = 'block';
+                            return;
+                        }
+
+                        items.forEach(function (item) {
+                            var opt = document.createElement('div');
+                            opt.className = 'emp-typeahead-option';
+                            opt.textContent = item.EmpMasterCode + ' ; ' + item.EmpName +
+                                (item.Designation ? ' (' + item.Designation + ')' : '');
+                            // mousedown + preventDefault fires before the input's blur event,
+                            // so the click registers before the results box gets hidden.
+                            opt.addEventListener('mousedown', function (e) {
+                                e.preventDefault();
+                                selectEmployee(input, row, box, item);
+                            });
+                            box.appendChild(opt);
+                        });
+                        box.style.display = 'block';
+                    }
+
+                    function runSearch(input, row, box, companyId, term) {
+                        $.ajax({
+                            type: 'POST',
+                            url: 'MeetingEntry.aspx/AjaxSearchEmployeesForMeeting',
+                            data: JSON.stringify({ companyId: companyId, term: term }),
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json'
+                        }).done(function (response) {
+                            var items = response && response.d ? response.d : [];
+                            // Ignore stale responses for a box the user has already moved away from.
+                            if (document.activeElement !== input) return;
+                            renderResults(input, row, box, items);
+                        }).fail(function () {
+                            hideResults(box);
+                        });
+                    }
+
+                    document.addEventListener('input', function (e) {
+                        var input = e.target;
+                        if (!input.classList || !input.classList.contains('emp-typeahead-input')) return;
+
+                        // Editing the text after a suggestion was picked invalidates that pick.
+                        if (input.getAttribute('data-selected-name') !== input.value) {
+                            input.removeAttribute('data-selected-name');
+                            var row0 = closestRow(input);
+                            if (row0) {
+                                var hfEmpInfo = fieldInRow(row0, 'ShfEmpInfoId');
+                                var hfCode = fieldInRow(row0, 'txt_EmpMasterCode');
+                                if (hfEmpInfo) hfEmpInfo.value = '';
+                                if (hfCode) hfCode.value = '';
+                            }
+                        }
+
+                        var row = closestRow(input);
+                        var box = input.parentElement.querySelector('.emp-typeahead-results');
+                        if (!row || !box) return;
+
+                        var typeVal = checkedRadioValueInRow(row, 'rbType');
+                        if (typeVal !== 'Employee') {
+                            hideResults(box);
+                            return;
+                        }
+
+                        var term = input.value.trim();
+                        if (searchTimer) window.clearTimeout(searchTimer);
+
+                        if (term.length < MIN_TERM_LENGTH) {
+                            hideResults(box);
+                            return;
+                        }
+
+                        var companyId = checkedRadioValueInRow(row, 'ddlCompanySave');
+                        if (!companyId) {
+                            hideResults(box);
+                            return;
+                        }
+
+                        searchTimer = window.setTimeout(function () {
+                            runSearch(input, row, box, companyId, term);
+                        }, DEBOUNCE_MS);
+                    }, true);
+
+                    document.addEventListener('keydown', function (e) {
+                        if (!e.target.classList || !e.target.classList.contains('emp-typeahead-input')) return;
+                        if (e.key === 'Escape') {
+                            var box = e.target.parentElement.querySelector('.emp-typeahead-results');
+                            if (box) hideResults(box);
+                        }
+                    });
+
+                    // Close an open results box when focus/clicks move elsewhere.
+                    document.addEventListener('click', function (e) {
+                        var wraps = document.querySelectorAll('.emp-typeahead-wrap');
+                        wraps.forEach(function (wrap) {
+                            if (!wrap.contains(e.target)) {
+                                var box = wrap.querySelector('.emp-typeahead-results');
+                                if (box) hideResults(box);
+                            }
+                        });
+                    });
+                })();
+            </script>
 
         </div>
 

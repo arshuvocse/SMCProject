@@ -1013,7 +1013,7 @@
                     </div>
                     <br />
                     <br />
-                    <div class="row">
+                    <div class="row" style="display:none">
                         <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Agenda Information</h2>
                         <div class="col-md-12">
 
@@ -1146,42 +1146,39 @@
                                 </div>
                             </fieldset>
 
-                            <asp:GridView Width="100%" ShowHeader="True" ID="gv_DocumentUpload" runat="server" AutoGenerateColumns="false" CssClass="AddToListCssTable" OnPreRender="gv_DocumentUpload_PreRender">
-                                <Columns>
-                                    <asp:TemplateField HeaderText="SL#">
+                            <table width="100%" class="AddToListCssTable" id="tbl_DocumentUpload">
+                                <thead>
+                                    <tr>
+                                        <th>SL#</th>
+                                        <th>Document</th>
+                                        <th>Summary Note</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="gv_DocumentUpload" runat="server" OnItemDataBound="gv_DocumentUpload_ItemDataBound">
                                         <ItemTemplate>
-                                            <%#Container.DataItemIndex + 1%>
+                                            <tr>
+                                                <td><%# Container.ItemIndex + 1 %></td>
+                                                <td>
+                                                    <asp:HyperLink ID="HLDocumentLink" Target="_blank" runat="server" NavigateUrl='<%# Eval("DocumentLink") %>' Text='Download'>
+                                                    </asp:HyperLink>
+                                                    <asp:Label ID="lbl_DocumentLink" Visible="False" runat="server" Text='<%#Eval("DocumentLink")%>'></asp:Label>
+                                                    <asp:HiddenField runat="server" ID="hfFileName" Value='<%#Eval("FileName")%>' />
+
+                                                    <asp:HiddenField runat="server" ID="hfDocumentLink" Value='<%#Eval("DocumentLink")%>' />
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="lbl_DocumentNote" runat="server" Text='<%#Eval("DocumentNote") %>'></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:LinkButton runat="server" ID="btnDocRemove" Visible="False" OnClick="btnDocRemove_OnClick" CssClass="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i> </asp:LinkButton>
+                                                </td>
+                                            </tr>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-
-
-                                    <asp:TemplateField HeaderText="Document">
-                                        <ItemTemplate>
-                                            <asp:HyperLink ID="HLDocumentLink" Target="_blank" runat="server" NavigateUrl='<%# Eval("DocumentLink") %>' Text='Download'>
-                                            </asp:HyperLink>
-                                            <asp:Label ID="lbl_DocumentLink" Visible="False" runat="server" Text='<%#Eval("DocumentLink")%>'></asp:Label>
-                                            <asp:HiddenField runat="server" ID="hfFileName" Value='<%#Eval("FileName")%>' />
-
-                                            <asp:HiddenField runat="server" ID="hfDocumentLink" Value='<%#Eval("DocumentLink")%>' />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-
-                                    <asp:TemplateField HeaderText="Summary Note	">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lbl_DocumentNote" runat="server" Text='<%#Eval("DocumentNote") %>'></asp:Label>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-
-
-                                    <asp:TemplateField HeaderText="Remove" runat="server" Visible="False">
-                                        <ItemTemplate>
-                                            <asp:LinkButton runat="server" ID="btnDocRemove" OnClick="btnDocRemove_OnClick" CssClass="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i> </asp:LinkButton>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
+                                    </asp:Repeater>
+                                </tbody>
+                            </table>
 
 
                             <br />
@@ -1191,39 +1188,38 @@
 
                         </div>
 
-                        <h2 class="blue title-widget" style="color: #2196F3; text-shadow: 0 0 2px black;">Approval Status List </h2>
-                        <div class="col-md-12">
+                        <h2 class="blue title-widget"  style="display:none" style="color: #2196F3; text-shadow: 0 0 2px black;">Approval Status List </h2>
+                        <div class="col-md-12" style="display:none">
 
 
-                            <asp:GridView Width="100%" ShowHeader="True" ID="gv_ApprovalList" runat="server" AutoGenerateColumns="false" CssClass="blueTableNew" OnPreRender="gv_DocumentUpload_PreRender">
-                                <Columns>
-                                    <asp:TemplateField HeaderText="SL#">
+                            <table width="100%" class="blueTableNew" id="tbl_ApprovalList">
+                                <thead>
+                                    <tr>
+                                        <th>SL#</th>
+                                        <th>Initiator</th>
+                                        <th>Comments</th>
+                                        <th>Approval Person</th>
+                                        <th>Action Status</th>
+                                        <th>Approved By</th>
+                                        <th>Approved Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="gv_ApprovalList" runat="server">
                                         <ItemTemplate>
-                                            <%#Container.DataItemIndex + 1%>
+                                            <tr>
+                                                <td><%# Container.ItemIndex + 1 %></td>
+                                                <td><%# Eval("PreEmp") %></td>
+                                                <td><%# Eval("Comments") %></td>
+                                                <td><%# Eval("ForEmp") %></td>
+                                                <td><%# Eval("ActionStatus") %></td>
+                                                <td><%# Eval("ApproveBy") %></td>
+                                                <td><%# Eval("ApprovedDate", "{0:dd-MMM-yyyy}") %></td>
+                                            </tr>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="PreEmp" HeaderText="Initiator" HtmlEncode="False" />
-
-                                    <asp:BoundField DataField="Comments" HeaderText="Comments" HtmlEncode="False" />
-
-                                    <asp:BoundField DataField="ForEmp" HeaderText="Approval Person" HtmlEncode="False" />
-
-                                    <asp:BoundField DataField="ActionStatus" HeaderText="Action Status" HtmlEncode="False" />
-
-                                    <%--<asp:BoundField DataField="Version" HeaderText="Version" HtmlEncode="False" />--%>
-
-
-
-                                    <asp:BoundField DataField="ApproveBy" HeaderText="Approved By" HtmlEncode="False" />
-                                    <asp:BoundField DataField="ApprovedDate" HeaderText="Approved Date" DataFormatString="{0:dd-MMM-yyyy}" />
-
-
-
-
-
-
-                                </Columns>
-                            </asp:GridView>
+                                    </asp:Repeater>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 

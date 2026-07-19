@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DAL.COMMON_DAL;
@@ -801,17 +802,17 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             {
                 RadioButtonList rbType = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("rbType");
                 RadioButtonList ddlCompanySave = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("ddlCompanySave");
-                DropDownList ddlEmployeeSave = (DropDownList)gv_Details_Save.Rows[i].FindControl("ddlEmployeeSave");
+                HiddenField ShfEmpInfoId = (HiddenField)gv_Details_Save.Rows[i].FindControl("ShfEmpInfoId");
                 TextBox txt_EmpName = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpName");
                 TextBox txt_Designation = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_Designation");
                 TextBox txt_EmpMasterCode = (TextBox)gv_Details_Save.Rows[i].FindControl("txt_EmpMasterCode");
                 RadioButtonList chkPosition = (RadioButtonList)gv_Details_Save.Rows[i].FindControl("chkPosition");
                 CheckBoxList chkNotification = (CheckBoxList)gv_Details_Save.Rows[i].FindControl("chkNotification");
-                
+
                 try { dt.Rows[i]["Type"] = rbType != null ? rbType.SelectedValue : ""; } catch {}
                 try { dt.Rows[i]["EmpName"] = txt_EmpName != null ? txt_EmpName.Text : ""; } catch {}
                 try { dt.Rows[i]["Designation"] = txt_Designation != null ? txt_Designation.Text : ""; } catch {}
-                try { dt.Rows[i]["EmpInfoId"] = ddlEmployeeSave != null ? ddlEmployeeSave.SelectedValue : ""; } catch {}
+                try { dt.Rows[i]["EmpInfoId"] = ShfEmpInfoId != null ? ShfEmpInfoId.Value : ""; } catch {}
                 try { dt.Rows[i]["EmpMasterCode"] = txt_EmpMasterCode != null ? txt_EmpMasterCode.Text : ""; } catch {}
                 try { dt.Rows[i]["CompanyId"] = ddlCompanySave != null ? ddlCompanySave.SelectedValue : ""; } catch {}
                 try { dt.Rows[i]["Position"] = chkPosition != null ? chkPosition.SelectedValue : ""; } catch {}
@@ -3239,8 +3240,7 @@ Meeting Entry Demo Mail.<br/><br/>
             dr["IsBoardMember"] = hfIsBoardMember.Value;
             dr["BMemberSetupDetailsID"] = hfBMemberSetupDetailsID.Value;
 
-            DropDownList ddlEmployeeSave = (DropDownList)gv_Details_Save.Rows[i].FindControl("ddlEmployeeSave");
-            dr["EmpInfoId"] = ddlEmployeeSave != null ? ddlEmployeeSave.SelectedValue : "";
+            dr["EmpInfoId"] = ShfEmpInfoId != null ? ShfEmpInfoId.Value : "";
 
             dr["EmpMasterCode"] = txt_EmpMasterCode.Text;
             dr["EmpName"] = txt_EmpName.Text;
@@ -3378,10 +3378,19 @@ Meeting Entry Demo Mail.<br/><br/>
         RadioButtonList rbType = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("rbType"));
         HiddenField hfType = ((HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("hfType"));
         RadioButtonList ddlCompanySave = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("ddlCompanySave"));
-        DropDownList ddlEmployeeSave = ((DropDownList)gv_Details_Save.Rows[rowIndex].FindControl("ddlEmployeeSave"));
-        TextBox txt_EmpName = ((TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_EmpName"));
 
         hfType.Value = rbType.SelectedValue;
+
+        // Reset employee details for this row as the type has toggled
+        HiddenField ShfEmpInfoId = (HiddenField)gv_Details_Save.Rows[rowIndex].FindControl("ShfEmpInfoId");
+        TextBox txt_EmpMasterCode = (TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_EmpMasterCode");
+        TextBox txt_EmpName = (TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_EmpName");
+        TextBox txt_Designation = (TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_Designation");
+
+        if (ShfEmpInfoId != null) ShfEmpInfoId.Value = "";
+        if (txt_EmpMasterCode != null) txt_EmpMasterCode.Text = "";
+        if (txt_EmpName != null) txt_EmpName.Text = "";
+        if (txt_Designation != null) txt_Designation.Text = "";
 
         if (rbType.SelectedValue == "Guest")
         {
@@ -3390,14 +3399,10 @@ Meeting Entry Demo Mail.<br/><br/>
                 ddlCompanySave.ClearSelection();
                 ddlCompanySave.Enabled = false;
             }
-            if (ddlEmployeeSave != null) ddlEmployeeSave.Visible = false;
-            if (txt_EmpName != null) txt_EmpName.Visible = true;
         }
         else
         {
             if (ddlCompanySave != null) ddlCompanySave.Enabled = true;
-            if (ddlEmployeeSave != null) ddlEmployeeSave.Visible = true;
-            if (txt_EmpName != null) txt_EmpName.Visible = false;
         }
     }
 
@@ -4045,23 +4050,6 @@ Meeting Entry Demo Mail.<br/><br/>
                 if (hfCompanySave != null && !string.IsNullOrEmpty(hfCompanySave.Value))
                 {
                     try { ddlCompanySave.SelectedValue = hfCompanySave.Value; } catch { }
-
-                    DropDownList ddlEmployeeSaveRow = (DropDownList)e.Row.FindControl("ddlEmployeeSave");
-                    if (ddlEmployeeSaveRow != null)
-                    {
-                        // Use session-cached employee list — avoids DB hit per row
-                        ddlEmployeeSaveRow.DataSource = GetEmployeesForCompany(hfCompanySave.Value);
-                        ddlEmployeeSaveRow.DataValueField = "Value";
-                        ddlEmployeeSaveRow.DataTextField = "TextField";
-                        ddlEmployeeSaveRow.DataBind();
-                        ddlEmployeeSaveRow.Items.Insert(0, new ListItem("Select...", ""));
-
-                        HiddenField ShfEmpInfoId = (HiddenField)e.Row.FindControl("ShfEmpInfoId");
-                        if (ShfEmpInfoId != null && !string.IsNullOrEmpty(ShfEmpInfoId.Value))
-                        {
-                            try { ddlEmployeeSaveRow.SelectedValue = ShfEmpInfoId.Value; } catch { }
-                        }
-                    }
                 }
             }
             
@@ -4094,9 +4082,6 @@ Meeting Entry Demo Mail.<br/><br/>
                 try { rbType.SelectedValue = hfType.Value.Trim(); } catch { }
             }
             
-            DropDownList ddlEmployeeSave = (DropDownList)e.Row.FindControl("ddlEmployeeSave");
-            TextBox txt_EmpName = (TextBox)e.Row.FindControl("txt_EmpName");
-
             if (rbType != null && rbType.SelectedValue == "Guest")
             {
                 if (ddlCompanySave != null)
@@ -4104,49 +4089,74 @@ Meeting Entry Demo Mail.<br/><br/>
                     ddlCompanySave.ClearSelection();
                     ddlCompanySave.Enabled = false;
                 }
-                if (ddlEmployeeSave != null) ddlEmployeeSave.Visible = false;
-                if (txt_EmpName != null) txt_EmpName.Visible = true;
             }
             else
             {
                 if (ddlCompanySave != null) ddlCompanySave.Enabled = true;
-                if (ddlEmployeeSave != null) ddlEmployeeSave.Visible = true;
-                if (txt_EmpName != null) txt_EmpName.Visible = false;
             }
         }
     }
 
-    protected void ddlCompanySave_SelectedIndexChanged(object sender, EventArgs e)
+    // Called from the Employee Name typeahead in gv_Details_Save ("Add Employees") as the
+    // user types. Replaces the old approach of binding every active employee in the
+    // company into each row's ddlEmployeeSave DropDownList (which put the whole roster,
+    // per Employee-type row, into ViewState on every postback and was the main cause of
+    // this page — including the Members List grid sharing the same ViewState — feeling
+    // stuck on "loading" whenever these grids were touched).
+    [System.Web.Services.WebMethod(EnableSession = true), ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public List<object> AjaxSearchEmployeesForMeeting(string companyId, string term)
     {
-        int rowIndex = ((GridViewRow)(((RadioButtonList)sender).Parent.Parent)).RowIndex;
-        RadioButtonList ddlCompanySave = ((RadioButtonList)gv_Details_Save.Rows[rowIndex].FindControl("ddlCompanySave"));
-        DropDownList ddlEmployeeSave = ((DropDownList)gv_Details_Save.Rows[rowIndex].FindControl("ddlEmployeeSave"));
+        var results = new List<object>();
 
-        if (ddlCompanySave != null && ddlCompanySave.SelectedValue != "" && ddlEmployeeSave != null)
+        // WebMethod requests bypass the master page's Page_Load auth-redirect, so guard
+        // explicitly here — this endpoint returns employee PII and must stay session-gated.
+        if (System.Web.HttpContext.Current.Session == null || Session["UserId"] == null)
         {
-            // Store in session cache so subsequent add/remove rows reuse the data
-            string key = "__MtgEntry_Emps_" + ddlCompanySave.SelectedValue;
-            if (Session[key] == null)
-                Session[key] = AMAsterDal.GetDDLEmpInfo(ddlCompanySave.SelectedValue);
-
-            ddlEmployeeSave.DataSource = (DataTable)Session[key];
-            ddlEmployeeSave.DataValueField = "Value";
-            ddlEmployeeSave.DataTextField = "TextField";
-            ddlEmployeeSave.DataBind();
-            ddlEmployeeSave.Items.Insert(0, new ListItem("Select...", ""));
+            return results;
         }
+
+        if (string.IsNullOrWhiteSpace(companyId) || string.IsNullOrWhiteSpace(term) || term.Trim().Length < 2)
+        {
+            return results;
+        }
+
+        DataTable dt = AMeetingEntryDal.SearchEmpForMeeting(companyId.Trim(), term.Trim());
+        if (dt == null) return results;
+
+        foreach (DataRow row in dt.Rows)
+        {
+            results.Add(new
+            {
+                EmpInfoId = row["EmpInfoId"].ToString(),
+                EmpMasterCode = row["EmpMasterCode"].ToString(),
+                EmpName = row["EmpName"].ToString(),
+                Designation = row["Designation"].ToString()
+            });
+        }
+        return results;
     }
 
-    protected void ddlEmployeeSave_SelectedIndexChanged(object sender, EventArgs e)
+    protected void ddlCompanySave_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int rowIndex = ((GridViewRow)(((DropDownList)sender).Parent.Parent)).RowIndex;
-        DropDownList ddlEmployeeSave = ((DropDownList)gv_Details_Save.Rows[rowIndex].FindControl("ddlEmployeeSave"));
-        TextBox txt_EmpName = ((TextBox)gv_Details_Save.Rows[rowIndex].FindControl("txt_EmpName"));
+        RadioButtonList ddlCompanySave = (RadioButtonList)sender;
+        GridViewRow row = (GridViewRow)ddlCompanySave.NamingContainer;
 
-        if (ddlEmployeeSave.SelectedValue != "")
+        HiddenField hfCompanySave = (HiddenField)row.FindControl("hfCompanySave");
+        if (hfCompanySave != null)
         {
-            txt_EmpName.Text = ddlEmployeeSave.SelectedItem.Text;
+            hfCompanySave.Value = ddlCompanySave.SelectedValue;
         }
+
+        // Clean up any previously selected employee for this row — the old selection
+        // belonged to the previous company's roster and no longer applies.
+        HiddenField ShfEmpInfoId = (HiddenField)row.FindControl("ShfEmpInfoId");
+        if (ShfEmpInfoId != null) ShfEmpInfoId.Value = "";
+        TextBox txt_EmpMasterCode = (TextBox)row.FindControl("txt_EmpMasterCode");
+        if (txt_EmpMasterCode != null) txt_EmpMasterCode.Text = "";
+        TextBox txt_EmpName = (TextBox)row.FindControl("txt_EmpName");
+        if (txt_EmpName != null) txt_EmpName.Text = "";
+        TextBox txt_Designation = (TextBox)row.FindControl("txt_Designation");
+        if (txt_Designation != null) txt_Designation.Text = "";
     }
 
     protected void ddlCompanyLocation_OnSelectedIndexChanged(object sender, EventArgs e)

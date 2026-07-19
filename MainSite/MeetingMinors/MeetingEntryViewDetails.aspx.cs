@@ -20,6 +20,26 @@ public partial class MeetingMinors_MeetingEntryViewDetails : System.Web.UI.Page
 {
     MiscellaneousInformationDAL AMAsterDal = new MiscellaneousInformationDAL();
     MeetingEntryDAL AMeetingEntryDal = new MeetingEntryDAL();
+
+    // Replaces the old gv_DocumentUpload.Columns[3].Visible toggle now that the grid is a Repeater —
+    // ItemDataBound applies this per row instead of per GridView column. Backed by ViewState
+    // (like the GridView column's Visible was via control state) so it survives postbacks —
+    // it's only computed inside the !IsPostBack branch of Page_Load.
+    private bool _canEditDoc
+    {
+        get { return ViewState["_canEditDoc"] != null && (bool)ViewState["_canEditDoc"]; }
+        set { ViewState["_canEditDoc"] = value; }
+    }
+
+    protected void gv_DocumentUpload_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        {
+            LinkButton btnDocRemove = (LinkButton)e.Item.FindControl("btnDocRemove");
+            if (btnDocRemove != null) btnDocRemove.Visible = _canEditDoc;
+        }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
          Page.Form.Attributes.Add("enctype", "multipart/form-data");
@@ -176,15 +196,6 @@ public partial class MeetingMinors_MeetingEntryViewDetails : System.Web.UI.Page
 
 
 
-                DataTable dtDoc = AMeetingEntryDal.GetDocDataById(id_mastetID.Value);
-                if (dtDoc.Rows.Count > 0)
-                {
-                    ViewState["DocGrid_List"] = dtDoc;
-                    gv_DocumentUpload.DataSource = dtDoc;
-                    gv_DocumentUpload.DataBind();
-                }
-
-
                 DataTable dtDocEdit =
                AMeetingEntryDal.GetEmpCanEditDOC(id_mastetID.Value.ToString());
 
@@ -196,8 +207,18 @@ public partial class MeetingMinors_MeetingEntryViewDetails : System.Web.UI.Page
                     {
                         divDoc.Visible = true;
 
-                        gv_DocumentUpload.Columns[3].Visible = true;
+                        // Must be set before gv_DocumentUpload.DataBind() below — ItemDataBound
+                        // reads this flag while binding, it isn't re-evaluated at render time.
+                        _canEditDoc = true;
                     }
+                }
+
+                DataTable dtDoc = AMeetingEntryDal.GetDocDataById(id_mastetID.Value);
+                if (dtDoc.Rows.Count > 0)
+                {
+                    ViewState["DocGrid_List"] = dtDoc;
+                    gv_DocumentUpload.DataSource = dtDoc;
+                    gv_DocumentUpload.DataBind();
                 }
 
 
@@ -643,12 +664,12 @@ public partial class MeetingMinors_MeetingEntryViewDetails : System.Web.UI.Page
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Rows[rowIndex].FindControl("hfDocumentLink");
-                    HyperLink HLDocumentLink = (HyperLink)gv_DocumentUpload.Rows[rowIndex].FindControl("HLDocumentLink");
-                    Label lbl_DocumentLink = (Label)gv_DocumentUpload.Rows[rowIndex].FindControl("lbl_DocumentLink");
+                    HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Items[rowIndex].FindControl("hfDocumentLink");
+                    HyperLink HLDocumentLink = (HyperLink)gv_DocumentUpload.Items[rowIndex].FindControl("HLDocumentLink");
+                    Label lbl_DocumentLink = (Label)gv_DocumentUpload.Items[rowIndex].FindControl("lbl_DocumentLink");
 
-                    Label lbl_DocumentNote = (Label)gv_DocumentUpload.Rows[rowIndex].FindControl("lbl_DocumentNote");
-                    HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Rows[rowIndex].FindControl("hfFileName");
+                    Label lbl_DocumentNote = (Label)gv_DocumentUpload.Items[rowIndex].FindControl("lbl_DocumentNote");
+                    HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Items[rowIndex].FindControl("hfFileName");
 
 
                     if (i < dt.Rows.Count - 1)
@@ -1971,11 +1992,11 @@ public partial class MeetingMinors_MeetingEntryViewDetails : System.Web.UI.Page
             string MemberSearch = "";
             List<MiscellaneousInfoDocumentDAO> DocList = new List<MiscellaneousInfoDocumentDAO>();
 
-            for (int i = 0; i < gv_DocumentUpload.Rows.Count; i++)
+            for (int i = 0; i < gv_DocumentUpload.Items.Count; i++)
             {
-                HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Rows[i].FindControl("hfDocumentLink");
-                Label lbl_DocumentNote = (Label)gv_DocumentUpload.Rows[i].FindControl("lbl_DocumentNote");
-                HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Rows[i].FindControl("hfFileName");
+                HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Items[i].FindControl("hfDocumentLink");
+                Label lbl_DocumentNote = (Label)gv_DocumentUpload.Items[i].FindControl("lbl_DocumentNote");
+                HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Items[i].FindControl("hfFileName");
 
 
                 MiscellaneousInfoDocumentDAO DocA = new MiscellaneousInfoDocumentDAO();
@@ -2644,11 +2665,11 @@ public partial class MeetingMinors_MeetingEntryViewDetails : System.Web.UI.Page
                 {
                     List<MiscellaneousInfoDocumentDAO> DocList = new List<MiscellaneousInfoDocumentDAO>();
 
-                    for (int i = 0; i < gv_DocumentUpload.Rows.Count; i++)
+                    for (int i = 0; i < gv_DocumentUpload.Items.Count; i++)
                     {
-                        HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Rows[i].FindControl("hfDocumentLink");
-                        Label lbl_DocumentNote = (Label)gv_DocumentUpload.Rows[i].FindControl("lbl_DocumentNote");
-                        HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Rows[i].FindControl("hfFileName");
+                        HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Items[i].FindControl("hfDocumentLink");
+                        Label lbl_DocumentNote = (Label)gv_DocumentUpload.Items[i].FindControl("lbl_DocumentNote");
+                        HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Items[i].FindControl("hfFileName");
 
 
                         MiscellaneousInfoDocumentDAO DocA = new MiscellaneousInfoDocumentDAO();
@@ -2898,11 +2919,11 @@ public partial class MeetingMinors_MeetingEntryViewDetails : System.Web.UI.Page
                 {
                     List<MiscellaneousInfoDocumentDAO> DocList = new List<MiscellaneousInfoDocumentDAO>();
 
-                    for (int i = 0; i < gv_DocumentUpload.Rows.Count; i++)
+                    for (int i = 0; i < gv_DocumentUpload.Items.Count; i++)
                     {
-                        HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Rows[i].FindControl("hfDocumentLink");
-                        Label lbl_DocumentNote = (Label)gv_DocumentUpload.Rows[i].FindControl("lbl_DocumentNote");
-                        HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Rows[i].FindControl("hfFileName");
+                        HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Items[i].FindControl("hfDocumentLink");
+                        Label lbl_DocumentNote = (Label)gv_DocumentUpload.Items[i].FindControl("lbl_DocumentNote");
+                        HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Items[i].FindControl("hfFileName");
 
 
                         MiscellaneousInfoDocumentDAO DocA = new MiscellaneousInfoDocumentDAO();
