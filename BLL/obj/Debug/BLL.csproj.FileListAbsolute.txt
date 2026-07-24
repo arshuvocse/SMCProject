@@ -858,4 +858,7 @@ D:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\bin\Debug\itextsharp.xml
 D:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\bin\Debug\EntityFramework.xml
 D:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\obj\Debug\BLL.dll
 D:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\obj\Debug\BLL.pdb
-d:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\bin\Debug\DAO.dll.config
+D:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+D:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+D:\CSTL_Projects\SMC\HRIS\HRIS_Web\SMCProject\BLL\obj\Debug\BLL.csproj.Up2Date

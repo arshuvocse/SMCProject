@@ -636,9 +636,9 @@
                                     <td>
                                         <asp:Label runat="server" ID="lblCompany"></asp:Label></td>
 
-                                    <td class="tblTHColorChang" style="width: 20%; padding: 10px;">Classification </td>
+                                    <td class="tblTHColorChang" style="width: 20%; padding: 10px;">  </td>
                                     <td>
-                                        <asp:Label runat="server" ID="lblClassification"></asp:Label></td>
+                                        <asp:Label runat="server"  Visible="false" ID="lblClassification"></asp:Label></td>
 
 
                                 </tr>

@@ -420,6 +420,7 @@
                                                     // that would otherwise wipe their <tbody> markup.
                                                     if (window.MeetingGridA) MeetingGridA.render();
                                                     if (window.MeetingGridB) MeetingGridB.render();
+                                                    if (window.MeetingGridDoc) MeetingGridDoc.render();
 
                                                     refreshChosenWidgets();
 
@@ -1405,15 +1406,86 @@
                                             <div class="row">
 
                                                 <div class="col-md-12">
+                                                    <style>
+                                                        /* Every other UpdateProgress on this page omits AssociatedUpdatePanelID,
+                                                           so by default MS AJAX pops their .divWaiting overlay for ANY async
+                                                           postback on the page - including this one. Suppress them all while
+                                                           our own OCR progress bar is showing instead. */
+                                                        body.ocr-loading-active .divWaiting {
+                                                            display: none !important;
+                                                        }
+                                                    </style>
+                                                    <div id="docOcrLoading" style="display: none; text-align: center; margin-bottom: 10px;">
+                                                        <div style="max-width: 320px; margin: 0 auto;">
+                                                            <div style="background: #e2e8f0; border-radius: 6px; height: 18px; overflow: hidden;">
+                                                                <div id="docOcrLoadingBar" style="background: #5B799E; height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+                                                            </div>
+                                                            <div style="margin-top: 6px; font-weight: bold; color: #5B799E;">
+                                                                Scanning document (OCR) for text - please wait...
+                                                                <span id="docOcrLoadingPercent">0%</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <script type="text/javascript">
+                                                        (function () {
+                                                            var timer = null;
+                                                            var percent = 0;
+
+                                                            function setPercent(p) {
+                                                                percent = p;
+                                                                var bar = document.getElementById('docOcrLoadingBar');
+                                                                var label = document.getElementById('docOcrLoadingPercent');
+                                                                if (bar) bar.style.width = p + '%';
+                                                                if (label) label.textContent = Math.round(p) + '%';
+                                                            }
+
+                                                            function start() {
+                                                                var box = document.getElementById('docOcrLoading');
+                                                                if (box) box.style.display = 'block';
+                                                                document.body.classList.add('ocr-loading-active');
+                                                                setPercent(0);
+                                                                if (timer) window.clearInterval(timer);
+                                                                // No real OCR progress is available from the server for a single
+                                                                // synchronous request, so this eases toward 90% and waits there -
+                                                                // endRequest snaps it to 100% and hides the bar.
+                                                                timer = window.setInterval(function () {
+                                                                    if (percent >= 90) return;
+                                                                    var remaining = 90 - percent;
+                                                                    setPercent(Math.min(90, percent + Math.max(0.3, remaining * 0.05)));
+                                                                }, 200);
+                                                            }
+
+                                                            function stop() {
+                                                                if (timer) {
+                                                                    window.clearInterval(timer);
+                                                                    timer = null;
+                                                                }
+                                                                setPercent(100);
+                                                                window.setTimeout(function () {
+                                                                    var box = document.getElementById('docOcrLoading');
+                                                                    if (box) box.style.display = 'none';
+                                                                    document.body.classList.remove('ocr-loading-active');
+                                                                }, 400);
+                                                            }
+
+                                                            var manager = window.Sys && Sys.WebForms ? Sys.WebForms.PageRequestManager.getInstance() : null;
+                                                            if (manager) {
+                                                                manager.add_beginRequest(function (sender, args) {
+                                                                    var el = args.get_postBackElement();
+                                                                    if (el && el.id && el.id.indexOf('brnAddDoc') > -1) {
+                                                                        start();
+                                                                    }
+                                                                });
+                                                                manager.add_endRequest(function (sender, args) {
+                                                                    if (document.body.classList.contains('ocr-loading-active')) {
+                                                                        stop();
+                                                                    }
+                                                                });
+                                                            }
+                                                        })();
+                                                    </script>
                                                     <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                                                         <ContentTemplate>
-                                                            <asp:UpdateProgress ID="UpdateProgress7" runat="server" ClientIDMode="Static" DisplayAfter="0" DynamicLayout="true">
-                                                                <ProgressTemplate>
-                                                                    <div class="divWaiting">
-                                                                        <asp:Image ID="imgWait3" CssClass="position-set" runat="server" ImageAlign="Middle" ImageUrl="~/Assets/img/progress-bar-opt.gif" Width="120px" Height="120px" />
-                                                                    </div>
-                                                                </ProgressTemplate>
-                                                            </asp:UpdateProgress>
                                                             <fieldset class="for-panel">
                                                                 <legend>Document </legend>
                                                                 <div class="row">
@@ -1473,43 +1545,17 @@
                                                                     <div class="col-md-8">
 
 
-                                                                        <asp:GridView Width="100%" ShowHeader="True" ID="gv_DocumentUpload" runat="server" AutoGenerateColumns="false" CssClass="AddToListCssTable" OnPreRender="gv_DocumentUpload_PreRender">
-                                                                            <Columns>
-                                                                                <asp:TemplateField HeaderText="SL#">
-                                                                                    <ItemTemplate>
-                                                                                        <%#Container.DataItemIndex + 1%>
-                                                                                    </ItemTemplate>
-                                                                                </asp:TemplateField>
-
-
-                                                                                <asp:TemplateField HeaderText="Document">
-                                                                                    <ItemTemplate>
-                                                                                        <asp:HyperLink ID="HLDocumentLink" Target="_blank" runat="server" NavigateUrl='<%# Eval("DocumentLink") %>' Text='Download'>
-                                                                                        </asp:HyperLink>
-                                                                                        <asp:Label ID="lbl_DocumentLink" Visible="False" runat="server" Text='<%#Eval("DocumentLink")%>'></asp:Label>
-                                                                                        <asp:HiddenField runat="server" ID="hfFileName" Value='<%#Eval("FileName")%>' />
-                                                                                        <asp:HiddenField runat="server" ID="hfExtractedText" Value='<%#Eval("ExtractedText")%>' />
-
-                                                                                        <asp:HiddenField runat="server" ID="hfDocumentLink" Value='<%#Eval("DocumentLink")%>' />
-                                                                                    </ItemTemplate>
-                                                                                </asp:TemplateField>
-
-
-                                                                                <asp:TemplateField HeaderText="Summary Note	">
-                                                                                    <ItemTemplate>
-                                                                                        <asp:Label ID="lbl_DocumentNote" runat="server" Text='<%#Eval("DocumentNote") %>'></asp:Label>
-                                                                                    </ItemTemplate>
-                                                                                </asp:TemplateField>
-
-
-
-                                                                                <asp:TemplateField HeaderText="Remove">
-                                                                                    <ItemTemplate>
-                                                                                        <asp:LinkButton runat="server" ID="btnDocRemove" OnClick="btnDocRemove_OnClick" CssClass="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i> </asp:LinkButton>
-                                                                                    </ItemTemplate>
-                                                                                </asp:TemplateField>
-                                                                            </Columns>
-                                                                        </asp:GridView>
+                                                                        <table id="gridDoc_Table" width="100%" class="AddToListCssTable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>SL#</th>
+                                                                                    <th>Document</th>
+                                                                                    <th>Summary Note</th>
+                                                                                    <th>Remove</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="gridDoc_Body"></tbody>
+                                                                        </table>
 
 
                                                                     </div>
@@ -1534,6 +1580,7 @@
                                                             <asp:HiddenField runat="server" ID="id_mastetID" />
                                                             <asp:HiddenField runat="server" ID="hfGridA_Json" />
                                                             <asp:HiddenField runat="server" ID="hfGridB_Json" />
+                                                            <asp:HiddenField runat="server" ID="hfGridDoc_Json" />
                                                             <asp:HiddenField runat="server" ID="hfGridA_ExistingCodes" />
                                                             <asp:LinkButton ID="editButton"
                                                                 OnClientClick="return handleMeetingGridsSave() &amp;&amp; confirm('Are you sure you want to Update ?')"
@@ -1873,8 +1920,7 @@
                         subCommitteeContainer: '<%= DivSubCommitte.ClientID %>',
                         subCommittee: '<%= ddlSubCommittee.ClientID %>',
                         meetingNote: '<%= txtMeetingpurpose.ClientID %>',
-                        meetingDate: '<%= txtMeetingDate.ClientID %>',
-                        documentGrid: '<%= gv_DocumentUpload.ClientID %>'
+                        meetingDate: '<%= txtMeetingDate.ClientID %>'
                     };
 
                     function byId(id) {
@@ -1897,8 +1943,7 @@
                     }
 
                     function hasDocumentInList() {
-                        var grid = byId(ids.documentGrid);
-                        return !!grid && grid.querySelectorAll('tbody tr').length > 0;
+                        return !!window.MeetingGridDoc && MeetingGridDoc.rows.length > 0;
                     }
 
                     function currentStepNumber() {
@@ -2486,6 +2531,47 @@
                     };
                 })();
 
+                // Document Upload list — client-rendered like Grid A/B so adding/removing a
+                // row (after the server round-trip that runs OCR) doesn't need a full GridView
+                // rebind. Server emits MeetingGridDoc.addRow(...)/hydrate(...) via
+                // ScriptManager.RegisterStartupScript; removal never needs the server at all.
+                window.MeetingGridDoc = (function () {
+                    var rows = [];
+
+                    function rowHtml(r, idx) {
+                        return '' +
+                            '<tr data-row-idx="' + idx + '">' +
+                            '<td>' + (idx + 1) + '</td>' +
+                            '<td><a href="' + escapeHtml(r.DocumentLink) + '" target="_blank">Download</a></td>' +
+                            '<td>' + escapeHtml(r.DocumentNote) + '</td>' +
+                            '<td><button type="button" class="btn btn-sm btn-danger" data-action="removeDoc" data-row-idx="' + idx + '"><i class="fa fa-minus-circle"></i></button></td>' +
+                            '</tr>';
+                    }
+
+                    function render() {
+                        var body = document.getElementById('gridDoc_Body');
+                        if (!body) return;
+                        body.innerHTML = rows.map(rowHtml).join('');
+                    }
+
+                    return {
+                        get rows() { return rows; },
+                        hydrate: function (jsonRows) {
+                            rows = jsonRows || [];
+                            render();
+                        },
+                        addRow: function (row) {
+                            rows.push(row);
+                            render();
+                        },
+                        removeRow: function (idx) {
+                            rows.splice(idx, 1);
+                            render();
+                        },
+                        render: render
+                    };
+                })();
+
                 // Structural changes (add/remove row) — these re-render, so Chosen (on Grid B's
                 // Position <select>) gets destroyed/recreated only here, never on every keystroke.
                 document.addEventListener('click', function (e) {
@@ -2503,6 +2589,9 @@
                             break;
                         case 'removeB':
                             MeetingGridB.removeRow(idx);
+                            break;
+                        case 'removeDoc':
+                            MeetingGridDoc.removeRow(idx);
                             break;
                     }
 
@@ -2596,8 +2685,10 @@
                 function handleMeetingGridsSave() {
                     var hfA = document.getElementById('<%= hfGridA_Json.ClientID %>');
                     var hfB = document.getElementById('<%= hfGridB_Json.ClientID %>');
+                    var hfDoc = document.getElementById('<%= hfGridDoc_Json.ClientID %>');
                     if (hfA) hfA.value = JSON.stringify(MeetingGridA.rows);
                     if (hfB) hfB.value = JSON.stringify(MeetingGridB.rows);
+                    if (hfDoc) hfDoc.value = JSON.stringify(MeetingGridDoc.rows);
                     return true;
                 }
             </script>

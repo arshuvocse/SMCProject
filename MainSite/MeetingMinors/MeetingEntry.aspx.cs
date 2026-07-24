@@ -152,6 +152,13 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             string scriptB = "MeetingGridB.hydrate(" + gridBJson + "); MeetingGridB.render();";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "GridB_Restore_" + Guid.NewGuid().ToString("N"), scriptB, true);
         }
+
+        string gridDocJson = hfGridDoc_Json.Value;
+        if (!string.IsNullOrWhiteSpace(gridDocJson) && gridDocJson != "[]" && gridDocJson != "null")
+        {
+            string scriptDoc = "MeetingGridDoc.hydrate(" + gridDocJson + ");";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "GridDoc_Restore_" + Guid.NewGuid().ToString("N"), scriptDoc, true);
+        }
     }
 
     protected void Page_Load(object sender, EventArgs e)
@@ -289,9 +296,9 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
                 DataTable dtDoc = AMeetingEntryDal.GetDocDataById(id_mastetID.Value);
                 if (dtDoc.Rows.Count > 0)
                 {
-                    ViewState["DocGrid_List"] = dtDoc;
-                    gv_DocumentUpload.DataSource = dtDoc;
-                    gv_DocumentUpload.DataBind();
+                    string docJson = JsonConvert.SerializeObject(dtDoc);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "GridDoc_Hydrate",
+                        "MeetingGridDoc.hydrate(" + docJson + ");", true);
                 }
 
                 DataTable MeetingInfoDetail = AMeetingEntryDal.GetMeetingInfoDetailByIdEmp(id_mastetID.Value);
@@ -562,81 +569,24 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
     {
         if (docVali())
         {
-            AddNewDocGrid_List();
-        }
-       
-    }
-    private void AddNewDocGrid_List()
-    {
-        string extractedText = ExtractUploadedDocumentText();
+            string extractedText = ExtractUploadedDocumentText();
 
-        if (ViewState["DocGrid_List"] != null)
-        {
-            DataTable dtCurrentTable = (DataTable)ViewState["DocGrid_List"];
-            DataRow drCurrentRow = null;
-
-            if (dtCurrentTable.Rows.Count > 0)
+            var docRow = new
             {
-                drCurrentRow = dtCurrentTable.NewRow();
+                DocumentLink = "../UploadMeetingDocument/" + hfDocFile.Value,
+                FileName = hfDocFileName.Value,
+                DocumentNote = txtSummaryNote.Text.Trim(),
+                ExtractedText = extractedText
+            };
 
+            string json = JsonConvert.SerializeObject(docRow);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "GridDoc_Add_" + Guid.NewGuid().ToString("N"),
+                "MeetingGridDoc.addRow(" + json + ");", true);
 
-                drCurrentRow["DocumentLink"] = "../UploadMeetingDocument/" + hfDocFile.Value;
-                drCurrentRow["FileName"] = hfDocFileName.Value;
-                drCurrentRow["ExtractedText"] = extractedText;
-
-
-
-
-                drCurrentRow["DocumentNote"] = txtSummaryNote.Text.Trim();
-
-                dtCurrentTable.Rows.Add(drCurrentRow);
-                //Store the current data to ViewState for future reference   
-                ViewState["DocGrid_List"] = dtCurrentTable;
-
-                //Rebind the Grid with the current data to reflect changes   
-                gv_DocumentUpload.DataSource = dtCurrentTable;
-                gv_DocumentUpload.DataBind();
-            }
+            txtSummaryNote.Text = string.Empty;
+            HyperLink2.NavigateUrl = "";
+            hfDocFile.Value = "";
         }
-        else
-        {
-            DataTable dt = new DataTable();
-            DataRow dr = null;
-
-            dt.Columns.Add(new DataColumn("DocumentLink", typeof(string)));
-            dt.Columns.Add(new DataColumn("DocumentNote", typeof(string)));
-            dt.Columns.Add(new DataColumn("FileName", typeof(string)));
-            dt.Columns.Add(new DataColumn("ExtractedText", typeof(string)));
-
-
-            dr = dt.NewRow();
-
-
-            dr["DocumentLink"] = "../UploadMeetingDocument/" + hfDocFile.Value;
-            dr["FileName"] = hfDocFileName.Value;
-            dr["ExtractedText"] = extractedText;
-
-
-
-
-            dr["DocumentNote"] = txtSummaryNote.Text.Trim();
-            dt.Rows.Add(dr);
-
-            //Store the DataTable in ViewState for future reference   
-            ViewState["DocGrid_List"] = dt;
-
-            //Bind the Gridview   
-            gv_DocumentUpload.DataSource = dt;
-            gv_DocumentUpload.DataBind();
-        }
-        //Set Previous Data on Postbacks   
-        SetDocGrid_List();
-
-
-        txtSummaryNote.Text = string.Empty;
-       // HyperLink2.Text = "No File Uploaded";
-        HyperLink2.NavigateUrl = "";
-        hfDocFile.Value = "";
     }
 
     private string ExtractUploadedDocumentText()
@@ -651,69 +601,6 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
         {
             System.Diagnostics.Trace.TraceError("Meeting attachment OCR failed: " + ex);
             return string.Empty;
-        }
-    }
-    protected void btnDocRemove_OnClick(object sender, EventArgs e)
-    {
-        LinkButton lb = (LinkButton)sender;
-        GridViewRow gvRow = (GridViewRow)lb.NamingContainer;
-        int rowID = gvRow.RowIndex;
-        if (ViewState["DocGrid_List"] != null)
-        {
-            DataTable dt = (DataTable)ViewState["DocGrid_List"];
-            dt.Rows.Remove(dt.Rows[rowID]);
-            if (dt.Rows.Count > 0)
-            {
-                //Store the current data in ViewState for future reference  
-                ViewState["DocGrid_List"] = dt;
-                //Re bind the GridView for the updated data  
-                gv_DocumentUpload.DataSource = dt;
-                gv_DocumentUpload.DataBind();
-            }
-            else
-            {
-                ViewState["DocGrid_List"] = null;
-                //Re bind the GridView for the updated data  
-                gv_DocumentUpload.DataSource = null;
-                gv_DocumentUpload.DataBind();
-            }
-        }
-        //Set Previous Data on Postbacks  
-        SetDocGrid_List();
-    }
-    private void SetDocGrid_List()
-    {
-        int rowIndex = 0;
-        if (ViewState["DocGrid_List"] != null)
-        {
-            DataTable dt = (DataTable)ViewState["DocGrid_List"];
-            if (dt.Rows.Count > 0)
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    HiddenField hfDocumentLink = (HiddenField)gv_DocumentUpload.Rows[rowIndex].FindControl("hfDocumentLink");
-                    HyperLink HLDocumentLink = (HyperLink)gv_DocumentUpload.Rows[rowIndex].FindControl("HLDocumentLink");
-                    Label lbl_DocumentLink = (Label)gv_DocumentUpload.Rows[rowIndex].FindControl("lbl_DocumentLink");
-
-                    Label lbl_DocumentNote = (Label)gv_DocumentUpload.Rows[rowIndex].FindControl("lbl_DocumentNote");
-                    HiddenField hfFileName = (HiddenField)gv_DocumentUpload.Rows[rowIndex].FindControl("hfFileName");
-
-
-                    if (i < dt.Rows.Count - 1)
-                    {
-                        hfFileName.Value = dt.Rows[i]["FileName"].ToString();
-
-                        hfDocumentLink.Value = dt.Rows[i]["DocumentLink"].ToString();
-                        lbl_DocumentLink.Text = dt.Rows[i]["DocumentLink"].ToString();
-                        HLDocumentLink.NavigateUrl = dt.Rows[i]["DocumentLink"].ToString();
-
-                        lbl_DocumentNote.Text = dt.Rows[i]["DocumentNote"].ToString();
-
-                    }
-
-                    rowIndex++;
-                }
-            }
         }
     }
 
@@ -2028,7 +1915,7 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
             return false;
         }
 
-        if (gv_DocumentUpload.Rows.Count == 0)
+        if (string.IsNullOrWhiteSpace(hfGridDoc_Json.Value) || hfGridDoc_Json.Value == "[]" || hfGridDoc_Json.Value == "null")
         {
             aShowMessage.ShowMessageBox("Please Add Document Information", this);
             return false;
@@ -2094,24 +1981,12 @@ public partial class MeetingMinors_MeetingEntry : System.Web.UI.Page
                 string DocumentSearch = "";
                 string AgendaSearch = "";
                 string MemberSearch = "";
-                List<MiscellaneousInfoDocumentDAO> DocList = new List<MiscellaneousInfoDocumentDAO>();
+                List<MiscellaneousInfoDocumentDAO> DocList =
+                    JsonConvert.DeserializeObject<List<MiscellaneousInfoDocumentDAO>>(hfGridDoc_Json.Value) ?? new List<MiscellaneousInfoDocumentDAO>();
 
-                for (int i = 0; i < gv_DocumentUpload.Rows.Count; i++)
+                foreach (var DocA in DocList)
                 {
-                    HiddenField hfDocumentLink = (HiddenField) gv_DocumentUpload.Rows[i].FindControl("hfDocumentLink");
-                    Label lbl_DocumentNote = (Label) gv_DocumentUpload.Rows[i].FindControl("lbl_DocumentNote");
-                    HiddenField hfFileName = (HiddenField) gv_DocumentUpload.Rows[i].FindControl("hfFileName");
-                    HiddenField hfExtractedText = (HiddenField) gv_DocumentUpload.Rows[i].FindControl("hfExtractedText");
-
-
-                    MiscellaneousInfoDocumentDAO DocA = new MiscellaneousInfoDocumentDAO();
-                    DocA.FileName = hfFileName.Value.ToString();
-                    DocA.DocumentLink = hfDocumentLink.Value.ToString();
-                    DocA.DocumentNote = lbl_DocumentNote.Text.Trim();
-                    DocA.ExtractedText = hfExtractedText == null ? string.Empty : hfExtractedText.Value;
-                    DocumentSearch = DocumentSearch + lbl_DocumentNote.Text.Trim() + " ";
-
-                    DocList.Add(DocA);
+                    DocumentSearch = DocumentSearch + (DocA.DocumentNote ?? "").Trim() + " ";
                 }
 
 
